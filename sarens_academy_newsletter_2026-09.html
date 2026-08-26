@@ -75,6 +75,29 @@ content studio is ideal). Then find and replace the token.
                       dark artwork on transparent,
                       sits on white #FFFFFF.
 
+  IMG_MSAPPS_URL      Microsoft app icon strip in the  320 w    640 w
+                      white card: Outlook, Teams,
+                      Excel, Word, PowerPoint in a
+                      row. Official product icons on
+                      transparent or white, sits on
+                      white #FFFFFF. Roughly 5:1.
+
+  IMG_SPOTLIGHT_URL   Course still for "Introduction   488 w    976 w
+                      to Special Trailers", on the
+                      black band. A real photo of a
+                      special trailer under load
+                      beats the Cornerstone course
+                      thumbnail if you have one.
+                      16:9 crop.
+
+  IMG_GLOW_URL        The mint glow, centred above     240 w    480 w
+                      "Any questions?" in the closing
+                      section. This is the May issue's
+                      glow PNG, now used as a normal
+                      image instead of a CSS
+                      background, which is what made
+                      it need the VML hack.
+
 WHY THE OLD IMAGE URLS ARE NOT REUSED
 The May issue pointed at sarens.sharepoint.com. Those URLs render for
 you because your browser holds a SharePoint session. Email clients
@@ -85,7 +108,8 @@ from SharePoint while signed in, then upload to Mailchimp:
   Logo      .../download.aspx?UniqueId=5f30ede6-301d-4b93-95a1-cab99ccdf6d6
   Cylinder  .../download.aspx?UniqueId=100aff61-9d92-4bf5-8e8a-933e7f07ce35
   Crane     .../tools/Icons/Equipment Icons/Cranes/Giant Cranes.png
-  All three live under https://sarens.sharepoint.com/kp/MARCOM/
+  Glow      .../download.aspx?UniqueId=333caee9-7219-44ff-bda1-b7d5d66ee496
+  All four live under https://sarens.sharepoint.com/kp/MARCOM/
 
 LINK PLACEHOLDERS still to be filled (href targets, not images):
   LINK_MICROSOFT_CATEGORY_URL   Microsoft course category in Cornerstone
@@ -93,7 +117,9 @@ LINK PLACEHOLDERS still to be filled (href targets, not images):
 
 DATA PLACEHOLDERS still to be filled (numbers banner):
   [HERO_NUMBER] [STAT_1_VALUE] [STAT_2_VALUE] [STAT_3_VALUE]
-  [PERSPECTIVE_COMPARISON] [NEXT_GOAL_TARGET_AND_DEADLINE]
+  [PERSPECTIVE_COMPARISON] [NEXT_GOAL_TARGET] [NEXT_GOAL_DEADLINE]
+  [PROGRESS_PERCENT]  <- the mint share of the progress bar, e.g. 71%.
+                         Must agree with [HERO_NUMBER] / [NEXT_GOAL_TARGET].
 
 LAYOUT NOTE
 Everything sits on one centred axis and the text column is held to
@@ -227,6 +253,10 @@ for prose, .card-pad inside the white cards.
                   <p class="h-section" style="margin:0 0 18px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:normal;">
                     Microsoft courses,<br /><em style="color:#2A5E97;">now on the portal.</em>
                   </p>
+
+                  <!-- App icon strip. Alt text names the apps, so the block still
+                       says what it is about when images are blocked. -->
+                  <img src="IMG_MSAPPS_URL" alt="Outlook, Teams, Excel, Word and PowerPoint" width="320" style="display:block; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; border:0; outline:none; text-decoration:none; height:auto; margin:0 auto 26px auto;" />
                   <p style="margin:0 0 14px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
                     The tools you use every day have more to offer than you think. Most of us schedule meetings, send mail and work in Teams without ever seeing what else those applications can do.
                   </p>
@@ -384,33 +414,49 @@ for prose, .card-pad inside the white cards.
         </tr>
 
         <!-- ============================================================== -->
-        <!-- NEXT GOAL LINE                                                 -->
-        <!-- EDIT EACH ISSUE: target number + deadline                      -->
+        <!-- NEXT GOAL - progress bar, built from table cells so it cannot  -->
+        <!-- be blocked like an image. The mint cell is the completed share.-->
+        <!-- EDIT EACH ISSUE: [PROGRESS_PERCENT] must match the figures,    -->
+        <!-- e.g. 14250 of 20000 is 71%. Give it as a percentage with the   -->
+        <!-- sign, and it goes in both the width attribute and the style.   -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-text" align="center" style="padding:26px 84px 0 84px;">
-            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:22px;">
-              NEXT GOAL &nbsp;<span style="color:#00FFA0;">[NEXT_GOAL_TARGET_AND_DEADLINE]</span>
+          <td class="pad-text" align="center" style="padding:34px 84px 0 84px;">
+            <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
+              NEXT GOAL
+            </p>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;">
+              <tr>
+                <td width="[PROGRESS_PERCENT]" height="10" style="width:[PROGRESS_PERCENT]; background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
+                <td height="10" style="background-color:#4378AC; font-size:0; line-height:0;">&nbsp;</td>
+              </tr>
+            </table>
+            <p style="margin:14px 0 0 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px;">
+              [HERO_NUMBER] of [NEXT_GOAL_TARGET] courses. Target: [NEXT_GOAL_DEADLINE].
             </p>
           </td>
         </tr>
-
-        <!-- Centred mint rule -->
         <tr>
-          <td align="center" style="padding:48px 0 0 0;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
-              <tr>
-                <td width="40" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
-              </tr>
-            </table>
-          </td>
+          <td height="48" style="font-size:0; line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- ============================================================== -->
-        <!-- COURSE IN THE SPOTLIGHT - navy, centred                        -->
-        <!-- EDIT EACH ISSUE: course title, description, button link        -->
+        <!-- COURSE IN THE SPOTLIGHT - full-bleed BLACK band.               -->
+        <!-- Black is already in the palette (the closing section), so this -->
+        <!-- breaks the run of navy without adding a colour. Mint on black  -->
+        <!-- is allowed by the brand rules.                                 -->
+        <!-- EDIT EACH ISSUE: course title, description, image, button link -->
         <!-- ============================================================== -->
         <tr>
+          <td bgcolor="#000000" style="background-color:#000000;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              <tr>
+                <td class="pad-side" align="center" style="padding:52px 56px 0 56px;">
+                  <!-- Course still. Sits above the copy, never behind it. -->
+                  <img src="IMG_SPOTLIGHT_URL" alt="A Sarens special trailer carrying a load" width="488" style="display:block; color:#FFFFFF; font-family:Arial,Helvetica,sans-serif; font-size:13px; border:0; outline:none; text-decoration:none; height:auto; width:100%; max-width:488px; margin:0 auto;" />
+                </td>
+              </tr>
+              <tr>
           <td class="pad-text" align="center" style="padding:36px 84px 0 84px;">
             <p style="margin:0 0 16px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
               COURSE IN THE SPOTLIGHT
@@ -430,6 +476,12 @@ for prose, .card-pad inside the white cards.
                     START THE COURSE &rarr;
                   </a>
                 </td>
+              </tr>
+            </table>
+          </td>
+              </tr>
+              <tr>
+                <td height="52" style="font-size:0; line-height:0;">&nbsp;</td>
               </tr>
             </table>
           </td>
@@ -516,7 +568,14 @@ for prose, .card-pad inside the white cards.
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
 
               <tr>
-                <td class="pad-text" align="center" style="padding:52px 84px 0 84px;">
+                <td align="center" style="padding:56px 24px 0 24px;">
+                  <!-- The mint glow, as a normal image above the text rather than
+                       a CSS background behind it. Decorative, so alt is empty. -->
+                  <img src="IMG_GLOW_URL" alt="" width="240" style="display:block; border:0; outline:none; text-decoration:none; height:auto; margin:0 auto;" />
+                </td>
+              </tr>
+              <tr>
+                <td class="pad-text" align="center" style="padding:28px 84px 0 84px;">
                   <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:28px; font-style:italic; font-weight:normal; line-height:36px;">
                     Any questions?
                   </p>

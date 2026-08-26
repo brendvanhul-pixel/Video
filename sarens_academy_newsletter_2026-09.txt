@@ -53,7 +53,8 @@ In eight months, you completed [HERO_NUMBER] e-learning courses.
 PUT THAT IN PERSPECTIVE
 [PERSPECTIVE_COMPARISON]
 
-Next goal: [NEXT_GOAL_TARGET_AND_DEADLINE]
+NEXT GOAL
+[HERO_NUMBER] of [NEXT_GOAL_TARGET] courses. Target: [NEXT_GOAL_DEADLINE].
 
 ---
 
