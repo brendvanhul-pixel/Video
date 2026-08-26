@@ -16,20 +16,23 @@ every rule here refines a layout that already works at 600px fixed.
 <style type="text/css">
 @media screen and (max-width:600px) {
   .pad-side   { padding-left:24px !important; padding-right:24px !important; }
-  .card-pad   { padding-left:24px !important; padding-right:24px !important; }
-  .hero-quote { font-size:30px !important; line-height:38px !important; }
-  .hero-mark  { font-size:56px !important; line-height:34px !important; }
+  .pad-text   { padding-left:26px !important; padding-right:26px !important; }
+  .card-pad   { padding-left:26px !important; padding-right:26px !important; }
+  .hero-quote { font-size:27px !important; line-height:36px !important; }
   .hero-sub   { font-size:17px !important; line-height:24px !important; }
-  .h-section  { font-size:25px !important; line-height:32px !important; }
-  .h-cta      { font-size:30px !important; line-height:36px !important; }
-  .big-number { font-size:58px !important; line-height:60px !important; }
+  .lead-line  { font-size:19px !important; line-height:29px !important; }
+  .h-section  { font-size:25px !important; line-height:33px !important; }
+  .h-cta      { font-size:28px !important; line-height:35px !important; }
+  .numeral    { font-size:26px !important; line-height:28px !important; }
+  .big-number { font-size:56px !important; line-height:62px !important; }
+  .perspective{ font-size:22px !important; line-height:31px !important; }
   .stat-cell {
     display:block !important;
     width:100% !important;
     border-left:0 !important;
     border-top:1px solid #E4E8EB !important;
-    padding:24px 0 0 0 !important;
-    margin:24px 0 0 0 !important;
+    padding:22px 0 0 0 !important;
+    margin:22px 0 0 0 !important;
   }
   .stat-first { border-top:0 !important; margin-top:0 !important; padding-top:0 !important; }
 }
@@ -55,24 +58,22 @@ content studio is ideal). Then find and replace the token.
 
   TOKEN               PURPOSE                          DISPLAY  SUPPLY
   ------------------  -------------------------------  -------  ------
-  IMG_LOGO_URL        Sarens Academy logo, masthead    140 w    280 w
-                      left. Light artwork on
-                      transparent, sits on navy
+  IMG_LOGO_URL        Sarens Academy logo, centred     150 w    300 w
+                      in the masthead. Light artwork
+                      on transparent, sits on navy
                       #2A5E97.
+
+  IMG_HERO_URL        The cylinder visual, centred     260 w    520 w
+                      above the hero quote. Transparent
+                      PNG, sits on navy #2A5E97. This
+                      is the same artwork as the May
+                      issue, re-hosted.
 
   IMG_CRANE_ICON_URL  Crane icon above the "put that   72 w     144 sq
                       in perspective" line, inside
                       the white numbers card. Navy or
                       dark artwork on transparent,
                       sits on white #FFFFFF.
-
-  IMG_HERO_URL        OPTIONAL. Only needed if you     320 w    640 w
-                      enable the commented-out hero
-                      image row (search for
-                      "OPTIONAL HERO IMAGE"). The
-                      hero reads correctly without
-                      it, which is why it is off by
-                      default.
 
 WHY THE OLD IMAGE URLS ARE NOT REUSED
 The May issue pointed at sarens.sharepoint.com. Those URLs render for
@@ -84,9 +85,7 @@ from SharePoint while signed in, then upload to Mailchimp:
   Logo      .../download.aspx?UniqueId=5f30ede6-301d-4b93-95a1-cab99ccdf6d6
   Cylinder  .../download.aspx?UniqueId=100aff61-9d92-4bf5-8e8a-933e7f07ce35
   Crane     .../tools/Icons/Equipment Icons/Cranes/Giant Cranes.png
-  Glow      .../download.aspx?UniqueId=333caee9-7219-44ff-bda1-b7d5d66ee496
-            (glow not reused: the closing section is solid black now)
-  All four live under https://sarens.sharepoint.com/kp/MARCOM/
+  All three live under https://sarens.sharepoint.com/kp/MARCOM/
 
 LINK PLACEHOLDERS still to be filled (href targets, not images):
   LINK_MICROSOFT_CATEGORY_URL   Microsoft course category in Cornerstone
@@ -95,6 +94,12 @@ LINK PLACEHOLDERS still to be filled (href targets, not images):
 DATA PLACEHOLDERS still to be filled (numbers banner):
   [HERO_NUMBER] [STAT_1_VALUE] [STAT_2_VALUE] [STAT_3_VALUE]
   [PERSPECTIVE_COMPARISON] [NEXT_GOAL_TARGET_AND_DEADLINE]
+
+LAYOUT NOTE
+Everything sits on one centred axis and the text column is held to
+roughly 430px inside the 600px container, so no line runs long. The
+side padding classes carry that: .pad-side for structure, .pad-text
+for prose, .card-pad inside the white cards.
 =====================================================================
 -->
 
@@ -128,115 +133,105 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         </tr>
 
         <!-- ============================================================== -->
-        <!-- MASTHEAD                                                       -->
-        <!-- EDIT EACH ISSUE: month/year on the right                       -->
+        <!-- MASTHEAD - centred lockup: logo, then issue month              -->
+        <!-- EDIT EACH ISSUE: month/year                                    -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:32px 36px 24px 36px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-              <tr>
-                <td align="left" valign="middle">
-                  <img src="IMG_LOGO_URL" alt="Sarens Academy" width="140" style="display:block; border:0; outline:none; text-decoration:none; height:auto;" />
-                </td>
-                <td align="right" valign="middle" style="color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
-                  SEPTEMBER 2026
-                </td>
-              </tr>
-            </table>
+          <td class="pad-side" align="center" style="padding:40px 56px 0 56px;">
+            <img src="IMG_LOGO_URL" alt="Sarens Academy" width="150" style="display:block; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:15px; border:0; outline:none; text-decoration:none; height:auto; margin:0 auto;" />
           </td>
         </tr>
         <tr>
-          <td class="pad-side" style="padding:0 36px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-              <tr>
-                <td height="1" style="background-color:#4378AC; font-size:0; line-height:0;">&nbsp;</td>
-              </tr>
-            </table>
+          <td class="pad-side" align="center" style="padding:16px 56px 0 56px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
+            SEPTEMBER 2026
           </td>
         </tr>
 
         <!-- ============================================================== -->
-        <!-- HERO - editorial pull-quote. No image, stacked rows only.      -->
-        <!-- The oversized mint quotation mark is live text, so it renders  -->
-        <!-- even with images blocked.                                      -->
+        <!-- HERO - cylinder visual, then the pull-quote.                   -->
+        <!-- Stacked rows only, no negative margin. The quote is live text, -->
+        <!-- so the hero still reads with images blocked.                   -->
         <!-- EDIT EACH ISSUE: the quote and the line under it               -->
         <!-- ============================================================== -->
-
-        <!-- OPTIONAL HERO IMAGE - uncomment this row to use IMG_HERO_URL.
-             The quote below stands on its own, so leaving this off is the
-             safer default.
         <tr>
-          <td class="pad-side" align="center" style="padding:44px 36px 0 36px;">
-            <img src="IMG_HERO_URL" alt="Sarens Academy learning library" width="320" style="display:block; border:0; outline:none; text-decoration:none; height:auto;" />
+          <td class="pad-side" align="center" style="padding:36px 56px 0 56px;">
+            <!-- alt is deliberately empty: the cylinder is pure decoration and
+                 the quote below carries the message, so with images blocked
+                 this row collapses instead of printing a stray caption. -->
+            <img src="IMG_HERO_URL" alt="" width="260" style="display:block; color:#FFFFFF; border:0; outline:none; text-decoration:none; height:auto; margin:0 auto;" />
           </td>
         </tr>
-        -->
-
         <tr>
-          <td class="pad-side" style="padding:52px 36px 0 36px;">
-            <p class="hero-mark" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:76px; line-height:44px; font-weight:normal;">
-              &ldquo;
+          <td class="pad-text" align="center" style="padding:32px 84px 0 84px;">
+            <p class="hero-quote" style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:34px; line-height:44px; font-weight:normal;">
+              &ldquo;Oh, that looks interesting. I&rsquo;ll check it out later.&rdquo;
             </p>
           </td>
         </tr>
         <tr>
-          <td class="pad-side" style="padding:16px 36px 0 36px;">
-            <p class="hero-quote" style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:40px; line-height:50px; font-weight:normal;">
-              Oh, that looks interesting.<br />I&rsquo;ll check it out later.
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td class="pad-side" style="padding:24px 36px 0 36px;">
-            <p class="hero-sub" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:20px; line-height:28px; font-style:italic;">
+          <td class="pad-text" align="center" style="padding:20px 84px 0 84px;">
+            <p class="hero-sub" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:19px; line-height:27px; font-style:italic;">
               Sounds familiar, right?
             </p>
           </td>
         </tr>
 
+        <!-- Centred mint rule - the divider device, repeated all issue -->
+        <tr>
+          <td align="center" style="padding:36px 0 0 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td width="40" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
         <!-- ============================================================== -->
-        <!-- OPENING COPY - navy, lead line in Georgia then Arial body      -->
+        <!-- OPENING COPY - centred, Georgia lead then Arial body           -->
         <!-- EDIT EACH ISSUE: opening copy                                  -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:44px 36px 0 36px;">
-            <p style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; line-height:32px;">
+          <td class="pad-text" align="center" style="padding:36px 84px 0 84px;">
+            <p class="lead-line" style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; line-height:32px;">
               Whether it&rsquo;s a video, an article, a podcast, or a book, we all come across things we&rsquo;d like to explore someday.
             </p>
-            <p style="margin:0 0 16px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-              Then they get lost among open tabs, saved favourites, and a growing to-do list. A bit of a shame, really. Every day brings a chance to learn something, sharpen a skill, or simply get inspired.
+            <p style="margin:0 0 14px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
+              Then they get lost among open tabs, saved favourites, and a growing to-do list. A bit of a shame, really.
             </p>
             <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-              So we have expanded our Learning Library again, with a range of brand-new courses. No homework. No obligations. Just short learning experiences that fit into your day.
+              So we have expanded our Learning Library again. No homework. No obligations. Just short courses that fit into your day.
             </p>
           </td>
         </tr>
 
         <!-- ============================================================== -->
-        <!-- 01 MICROSOFT COURSES - WHITE CARD                              -->
-        <!-- Treatment 1 of 3 in the top half: solid white, high contrast.  -->
-        <!-- Mint is never used on white. Links here are navy.              -->
+        <!-- 01 MICROSOFT COURSES - WHITE CARD, centred                     -->
+        <!-- Mint is never used on white. The link here is navy.            -->
         <!-- EDIT EACH ISSUE: headline, body, category link                 -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:48px 36px 0 36px;">
+          <td class="pad-side" style="padding:44px 56px 0 56px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td height="5" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
               <tr>
-                <td class="card-pad" style="padding:40px 40px 44px 40px;">
-                  <p style="margin:0 0 6px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
-                    01 &nbsp;/&nbsp; NEW IN THE LIBRARY
+                <td class="card-pad" align="center" style="padding:36px 40px 40px 40px;">
+                  <p class="numeral" style="margin:0 0 4px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px;">
+                    01
                   </p>
-                  <p class="h-section" style="margin:0 0 20px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:normal;">
+                  <p style="margin:0 0 16px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
+                    NEW IN THE LIBRARY
+                  </p>
+                  <p class="h-section" style="margin:0 0 18px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:normal;">
                     Microsoft courses,<br /><em style="color:#2A5E97;">now on the portal.</em>
                   </p>
                   <p style="margin:0 0 14px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-                    The tools you use every day probably have more to offer than you think. Most of us schedule meetings, send mail, build reports and work together in Teams without ever seeing what else those applications can do.
+                    The tools you use every day have more to offer than you think. Most of us schedule meetings, send mail and work in Teams without ever seeing what else those applications can do.
                   </p>
-                  <p style="margin:0 0 28px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-                    So we have added a set of Microsoft e-learning courses, next to our internal courses on Sarens knowledge from across the departments. Use them to find quicker ways of working and to build your digital skills.
+                  <p style="margin:0 0 26px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
+                    So we have added a set of Microsoft courses, next to our internal ones on Sarens knowledge. Use them to find quicker ways of working.
                   </p>
                   <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:20px;">
                     <a href="LINK_MICROSOFT_CATEGORY_URL" style="color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:13px; font-weight:bold; letter-spacing:1.5px; text-decoration:none; border-bottom:2px solid #2A5E97;">SEE THE MICROSOFT COURSES &rarr;</a>
@@ -248,35 +243,31 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         </tr>
 
         <!-- ============================================================== -->
-        <!-- 02 TRANSCRIPT - navy with mint left keyline                     -->
-        <!-- Treatment 2 of 3: indented, ruled, quieter than the card.      -->
+        <!-- 02 TRANSCRIPT - navy, centred, mint numeral                    -->
         <!-- EDIT EACH ISSUE: copy + transcript link                        -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:48px 36px 0 36px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-              <tr>
-                <td style="padding:4px 0 4px 24px; border-left:4px solid #00FFA0;">
-                  <p style="margin:0 0 6px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
-                    02 &nbsp;/&nbsp; WHAT IS RELEVANT FOR YOU
-                  </p>
-                  <p class="h-section" style="margin:0 0 14px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:normal;">
-                    Start with your <em>transcript.</em>
-                  </p>
-                  <p style="margin:0 0 26px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-                    Your personal transcript in Cornerstone lists the courses assigned to you, based on your role at Sarens. It is the quickest way to see what matters for your day-to-day work.
-                  </p>
+          <td class="pad-text" align="center" style="padding:52px 84px 0 84px;">
+            <p class="numeral" style="margin:0 0 4px 0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px;">
+              02
+            </p>
+            <p style="margin:0 0 16px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
+              WHAT IS RELEVANT FOR YOU
+            </p>
+            <p class="h-section" style="margin:0 0 16px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; font-weight:normal;">
+              Start with your <em>transcript.</em>
+            </p>
+            <p style="margin:0 0 28px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
+              Your transcript in Cornerstone lists the courses assigned to you, based on your role. It is the quickest way to see what matters for your work.
+            </p>
 
-                  <!-- Outline mint button (bulletproof: table cell + padded anchor) -->
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td style="border:2px solid #00FFA0;">
-                        <a href="https://sarens.csod.com/phnx/driver.aspx?routename=Social/UniversalProfile/Transcript" style="display:inline-block; padding:14px 26px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                          OPEN MY TRANSCRIPT &rarr;
-                        </a>
-                      </td>
-                    </tr>
-                  </table>
+            <!-- Outline mint button (bulletproof: table cell + padded anchor) -->
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td style="border:2px solid #00FFA0;">
+                  <a href="https://sarens.csod.com/phnx/driver.aspx?routename=Social/UniversalProfile/Transcript" style="display:inline-block; padding:14px 26px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+                    OPEN MY TRANSCRIPT &rarr;
+                  </a>
                 </td>
               </tr>
             </table>
@@ -284,84 +275,77 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         </tr>
 
         <!-- ============================================================== -->
-        <!-- 03 NUMBERS BANNER - WHITE CARD                                 -->
-        <!-- Treatment 3 of 3: the visual payoff. Centred, big figure.      -->
+        <!-- 03 NUMBERS BANNER - WHITE CARD, centred                        -->
         <!-- EDIT EACH ISSUE: hero number, period, three stats,             -->
         <!--                  perspective line                              -->
         <!-- The three stats must measure three different things.           -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:48px 36px 0 36px;">
+          <td class="pad-side" style="padding:52px 56px 0 56px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td height="5" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
               <tr>
-                <td class="card-pad" style="padding:44px 40px 48px 40px;">
+                <td class="card-pad" align="center" style="padding:36px 40px 44px 40px;">
 
                   <!-- Hero figure -->
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <p class="numeral" style="margin:0 0 4px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px;">
+                    03
+                  </p>
+                  <p style="margin:0 0 22px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
+                    YOU ARE DOING AN AMAZING JOB
+                  </p>
+                  <p style="margin:0 0 4px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px;">
+                    In eight months, you completed
+                  </p>
+                  <p class="big-number" style="margin:0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:72px; line-height:80px; font-weight:normal;">
+                    [HERO_NUMBER]
+                  </p>
+                  <p style="margin:0 0 24px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:21px; font-style:italic; line-height:28px;">
+                    e-learning courses.
+                  </p>
+
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
                     <tr>
-                      <td align="center">
-                        <p style="margin:0 0 20px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
-                          03 &nbsp;/&nbsp; YOU ARE DOING AN AMAZING JOB
-                        </p>
-                        <p style="margin:0 0 6px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px;">
-                          In eight months, you completed
-                        </p>
-                        <p class="big-number" style="margin:0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:76px; line-height:84px; font-weight:normal;">
-                          [HERO_NUMBER]
-                        </p>
-                        <p style="margin:0 0 22px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:22px; font-style:italic; line-height:28px;">
-                          e-learning courses.
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="center" style="padding-bottom:36px;">
-                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td width="56" height="4" style="background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td>
-                          </tr>
-                        </table>
-                      </td>
+                      <td width="48" height="4" style="background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td>
                     </tr>
                   </table>
 
                   <!-- Three stats, three different measurements -->
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-top:1px solid #E4E8EB;">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:34px; border-top:1px solid #E4E8EB;">
                     <tr>
-                      <td class="stat-cell stat-first" valign="top" width="33%" align="center" style="padding:28px 12px 0 0;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                      <td class="stat-cell stat-first" valign="top" width="33%" align="center" style="padding:26px 10px 0 0;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:28px; line-height:30px; font-weight:normal;">
                           [STAT_1_VALUE]
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           LEARNERS
                         </p>
                         <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
-                          Colleagues who completed at least one course.
+                          At least one course.
                         </p>
                       </td>
-                      <td class="stat-cell" valign="top" width="33%" align="center" style="padding:28px 12px 0 12px; border-left:1px solid #E4E8EB;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                      <td class="stat-cell" valign="top" width="33%" align="center" style="padding:26px 10px 0 10px; border-left:1px solid #E4E8EB;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:28px; line-height:30px; font-weight:normal;">
                           [STAT_2_VALUE]
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           COURSES EACH
                         </p>
                         <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
-                          Average courses completed per colleague.
+                          Average per colleague.
                         </p>
                       </td>
-                      <td class="stat-cell" valign="top" width="34%" align="center" style="padding:28px 0 0 12px; border-left:1px solid #E4E8EB;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                      <td class="stat-cell" valign="top" width="34%" align="center" style="padding:26px 0 0 10px; border-left:1px solid #E4E8EB;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:28px; line-height:30px; font-weight:normal;">
                           [STAT_3_VALUE]
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           COMPLETION
                         </p>
                         <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
-                          Of the courses that were assigned.
+                          Of the courses assigned.
                         </p>
                       </td>
                     </tr>
@@ -370,13 +354,11 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
                   <!-- Put that in perspective -->
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tr>
-                      <td style="padding-top:40px; border-top:1px solid #E4E8EB; font-size:0; line-height:0;">&nbsp;</td>
+                      <td style="padding-top:36px; border-top:1px solid #E4E8EB; font-size:0; line-height:0;">&nbsp;</td>
                     </tr>
-                  </table>
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tr>
-                      <td align="center" style="padding:0 0 20px 0;">
-                        <img src="IMG_CRANE_ICON_URL" alt="Sarens crane" width="72" style="display:block; border:0; outline:none; text-decoration:none; height:auto;" />
+                      <td align="center" style="padding:0 0 18px 0;">
+                        <img src="IMG_CRANE_ICON_URL" alt="Sarens crane" width="72" style="display:block; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; border:0; outline:none; text-decoration:none; height:auto; margin:0 auto;" />
                       </td>
                     </tr>
                     <tr>
@@ -388,7 +370,7 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
                     </tr>
                     <tr>
                       <td align="center">
-                        <p style="margin:0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:26px; line-height:36px; font-weight:normal;">
+                        <p class="perspective" style="margin:0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:24px; line-height:34px; font-weight:normal;">
                           [PERSPECTIVE_COMPARISON]
                         </p>
                       </td>
@@ -406,40 +388,42 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         <!-- EDIT EACH ISSUE: target number + deadline                      -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" align="center" style="padding:28px 36px 0 36px;">
-            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:22px; letter-spacing:0.5px;">
+          <td class="pad-text" align="center" style="padding:26px 84px 0 84px;">
+            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:22px;">
               NEXT GOAL &nbsp;<span style="color:#00FFA0;">[NEXT_GOAL_TARGET_AND_DEADLINE]</span>
             </p>
           </td>
         </tr>
 
-        <!-- ============================================================== -->
-        <!-- COURSE IN THE SPOTLIGHT                                        -->
-        <!-- EDIT EACH ISSUE: course title, description, button link        -->
-        <!-- ============================================================== -->
+        <!-- Centred mint rule -->
         <tr>
-          <td class="pad-side" style="padding:56px 36px 0 36px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <td align="center" style="padding:48px 0 0 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
               <tr>
-                <td height="1" style="background-color:#4378AC; font-size:0; line-height:0;">&nbsp;</td>
+                <td width="40" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
             </table>
           </td>
         </tr>
+
+        <!-- ============================================================== -->
+        <!-- COURSE IN THE SPOTLIGHT - navy, centred                        -->
+        <!-- EDIT EACH ISSUE: course title, description, button link        -->
+        <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:44px 36px 0 36px;">
-            <p style="margin:0 0 14px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
+          <td class="pad-text" align="center" style="padding:36px 84px 0 84px;">
+            <p style="margin:0 0 16px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
               COURSE IN THE SPOTLIGHT
             </p>
-            <p class="h-section" style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:34px; line-height:42px; font-weight:normal;">
+            <p class="h-section" style="margin:0 0 18px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:32px; line-height:40px; font-weight:normal;">
               Introduction to<br /><em>Special Trailers</em>
             </p>
-            <p style="margin:0 0 30px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
-              Step into the world of self-propelled, modular trailers: where the design came from, and what the work asks of it. You will see the fundamental difference between a conventional trailer and a special one, and get to know the main types. By the end you will understand the working principle and where each type is typically used.
+            <p style="margin:0 0 28px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
+              Step into the world of self-propelled, modular trailers: where the design came from, and what the work asks of it. You will learn how they differ from conventional trailers, the main types, and where each one is used.
             </p>
 
             <!-- Outline mint button -->
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
               <tr>
                 <td style="border:2px solid #00FFA0;">
                   <a href="LINK_SPOTLIGHT_COURSE_URL" style="display:inline-block; padding:14px 26px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
@@ -463,20 +447,20 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         <!-- EDIT EACH ISSUE: headline + supporting line                    -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:56px 36px 0 36px;">
+          <td class="pad-side" style="padding:52px 56px 0 56px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td height="5" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
               <tr>
-                <td class="card-pad" align="center" style="padding:52px 40px 56px 40px;">
-                  <p style="margin:0 0 16px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
+                <td class="card-pad" align="center" style="padding:44px 40px 48px 40px;">
+                  <p style="margin:0 0 14px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
                     READY TO LEARN?
                   </p>
-                  <p class="h-cta" style="margin:0 0 14px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:38px; line-height:46px; font-weight:normal;">
+                  <p class="h-cta" style="margin:0 0 14px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:34px; line-height:42px; font-weight:normal;">
                     Open Cornerstone <em>now.</em>
                   </p>
-                  <p style="margin:0 0 34px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
+                  <p style="margin:0 0 30px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
                     Single sign-on gets you in without another password.
                   </p>
 
@@ -484,7 +468,7 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
                     <tr>
                       <td style="background-color:#00FFA0;">
-                        <a href="https://sarens.csod.com/ui/lms-learner-home/home?tab_page_id=-200300006" style="display:inline-block; padding:20px 52px; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+                        <a href="https://sarens.csod.com/ui/lms-learner-home/home?tab_page_id=-200300006" style="display:inline-block; padding:19px 48px; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:15px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
                           LOG IN &rarr;
                         </a>
                       </td>
@@ -497,31 +481,34 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
         </tr>
 
         <!-- ============================================================== -->
-        <!-- APP TEASER - placed AFTER the main CTA on purpose, so LOG IN   -->
-        <!-- stays the only action in the lower half. No button.            -->
+        <!-- APP TEASER - after the main CTA on purpose, so LOG IN stays    -->
+        <!-- the only action in the lower half. No button.                  -->
         <!-- ============================================================== -->
         <tr>
-          <td class="pad-side" style="padding:44px 36px 56px 36px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <td align="center" style="padding:44px 0 0 0;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
               <tr>
-                <td style="padding:2px 0 2px 24px; border-left:4px solid #00FFA0;">
-                  <p style="margin:0 0 8px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
-                    COMING UP
-                  </p>
-                  <p style="margin:0 0 10px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:30px; font-weight:normal;">
-                    No desk? No problem.
-                  </p>
-                  <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:23px;">
-                    Learning does not always happen behind a screen. Sometimes the best moment is while you are travelling, waiting for a meeting to start, or in a quiet gap in the day. Cornerstone has a feature that makes this more flexible than you might expect. More on it in the next issue.
-                  </p>
-                </td>
+                <td width="40" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
             </table>
           </td>
         </tr>
+        <tr>
+          <td class="pad-text" align="center" style="padding:28px 84px 52px 84px;">
+            <p style="margin:0 0 8px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
+              COMING UP
+            </p>
+            <p style="margin:0 0 10px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:30px; font-weight:normal;">
+              No desk? No problem.
+            </p>
+            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:23px;">
+              Sometimes the best moment to learn is while you are travelling, or waiting for a meeting to start. Cornerstone has a feature for exactly that. More on it in the next issue.
+            </p>
+          </td>
+        </tr>
 
         <!-- ============================================================== -->
-        <!-- CLOSING SECTION - solid black, no background image, no VML     -->
+        <!-- CLOSING SECTION - solid black, centred, no background image    -->
         <!-- EDIT EACH ISSUE: questions copy, sign-off name                 -->
         <!-- ============================================================== -->
         <tr>
@@ -529,15 +516,19 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
 
               <tr>
-                <td class="pad-side" style="padding:56px 36px 0 36px;">
-                  <p style="margin:0 0 16px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:30px; font-style:italic; font-weight:normal; line-height:38px;">
+                <td class="pad-text" align="center" style="padding:52px 84px 0 84px;">
+                  <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:28px; font-style:italic; font-weight:normal; line-height:36px;">
                     Any questions?
                   </p>
-                  <p style="margin:0 0 44px 0; color:#B9C0C6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
+                  <p style="margin:0; color:#B9C0C6; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
                     Not sure how to log in, or where to find a particular course? Reach out to your team leader or HR. They are here to help.
                   </p>
+                </td>
+              </tr>
 
-                  <p style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:22px; font-style:italic; line-height:32px;">
+              <tr>
+                <td class="pad-text" align="center" style="padding:40px 84px 0 84px;">
+                  <p style="margin:0 0 18px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; font-style:italic; line-height:31px;">
                     Together, we own our future.
                   </p>
                   <p style="margin:0; color:#B9C0C6; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px;">
@@ -549,23 +540,23 @@ DATA PLACEHOLDERS still to be filled (numbers banner):
 
               <!-- #OwnYourFuture lockup (mandatory every issue) -->
               <tr>
-                <td align="center" style="padding:52px 24px 56px 24px;">
+                <td align="center" style="padding:48px 24px 52px 24px;">
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
                     <tr>
-                      <td width="28" valign="middle" style="font-size:0; line-height:0;">
-                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="28">
+                      <td width="26" valign="middle" style="font-size:0; line-height:0;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="26">
                           <tr>
-                            <td width="28" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
+                            <td width="26" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
                           </tr>
                         </table>
                       </td>
-                      <td align="center" style="padding:0 16px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:19px; font-weight:bold; letter-spacing:5px;">
+                      <td align="center" style="padding:0 14px; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:18px; font-weight:bold; letter-spacing:5px;">
                         #OWNYOURFUTURE
                       </td>
-                      <td width="28" valign="middle" style="font-size:0; line-height:0;">
-                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="28">
+                      <td width="26" valign="middle" style="font-size:0; line-height:0;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="26">
                           <tr>
-                            <td width="28" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
+                            <td width="26" height="2" style="background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
                           </tr>
                         </table>
                       </td>
