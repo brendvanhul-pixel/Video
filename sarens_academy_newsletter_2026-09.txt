@@ -15,8 +15,7 @@ sharpen a skill, or simply get inspired.
 
 So we have expanded our Learning Library again, with a range of
 brand-new courses. No homework. No obligations. Just short learning
-experiences that fit into your day. You might even find that one topic
-you have been curious about for a while.
+experiences that fit into your day.
 
 ---
 
@@ -51,14 +50,14 @@ YOU ARE DOING AN AMAZING JOB
 
 In eight months, you completed [HERO_NUMBER] e-learning courses.
 
-[STAT_1_VALUE] unique learners
+[STAT_1_VALUE] learners
 Colleagues who completed at least one course.
 
-[STAT_2_VALUE] courses per learner
-Average completed per colleague.
+[STAT_2_VALUE] courses each
+Average courses completed per colleague.
 
-[STAT_3_VALUE] assigned courses done
-Completion rate on what was assigned.
+[STAT_3_VALUE] completion
+Of the courses that were assigned.
 
 PUT THAT IN PERSPECTIVE
 [PERSPECTIVE_COMPARISON]
