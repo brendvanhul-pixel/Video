@@ -10,21 +10,10 @@
 ====================================================================
 SEPTEMBER 2026 - SARENS ACADEMY NEWSLETTER
 
-Layout follows the May issue: one navy column, 600px wide, with
-white and black chapter cards inset on top of it so navy always
-frames them. The navy stops at the edge of the email; anything
-wider than 600px is the black page field behind it. No full-bleed
-white bands, no mint keylines top or bottom.
-
-Everything is centred.
-
-WHY NO @font-face
-The May file loaded Banera from sarens.sharepoint.com. Email
-clients fetch anonymously and get a login redirect, so the font
-never arrived; Outlook and Gmail strip @font-face anyway. Georgia
-is the fallback that was actually rendering. If Banera is ever
-hosted publicly, add the @font-face block back and prepend
-'Banera' to every font-family stack in this file.
+Layout: one navy column, 600px wide, with white and black cards
+inset on it. Everything is centred. Type: Georgia for display,
+Arial for text. Georgia sizes 76/48/40/32/24/20, Arial 15/12
+plus 11px and 10px caps labels. Use only these sizes.
 
 MAILCHIMP
 Paste as a coded template: Content > Email templates > Create
@@ -56,13 +45,13 @@ the graphic contradicts the sentence under it.
   .pad-text   { padding-left:24px !important; padding-right:24px !important; }
   .pad-card   { padding-left:26px !important; padding-right:26px !important; }
   .hero-quote { font-size:30px !important; line-height:39px !important; }
-  .hero-sub   { font-size:17px !important; line-height:24px !important; }
-  .lead-line  { font-size:19px !important; line-height:29px !important; }
+  .hero-sub   { font-size:18px !important; line-height:26px !important; }
+  .lead-line  { font-size:20px !important; line-height:30px !important; }
   .h-section  { font-size:26px !important; line-height:34px !important; }
-  .h-cta      { font-size:29px !important; line-height:36px !important; }
+  .h-cta      { font-size:26px !important; line-height:34px !important; }
   .numeral    { font-size:40px !important; line-height:42px !important; }
   .big-number { font-size:62px !important; line-height:68px !important; }
-  .perspective{ font-size:21px !important; line-height:30px !important; }
+  .perspective{ font-size:20px !important; line-height:30px !important; }
   .stat-cell {
     display:block !important;
     width:100% !important;
@@ -87,7 +76,7 @@ the graphic contradicts the sentence under it.
 <!-- PREHEADER - filled from the campaign's preview text field -->
 <div style="display:none; font-size:1px; color:#000000; line-height:1px; max-height:0px; max-width:0px; opacity:0; overflow:hidden;">*|MC_PREVIEW_TEXT|*</div>
 
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#000000;">
+<table bgcolor="#000000" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#000000;">
   <tr>
     <td align="center" style="padding:0;">
 
@@ -97,7 +86,7 @@ the graphic contradicts the sentence under it.
       <td>
       <![endif]-->
 
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%; max-width:600px; background-color:#2A5E97;">
+      <table bgcolor="#2A5E97" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%; max-width:600px; background-color:#2A5E97;">
 
         <!-- ============================================================== -->
         <!-- MASTHEAD - logo left, issue date right                          -->
@@ -134,14 +123,14 @@ the graphic contradicts the sentence under it.
 
         <tr>
           <td mc:edit="hero_quote" bgcolor="#2A5E97" class="pad-text" align="center" style="background-color:#2A5E97; padding:12px 56px 0 56px;">
-            <p class="hero-quote" style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:42px; line-height:52px; font-weight:normal;">
+            <p class="hero-quote" style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:40px; line-height:50px; font-weight:normal;">
               &ldquo;Oh, that looks interesting. I&rsquo;ll check it out later.&rdquo;
             </p>
           </td>
         </tr>
         <tr>
           <td mc:edit="hero_sub" bgcolor="#2A5E97" class="pad-text" align="center" style="background-color:#2A5E97; padding:18px 56px 0 56px;">
-            <p class="hero-sub" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:19px; line-height:27px; font-style:italic;">
+            <p class="hero-sub" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:20px; line-height:28px; font-style:italic;">
               Sounds familiar, right?
             </p>
           </td>
@@ -164,7 +153,7 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td mc:edit="intro" bgcolor="#2A5E97" class="pad-text" align="center" style="background-color:#2A5E97; padding:34px 56px 44px 56px;">
-            <p class="lead-line" style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; line-height:32px;">
+            <p class="lead-line" style="margin:0 0 20px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:24px; line-height:34px;">
               Whether it&rsquo;s a video, an article, a podcast, or a book, we all come across topics we&rsquo;d like to explore someday.
             </p>
             <p style="margin:0 0 14px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
@@ -184,7 +173,7 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td class="pad-band" style="padding:0 40px 40px 40px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
+            <table bgcolor="#FFFFFF" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td class="pad-card" align="center" style="padding:42px 34px 44px 34px;">
 
@@ -201,16 +190,16 @@ the graphic contradicts the sentence under it.
                   </table>
 
                   <!-- Navy figure panel -->
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#2A5E97;">
+                  <table bgcolor="#2A5E97" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#2A5E97;">
                     <tr>
                       <td mc:edit="numbers_figure" align="center" style="padding:30px 20px 34px 20px;">
-                        <p style="margin:0 0 2px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; letter-spacing:1px;">
+                        <p style="margin:0 0 2px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
                           In eight months, you learned for
                         </p>
                         <p class="big-number" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:76px; line-height:84px; font-weight:normal;">
                           829
                         </p>
-                        <p style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; font-style:italic; line-height:28px;">
+                        <p style="margin:0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:20px; font-style:italic; line-height:28px;">
                           days.
                         </p>
                       </td>
@@ -221,37 +210,37 @@ the graphic contradicts the sentence under it.
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:32px;">
                     <tr>
                       <td mc:edit="numbers_stat1" class="stat-cell" valign="top" width="32%" align="center" style="padding:16px 0 0 0; border-top:2px solid #2A5E97;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:32px; line-height:36px; font-weight:normal;">
                           2800+
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           LEARNERS
                         </p>
-                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
+                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px;">
                           Followed at least one course.
                         </p>
                       </td>
                       <td class="spacer" width="2%" style="font-size:0; line-height:0;">&nbsp;</td>
                       <td mc:edit="numbers_stat2" class="stat-cell" valign="top" width="32%" align="center" style="padding:16px 0 0 0; border-top:2px solid #2A5E97;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:32px; line-height:36px; font-weight:normal;">
                           4
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           COURSES EACH
                         </p>
-                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
+                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px;">
                           Average per colleague.
                         </p>
                       </td>
                       <td class="spacer" width="2%" style="font-size:0; line-height:0;">&nbsp;</td>
                       <td mc:edit="numbers_stat3" class="stat-cell" valign="top" width="32%" align="center" style="padding:16px 0 0 0; border-top:2px solid #2A5E97;">
-                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:32px; font-weight:normal;">
+                        <p style="margin:0 0 8px 0; color:#2A5E97; font-family:Georgia,'Times New Roman',serif; font-size:32px; line-height:36px; font-weight:normal;">
                           50+
                         </p>
                         <p style="margin:0 0 6px 0; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px;">
                           COMPLETED COURSES
                         </p>
-                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:17px;">
+                        <p style="margin:0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px;">
                           Average of our top 10 learners.
                         </p>
                       </td>
@@ -300,14 +289,14 @@ the graphic contradicts the sentence under it.
             <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
               NEXT GOAL
             </p>
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#1E4B7E" style="width:100%; background-color:#1E4B7E; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
               <tr>
-                <td width="80%" height="12" bgcolor="#00FFA0" style="width:80%; background-color:#00FFA0; font-size:0; line-height:0;">&nbsp;</td>
-                <td width="20%" height="12" bgcolor="#1E4B7E" style="width:20%; background-color:#1E4B7E; font-size:0; line-height:0;">&nbsp;</td>
+                <td width="80%" height="12" bgcolor="#00FFA0" style="width:80%; height:12px; background-color:#00FFA0; font-size:12px; line-height:12px; mso-line-height-rule:exactly;">&nbsp;</td>
+                <td width="20%" height="12" bgcolor="#1E4B7E" style="width:20%; height:12px; background-color:#1E4B7E; font-size:12px; line-height:12px; mso-line-height-rule:exactly;">&nbsp;</td>
               </tr>
             </table>
             <div mc:edit="goal_caption">
-            <p style="margin:14px 0 0 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px;">
+            <p style="margin:14px 0 0 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
               2800 learners of a 3500 target. Deadline: end of 2026.
             </p>
             </div>
@@ -328,7 +317,7 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td class="pad-band" style="padding:0 40px 40px 40px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
+            <table bgcolor="#FFFFFF" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td class="pad-card" align="center" style="padding:42px 34px 44px 34px;">
 
@@ -350,10 +339,10 @@ the graphic contradicts the sentence under it.
                   </p>
                   </div>
 
-                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#2A5E97;">
+                  <table bgcolor="#2A5E97" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#2A5E97;">
                     <tr>
                       <td mc:edit="board_figure" align="center" style="padding:28px 20px 30px 20px;">
-                <p style="margin:0 0 2px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:21px; letter-spacing:1px;">
+                <p style="margin:0 0 2px 0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
                   Together, we have completed
                 </p>
                 <p class="big-number" style="margin:0; color:#00FFA0; font-family:Georgia,'Times New Roman',serif; font-size:76px; line-height:84px; font-weight:normal;">
@@ -387,242 +376,242 @@ the graphic contradicts the sentence under it.
                   <!-- RANKING: one <tr> per unit, ties share a rank. Fill #2A5E97, track #E4EAF0. -->
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:14px;">
             <tr>
-              <td width="7%" align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">1</td>
-              <td width="33%" align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">KPO India</td>
-              <td width="32%" style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="100%" height="10" bgcolor="#2A5E97" style="width:100%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td width="14%" align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">100.0%</td>
-              <td width="14%" align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td width="7%" align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">1</td>
+              <td width="33%" align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">KPO India</td>
+              <td width="32%" style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="100%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td width="14%" align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">100.0%</td>
+              <td width="14%" align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">2</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Group functions</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="92%" height="10" bgcolor="#2A5E97" style="width:92%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="8%" height="10" bgcolor="#E4EAF0" style="width:8%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">92.2%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">2</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Group functions</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="92%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">92.2%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">3</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Canada</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="87%" height="10" bgcolor="#2A5E97" style="width:87%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="13%" height="10" bgcolor="#E4EAF0" style="width:13%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">86.7%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">3</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#000000; font-weight:bold; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Canada</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="87%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">86.7%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">4</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Netherlands</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="72%" height="10" bgcolor="#2A5E97" style="width:72%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="28%" height="10" bgcolor="#E4EAF0" style="width:28%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">72.1%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">4</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Netherlands</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="72%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">72.1%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">5</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 2</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="68%" height="10" bgcolor="#2A5E97" style="width:68%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="32%" height="10" bgcolor="#E4EAF0" style="width:32%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">68.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">5</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 2</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="68%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">68.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">6</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">USA</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="67%" height="10" bgcolor="#2A5E97" style="width:67%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="33%" height="10" bgcolor="#E4EAF0" style="width:33%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">66.7%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;2</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">6</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">USA</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="67%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">66.7%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;2</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">7</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 1</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="66%" height="10" bgcolor="#2A5E97" style="width:66%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="34%" height="10" bgcolor="#E4EAF0" style="width:34%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">66.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">7</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 1</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="66%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">66.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">8</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Mexico</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="63%" height="10" bgcolor="#2A5E97" style="width:63%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="37%" height="10" bgcolor="#E4EAF0" style="width:37%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">62.9%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">8</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Mexico</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="63%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">62.9%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">9</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Global Fleet Services</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="59%" height="10" bgcolor="#2A5E97" style="width:59%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="41%" height="10" bgcolor="#E4EAF0" style="width:41%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">59.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">9</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Global Fleet Services</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="59%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">59.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">10</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Australia</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="54%" height="10" bgcolor="#2A5E97" style="width:54%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="46%" height="10" bgcolor="#E4EAF0" style="width:46%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">54.5%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;4</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">10</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Australia</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="54%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">54.5%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;4</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">11</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">United Kingdom</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="53%" height="10" bgcolor="#2A5E97" style="width:53%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="47%" height="10" bgcolor="#E4EAF0" style="width:47%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">53.4%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">11</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">United Kingdom</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="53%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">53.4%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">12</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 3</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="52%" height="10" bgcolor="#2A5E97" style="width:52%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="48%" height="10" bgcolor="#E4EAF0" style="width:48%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">52.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">12</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">SP &mdash; HUB 3</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="52%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">52.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">13</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Belgium (Sarens BE)</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="50%" height="10" bgcolor="#2A5E97" style="width:50%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="50%" height="10" bgcolor="#E4EAF0" style="width:50%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">50.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">13</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Belgium (Sarens BE)</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="50%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">50.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">13</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Sarens USA Nuclear</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="50%" height="10" bgcolor="#2A5E97" style="width:50%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="50%" height="10" bgcolor="#E4EAF0" style="width:50%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">50.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;4</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">13</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Sarens USA Nuclear</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="50%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">50.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;4</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">15</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">South Africa</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="45%" height="10" bgcolor="#2A5E97" style="width:45%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="55%" height="10" bgcolor="#E4EAF0" style="width:55%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">44.9%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">15</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">South Africa</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="45%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">44.9%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">16</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">SNME</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="45%" height="10" bgcolor="#2A5E97" style="width:45%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="55%" height="10" bgcolor="#E4EAF0" style="width:55%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">44.8%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">16</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">SNME</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="45%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">44.8%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">17</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Samoco</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="38%" height="10" bgcolor="#2A5E97" style="width:38%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="62%" height="10" bgcolor="#E4EAF0" style="width:62%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">37.5%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">17</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Samoco</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="38%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">37.5%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">18</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Belarus</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="35%" height="10" bgcolor="#2A5E97" style="width:35%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="65%" height="10" bgcolor="#E4EAF0" style="width:65%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">34.8%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">18</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Belarus</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="35%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">34.8%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">19</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">France</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="34%" height="10" bgcolor="#2A5E97" style="width:34%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="66%" height="10" bgcolor="#E4EAF0" style="width:66%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">34.4%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">19</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">France</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="34%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">34.4%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">20</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Egypt</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="31%" height="10" bgcolor="#2A5E97" style="width:31%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="69%" height="10" bgcolor="#E4EAF0" style="width:69%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">30.6%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;11</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">20</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Egypt</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="31%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">30.6%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;11</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">21</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Kazakhstan</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="29%" height="10" bgcolor="#2A5E97" style="width:29%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="71%" height="10" bgcolor="#E4EAF0" style="width:71%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">29.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">21</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Kazakhstan</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="29%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">29.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">22</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Angola</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="28%" height="10" bgcolor="#2A5E97" style="width:28%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="72%" height="10" bgcolor="#E4EAF0" style="width:72%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">27.8%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">22</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Angola</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="28%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">27.8%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">23</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Poland</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="27%" height="10" bgcolor="#2A5E97" style="width:27%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="73%" height="10" bgcolor="#E4EAF0" style="width:73%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">27.2%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">23</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Poland</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="27%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">27.2%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">24</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Uzbekistan</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="25%" height="10" bgcolor="#2A5E97" style="width:25%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="75%" height="10" bgcolor="#E4EAF0" style="width:75%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">25.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">24</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Uzbekistan</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="25%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">25.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;1</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">25</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Sinotrans</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="23%" height="10" bgcolor="#2A5E97" style="width:23%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="77%" height="10" bgcolor="#E4EAF0" style="width:77%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">23.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">25</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Sinotrans</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="23%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">23.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">25</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Thailand</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="23%" height="10" bgcolor="#2A5E97" style="width:23%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="77%" height="10" bgcolor="#E4EAF0" style="width:77%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">23.3%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;5</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">25</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Thailand</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="23%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">23.3%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;5</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">27</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">India</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="21%" height="10" bgcolor="#2A5E97" style="width:21%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="79%" height="10" bgcolor="#E4EAF0" style="width:79%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.9%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;2</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">27</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">India</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="21%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.9%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#1A7F37; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9650;&nbsp;2</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">28</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Lithuania</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="width:20%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="80%" height="10" bgcolor="#E4EAF0" style="width:80%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.4%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">28</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Lithuania</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.4%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">29</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Malaysia</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="width:20%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="80%" height="10" bgcolor="#E4EAF0" style="width:80%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;5</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">29</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Malaysia</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;5</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">29</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">TAGI</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="width:20%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="80%" height="10" bgcolor="#E4EAF0" style="width:80%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.0%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">29</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">TAGI</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="20%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">20.0%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;2</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">31</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Zambia</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="19%" height="10" bgcolor="#2A5E97" style="width:19%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="81%" height="10" bgcolor="#E4EAF0" style="width:81%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">18.8%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;3</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">31</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Zambia</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="19%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">18.8%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#C62828; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap; font-weight:bold;">&#9660;&nbsp;3</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">32</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Russia South</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="12%" height="10" bgcolor="#2A5E97" style="width:12%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="88%" height="10" bgcolor="#E4EAF0" style="width:88%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">12.4%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">32</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Russia South</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="12%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">12.4%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">33</td>
-              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Indonesia</td>
-              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="12%" height="10" bgcolor="#2A5E97" style="width:12%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="88%" height="10" bgcolor="#E4EAF0" style="width:88%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
-              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">12.2%</td>
-              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="left" style="padding:0 0 11px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">33</td>
+              <td align="left" style="padding:0 6px 11px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Indonesia</td>
+              <td style="padding:0 6px 11px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="12%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
+              <td align="right" style="padding:0 0 11px 0; color:#2A5E97; font-family:Arial,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">12.2%</td>
+              <td align="right" style="padding:0 0 11px 8px; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
             <tr>
-              <td align="left" style="padding:0 0 4px 0; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px;">34</td>
-              <td align="left" style="padding:0 6px 4px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px;">Czech Republic</td>
-              <td style="padding:0 6px 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td width="5%" height="10" bgcolor="#2A5E97" style="width:5%; background-color:#2A5E97; font-size:0; line-height:0;">&nbsp;</td><td width="95%" height="10" bgcolor="#E4EAF0" style="width:95%; background-color:#E4EAF0; font-size:0; line-height:0;">&nbsp;</td></tr></table></td>
+              <td align="left" style="padding:0 0 4px 0; color:#7A838B; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">34</td>
+              <td align="left" style="padding:0 6px 4px 0; color:#3C4247; font-family:Arial,sans-serif; font-size:12px; line-height:16px;">Czech Republic</td>
+              <td style="padding:0 6px 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#E4EAF0" style="background-color:#E4EAF0; border-collapse:collapse;"><tr><td width="5%" height="10" bgcolor="#2A5E97" style="background-color:#2A5E97; font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td><td style="font-size:10px; line-height:10px; mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td>
               <td align="right" style="padding:0 0 4px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; line-height:16px; white-space:nowrap;">4.8%</td>
-              <td align="right" style="padding:0 0 4px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:16px; white-space:nowrap;">&ndash;</td>
+              <td align="right" style="padding:0 0 4px 8px; color:#7A838B; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:16px; white-space:nowrap;">&ndash;</td>
             </tr>
                   </table>
 
@@ -704,11 +693,11 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td class="pad-band" style="padding:0 40px 40px 40px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#000000;">
+            <table bgcolor="#000000" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#000000;">
               <tr>
                 <td class="pad-card" align="center" style="padding:42px 40px 44px 40px;">
 
-                  <p style="margin:0 0 12px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
+                  <p style="margin:0 0 12px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
                     COURSE IN THE SPOTLIGHT
                   </p>
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 26px auto;">
@@ -754,7 +743,7 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td class="pad-band" style="padding:0 40px 40px 40px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
+            <table bgcolor="#FFFFFF" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td class="pad-card" align="center" style="padding:42px 40px 44px 40px;">
 
@@ -788,8 +777,8 @@ the graphic contradicts the sentence under it.
                     So we have added a set of Microsoft Viva courses, next to our internal ones on Sarens knowledge. Use them to find quicker ways of working.
                   </p>
 
-                  <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:20px;">
-                    <a href="https://sarens.csod.com/ui/lms-learner-search/search?pageNumber=1&query=microsoft%20viva" style="color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:13px; font-weight:bold; letter-spacing:1.5px; text-decoration:none; border-bottom:2px solid #2A5E97;">SEE THE MICROSOFT COURSES &rarr;</a>
+                  <p style="margin:0; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px;">
+                    <a href="https://sarens.csod.com/ui/lms-learner-search/search?pageNumber=1&query=microsoft%20viva" style="color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:12px; font-weight:bold; letter-spacing:2px; text-decoration:none; border-bottom:2px solid #2A5E97;">SEE THE MICROSOFT COURSES &rarr;</a>
                   </p>
                   </div>
 
@@ -808,10 +797,10 @@ the graphic contradicts the sentence under it.
             <p style="margin:0 0 8px 0; color:#00FFA0; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
               COMING UP
             </p>
-            <p style="margin:0 0 10px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:30px; font-weight:normal;">
+            <p style="margin:0 0 10px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:24px; line-height:32px; font-weight:normal;">
               No desk? No problem.
             </p>
-            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:23px;">
+            <p style="margin:0; color:#D6E3F0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
               Sometimes the best moment to learn is while you are travelling, waiting for a meeting to start or between loads and lifts. Cornerstone has a feature for exactly that. More on this following soon.
             </p>
           </td>
@@ -824,14 +813,14 @@ the graphic contradicts the sentence under it.
         <!-- ============================================================== -->
         <tr>
           <td class="pad-band" style="padding:0 40px 48px 40px;">
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
+            <table bgcolor="#FFFFFF" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;">
               <tr>
                 <td class="pad-card" align="center" style="padding:48px 40px 50px 40px;">
                   <div mc:edit="cta_copy">
-                  <p style="margin:0 0 14px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:4px;">
+                  <p style="margin:0 0 14px 0; color:#2A5E97; font-family:Arial,Helvetica,sans-serif; font-size:11px; font-weight:bold; letter-spacing:3px;">
                     READY TO LEARN?
                   </p>
-                  <p class="h-cta" style="margin:0 0 14px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:36px; line-height:44px; font-weight:normal;">
+                  <p class="h-cta" style="margin:0 0 14px 0; color:#000000; font-family:Georgia,'Times New Roman',serif; font-size:32px; line-height:40px; font-weight:normal;">
                     Open Cornerstone <em style="color:#2A5E97;">now.</em>
                   </p>
                   <p style="margin:0 0 30px 0; color:#3C4247; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
@@ -876,7 +865,7 @@ the graphic contradicts the sentence under it.
 
               <tr>
                 <td mc:edit="closing_questions" class="pad-text" align="center" style="padding:76px 56px 0 56px;">
-                  <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:28px; font-style:italic; font-weight:normal; line-height:36px;">
+                  <p style="margin:0 0 14px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:32px; font-style:italic; font-weight:normal; line-height:40px;">
                     Any questions?
                   </p>
                   <p style="margin:0; color:#D6DCE2; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:26px;">
@@ -897,10 +886,10 @@ the graphic contradicts the sentence under it.
 
               <tr>
                 <td mc:edit="closing_signoff" class="pad-text" align="center" style="padding:30px 56px 0 56px;">
-                  <p style="margin:0 0 16px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:21px; font-style:italic; line-height:31px;">
+                  <p style="margin:0 0 16px 0; color:#FFFFFF; font-family:Georgia,'Times New Roman',serif; font-size:20px; font-style:italic; line-height:30px;">
                     Together, we own our future.
                   </p>
-                  <p style="margin:0; color:#D6DCE2; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px;">
+                  <p style="margin:0; color:#D6DCE2; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px;">
                     Kind regards,<br />
                     Talent Team
                   </p>
@@ -936,7 +925,7 @@ the graphic contradicts the sentence under it.
 
               <!-- MAILCHIMP FOOTER - required merge tags, filled on send -->
               <tr>
-                <td class="pad-text" align="center" style="padding:0 56px 44px 56px; color:#8A939B; font-family:Arial,Helvetica,sans-serif; font-size:11px; line-height:18px;">
+                <td class="pad-text" align="center" style="padding:0 56px 44px 56px; color:#8A939B; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:18px;">
                   <a href="*|ARCHIVE|*" style="color:#8A939B; text-decoration:underline;">View in browser</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="*|UPDATE_PROFILE|*" style="color:#8A939B; text-decoration:underline;">Update preferences</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="*|UNSUB|*" style="color:#8A939B; text-decoration:underline;">Unsubscribe</a><br />
                   *|LIST:ADDRESSLINE|*
                 </td>
