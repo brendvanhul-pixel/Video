@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Learn Anywhere Poster</title>
+<style>
+  /* Sarens Senior Brand Manual palette */
+  :root{--blue:#2A5E97;--navy:#001F5B;--navy-deep:#000C26;--grey:#606566;--yellow:#FFE300;--grey-light:#D9DEE2;--white:#fff;--ink:#0E1A2E;--M:64px}
+  @page{size:297mm 420mm;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:"Inter Display","Inter",system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+  #poster{position:relative;width:1123px;height:1587px;overflow:hidden;background:var(--navy-deep)}
+  .abs{position:absolute}
+
+  /* background: crane photo on the right, melting into navy */
+  #photo{right:0;top:0;width:820px;height:1180px;background:url(../cornerstone-promo/assets/crane-vertical.jpg) 38% 0/cover no-repeat}
+  #photoFade{right:0;top:0;width:820px;height:1180px;background:
+     linear-gradient(90deg,var(--navy-deep) 0%,rgba(0,12,38,.82) 22%,rgba(0,12,38,.25) 55%,rgba(0,12,38,.1) 100%),
+     linear-gradient(180deg,rgba(0,12,38,.55) 0%,rgba(0,12,38,0) 18%,rgba(0,12,38,0) 55%,rgba(0,12,38,.9) 85%,var(--navy-deep) 100%)}
+  #glow{left:340px;top:760px;width:900px;height:900px;border-radius:50%;background:radial-gradient(closest-side,rgba(42,94,151,.42),rgba(42,94,151,0))}
+  #arc{left:-560px;top:780px;width:1500px;height:1500px;border-radius:50%;border:1.5px solid rgba(255,227,0,.28)}
+  #grain{inset:0;background:url(../cornerstone-promo/assets/noise.png);background-size:256px;opacity:.05;mix-blend-mode:overlay}
+
+  /* header */
+  #logo{left:var(--M);top:58px;height:34px}
+  #kicker{right:var(--M);top:62px;font-size:15px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  #kicker b{color:var(--yellow);font-weight:600}
+
+  /* headline */
+  #h1{left:var(--M);top:150px;font-size:172px;font-weight:700;letter-spacing:-.045em;line-height:.9}
+  #h1 .y{color:var(--yellow)}
+  #rule{left:var(--M);top:478px;width:88px;height:5px;background:var(--yellow)}
+  #sub{left:var(--M);top:506px;font-size:30px;font-weight:500;letter-spacing:-.01em;color:rgba(255,255,255,.86);line-height:1.3}
+
+  /* phone (reused from the app screen build, scaled) */
+    #phoneWrap{left:240px;top:560px;width:600px;height:1240px;perspective:2200px}
+  #phone{width:100%;height:100%;border-radius:96px;background:#0A0F18;padding:14px;
+         box-shadow:0 0 0 2px #2b3442,0 0 0 5px #10151f,0 60px 120px rgba(0,0,0,.55),0 20px 40px rgba(0,0,0,.35);
+         transform-style:preserve-3d;will-change:transform}
+  #screen{position:relative;width:100%;height:100%;border-radius:82px;overflow:hidden;background:#F3F5F8;color:var(--ink);
+          font-family:"Inter",system-ui,sans-serif}
+  #island{position:absolute;left:50%;top:22px;width:176px;height:52px;margin-left:-88px;background:#000;border-radius:26px;z-index:5}
+  .status{position:absolute;left:0;right:0;top:0;height:96px;display:flex;justify-content:space-between;align-items:center;padding:20px 52px 0;font-size:24px;font-weight:600}
+  .status .icons{display:flex;gap:10px;align-items:center}
+  .appbar{position:absolute;top:100px;left:32px;right:32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .appbar h1{font-size:30px;font-weight:650;letter-spacing:-.01em}
+  .appbar svg{width:34px;height:34px;color:var(--ink)}
+  .bell{position:relative}
+  .bell b{position:absolute;right:-6px;top:-6px;width:22px;height:22px;border-radius:11px;background:#E5484D;color:#fff;font-size:13px;display:grid;place-items:center;font-weight:700}
+  .stats{position:absolute;top:190px;left:28px;right:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stat{background:#fff;border-radius:22px;height:118px;padding:18px 18px;box-shadow:0 2px 10px rgba(14,26,46,.06);position:relative}
+  .stat i{display:block;width:34px;height:34px;border-radius:50%}
+  .stat .n{position:absolute;right:20px;top:16px;font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .l{position:absolute;left:18px;bottom:16px;font-size:20px;color:#55606F;font-weight:500}
+  .goals{position:absolute;top:330px;left:28px;right:28px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;gap:18px;padding:0 22px;box-shadow:0 2px 10px rgba(14,26,46,.06)}
+  .goals .ic{width:52px;height:52px;border-radius:50%;background:#FDECEC;display:grid;place-items:center;color:#E5484D}
+  .goals b{display:block;font-size:24px;font-weight:650}
+  .goals span{font-size:19px;color:#6A7482}
+  .goals .chev{margin-left:auto;color:#8A93A0}
+  .sec{position:absolute;left:32px;font-size:27px;font-weight:700;letter-spacing:-.01em}
+  .rail{position:absolute;top:516px;left:28px;display:flex;gap:16px}
+  .card{width:388px;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 6px 18px rgba(14,26,46,.08);position:relative}
+  .cover{height:196px;background:var(--navy);position:relative;overflow:hidden}
+  .cover svg{position:absolute;inset:0}
+  .cover h3{position:absolute;left:28px;bottom:26px;font-family:"Inter Display","Inter";font-size:50px;font-weight:600;color:#fff;letter-spacing:-.02em}
+  .cover .tag{position:absolute;left:28px;top:24px;font-size:15px;font-weight:700;letter-spacing:.14em;color:var(--yellow)}
+  .body{padding:18px 24px 24px}
+  .chip{display:inline-block;font-size:16px;font-weight:600;padding:5px 12px;border-radius:8px;background:#EEF1F5;color:#4A5565}
+  .body h4{font-size:24px;font-weight:650;margin:12px 0 6px;letter-spacing:-.01em}
+  .body .st{font-size:18px;color:#6A7482;display:flex;justify-content:space-between}
+  .body .st b{color:var(--ink);font-weight:600}
+  .bar{height:8px;border-radius:4px;background:#E3E8EE;margin-top:14px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+  .saved{position:absolute;top:938px;left:28px;right:28px;height:104px;background:#fff;border-radius:22px;display:flex;align-items:center;gap:18px;padding:0 18px;box-shadow:0 2px 10px rgba(14,26,46,.06)}
+  .saved .th{width:68px;height:68px;border-radius:14px;background:var(--blue);display:grid;place-items:center;color:#fff}
+  .saved b{display:block;font-size:22px;font-weight:650}
+  .saved span{font-size:18px;color:#6A7482}
+  .tabs{position:absolute;left:0;right:0;bottom:0;height:128px;background:#fff;border-top:1px solid #E6EAF0;display:grid;grid-template-columns:repeat(4,1fr);padding:16px 12px 0}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:16px;font-weight:600;color:#8A93A0}
+  .tab svg{width:32px;height:32px}
+  .tab.on{color:var(--blue)}
+  .homebar{position:absolute;bottom:10px;left:50%;width:180px;height:6px;margin-left:-90px;border-radius:3px;background:#0E1A2E}
+  #tap{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(42,94,151,.28);border:3px solid rgba(42,94,151,.55);pointer-events:none}
+  #toast{position:absolute;left:24px;right:24px;top:96px;height:112px;border-radius:28px;background:rgba(255,255,255,.96);
+         box-shadow:0 18px 40px rgba(14,26,46,.22);display:flex;align-items:center;gap:18px;padding:0 22px;z-index:6}
+  #toast .ok{width:60px;height:60px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--navy);flex:none}
+  #toast b{display:block;font-size:24px;font-weight:700}
+  #toast span{font-size:19px;color:#5A6472}
+
+  #phoneWrap{left:606px;top:575px;width:600px;height:1240px;perspective:none;transform:scale(.6) rotate(3deg);transform-origin:0 0}
+  #phoneWrap #toast,#phoneWrap #tap{display:none}
+
+  /* callouts on the left */
+  .note{left:var(--M);width:430px;height:104px;border-radius:24px;padding:0 24px;display:flex;align-items:center;gap:20px;
+        background:linear-gradient(135deg,rgba(32,70,130,.92),rgba(6,26,70,.94));border:1px solid rgba(255,255,255,.16);
+        box-shadow:0 24px 48px rgba(0,6,24,.5),inset 0 1px 0 rgba(255,255,255,.12)}
+  .note .ic{flex:none;width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,.1);color:var(--yellow);display:grid;place-items:center}
+  .note .ic svg{width:30px;height:30px}
+  .note small{display:block;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px}
+  .note strong{display:block;font-size:28px;font-weight:650;letter-spacing:-.02em;line-height:1.1}
+  .note .bar{height:6px;width:180px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:10px;overflow:hidden}
+  .note .bar i{display:block;height:100%;width:62%;background:var(--yellow)}
+  #n1{top:640px} #n2{top:764px} #n3{top:888px} #n4{top:1012px}
+  #n2 .ic{background:var(--yellow);color:var(--navy)}
+
+  /* sticker */
+  #sticker{left:836px;top:478px;width:236px;height:236px;border-radius:50%;background:var(--yellow);color:var(--navy);
+           display:grid;place-items:center;text-align:center;transform:rotate(-10deg);box-shadow:0 22px 44px rgba(0,6,24,.45)}
+  #sticker span{font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:6px}
+  #sticker b{font-size:33px;font-weight:700;letter-spacing:-.03em;line-height:1}
+
+  /* what's in it */
+  #topics{left:var(--M);top:1166px;width:560px}
+  #topics small{display:block;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chips span{font-size:19px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06)}
+
+  /* CTA panel */
+  #cta{left:40px;right:40px;bottom:40px;height:258px;border-radius:36px;background:#fff;color:var(--navy);
+       display:flex;align-items:center;justify-content:space-between;padding:0 36px 0 44px;box-shadow:0 -10px 60px rgba(0,0,0,.35)}
+  #cta h2{font-size:46px;font-weight:700;letter-spacing:-.035em;line-height:1}
+  #cta p{font-size:20px;color:#4A5565;margin-top:14px;font-weight:500;line-height:1.35}
+  #cta .brand{display:flex;align-items:center;gap:14px;margin-top:26px;font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  #cta .brand i{display:block;width:36px;height:4px;background:var(--yellow)}
+  .qrs{display:flex;gap:18px}
+  .qr{width:176px;border-radius:22px;border:1.5px solid #DCE2EA;padding:16px 16px 10px;text-align:center}
+  .qr img{display:block;width:144px;height:144px;image-rendering:pixelated}
+  .qr div{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:9px;font-size:18px;font-weight:700}
+  .qr svg{width:18px;height:18px}
+</style>
+</head>
+<body>
+<div id="poster">
+  <div class="abs" id="photo"></div>
+  <div class="abs" id="photoFade"></div>
+  <div class="abs" id="glow"></div>
+  <div class="abs" id="arc"></div>
+
+  <img class="abs" id="logo" src="../cornerstone-promo/assets/sarens-logo-white.png" alt="Sarens">
+  <div class="abs" id="kicker">Sarens Academy <b>·</b> Cornerstone app</div>
+
+  <h1 class="abs" id="h1">Learn<br>anywhere<span class="y">.</span></h1>
+  <div class="abs" id="rule"></div>
+  <p class="abs" id="sub">Parked up. Ten minutes.<br>One module done.</p>
+
+    <div class="abs" id="phoneWrap"><div id="phone"><div id="screen">
+    <div id="island"></div>
+    <div class="status"><span>9:41</span><span class="icons">
+      <svg width="30" height="20" viewBox="0 0 30 20"><rect x="0" y="12" width="5" height="8" rx="1.5" fill="#0E1A2E"/><rect x="8" y="8" width="5" height="12" rx="1.5" fill="#0E1A2E"/><rect x="16" y="4" width="5" height="16" rx="1.5" fill="#0E1A2E"/><rect x="24" y="0" width="5" height="20" rx="1.5" fill="#0E1A2E"/></svg>
+      <svg width="44" height="22" viewBox="0 0 44 22"><rect x="1" y="1" width="38" height="20" rx="6" fill="none" stroke="#0E1A2E" stroke-opacity=".4" stroke-width="2"/><rect x="4" y="4" width="28" height="14" rx="3.5" fill="#0E1A2E"/><rect x="41" y="7" width="3" height="8" rx="1.5" fill="#0E1A2E" fill-opacity=".4"/></svg>
+    </span></div>
+    <div id="toast"><div class="ok"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <div><b>Course completed</b><span>Added to your training record</span></div></div>
+    <div class="appbar">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.8"/><circle cx="12" cy="5" r="1.8"/><circle cx="19" cy="5" r="1.8"/><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/><circle cx="5" cy="19" r="1.8"/><circle cx="12" cy="19" r="1.8"/><circle cx="19" cy="19" r="1.8"/></svg>
+      <h1>Home</h1>
+      <span class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><b>3</b></span>
+    </div>
+    <div class="stats">
+      <div class="stat"><i style="background:#FAD4D4"></i><span class="n">0</span><span class="l">Overdue</span></div>
+      <div class="stat"><i style="background:#FFEFA8"></i><span class="n" id="dueN">1</span><span class="l">Due soon</span></div>
+      <div class="stat"><i style="background:#DCE2EA"></i><span class="n">6</span><span class="l">Assigned</span></div>
+    </div>
+    <div class="goals"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+      <div><b>Goals</b><span>View your performance goals</span></div>
+      <svg class="chev" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    <div class="sec" style="top:462px">Continue Learning</div>
+    <div class="rail">
+      <div class="card" id="card1">
+        <div class="cover"><svg viewBox="0 0 388 196" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"><path d="M-10 130 C 80 80, 160 170, 260 110 S 380 70, 400 90"/><path d="M-10 160 C 90 110, 170 200, 270 140 S 380 100, 400 120"/><path d="M-10 100 C 70 50, 150 140, 250 80 S 380 40, 400 60"/></g><circle cx="340" cy="40" r="70" fill="rgba(42,94,151,.6)"/></svg>
+          <h3>Operations</h3></div>
+        <div class="body"><span class="chip">Online Class</span><h4>Loading and Lashing</h4>
+          <div class="st"><span>Status: <b id="c1Status">In Progress</b></span><b id="c1Pct">62%</b></div>
+          <div class="bar"><i id="c1Bar" style="width:62%"></i></div></div>
+      </div>
+      <div class="card">
+        <div class="cover" style="background:var(--blue)"><svg viewBox="0 0 388 196" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"><path d="M0 40 L388 40 M0 80 L388 80 M0 120 L388 120 M0 160 L388 160"/></g></svg>
+          <h3>SHEQ</h3></div>
+        <div class="body"><span class="chip">Online Class</span><h4>Working at Height</h4>
+          <div class="st"><span>Status: <b>Not Started</b></span><b>0%</b></div><div class="bar"><i style="width:0"></i></div></div>
+      </div>
+    </div>
+    <div class="sec" style="top:888px">Saved for Later</div>
+    <div class="saved"><div class="th"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg></div>
+      <div><b>Sarens basics</b><span>Online Class · 12 min</span></div></div>
+    <div class="tabs">
+      <div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>My Learning</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>More</div>
+    </div>
+    <div id="tap"></div>
+    <div class="homebar"></div>
+  </div></div></div>
+
+  <div class="abs" id="sticker"><div><span>Finish a module</span><b>on your<br>break</b></div></div>
+
+  <div class="abs note" id="n1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7 4 20 12 7 20 7 4"/></svg></div>
+    <div><small>Continue learning</small><strong>Loading and Lashing</strong><div class="bar"><i></i></div></div></div>
+  <div class="abs note" id="n2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <div><small>Training record</small><strong>Course completed</strong></div></div>
+  <div class="abs note" id="n3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+    <div><small>Ready for</small><strong>Client inductions</strong></div></div>
+  <div class="abs note" id="n4"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/></svg></div>
+    <div><small>Courses in</small><strong>Your language</strong></div></div>
+
+  <div class="abs" id="topics"><small>What's in it</small><div class="chips"><span>SHEQ</span><span>Fleet</span><span>Operations</span><span>Sarens basics</span></div></div>
+
+  <div class="abs" id="cta">
+    <div><h2>Get the app.<br>Start today.</h2>
+      <p>Scan with your phone camera<br>and log in to Cornerstone.</p>
+      <div class="brand"><i></i>Sarens Academy</div></div>
+    <div class="qrs">
+      <div class="qr"><img src="../cornerstone-promo/assets/qr-android.png" alt="Google Play QR"><div>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2.9v18.8c0 .5.5.8 1 .6l10.7-10L5 2.3c-.5-.2-1 .1-1 .6zM16.9 13.5l2.8-1.6c.6-.4.6-1 0-1.4L16.9 8.9 14.6 11.3zM6.6 22.6L15.7 17.3l-2.3-2.3zM6.6 0l6.8 7.6 2.3-2.3z"/></svg>Android</div></div>
+      <div class="qr"><img src="../cornerstone-promo/assets/qr-ios.png" alt="App Store QR"><div>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.6 1.3-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.5.9-1.4 1.3-2.8 1.3-2.8s-2.6-1-2.1-4.2zM13.9 4.9c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>iOS</div></div>
+    </div>
+  </div>
+  <div class="abs" id="grain"></div>
+</div>
+</body>
+</html>
