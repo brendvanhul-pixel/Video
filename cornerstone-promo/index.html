@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn Anywhere Promo</title>
+<style>
+  /* Sarens Senior Brand Manual palette */
+  :root{
+    --blue:#2A5E97;      /* Pantone 301C */
+    --navy:#001F5B;      /* Pantone 281C */
+    --navy-deep:#000C26;
+    --grey:#606566;      /* Pantone 431C */
+    --yellow:#FFE300;    /* Pantone 108C */
+    --grey-light:#D9DEE2;
+    --white:#FFFFFF;
+    --ink:#0E1A2E;
+    --W:1080px; --H:1920px; --M:88px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#000;height:100%;overflow:hidden}
+  body{font-family:"Inter Display","Inter",system-ui,sans-serif;color:var(--white);
+       -webkit-font-smoothing:antialiased;font-feature-settings:"ss02" 0}
+
+  #stage{position:absolute;left:0;top:0;width:var(--W);height:var(--H);overflow:hidden;
+         background:var(--navy-deep);transform-origin:0 0}
+  .abs{position:absolute}
+  .layer{position:absolute;inset:0}
+
+  /* ---------- backgrounds ---------- */
+  #bgPhoto1{background:url(assets/operator-dusk.jpg) 47% 50%/cover no-repeat}
+  #bgPhoto1Shade{background:
+      linear-gradient(180deg,rgba(0,12,38,.55) 0%,rgba(0,12,38,0) 22%,rgba(0,12,38,0) 45%,rgba(0,12,38,.86) 78%,rgba(0,12,38,.96) 100%)}
+  #bgNavy{background:
+      radial-gradient(900px 900px at 50% 58%,rgba(42,94,151,.75),rgba(42,94,151,0) 70%),
+      radial-gradient(1400px 1000px at 50% 110%,rgba(0,31,91,1),rgba(0,12,38,1) 70%)}
+  #grid{background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+      background-size:72px 72px;background-position:-36px -36px;
+      -webkit-mask-image:radial-gradient(800px 1100px at 50% 55%,#000 30%,transparent 80%)}
+  #arc{left:-420px;top:640px;width:1920px;height:1920px;border-radius:50%;
+       border:2px solid rgba(255,227,0,.22)}
+  #bgPhoto2{background:url(assets/crane-vertical.jpg) 50% 0%/cover no-repeat}
+  #bgPhoto2Shade{background:
+      linear-gradient(180deg,rgba(0,12,38,.35) 0%,rgba(0,12,38,0) 18%,rgba(0,12,38,.55) 30%,rgba(0,20,62,.94) 48%,var(--navy-deep) 64%)}
+  #grain{inset:-128px;background:url(assets/noise.png);opacity:.055;mix-blend-mode:overlay}
+
+  /* ---------- HUD ---------- */
+  #logoTop{left:var(--M);top:92px;height:46px}
+  #timer{right:var(--M);top:86px;height:58px;padding:0 24px 0 18px;border-radius:29px;
+         display:flex;align-items:center;gap:12px;font-size:28px;font-weight:600;
+         font-variant-numeric:tabular-nums;letter-spacing:.01em;
+         background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+         backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  #timer svg{width:30px;height:30px}
+  #timer .ring-bg{stroke:rgba(255,255,255,.25)}
+  #timer .ring{stroke:var(--white);transform:rotate(-90deg);transform-origin:50% 50%}
+  #timer.done{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+  #timer.done .ring,#timer.done .ring-bg{stroke:var(--navy);opacity:.0}
+
+  /* ---------- type ---------- */
+  .mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+  .mask>span{display:inline-block;will-change:transform}
+  .display{font-weight:700;letter-spacing:-.035em;line-height:.98}
+  .y{color:var(--yellow)}
+  .eyebrow{font-size:24px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+
+  #intro{left:var(--M);right:var(--M);bottom:260px;font-size:124px}
+  #intro .eyebrow{margin-bottom:36px}
+  #hDone{left:var(--M);right:var(--M);top:210px;font-size:108px}
+  #hBreak{left:var(--M);right:var(--M);top:206px;font-size:92px}
+  #hFinal{left:var(--M);right:var(--M);top:700px;font-size:180px;line-height:.92}
+  #subFinal{left:var(--M);top:1080px;font-size:40px;font-weight:500;color:rgba(255,255,255,.78);letter-spacing:-.01em}
+  #rule{left:var(--M);top:1050px;height:6px;width:120px;background:var(--yellow);transform-origin:0 50%}
+
+  /* ---------- phone ---------- */
+  #phoneWrap{left:240px;top:560px;width:600px;height:1240px;perspective:2200px}
+  #phone{width:100%;height:100%;border-radius:96px;background:#0A0F18;padding:14px;
+         box-shadow:0 0 0 2px #2b3442,0 0 0 5px #10151f,0 60px 120px rgba(0,0,0,.55),0 20px 40px rgba(0,0,0,.35);
+         transform-style:preserve-3d;will-change:transform}
+  #screen{position:relative;width:100%;height:100%;border-radius:82px;overflow:hidden;background:#F3F5F8;color:var(--ink);
+          font-family:"Inter",system-ui,sans-serif}
+  #island{position:absolute;left:50%;top:22px;width:176px;height:52px;margin-left:-88px;background:#000;border-radius:26px;z-index:5}
+  .status{position:absolute;left:0;right:0;top:0;height:96px;display:flex;justify-content:space-between;align-items:center;padding:20px 52px 0;font-size:24px;font-weight:600}
+  .status .icons{display:flex;gap:10px;align-items:center}
+  .appbar{position:absolute;top:100px;left:32px;right:32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .appbar h1{font-size:30px;font-weight:650;letter-spacing:-.01em}
+  .appbar svg{width:34px;height:34px;color:var(--ink)}
+  .bell{position:relative}
+  .bell b{position:absolute;right:-6px;top:-6px;width:22px;height:22px;border-radius:11px;background:#E5484D;color:#fff;font-size:13px;display:grid;place-items:center;font-weight:700}
+  .stats{position:absolute;top:190px;left:28px;right:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stat{background:#fff;border-radius:22px;height:118px;padding:18px 18px;box-shadow:0 2px 10px rgba(14,26,46,.06);position:relative}
+  .stat i{display:block;width:34px;height:34px;border-radius:50%}
+  .stat .n{position:absolute;right:20px;top:16px;font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .l{position:absolute;left:18px;bottom:16px;font-size:20px;color:#55606F;font-weight:500}
+  .goals{position:absolute;top:330px;left:28px;right:28px;height:96px;background:#fff;border-radius:22px;display:flex;align-items:center;gap:18px;padding:0 22px;box-shadow:0 2px 10px rgba(14,26,46,.06)}
+  .goals .ic{width:52px;height:52px;border-radius:50%;background:#FDECEC;display:grid;place-items:center;color:#E5484D}
+  .goals b{display:block;font-size:24px;font-weight:650}
+  .goals span{font-size:19px;color:#6A7482}
+  .goals .chev{margin-left:auto;color:#8A93A0}
+  .sec{position:absolute;left:32px;font-size:27px;font-weight:700;letter-spacing:-.01em}
+  .rail{position:absolute;top:516px;left:28px;display:flex;gap:16px}
+  .card{width:388px;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 6px 18px rgba(14,26,46,.08);position:relative}
+  .cover{height:196px;background:var(--navy);position:relative;overflow:hidden}
+  .cover svg{position:absolute;inset:0}
+  .cover h3{position:absolute;left:28px;bottom:26px;font-family:"Inter Display","Inter";font-size:50px;font-weight:600;color:#fff;letter-spacing:-.02em}
+  .cover .tag{position:absolute;left:28px;top:24px;font-size:15px;font-weight:700;letter-spacing:.14em;color:var(--yellow)}
+  .body{padding:18px 24px 24px}
+  .chip{display:inline-block;font-size:16px;font-weight:600;padding:5px 12px;border-radius:8px;background:#EEF1F5;color:#4A5565}
+  .body h4{font-size:24px;font-weight:650;margin:12px 0 6px;letter-spacing:-.01em}
+  .body .st{font-size:18px;color:#6A7482;display:flex;justify-content:space-between}
+  .body .st b{color:var(--ink);font-weight:600}
+  .bar{height:8px;border-radius:4px;background:#E3E8EE;margin-top:14px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+  .saved{position:absolute;top:938px;left:28px;right:28px;height:104px;background:#fff;border-radius:22px;display:flex;align-items:center;gap:18px;padding:0 18px;box-shadow:0 2px 10px rgba(14,26,46,.06)}
+  .saved .th{width:68px;height:68px;border-radius:14px;background:var(--blue);display:grid;place-items:center;color:#fff}
+  .saved b{display:block;font-size:22px;font-weight:650}
+  .saved span{font-size:18px;color:#6A7482}
+  .tabs{position:absolute;left:0;right:0;bottom:0;height:128px;background:#fff;border-top:1px solid #E6EAF0;display:grid;grid-template-columns:repeat(4,1fr);padding:16px 12px 0}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:16px;font-weight:600;color:#8A93A0}
+  .tab svg{width:32px;height:32px}
+  .tab.on{color:var(--blue)}
+  .homebar{position:absolute;bottom:10px;left:50%;width:180px;height:6px;margin-left:-90px;border-radius:3px;background:#0E1A2E}
+  #tap{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(42,94,151,.28);border:3px solid rgba(42,94,151,.55);pointer-events:none}
+  #toast{position:absolute;left:24px;right:24px;top:96px;height:112px;border-radius:28px;background:rgba(255,255,255,.96);
+         box-shadow:0 18px 40px rgba(14,26,46,.22);display:flex;align-items:center;gap:18px;padding:0 22px;z-index:6}
+  #toast .ok{width:60px;height:60px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--navy);flex:none}
+  #toast b{display:block;font-size:24px;font-weight:700}
+  #toast span{font-size:19px;color:#5A6472}
+
+  /* ---------- proof cards ---------- */
+  .pcard{left:64px;width:604px;border-radius:32px;padding:30px 34px;
+         background:linear-gradient(135deg,rgba(28,62,118,.86),rgba(6,24,66,.88));
+         border:1px solid rgba(255,255,255,.2);
+         backdrop-filter:blur(26px) saturate(1.2);-webkit-backdrop-filter:blur(26px) saturate(1.2);
+         box-shadow:0 30px 60px rgba(0,8,30,.55),inset 0 1px 0 rgba(255,255,255,.12);display:flex;gap:26px;align-items:center}
+  .pcard .ic{flex:none;width:84px;height:84px;border-radius:24px;background:var(--yellow);color:var(--navy);display:grid;place-items:center}
+  .pcard .ic svg{width:44px;height:44px}
+  .pcard small{display:block;font-size:20px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-bottom:8px}
+  .pcard strong{display:block;font-size:44px;font-weight:700;letter-spacing:-.025em;line-height:1.05}
+  #pc1{top:520px} #pc2{top:746px} #pc3{top:972px;align-items:flex-start}
+  .slot{display:inline-block;height:1.1em;overflow:hidden;vertical-align:bottom;color:var(--yellow)}
+  .slot>span{display:block}
+  .slot>span>span{display:block;height:1.1em}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+  .chips span{font-size:26px;font-weight:600;padding:10px 20px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
+
+  /* ---------- end card ---------- */
+  #cta{left:var(--M);top:1222px;right:var(--M)}
+  #cta .eyebrow{color:var(--yellow);margin-bottom:26px}
+  .qrs{display:flex;gap:32px}
+  .qr{width:340px;background:#fff;border-radius:32px;padding:30px 30px 22px;color:var(--navy);box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .qr img{display:block;width:280px;height:280px;image-rendering:pixelated}
+  .qr div{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;font-size:28px;font-weight:700;letter-spacing:-.01em}
+  .qr svg{width:28px;height:28px}
+  #footer{left:var(--M);right:var(--M);bottom:96px;display:flex;justify-content:space-between;align-items:flex-end;
+          border-top:1px solid rgba(255,255,255,.18);padding-top:34px}
+  #footer img{height:52px}
+  #footer span{font-size:24px;font-weight:500;color:rgba(255,255,255,.62);letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- backgrounds -->
+  <div class="layer" id="bgNavy"></div>
+  <div class="layer" id="grid"></div>
+  <div class="abs" id="arc"></div>
+  <div class="layer" id="bgPhoto1"></div>
+  <div class="layer" id="bgPhoto1Shade"></div>
+  <div class="layer" id="bgPhoto2"></div>
+  <div class="layer" id="bgPhoto2Shade"></div>
+
+  <!-- HUD -->
+  <img class="abs" id="logoTop" src="assets/sarens-logo-white.png" alt="Sarens">
+  <div class="abs" id="timer">
+    <svg viewBox="0 0 30 30"><circle class="ring-bg" cx="15" cy="15" r="12" fill="none" stroke-width="3"/>
+      <path id="tick" d="M7 15.5l5 5 11-12" fill="none" stroke="#001F5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0"/><circle class="ring" id="ring" cx="15" cy="15" r="12" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="75.4" stroke-dashoffset="0"/></svg>
+    <span id="timerTxt">10:00</span>
+  </div>
+
+  <!-- scene 1: intro -->
+  <div class="abs" id="intro">
+    <div class="eyebrow mask"><span id="introEyebrow">Sarens Academy</span></div>
+    <div class="display"><span class="mask"><span id="l1">Parked up.</span></span>
+    <span class="mask"><span id="l2">Ten minutes.</span></span></div>
+  </div>
+
+  <!-- scene 2: phone -->
+  <div class="abs display" id="hDone"><span class="mask"><span id="d1">One module</span></span><span class="mask"><span id="d2" class="y">done.</span></span></div>
+  <div class="abs display" id="hBreak"><span class="mask"><span id="b1">Finish a module</span></span><span class="mask"><span id="b2">on your <span class="y">break.</span></span></span></div>
+
+  <div class="abs" id="phoneWrap"><div id="phone"><div id="screen">
+    <div id="island"></div>
+    <div class="status"><span>9:41</span><span class="icons">
+      <svg width="30" height="20" viewBox="0 0 30 20"><rect x="0" y="12" width="5" height="8" rx="1.5" fill="#0E1A2E"/><rect x="8" y="8" width="5" height="12" rx="1.5" fill="#0E1A2E"/><rect x="16" y="4" width="5" height="16" rx="1.5" fill="#0E1A2E"/><rect x="24" y="0" width="5" height="20" rx="1.5" fill="#0E1A2E"/></svg>
+      <svg width="44" height="22" viewBox="0 0 44 22"><rect x="1" y="1" width="38" height="20" rx="6" fill="none" stroke="#0E1A2E" stroke-opacity=".4" stroke-width="2"/><rect x="4" y="4" width="28" height="14" rx="3.5" fill="#0E1A2E"/><rect x="41" y="7" width="3" height="8" rx="1.5" fill="#0E1A2E" fill-opacity=".4"/></svg>
+    </span></div>
+    <div id="toast"><div class="ok"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <div><b>Course completed</b><span>Added to your training record</span></div></div>
+    <div class="appbar">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.8"/><circle cx="12" cy="5" r="1.8"/><circle cx="19" cy="5" r="1.8"/><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/><circle cx="5" cy="19" r="1.8"/><circle cx="12" cy="19" r="1.8"/><circle cx="19" cy="19" r="1.8"/></svg>
+      <h1>Home</h1>
+      <span class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><b>3</b></span>
+    </div>
+    <div class="stats">
+      <div class="stat"><i style="background:#FAD4D4"></i><span class="n">0</span><span class="l">Overdue</span></div>
+      <div class="stat"><i style="background:#FFEFA8"></i><span class="n" id="dueN">1</span><span class="l">Due soon</span></div>
+      <div class="stat"><i style="background:#DCE2EA"></i><span class="n">6</span><span class="l">Assigned</span></div>
+    </div>
+    <div class="goals"><div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+      <div><b>Goals</b><span>View your performance goals</span></div>
+      <svg class="chev" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    <div class="sec" style="top:462px">Continue Learning</div>
+    <div class="rail">
+      <div class="card" id="card1">
+        <div class="cover"><svg viewBox="0 0 388 196" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"><path d="M-10 130 C 80 80, 160 170, 260 110 S 380 70, 400 90"/><path d="M-10 160 C 90 110, 170 200, 270 140 S 380 100, 400 120"/><path d="M-10 100 C 70 50, 150 140, 250 80 S 380 40, 400 60"/></g><circle cx="340" cy="40" r="70" fill="rgba(42,94,151,.6)"/></svg>
+          <h3>Operations</h3></div>
+        <div class="body"><span class="chip">Online Class</span><h4>Loading and Lashing</h4>
+          <div class="st"><span>Status: <b id="c1Status">In Progress</b></span><b id="c1Pct">62%</b></div>
+          <div class="bar"><i id="c1Bar" style="width:62%"></i></div></div>
+      </div>
+      <div class="card">
+        <div class="cover" style="background:var(--blue)"><svg viewBox="0 0 388 196" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"><path d="M0 40 L388 40 M0 80 L388 80 M0 120 L388 120 M0 160 L388 160"/></g></svg>
+          <h3>SHEQ</h3></div>
+        <div class="body"><span class="chip">Online Class</span><h4>Working at Height</h4>
+          <div class="st"><span>Status: <b>Not Started</b></span><b>0%</b></div><div class="bar"><i style="width:0"></i></div></div>
+      </div>
+    </div>
+    <div class="sec" style="top:888px">Saved for Later</div>
+    <div class="saved"><div class="th"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg></div>
+      <div><b>Sarens basics</b><span>Online Class · 12 min</span></div></div>
+    <div class="tabs">
+      <div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>My Learning</div>
+      <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>More</div>
+    </div>
+    <div id="tap"></div>
+    <div class="homebar"></div>
+  </div></div></div>
+
+  <!-- scene 3: proof cards -->
+  <div class="abs pcard" id="pc1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+    <div><small>Ready for</small><strong>Client inductions</strong></div></div>
+  <div class="abs pcard" id="pc2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/></svg></div>
+    <div><small>Courses in your language</small><strong><span class="slot"><span id="langRoll"></span></span></strong></div></div>
+  <div class="abs pcard" id="pc3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5-10 5L2 7z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg></div>
+    <div><small>What's in it</small><div class="chips"><span id="ch1">SHEQ</span><span id="ch2">Fleet</span><span id="ch3">Operations</span><span id="ch4">Sarens basics</span></div></div></div>
+
+  <!-- scene 4: finale + end card -->
+  <div class="abs display" id="hFinal"><span class="mask"><span id="f1">Learn</span></span><span class="mask"><span id="f2">anywhere<span class="y">.</span></span></span></div>
+  <div class="abs" id="rule"></div>
+  <div class="abs" id="subFinal"><span class="mask"><span id="sub">Parked up. Ten minutes. One module done.</span></span></div>
+
+  <div class="abs" id="cta">
+    <div class="eyebrow">Scan to get the Cornerstone app</div>
+    <div class="qrs">
+      <div class="qr" id="qrA"><img src="assets/qr-android.png" alt="Google Play QR"><div>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2.6v18.8c0 .5.5.8 1 .6l10.7-10-10.7-10c-.5-.2-1 .1-1 .6zM16.9 13.2l2.8-1.6c.6-.4.6-1 0-1.4L16.9 8.6 14.6 11zM6.6 22.3L15.7 17l-2.3-2.3zM6.6-.3l6.8 7.6 2.3-2.3z" transform="translate(0 .3)"/></svg>Android</div></div>
+      <div class="qr" id="qrI"><img src="assets/qr-ios.png" alt="App Store QR"><div>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.6 1.3-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.5.9-1.4 1.3-2.8 1.3-2.8s-2.6-1-2.1-4.2zM13.9 4.9c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>iOS</div></div>
+    </div>
+  </div>
+  <div class="abs" id="footer"><img src="assets/sarens-logo-white.png" alt="Sarens"><span>Sarens Academy · Cornerstone</span></div>
+
+  <div class="abs" id="grain"></div>
+</div>
+
+<script>
+const FPS = 30, DURATION = 27;
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
+const P = (t,a,b) => clamp((t-a)/(b-a));
+const lerp = (a,b,p) => a+(b-a)*p;
+const outExpo = p => p===1?1:1-Math.pow(2,-10*p);
+const outCubic = p => 1-Math.pow(1-p,3);
+const inCubic = p => p*p*p;
+const inOutCubic = p => p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const outBack = p => {const c=1.5;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2)};
+const set = (el,o) => { if(typeof el==='string') el=$(el); for(const k in o) el.style[k]=o[k]; };
+
+/* in/out envelope: fade+rise in over [a,a+d], out over [b,b+d2] */
+function env(t,a,d,b,d2){ const i=outExpo(P(t,a,a+d)); const o=b==null?0:inCubic(P(t,b,b+(d2||.4))); return {i,o,v:i*(1-o)}; }
+/* masked line reveal: slides up from below its own mask */
+function reveal(id,t,a,b,dur=.75){ const i=outExpo(P(t,a,a+dur)); const o=b==null?0:inCubic(P(t,b,b+.45));
+  set(id,{transform:`translateY(${(1-i)*112 - o*112}%)`}); }
+
+const LANGS=["English","Nederlands","Français","Español","Deutsch","Português","Polski","English"];
+$('langRoll').innerHTML=LANGS.map(l=>`<span>${l}</span>`).join('');
+
+function render(t){
+  /* ---------- backgrounds ---------- */
+  const ph1In = outCubic(P(t,0,1.4));
+  const ph1Out = inOutCubic(P(t,3.9,4.9));
+  set('bgPhoto1',{opacity:ph1In*(1-ph1Out), transform:`scale(${lerp(1.16,1.04,outCubic(P(t,0,5)))})`, filter:`blur(${ph1Out*16}px)`});
+  set('bgPhoto1Shade',{opacity:ph1In*(1-ph1Out)});
+  const navyV = P(t,3.9,4.9)*(1-P(t,16.8,17.8));
+  set('bgNavy',{opacity:navyV});
+  set('grid',{opacity:navyV, transform:`translateY(${-t*6}px)`});
+  set('arc',{opacity:navyV*outCubic(P(t,4.4,5.6)), transform:`rotate(${t*1.2}deg) scale(${lerp(.9,1,outCubic(P(t,4.2,6)))})`});
+  const ph2 = inOutCubic(P(t,16.9,18.1));
+  set('bgPhoto2',{opacity:ph2, transform:`scale(${lerp(1.14,1.0,outCubic(P(t,16.9,27)))}) translateY(${lerp(30,0,outCubic(P(t,16.9,27)))}px)`});
+  set('bgPhoto2Shade',{opacity:ph2});
+  const f=Math.floor(t*FPS)%7;
+  set('grain',{transform:`translate(${(f*73)%128}px,${(f*41)%128}px)`});
+
+  /* ---------- HUD ---------- */
+  const logo = env(t,.4,.9,16.7,.5);
+  set('logoTop',{opacity:logo.v, transform:`translateY(${(1-logo.i)*-14}px)`});
+  const tm = env(t,2.3,.8,10.4,.5);
+  set('timer',{opacity:tm.v, transform:`translateY(${(1-tm.i)*-14}px)`});
+  const run = inOutCubic(P(t,2.6,8.1));
+  const left = Math.round(600 - run*(600-252));           // stops at 4:12 left
+  $('timerTxt').textContent = t>=8.1 ? 'Done · 4:12 to spare' : `${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
+  $('timer').classList.toggle('done', t>=8.1);
+  set('ring',{strokeDashoffset: t>=8.1 ? 0 : 75.4*(1-left/600)});
+  set('tick',{opacity: t>=8.1 ? 1 : 0});
+
+  /* ---------- scene 1 ---------- */
+  reveal('introEyebrow',t,.6,3.9,.8);
+  reveal('l1',t,.8,3.95);
+  reveal('l2',t,2.1,4.0);
+  set('l1',{opacity: lerp(1,.42,outCubic(P(t,2.1,2.6)))});
+
+  /* ---------- scene 2: phone ---------- */
+  const rise = outExpo(P(t,4.2,5.6));
+  const aside = inOutCubic(P(t,10.5,11.6));
+  const drop = inCubic(P(t,16.4,17.2));
+  set('phone',{transform:
+    `translate3d(${aside*250}px,${(1-rise)*1500 + aside*150 + drop*1700}px,0) scale(${lerp(1,.84,aside)}) rotateX(${(1-rise)*28}deg) rotateY(${-aside*14}deg) rotateZ(${(1-rise)*-4 + aside*1.5}deg)`});
+  const tap = P(t,5.75,6.45);
+  set('tap',{left:'140px',top:'640px',opacity: tap>0&&tap<1 ? (1-tap)*.9 : 0, transform:`scale(${.3+tap*1.4})`});
+  const prog = inOutCubic(P(t,6.0,8.0));
+  const pct = Math.round(lerp(62,100,prog));
+  set('c1Bar',{width:pct+'%', background: t>=8.0 ? 'var(--yellow)' : 'var(--blue)'});
+  $('c1Pct').textContent = pct+'%';
+  $('c1Status').textContent = t>=8.0 ? 'Completed' : 'In Progress';
+  $('dueN').textContent = t>=8.15 ? '0' : '1';
+  const toast = env(t,8.15,.7,10.0,.4);
+  set('toast',{opacity:toast.v, transform:`translateY(${(1-toast.i)*-150 - toast.o*40}px) scale(${lerp(.92,1,toast.i)})`});
+  const pop = P(t,8.0,8.5);
+  set('card1',{transform:`scale(${1+Math.sin(pop*Math.PI)*.035})`});
+
+  reveal('d1',t,8.3,10.45);
+  reveal('d2',t,8.45,10.5);
+
+  /* ---------- scene 3: proof ---------- */
+  reveal('b1',t,10.9,16.4);
+  reveal('b2',t,11.05,16.45);
+  [['pc1',11.5,16.3],['pc2',12.3,16.4],['pc3',13.1,16.5]].forEach(([id,a,b])=>{
+    const e=env(t,a,.9,b,.45);
+    set(id,{opacity:e.v, transform:`translateX(${(1-e.i)*-90 - e.o*120}px)`});
+  });
+  // language roll: one step every .55s, smooth tick
+  const steps=LANGS.length-1, lt=Math.max(0,t-12.9)/.55, si=Math.min(steps,Math.floor(lt)), sf=si>=steps?0:outCubic(clamp((lt-si)/.35));
+  set('langRoll',{transform:`translateY(${-(si+sf)*1.1}em)`});
+  ['ch1','ch2','ch3','ch4'].forEach((id,i)=>{ const p=outBack(P(t,13.5+i*.14,13.95+i*.14));
+    set(id,{opacity:clamp(p*1.4), transform:`scale(${lerp(.6,1,p)})`, display:'inline-block'}); });
+
+  /* ---------- scene 4: finale + end card ---------- */
+  reveal('f1',t,17.6);
+  reveal('f2',t,17.78);
+  set('rule',{transform:`scaleX(${outExpo(P(t,18.4,19.2))})`, top:'1046px', opacity:P(t,18.4,18.5)});
+  reveal('sub',t,18.7,null,.9);
+  set('subFinal',{top:'1088px'});
+  const cta = env(t,20.2,1.0);
+  set('cta',{opacity:cta.v, transform:`translateY(${(1-cta.i)*60}px)`});
+  ['qrA','qrI'].forEach((id,i)=>{ const e=outExpo(P(t,20.4+i*.15,21.4+i*.15));
+    set(id,{opacity:e, transform:`translateY(${(1-e)*80}px)`}); });
+  const ft = env(t,20.9,1.0);
+  set('footer',{opacity:ft.v, transform:`translateY(${(1-ft.i)*30}px)`});
+}
+
+/* preview mode: plays in the browser, scaled to fit. ?render=1 is used by render.mjs */
+const params = new URLSearchParams(location.search);
+window.render = render; window.DURATION = DURATION; window.FPS = FPS;
+if(!params.has('render')){
+  const fit=()=>{const s=Math.min(innerWidth/1080,innerHeight/1920);
+    set('stage',{transform:`scale(${s})`,left:((innerWidth-1080*s)/2)+'px'});};
+  addEventListener('resize',fit); fit();
+  const t0=performance.now(), start=+(params.get('t')||0);
+  const loop=()=>{ render(start + ((performance.now()-t0)/1000)%(DURATION+1)); requestAnimationFrame(loop); };
+  params.has('still') ? render(+params.get('still')) : loop();
+} else { render(0); }
+</script>
+</body>
+</html>
