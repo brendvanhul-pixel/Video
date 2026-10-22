@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>B1 · Proof · Photo</title>
+<link rel="stylesheet" href="shared.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  kicker:   "New: Cornerstone Learning app",
+  headline: "Proof\nin your\npocket.",
+  support: [
+    "Do your site induction before you arrive.",
+    "All your training in one place.",
+    "Supervisor asks? Show your phone."
+  ],
+  cta:      "Scan. Get the app.",
+  android:  "Android",
+  ios:      "iPhone",
+  app:      "App: Cornerstone Learning"
+};
+</script>
+<style>
+.poster{background:var(--blue)}
+.photo{position:absolute;left:0;right:0;top:0;height:200mm;background:url(img/rigger-spmt.jpg) 40% 30%/cover no-repeat}
+.kicker{position:absolute;left:var(--safe);top:var(--safe);font:800 7mm "Barlow Condensed";text-transform:uppercase;letter-spacing:.06em;color:var(--navy);background:var(--yellow);padding:1.2mm 2.5mm}
+.logo-slot{right:var(--safe);top:var(--safe);width:58mm;height:17mm;color:var(--navy);background:rgba(255,255,255,.7)}
+.headline{position:absolute;left:var(--safe);right:var(--safe);top:172mm;font-size:62mm;color:var(--white)}
+.headline .ln:first-child{color:var(--yellow)}
+.bottom{position:absolute;left:var(--safe);right:var(--safe);bottom:var(--safe);display:flex;align-items:flex-end;gap:8mm}
+.left{flex:1;color:var(--white)}
+.left .cta{font:900 12mm/1 "Barlow Condensed";text-transform:uppercase;color:var(--yellow);margin-top:5mm}
+.support{list-style:none;font:600 8.6mm/1.12 "Barlow Condensed"}
+.support li{padding-left:6.5mm;position:relative;margin-top:1.8mm}
+.support li::before{content:"";position:absolute;left:0;top:2.4mm;width:3.2mm;height:3.2mm;background:var(--yellow)}
+.qr-block{position:static}
+</style></head>
+<body><div class="poster">
+  <div class="photo"></div>
+  <div class="kicker" data-copy="kicker"></div>
+  <div class="logo-slot">Sarens logo</div>
+  <h1 class="headline" data-copy="headline"></h1>
+  <div class="bottom">
+    <div class="left">
+      <ul class="support" data-copy-list="support"></ul>
+      <div class="cta" data-copy="cta"></div>
+    </div>
+    <div class="qr-block">
+      <div class="codes">
+        <figure><img src="qr/android.svg" alt=""><figcaption data-copy="android"></figcaption></figure>
+        <figure><img src="qr/ios.svg" alt=""><figcaption data-copy="ios"></figcaption></figure>
+      </div>
+      <div class="app" data-copy="app"></div>
+    </div>
+  </div>
+</div>
+<script src="fit.js"></script>
+</body></html>

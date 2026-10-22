@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>A2 · Your language · Container marking</title>
+<link rel="stylesheet" href="shared.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  kicker:   "New: Cornerstone Learning app",
+  headline: "Every\ncourse.\nYour\nlanguage.",
+  /* Native names, not translations. Must match the languages enabled in Cornerstone. */
+  languages: "English · Nederlands · Français · Deutsch · Español · Português · Polski · Română · Italiano",
+  support: [
+    "Choose your language in the app.",
+    "On your phone, wherever you work.",
+    "Site inductions too."
+  ],
+  cta:      "Scan. Get the app.",
+  android:  "Android",
+  ios:      "iPhone",
+  app:      "App: Cornerstone Learning"
+};
+</script>
+<style>
+/* The poster is the side of a Sarens container: hard-edged corrugation, painted stencil marking */
+.poster{background:
+  repeating-linear-gradient(90deg,
+    #2B6097 0 13mm, #25588A 13mm 16mm, #295D92 16mm 29mm, #3168A0 29mm 32mm)}
+.rail{position:absolute;left:0;right:0;height:9mm;background:#1E4670}
+.rail.top{top:0}.rail.bot{bottom:0}
+.paint{color:#F4F6F7}
+.logo-slot{left:var(--safe);top:var(--safe);width:58mm;height:17mm;color:#fff}
+.kicker{position:absolute;right:var(--safe);top:calc(var(--safe) + 4mm);font:700 8mm "Stencil";text-transform:uppercase;letter-spacing:.08em;color:var(--yellow)}
+.headline{position:absolute;left:var(--safe);right:var(--safe);top:40mm;font-family:"Stencil";font-weight:900;font-size:66mm;line-height:.85;letter-spacing:.01em}
+.headline .ln:nth-child(n+3){color:var(--yellow)}
+.langs{position:absolute;left:var(--safe);right:var(--safe);top:274mm;font:800 13mm/1.12 "Barlow Condensed";text-transform:uppercase;letter-spacing:.02em;color:#F4F6F7;border-top:1.2mm solid #F4F6F7;border-bottom:1.2mm solid #F4F6F7;padding:3mm 0}
+.bottom{position:absolute;left:var(--safe);right:var(--safe);bottom:var(--safe);display:flex;align-items:flex-end;gap:8mm}
+.support{flex:1;list-style:none;color:#fff;font:600 8.6mm/1.12 "Barlow Condensed"}
+.support li{padding-left:6.5mm;position:relative;margin-top:1.8mm}
+.support li::before{content:"";position:absolute;left:0;top:2.4mm;width:3.2mm;height:3.2mm;background:var(--yellow)}
+/* QR on a riveted plate, like the data plate on a container door */
+.qr-block{position:relative}
+.qr-block::before,.qr-block::after{content:"";position:absolute;top:2mm;width:2.4mm;height:2.4mm;border-radius:50%;background:#9AA3AB}
+.qr-block::before{left:2mm}.qr-block::after{right:2mm}
+</style></head>
+<body><div class="poster">
+  <div class="rail top"></div><div class="rail bot"></div>
+  <div class="logo-slot">Sarens logo</div>
+  <div class="kicker" data-copy="kicker"></div>
+  <h1 class="headline paint" data-copy="headline"></h1>
+  <div class="langs" data-copy="languages"></div>
+  <div class="bottom">
+    <ul class="support" data-copy-list="support"></ul>
+    <div class="qr-block">
+      <div class="cta" data-copy="cta"></div>
+      <div class="codes">
+        <figure><img src="qr/android.svg" alt=""><figcaption data-copy="android"></figcaption></figure>
+        <figure><img src="qr/ios.svg" alt=""><figcaption data-copy="ios"></figcaption></figure>
+      </div>
+      <div class="app" data-copy="app"></div>
+    </div>
+  </div>
+</div>
+<script src="fit.js"></script>
+</body></html>

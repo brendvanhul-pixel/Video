@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>B2 · Proof · Hi-vis record</title>
+<link rel="stylesheet" href="shared.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  kicker:   "New: Cornerstone Learning app",
+  question: "Inducted?",
+  answer:   "It's on\nmy phone.",
+  record:   "My training record",
+  /* Supporting lines, set as record rows: [label, value] */
+  support: [
+    ["Site induction", "Done before you arrive"],
+    ["All your training", "In one place"],
+    ["Supervisor asks", "Show it in seconds"]
+  ],
+  cta:      "Scan. Get the app.",
+  android:  "Android",
+  ios:      "iPhone",
+  app:      "App: Cornerstone Learning"
+};
+</script>
+<style>
+/* The poster is a hi-vis vest: fluorescent field, one band of reflective tape, print in navy */
+.poster{background:var(--yellow);color:var(--navy)}
+.tape{position:absolute;left:0;right:0;top:101mm;height:22mm;background:
+  repeating-linear-gradient(60deg,#C3C8CC 0 3mm,#D5D9DC 3mm 6mm),#C9CDD1;
+  border-top:1mm solid #AEB4B9;border-bottom:1mm solid #AEB4B9}
+.kicker{position:absolute;left:var(--safe);top:calc(var(--safe) + 4mm);font:800 7mm "Barlow Condensed";text-transform:uppercase;letter-spacing:.06em}
+.logo-slot{right:var(--safe);top:var(--safe);width:58mm;height:17mm;color:var(--navy)}
+.q{position:absolute;left:var(--safe);right:var(--safe);top:38mm;font-size:66mm}
+.a{position:absolute;left:var(--safe);right:var(--safe);top:131mm;font-size:66mm}
+.q .ln{color:var(--blue)}
+/* record: set like a load chart / record card */
+.record{position:absolute;left:var(--safe);right:var(--safe);top:258mm;border:1.4mm solid var(--navy)}
+.record h2{background:var(--navy);color:var(--yellow);font:800 7.5mm/1 "Barlow Condensed";text-transform:uppercase;letter-spacing:.08em;padding:2.4mm 3.5mm}
+.record ul{list-style:none}
+.record li{display:flex;align-items:center;gap:4mm;font:700 9mm/1.1 "Barlow Condensed";padding:2.6mm 3.5mm;border-top:.6mm solid var(--navy)}
+.record li:first-child{border-top:0}
+.record .k{flex:0 0 92mm;font-weight:600}
+.record .v{font-weight:800}
+.record li::before{content:"✓";flex:none;width:8mm;height:8mm;display:flex;align-items:center;justify-content:center;background:var(--navy);color:var(--yellow);font:900 6.5mm/1 "Barlow"}
+.bottom{position:absolute;left:var(--safe);right:var(--safe);bottom:var(--safe);display:flex;align-items:flex-end;justify-content:space-between;gap:8mm}
+.bottom .cta{font:900 13mm/1 "Barlow Condensed";text-transform:uppercase;max-width:150mm}
+.qr-block{position:static;border:1.4mm solid var(--navy)}
+</style></head>
+<body><div class="poster">
+  <div class="tape"></div>
+  <div class="kicker" data-copy="kicker"></div>
+  <div class="logo-slot">Sarens logo</div>
+  <h1 class="headline q" data-copy="question"></h1>
+  <h1 class="headline a" data-copy="answer"></h1>
+  <div class="record"><h2 data-copy="record"></h2><ul id="rows"></ul></div>
+  <div class="bottom">
+    <div class="cta" data-copy="cta"></div>
+    <div class="qr-block">
+      <div class="codes">
+        <figure><img src="qr/android.svg" alt=""><figcaption data-copy="android"></figcaption></figure>
+        <figure><img src="qr/ios.svg" alt=""><figcaption data-copy="ios"></figcaption></figure>
+      </div>
+      <div class="app" data-copy="app"></div>
+    </div>
+  </div>
+</div>
+<script>if(window.__DE) Object.assign(COPY, window.__DE);document.getElementById('rows').innerHTML=COPY.support.map(([k,v])=>`<li><span class="k">${k}</span><span class="v">${v}</span></li>`).join('')</script>
+<script src="fit.js"></script>
+</body></html>

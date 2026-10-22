@@ -1,0 +1,44 @@
+/* Shared base for all four round-one posters. A3 + 3 mm bleed. */
+@font-face{font-family:"Barlow Condensed";font-weight:900;src:url(fonts/BarlowCondensed-Black.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:800;src:url(fonts/BarlowCondensed-ExtraBold.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:700;src:url(fonts/BarlowCondensed-Bold.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:600;src:url(fonts/BarlowCondensed-SemiBold.ttf)}
+@font-face{font-family:"Barlow";font-weight:500;src:url(fonts/Barlow-Medium.ttf)}
+@font-face{font-family:"Barlow";font-weight:600;src:url(fonts/Barlow-SemiBold.ttf)}
+@font-face{font-family:"Barlow";font-weight:700;src:url(fonts/Barlow-Bold.ttf)}
+@font-face{font-family:"Stencil";font-weight:100 900;src:url(fonts/BigShouldersStencilDisplay.ttf)}
+
+:root{
+  --blue:#2B6097;      /* sampled from approved poster; confirm against /brand */
+  --navy:#14263F;
+  --yellow:#F3E72A;    /* sampled from approved poster; confirm against /brand */
+  --white:#FFFFFF;
+  --steel:#C9CDD1;
+  --bleed:3mm;
+  --safe:15mm;         /* 3 mm bleed + 12 mm inside trim */
+}
+@page{size:303mm 426mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:303mm;height:426mm;background:#777}
+.poster{position:relative;width:303mm;height:426mm;overflow:hidden;font-family:"Barlow",sans-serif;-webkit-font-smoothing:antialiased}
+
+/* Headline: line breaks come from the copy (\n). fit.js shrinks only if a line overflows. */
+.headline{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.005em;white-space:pre-line}
+.headline .ln{display:block;white-space:nowrap}
+
+/* QR block: two store codes, one call to action */
+.qr-block{position:absolute;background:var(--white);color:var(--navy);display:flex;flex-direction:column;gap:3mm;padding:4mm 5mm 5mm}
+.qr-block .cta{font-family:"Barlow Condensed";font-weight:800;font-size:9.5mm;line-height:1;text-transform:uppercase}
+.qr-block .codes{display:flex;gap:2mm}
+.qr-block figure{display:flex;flex-direction:column;align-items:center}
+.qr-block figure img{width:45mm;height:45mm;display:block}
+.qr-block figcaption{font-family:"Barlow Condensed";font-weight:700;font-size:5.2mm;text-transform:uppercase;letter-spacing:.06em;margin-top:-1.5mm}
+.qr-block .app{font-family:"Barlow";font-weight:600;font-size:4.2mm;opacity:.75}
+
+/* Logo slot: replace with the official file from /brand */
+.logo-slot{position:absolute;border:.5mm dashed currentColor;display:flex;align-items:center;justify-content:center;font:700 3.6mm "Barlow";letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+
+/* Debug: trim + safe area guides, toggled with ?guides */
+.guides .trim{position:absolute;inset:var(--bleed);outline:.3mm solid magenta;pointer-events:none;z-index:99}
+.guides .safe{position:absolute;inset:var(--safe);outline:.3mm dashed cyan;pointer-events:none;z-index:99}
+.fit-warn{outline:1mm solid red!important}
