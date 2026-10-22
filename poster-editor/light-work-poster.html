@@ -43,6 +43,9 @@ label.f{display:grid;gap:4px;font-size:13px;color:var(--muted)}
 label.f>span{font:600 12px var(--f-label);text-transform:uppercase;letter-spacing:.06em}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.mini{display:grid;grid-template-columns:52px 1fr;gap:6px;margin-top:-4px}
+.mini input[type=color]{height:34px}
+code{font-size:12px;background:var(--field);padding:1px 4px;border-radius:4px}
 input[type=text],input[type=number],textarea,select,input[type=url]{width:100%;font:15px var(--f-ui);color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
 textarea{resize:vertical;min-height:58px}
 input[type=color]{width:100%;height:36px;border:1px solid var(--line);border-radius:6px;background:var(--field);padding:2px}
@@ -86,26 +89,33 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
     <details open>
       <summary>Words</summary>
       <div class="grp">
+        <p class="hint">Put <b>*stars*</b> around words to give them the highlight colour, for example <code>Learn *anywhere*.</code></p>
         <label class="f"><span>Headline (Enter = new line)</span><textarea id="t_headline" data-k="text.headline" rows="2"></textarea></label>
-        <label class="f"><span>Payoff, line 1</span><input type="text" id="t_pay1" data-k="text.pay1"></label>
-        <label class="f"><span>Payoff, line 2 (bold)</span><input type="text" id="t_pay2" data-k="text.pay2"></label>
-        <label class="f"><span>App name</span><input type="text" id="t_app" data-k="text.app"></label>
+        <div class="row3">
+          <label class="f"><span>Line 1</span><input type="color" id="hl0" data-k="style.headLines.0"></label>
+          <label class="f"><span>Line 2</span><input type="color" id="hl1" data-k="style.headLines.1"></label>
+          <label class="f"><span>Line 3+</span><input type="color" id="hl2" data-k="style.headLines.2"></label>
+        </div>
+        <label class="f"><span>Payoff, line 1</span><input type="text" id="t_pay1" data-k="text.pay1"></label><div class="mini"><input type="color" id="sc_pay1" data-k="style.pay1.c" aria-label="Payoff line 1 colour" title="Payoff line 1 colour"><select id="sw_pay1" data-k="style.pay1.w" data-num="1" aria-label="Payoff line 1 weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
+        <label class="f"><span>Payoff, line 2</span><input type="text" id="t_pay2" data-k="text.pay2"></label><div class="mini"><input type="color" id="sc_pay2" data-k="style.pay2.c" aria-label="Payoff line 2 colour" title="Payoff line 2 colour"><select id="sw_pay2" data-k="style.pay2.w" data-num="1" aria-label="Payoff line 2 weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
+        <label class="f"><span>App name</span><input type="text" id="t_app" data-k="text.app"></label><div class="mini"><input type="color" id="sc_app" data-k="style.app.c" aria-label="App name colour" title="App name colour"><select id="sw_app" data-k="style.app.w" data-num="1" aria-label="App name weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
         <div class="row">
           <label class="f"><span>Point 1</span><textarea id="t_p1" data-k="text.p1" rows="2"></textarea></label>
           <label class="f"><span>Icon 1</span><select id="i_p1" data-k="icons.0"></select></label>
-        </div>
+        </div><div class="mini"><input type="color" id="sc_p1" data-k="style.p1.c" aria-label="Point 1 colour" title="Point 1 colour"><select id="sw_p1" data-k="style.p1.w" data-num="1" aria-label="Point 1 weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
         <div class="row">
           <label class="f"><span>Point 2</span><textarea id="t_p2" data-k="text.p2" rows="2"></textarea></label>
           <label class="f"><span>Icon 2</span><select id="i_p2" data-k="icons.1"></select></label>
-        </div>
+        </div><div class="mini"><input type="color" id="sc_p2" data-k="style.p2.c" aria-label="Point 2 colour" title="Point 2 colour"><select id="sw_p2" data-k="style.p2.w" data-num="1" aria-label="Point 2 weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
         <div class="row">
           <label class="f"><span>Point 3</span><textarea id="t_p3" data-k="text.p3" rows="2"></textarea></label>
           <label class="f"><span>Icon 3</span><select id="i_p3" data-k="icons.2"></select></label>
-        </div>
+        </div><div class="mini"><input type="color" id="sc_p3" data-k="style.p3.c" aria-label="Point 3 colour" title="Point 3 colour"><select id="sw_p3" data-k="style.p3.w" data-num="1" aria-label="Point 3 weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div>
         <div class="row">
           <label class="f"><span>QR caption left</span><input type="text" id="t_qrA" data-k="text.qrA"></label>
           <label class="f"><span>QR caption right</span><input type="text" id="t_qrB" data-k="text.qrB"></label>
         </div>
+        <div class="row"><div class="mini"><input type="color" id="sc_qrA" data-k="style.qrA.c" aria-label="QR caption left colour" title="QR caption left colour"><select id="sw_qrA" data-k="style.qrA.w" data-num="1" aria-label="QR caption left weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div><div class="mini"><input type="color" id="sc_qrB" data-k="style.qrB.c" aria-label="QR caption right colour" title="QR caption right colour"><select id="sw_qrB" data-k="style.qrB.w" data-num="1" aria-label="QR caption right weight"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option><option value="800">Extrabold</option><option value="900">Black</option></select></div></div>
         <div class="row">
           <label class="f"><span>Load tag, line 1</span><input type="text" id="t_tag1" data-k="text.tag1"></label>
           <label class="f"><span>Load tag, line 2</span><input type="text" id="t_tag2" data-k="text.tag2"></label>
@@ -127,10 +137,12 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
         <p class="hint">Your fonts appear at the top of both font lists and stay in this browser, so the font files never leave your computer. Each file is one style: Gotham Bold is always bold, Caslon Regular always regular.</p>
         <button class="btn" type="button" id="clearFonts">Remove my fonts</button>
         <div class="row3">
-          <label class="f"><span>Headline</span><input type="color" id="c_head" data-k="color.head"></label>
-          <label class="f"><span>Text</span><input type="color" id="c_text" data-k="color.text"></label>
+          <label class="f"><span>All headline</span><input type="color" id="c_head" data-k="color.head"></label>
+          <label class="f"><span>All text</span><input type="color" id="c_text" data-k="color.text"></label>
           <label class="f"><span>Icons</span><input type="color" id="c_accent" data-k="color.accent"></label>
         </div>
+        <label class="f"><span>Highlight colour for *starred* words</span><input type="color" id="c_hl" data-k="highlight"></label>
+        <p class="hint">“All headline” and “All text” set every line at once; fine-tune single lines under Words.</p>
       </div>
     </details>
 
@@ -235,8 +247,13 @@ const DEFAULT = {
            { x:-14, y:258, w:150, flip:false, rot:3, op:0.95, show:true } ],
   grain:0.55,
   ui:{ guides:false },
+  highlight:"#f3e72a",
+  style:{ headLines:["#f3e72a","#f3e72a","#f3e72a","#f3e72a"],
+          pay1:{c:"#ffffff",w:400}, pay2:{c:"#ffffff",w:700}, app:{c:"#ffffff",w:700},
+          p1:{c:"#ffffff",w:600}, p2:{c:"#ffffff",w:600}, p3:{c:"#ffffff",w:600},
+          qrA:{c:"#ffffff",w:600}, qrB:{c:"#ffffff",w:600} },
   uploads:{ sky:null, screen:null, logo:null, fonts:[] },
-  v:2
+  v:3
 };
 
 /* ================= state ================= */
@@ -249,6 +266,10 @@ function migrate(o){
   if(!o.v){ if(o.info&&typeof o.info.y==="number") o.info.y+=5.4;
     if(o.uploads){ o.uploads.fonts = o.uploads.font&&o.uploads.fontName ? [{name:o.uploads.fontName,data:o.uploads.font}] : []; delete o.uploads.font; delete o.uploads.fontName; }
     o.v=2; }
+  if(o.v<3){  // per-element colours start from the old shared colours
+    const t=(o.color&&o.color.text)||"#ffffff", h=(o.color&&o.color.head)||"#f3e72a";
+    o.style={ headLines:[h,h,h,h], pay1:{c:t,w:400}, pay2:{c:t,w:700}, app:{c:t,w:700}, p1:{c:t,w:600}, p2:{c:t,w:600}, p3:{c:t,w:600}, qrA:{c:t,w:600}, qrB:{c:t,w:600} };
+    o.v=3; }
   return o;
 }
 try{ const saved = localStorage.getItem(KEY); if(saved) S = merge(clone(DEFAULT), migrate(JSON.parse(saved))); }catch(e){}
@@ -299,6 +320,15 @@ function qrMatrix(url){
 const font = (w,size,fam) => `${w} ${size}px "${fam}", "Barlow", sans-serif`;
 let boxes = [];   // hit boxes from the last preview draw
 
+function runs(t){ const out=[]; String(t||"").split(/(\*[^*]+\*)/).forEach(seg=>{ if(!seg) return; const hl=seg.length>2&&seg[0]==="*"&&seg.at(-1)==="*"; out.push({t:hl?seg.slice(1,-1):seg, hl}); }); return out; }
+function plain(t){ return String(t||"").replace(/\*([^*]+)\*/g,"$1"); }
+// draws one line made of runs; returns its width (mm)
+function richLine(ctx,t,x,y,{w,size,fam,color,align="left"}){
+  ctx.font=font(w,size,fam); const rs=runs(t); const ws=rs.map(r=>ctx.measureText(r.t).width), total=ws.reduce((a,b)=>a+b,0);
+  let cx = align==="center" ? x-total/2 : x; ctx.textAlign="left";
+  rs.forEach((r,i)=>{ ctx.fillStyle=r.hl?S.highlight:color; ctx.fillText(r.t,cx,y); cx+=ws[i]; });
+  return total;
+}
 function lines(t, upper){ return String(t||"").split("\n").map(s=>upper?s.toUpperCase():s); }
 function setLS(ctx, em){ if("letterSpacing" in ctx) ctx.letterSpacing = em ? `${em}px` : "0px"; }
 
@@ -418,32 +448,30 @@ function drawLogo(ctx){
 }
 function drawHeadline(ctx){
   const h=S.head, ls=lines(S.text.headline,h.upper), size=h.size;
-  ctx.save(); ctx.fillStyle=S.color.head; ctx.textAlign="left"; ctx.textBaseline="alphabetic";
-  ctx.font=font(S.font.headW,size,S.font.head); setLS(ctx,h.ls*size);
-  let wmax=0; ls.forEach((t,i)=>{ const y=h.y+(h.lh/2+.4)*size+i*h.lh*size; ctx.fillText(t,h.x,y); wmax=Math.max(wmax,ctx.measureText(t).width); });
+  ctx.save(); ctx.textBaseline="alphabetic"; setLS(ctx,h.ls*size);
+  let wmax=0; ls.forEach((t,i)=>{ const y=h.y+(h.lh/2+.4)*size+i*h.lh*size;
+    const c=S.style.headLines[Math.min(i,S.style.headLines.length-1)]||S.color.head;
+    wmax=Math.max(wmax, richLine(ctx,t,h.x,y,{w:S.font.headW,size,fam:S.font.head,color:c})); });
   ctx.restore(); boxes.push({id:"headline",x:h.x,y:h.y,w:wmax,h:Math.max(1,ls.length)*h.lh*size, kind:"text"});
 }
 function drawPayoff(ctx){
-  const p=S.pay, size=p.size; ctx.save(); ctx.fillStyle=S.color.text; setLS(ctx,0);
+  const p=S.pay, size=p.size, st=S.style; ctx.save(); setLS(ctx,0);
   const b1=p.y+(p.lh/2+.4)*size, b2=b1+p.lh*size;
-  ctx.font=font(400,size,S.font.body); ctx.fillText(S.text.pay1,p.x,b1); let w=ctx.measureText(S.text.pay1).width;
-  ctx.font=font(700,size,S.font.body); ctx.fillText(S.text.pay2,p.x,b2); w=Math.max(w,ctx.measureText(S.text.pay2).width);
-  ctx.restore(); boxes.push({id:"payoff",x:p.x,y:p.y,w,h:2*p.lh*size, kind:"text"});
+  const w1=richLine(ctx,S.text.pay1,p.x,b1,{w:st.pay1.w,size,fam:S.font.body,color:st.pay1.c});
+  const w2=richLine(ctx,S.text.pay2,p.x,b2,{w:st.pay2.w,size,fam:S.font.body,color:st.pay2.c});
+  ctx.restore(); boxes.push({id:"payoff",x:p.x,y:p.y,w:Math.max(w1,w2),h:2*p.lh*size, kind:"text"});
 }
 function drawInfo(ctx){
-  const I=S.info; ctx.save(); setLS(ctx,0);
-  ctx.fillStyle=S.color.text; ctx.font=font(700,I.app,S.font.body);
-  const appBase=I.y+.9*I.app; ctx.fillText(S.text.app,I.x,appBase);
-  let wmax=ctx.measureText(S.text.app).width;
-  const top=I.y+31.1, icon=12.5, pts=[S.text.p1,S.text.p2,S.text.p3];
+  const I=S.info, st=S.style; ctx.save(); setLS(ctx,0);
+  let wmax=richLine(ctx,S.text.app,I.x,I.y+.9*I.app,{w:st.app.w,size:I.app,fam:S.font.body,color:st.app.c});
+  const top=I.y+31.1, icon=12.5, pts=[S.text.p1,S.text.p2,S.text.p3], ps=[st.p1,st.p2,st.p3];
   pts.forEach((t,i)=>{
     const cx=I.x+i*I.col+(i?5:0);
     if(i){ ctx.fillStyle="rgba(255,255,255,.4)"; ctx.fillRect(I.x+i*I.col,top,.35,icon+3+2*1.2*I.pt+1); }
     ctx.save(); ctx.translate(cx,top); ctx.scale(icon/24,icon/24);
     ctx.strokeStyle=S.color.accent; ctx.lineWidth=1.6; ctx.lineCap="round"; ctx.lineJoin="round";
     ctx.stroke(new Path2D((ICONS[S.icons[i]]||ICONS.language).d)); ctx.restore();
-    ctx.fillStyle=S.color.text; ctx.font=font(600,I.pt,S.font.body);
-    lines(t,false).forEach((ln,j)=>{ ctx.fillText(ln,cx,top+icon+3+I.pt+j*1.2*I.pt); wmax=Math.max(wmax,cx-I.x+ctx.measureText(ln).width); });
+    lines(t,false).forEach((ln,j)=>{ const w=richLine(ctx,ln,cx,top+icon+3+I.pt+j*1.2*I.pt,{w:ps[i].w,size:I.pt,fam:S.font.body,color:ps[i].c}); wmax=Math.max(wmax,cx-I.x+w); });
   });
   ctx.restore(); boxes.push({id:"info",x:I.x,y:I.y,w:wmax,h:top-I.y+icon+3+2*1.2*I.pt+1, kind:"text"});
 }
@@ -454,8 +482,8 @@ function drawQR(ctx){
     rr(ctx,x,y,Q.size,Q.size,1.6); ctx.fillStyle="#fff"; ctx.fill();
     if(m){ const n=m.length, cell=Q.size/(n+8); ctx.fillStyle="#000";
       for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(m[r][c]) ctx.fillRect(x+(c+4)*cell, y+(r+4)*cell, cell+.01, cell+.01); }
-    ctx.fillStyle=S.color.text; ctx.font=font(600,Q.cap,S.font.body); ctx.textAlign="center";
-    ctx.fillText(cap,x+Q.size/2,y+Q.size+1.6+.95*Q.cap);
+    const cs=i?S.style.qrB:S.style.qrA;
+    richLine(ctx,cap,x+Q.size/2,y+Q.size+1.6+.95*Q.cap,{w:cs.w,size:Q.cap,fam:S.font.body,color:cs.c,align:"center"});
   });
   ctx.restore(); boxes.push({id:"qr",x:Q.x,y:Q.y,w:2*Q.size+Q.gap,h:Q.size+1.6+1.2*Q.cap, kind:"text"});
 }
@@ -576,6 +604,8 @@ function bindAll(root=document){
       if(el.dataset.num){ v=parseFloat(v); if(!isFinite(v)) return; }
       if(el.dataset.k==="qr.size") v=Math.max(35,v);
       set(el.dataset.k,v);
+      if(el.dataset.k==="color.head") S.style.headLines=[v,v,v,v];
+      if(el.dataset.k==="color.text") ["pay1","pay2","app","p1","p2","p3","qrA","qrB"].forEach(k=>S.style[k].c=v);
       if(el.dataset.k.startsWith("font.")) await ensureFonts();
       syncInputs(); schedule(); persist();
     });
@@ -583,7 +613,7 @@ function bindAll(root=document){
   syncInputs(root);
 }
 async function ensureFonts(){
-  const need=[[S.font.headW,S.font.head],[400,S.font.body],[600,S.font.body],[700,S.font.body],[800,"Barlow Condensed"]];
+  const need=[[S.font.headW,S.font.head],[800,"Barlow Condensed"]].concat([300,400,500,600,700,800,900].map(w=>[w,S.font.body]));
   try{ await Promise.all(need.map(([w,f])=>document.fonts.load(`${w} 40px "${f}"`, "LIGHTWORKégy"))); }catch(e){}
 }
 async function addFontFromData(name,dataUrl,announce=true){
@@ -659,7 +689,7 @@ async function save(filename,data){
   catch(e){ const c=e&&e.code; setStatus(c==="declined"?"Download cancelled.":c==="rate_limited"?"A download is already waiting for your confirmation.":"The download did not go through. Try again in a moment."); }
 }
 async function busy(btn,label,fn){ const t=btn.textContent; btn.disabled=true; btn.textContent=label; setStatus("Rendering at 300 dpi…"); await new Promise(r=>setTimeout(r,30)); try{ await fn(); } finally{ btn.disabled=false; btn.textContent=t; } }
-const slug=()=> (S.text.headline||"poster").replace(/\s+/g," ").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"poster";
+const slug=()=> plain(S.text.headline||"poster").replace(/\s+/g," ").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"poster";
 document.getElementById("pngBtn").addEventListener("click",e=>busy(e.currentTarget,"Rendering…",async()=>{ await ensureFonts(); const cv=exportCanvas(); await save(`${slug()}-A3-bleed-300dpi.png`, await toBlob(cv,"image/png")); }));
 async function pdf(marks){
   await ensureFonts(); const cv=exportCanvas(); const jpg=cv.toDataURL("image/jpeg",0.95);
@@ -674,7 +704,7 @@ async function pdf(marks){
       doc.line(x, y+sy*(BLEED+1), x, y+sy*(BLEED+1+len));    // vertical mark
       doc.line(x+sx*(BLEED+1), y, x+sx*(BLEED+1+len), y);    // horizontal mark
     });
-    doc.setFontSize(6); doc.setTextColor(60); doc.text(`${S.text.headline.replace(/\n/g," ")} · A3 297 × 420 mm trim · 3 mm bleed · 300 dpi`, M, PH-3.5);
+    doc.setFontSize(6); doc.setTextColor(60); doc.text(`${plain(S.text.headline).replace(/\n/g," ")} · A3 297 × 420 mm trim · 3 mm bleed · 300 dpi`, M, PH-3.5);
   }
   return doc.output("blob");
 }
