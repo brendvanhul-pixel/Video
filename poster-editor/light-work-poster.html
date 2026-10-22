@@ -587,9 +587,17 @@ async function ensureFonts(){
   try{ await Promise.all(need.map(([w,f])=>document.fonts.load(`${w} 40px "${f}"`, "LIGHTWORKégy"))); }catch(e){}
 }
 async function addFontFromData(name,dataUrl,announce=true){
-  try{ const buf=await (await fetch(dataUrl)).arrayBuffer(); const ff=new FontFace(name,buf,{weight:"100 900"}); await ff.load(); document.fonts.add(ff);
-    if(announce) setStatus(`Font "${name}" added. Pick it in the font lists.`); return true; }
-  catch(e){ setStatus("That font file could not be read. Try a .ttf, .otf or .woff2 file."); return false; }
+  // Decode in memory: the artifact frame blocks fetch() of data: URLs.
+  const attempts=[
+    ()=>{ const b64=dataUrl.slice(dataUrl.indexOf(",")+1), bin=atob(b64), buf=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) buf[i]=bin.charCodeAt(i); return new FontFace(name,buf.buffer,{weight:"100 900"}); },
+    ()=>new FontFace(name,`url(${dataUrl})`,{weight:"100 900"})
+  ];
+  for(const make of attempts){
+    try{ const ff=make(); await ff.load(); document.fonts.add(ff);
+      if(announce) setStatus(`Font "${name}" added. Pick it in the font lists.`); return true; }
+    catch(e){ /* try the next way */ }
+  }
+  setStatus("That font file could not be read. Try a .ttf, .otf or .woff2 file."); return false;
 }
 const readAsDataURL = f => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(f); });
 
