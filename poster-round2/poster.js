@@ -27,8 +27,9 @@ function build(){
   // real sky photo wins if img/sky.jpg exists; otherwise the drawn sky
   if(L.skyImg){  // real sky photo: position, colour grade, then depth fades so it sits with the brand blue
     const k=L.skyImg, el=document.getElementById('sky');
+    const extra=(k.extra||[]).map(c=>`<img src="${c.src}" style="position:absolute;left:${c.x}mm;top:${c.y}mm;width:${c.w}mm;opacity:${c.opacity??1};transform:${c.flip?'scaleX(-1) ':''}rotate(${c.rot||0}deg)">`).join('');
     el.innerHTML=`<div style="position:absolute;inset:0;background:url(${k.src}) ${k.pos}/${k.size} no-repeat;filter:${k.filter||'none'};transform:${k.flip?'scaleX(-1)':'none'}"></div>
-      <div style="position:absolute;inset:0;background:${k.fade||'none'}"></div>`;
+      ${extra}<div style="position:absolute;inset:0;background:${k.fade||'none'}"></div>`;
   } else sky(document.getElementById('sky'),L.sky);
   Object.assign(document.querySelector('.headline').style,L.headStyle);
   Object.assign(document.querySelector('.payoff').style,L.payoffStyle);
