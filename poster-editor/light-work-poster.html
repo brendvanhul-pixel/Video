@@ -1,0 +1,688 @@
+<title>Light Work Poster</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Anton&family=Oswald:wght@400;500;600;700&family=Bebas+Neue&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Roboto+Condensed:wght@400;500;700;800;900&family=Work+Sans:wght@400;500;600;700;800;900&display=swap">
+<style>
+/* Layout: control rail on the left, live A3 proof on the right; stacks below 900px. */
+:root{
+  --bg:#eef1f5; --panel:#ffffff; --ink:#14263f; --muted:#5b6b80; --line:#d6dde6;
+  --accent:#2b6097; --hi:#f3e72a; --warn:#b4540a; --ok:#1f7a4d; --field:#f6f8fb;
+  --f-ui:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-label:"Barlow Condensed","Arial Narrow",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1622; --panel:#14202f; --ink:#e7edf5; --muted:#9aaabd; --line:#253549;
+  --accent:#7fb0e6; --hi:#f3e72a; --warn:#f0a35e; --ok:#5fc796; --field:#0f1a27; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1622; --panel:#14202f; --ink:#e7edf5; --muted:#9aaabd; --line:#253549;
+  --accent:#7fb0e6; --hi:#f3e72a; --warn:#f0a35e; --ok:#5fc796; --field:#0f1a27; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.4 var(--f-ui);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;box-sizing:border-box}
+*{box-sizing:border-box}
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding-block:14px;border-bottom:1px solid var(--line)}
+header.top h1{margin:0;font:800 22px/1 var(--f-label);letter-spacing:.01em;text-transform:uppercase}
+header.top .sub{color:var(--muted);font-size:13px}
+header.top .spacer{flex:1}
+.btn{font:600 14px var(--f-ui);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:8px 12px;cursor:pointer;min-height:38px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root:not([data-theme="light"]) .btn.primary{color:#0d1622}
+@media (prefers-color-scheme: light){.btn.primary{color:#fff}}
+.btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,canvas:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+main{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:16px;padding-block:16px;height:calc(100% - 68px)}
+@media (max-width:900px){main{grid-template-columns:minmax(0,1fr);height:auto}}
+aside{overflow:auto;min-width:0;display:flex;flex-direction:column;gap:10px;padding-bottom:24px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px}
+summary{cursor:pointer;padding:10px 14px;font:700 15px var(--f-label);text-transform:uppercase;letter-spacing:.06em;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--muted)}
+details[open] summary::after{content:"\2212"}
+.grp{padding:4px 14px 14px;display:grid;gap:10px}
+label.f{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+label.f>span{font:600 12px var(--f-label);text-transform:uppercase;letter-spacing:.06em}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+input[type=text],input[type=number],textarea,select,input[type=url]{width:100%;font:15px var(--f-ui);color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+textarea{resize:vertical;min-height:58px}
+input[type=color]{width:100%;height:36px;border:1px solid var(--line);border-radius:6px;background:var(--field);padding:2px}
+input[type=range]{width:100%}
+.check{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink)}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.stage{min-width:0;display:flex;flex-direction:column;gap:10px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar .chip{font:600 12px var(--f-label);text-transform:uppercase;letter-spacing:.06em;padding:5px 9px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted)}
+.canvasWrap{flex:1;min-height:420px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:none;cursor:default;background:#2b6097}
+.inspector .grp{grid-template-columns:1fr 1fr}
+.inspector .grp .wide{grid-column:1/-1}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.checks li{font-size:13.5px;padding-left:20px;position:relative}
+.checks li::before{content:"";position:absolute;left:2px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.checks li.warn::before{background:var(--warn)}
+.status{font-size:13px;color:var(--muted);min-height:18px}
+.tabular{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <h1>Light Work Poster</h1>
+  <span class="sub">A3 · 297 × 420 mm · 3 mm bleed</span>
+  <span class="spacer"></span>
+  <button class="btn" id="undoBtn" type="button" title="Undo (Ctrl+Z)">Undo</button>
+  <button class="btn" id="resetBtn" type="button">Reset to original</button>
+  <button class="btn" id="pngBtn" type="button">PNG 300 dpi</button>
+  <button class="btn" id="pdfBtn" type="button">PDF with bleed</button>
+  <button class="btn primary" id="pdfMarksBtn" type="button">PDF for print (crop marks)</button>
+</header>
+
+<main>
+  <aside id="controls">
+    <details class="inspector" id="inspector" open>
+      <summary>Selected: <span id="selName" style="text-transform:none;letter-spacing:0">nothing</span></summary>
+      <div class="grp" id="inspectorBody"><p class="hint wide">Click an element on the poster to select it, then drag it or fine-tune it here. Arrow keys nudge 0.5 mm, with Shift 5 mm.</p></div>
+    </details>
+
+    <details open>
+      <summary>Words</summary>
+      <div class="grp">
+        <label class="f"><span>Headline (Enter = new line)</span><textarea id="t_headline" data-k="text.headline" rows="2"></textarea></label>
+        <label class="f"><span>Payoff, line 1</span><input type="text" id="t_pay1" data-k="text.pay1"></label>
+        <label class="f"><span>Payoff, line 2 (bold)</span><input type="text" id="t_pay2" data-k="text.pay2"></label>
+        <label class="f"><span>App name</span><input type="text" id="t_app" data-k="text.app"></label>
+        <div class="row">
+          <label class="f"><span>Point 1</span><textarea id="t_p1" data-k="text.p1" rows="2"></textarea></label>
+          <label class="f"><span>Icon 1</span><select id="i_p1" data-k="icons.0"></select></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>Point 2</span><textarea id="t_p2" data-k="text.p2" rows="2"></textarea></label>
+          <label class="f"><span>Icon 2</span><select id="i_p2" data-k="icons.1"></select></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>Point 3</span><textarea id="t_p3" data-k="text.p3" rows="2"></textarea></label>
+          <label class="f"><span>Icon 3</span><select id="i_p3" data-k="icons.2"></select></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>QR caption left</span><input type="text" id="t_qrA" data-k="text.qrA"></label>
+          <label class="f"><span>QR caption right</span><input type="text" id="t_qrB" data-k="text.qrB"></label>
+        </div>
+        <div class="row">
+          <label class="f"><span>Load tag, line 1</span><input type="text" id="t_tag1" data-k="text.tag1"></label>
+          <label class="f"><span>Load tag, line 2</span><input type="text" id="t_tag2" data-k="text.tag2"></label>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Fonts &amp; colours</summary>
+      <div class="grp">
+        <label class="f"><span>Headline font</span><select id="f_head" data-k="font.head"></select></label>
+        <div class="row">
+          <label class="f"><span>Headline weight</span><select id="f_headW" data-k="font.headW" data-num="1">
+            <option value="400">Regular 400</option><option value="500">Medium 500</option><option value="600">Semibold 600</option><option value="700">Bold 700</option><option value="800">Extrabold 800</option><option value="900">Black 900</option></select></label>
+          <label class="check" style="align-self:end"><input type="checkbox" id="f_upper" data-k="head.upper"> Capitals</label>
+        </div>
+        <label class="f"><span>Text font (payoff, app name, points, captions)</span><select id="f_body" data-k="font.body"></select></label>
+        <label class="f"><span>Use your own font file (.ttf .otf .woff .woff2)</span><input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2"></label>
+        <p class="hint">An uploaded font appears at the top of both font lists. It stays in this browser only.</p>
+        <div class="row3">
+          <label class="f"><span>Headline</span><input type="color" id="c_head" data-k="color.head"></label>
+          <label class="f"><span>Text</span><input type="color" id="c_text" data-k="color.text"></label>
+          <label class="f"><span>Accent</span><input type="color" id="c_accent" data-k="color.accent"></label>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Images</summary>
+      <div class="grp">
+        <label class="f"><span>Sky</span><select id="s_src" data-k="sky.src">
+          <option value="wisp">Wisp cloud (graded to Sarens blue)</option><option value="cumulus">Cumulus</option><option value="upload">Uploaded photo</option></select></label>
+        <label class="f"><span>Upload a sky photo</span><input type="file" id="skyFile" accept="image/*"></label>
+        <div class="row3">
+          <label class="f"><span>Sky width mm</span><input type="number" id="s_w" data-k="sky.w" step="5" data-num="1"></label>
+          <label class="f"><span>Sky X mm</span><input type="number" id="s_x" data-k="sky.x" step="5" data-num="1"></label>
+          <label class="f"><span>Sky Y mm</span><input type="number" id="s_y" data-k="sky.y" step="5" data-num="1"></label>
+        </div>
+        <label class="f"><span>Darken top <b class="tabular" id="v_top"></b></span><input type="range" id="s_top" data-k="sky.top" min="0" max="0.8" step="0.01" data-num="1"></label>
+        <label class="f"><span>Darken bottom <b class="tabular" id="v_bottom"></b></span><input type="range" id="s_bottom" data-k="sky.bottom" min="0" max="0.8" step="0.01" data-num="1"></label>
+        <label class="f"><span>Film grain <b class="tabular" id="v_grain"></b></span><input type="range" id="g_grain" data-k="grain" min="0" max="1" step="0.01" data-num="1"></label>
+        <label class="f"><span>App screenshot on the phone</span><input type="file" id="screenFile" accept="image/*"></label>
+        <label class="f"><span>Logo (white PNG)</span><input type="file" id="logoFile" accept="image/png,image/svg+xml,image/webp"></label>
+        <div class="row">
+          <label class="check"><input type="checkbox" id="l_show" data-k="logo.show"> Show logo</label>
+          <label class="check"><input type="checkbox" id="c0_show" data-k="clouds.0.show"> Top cloud</label>
+        </div>
+        <label class="check"><input type="checkbox" id="c1_show" data-k="clouds.1.show"> Middle cloud</label>
+        <button class="btn" type="button" id="clearUploads">Remove uploaded images</button>
+      </div>
+    </details>
+
+    <details>
+      <summary>QR codes</summary>
+      <div class="grp">
+        <label class="f"><span>Left code links to</span><input type="url" id="q_a" data-k="qr.urlA"></label>
+        <label class="f"><span>Right code links to</span><input type="url" id="q_b" data-k="qr.urlB"></label>
+        <p class="hint">Codes are generated from these links. Keep tiles at 35 mm or more.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Print check</summary>
+      <div class="grp">
+        <label class="check"><input type="checkbox" id="guides" data-k="ui.guides"> Show trim (magenta) and 12 mm safe line (cyan)</label>
+        <ul class="checks" id="checks"></ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Save settings</summary>
+      <div class="grp">
+        <p class="hint">Your changes are kept in this browser automatically. To move them to another computer or keep versions, save a settings file.</p>
+        <div class="row">
+          <button class="btn" type="button" id="saveJson">Save settings file</button>
+          <label class="btn" style="text-align:center">Load settings file<input type="file" id="loadJson" accept=".json,application/json" hidden></label>
+        </div>
+      </div>
+    </details>
+  </aside>
+
+  <section class="stage">
+    <div class="toolbar">
+      <span class="chip" id="zoomChip">Preview</span>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="canvasWrap" id="wrap"><canvas id="view" tabindex="0" aria-label="Poster preview. Click an element to select it, drag to move it."></canvas></div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(() => {
+/* ================= constants (mm) ================= */
+const W = 303, H = 426, BLEED = 3, SAFE = 15;          // canvas = A3 + 3 mm bleed; safe = 12 mm inside trim
+const PRINT_DPI = 300, PX = PRINT_DPI / 25.4;
+const HOOK = { w:145, h:300, rc:74, ropes:[54,94], seat:[70,263], ropeEnd:30 };
+const PHONE_RATIO = 138/68;
+const FONTS = ["Barlow Condensed","Barlow","Anton","Oswald","Bebas Neue","Archivo","Archivo Narrow","Big Shoulders Display","Roboto Condensed","Work Sans"];
+const ICONS = {
+  language:{label:"Speech bubbles (language)", d:"M3 5h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3v-3H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z M5.5 13l2-5 2 5 M6.2 11.4h2.6 M19 9h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v2.5L17 19h-4"},
+  pace:{label:"Clock (any time)", d:"M20.5 13a8.5 8.5 0 1 1-17 0a8.5 8.5 0 1 1 17 0z M12 8.5V13l3 2 M9.5 2.5h5"},
+  record:{label:"Clipboard (record)", d:"M7 4h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z M9 4V2.5h6V4 M8.5 10l1.5 1.5 3-3 M8.5 16l1.5 1.5 3-3"},
+  pin:{label:"Map pin (on site)", d:"M12 22s7-6.6 7-12.2a7 7 0 0 0-14 0C5 15.4 12 22 12 22z M9 9.8l2.1 2.1L15.2 8"},
+  phone:{label:"Phone (on your phone)", d:"M9 2h6a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z M9.5 12l2 2 3.5-4"}
+};
+
+const DEFAULT = {
+  text:{ headline:"Light\nwork.", pay1:"Your training, on your phone.", pay2:"Learn anywhere.", app:"Cornerstone Learning app",
+         p1:"Every course\nin your language", p2:"Learn whenever\nit suits you", p3:"Your full record,\nready to show",
+         qrA:"Android", qrB:"iOS", tag1:"LOAD", tag2:"0.2 KG" },
+  icons:["language","pace","record"],
+  font:{ head:"Barlow Condensed", headW:900, body:"Barlow" },
+  color:{ head:"#f3e72a", text:"#ffffff", accent:"#f3e72a" },
+  head:{ x:15, y:42, size:88, lh:0.82, ls:-0.01, upper:true },
+  pay:{ x:15, y:232, size:10.5, lh:1.14 },
+  logo:{ x:15, y:15, h:13, show:true },
+  info:{ x:15, y:346, app:10, pt:5.4, col:50 },
+  qr:{ x:204, y:364, size:40, gap:4, cap:4.6,
+       urlA:"https://play.google.com/store/apps/details?id=com.csod.learning",
+       urlB:"https://apps.apple.com/be/app/cornerstone-ondemand/id970204620" },
+  crane:{ x:256, y:94, w:40, phoneW:68, tilt:6, drop:22 },
+  sky:{ src:"wisp", w:820, x:-258.5, y:0, top:0.30, bottom:0.42 },
+  clouds:[ { x:212, y:-10, w:150, flip:true, rot:-6, op:0.82, show:true },
+           { x:-14, y:258, w:150, flip:false, rot:3, op:0.95, show:true } ],
+  grain:0.55,
+  ui:{ guides:false },
+  uploads:{ sky:null, screen:null, logo:null, font:null, fontName:null }
+};
+
+/* ================= state ================= */
+const KEY = "lightwork-poster-v1";
+const clone = o => JSON.parse(JSON.stringify(o));
+function merge(base, over){ if(!over||typeof over!=="object") return base;
+  for(const k in over){ if(over[k]&&typeof over[k]==="object"&&!Array.isArray(over[k])&&base[k]&&typeof base[k]==="object") merge(base[k],over[k]); else base[k]=over[k]; } return base; }
+let S = clone(DEFAULT);
+try{ const saved = localStorage.getItem(KEY); if(saved) S = merge(clone(DEFAULT), JSON.parse(saved)); }catch(e){}
+const get = (path,o=S) => path.split(".").reduce((a,k)=>a==null?a:a[k], o);
+const set = (path,v) => { const ks=path.split("."); let o=S; ks.slice(0,-1).forEach(k=>o=o[k]); o[ks.at(-1)]=v; };
+
+let saveTimer=null; const history=[]; let lastSnap=JSON.stringify(S);
+function persist(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    const now=JSON.stringify(S);
+    if(now!==lastSnap){ history.push(lastSnap); if(history.length>60) history.shift(); lastSnap=now; }
+    try{ localStorage.setItem(KEY, now); }
+    catch(e){ try{ const lite=clone(S); lite.uploads={sky:null,screen:null,logo:null,font:null,fontName:null}; localStorage.setItem(KEY, JSON.stringify(lite)); setStatus("Uploaded images are too large to keep in this browser; save a settings file to keep them."); }catch(_){} }
+  },350);
+}
+
+/* ================= assets ================= */
+const IMG = {};
+function loadImg(src){ return new Promise(res=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src; }); }
+async function loadAssets(){
+  const list = { wisp:"img/sky-wisp.jpg", cumulus:"img/sky-cumulus.jpg", cloud:"img/cloud-wisp.png", hook:"img/hook.png", screen:"img/app-home.jpg", logo:"img/sarens-logo-white.png" };
+  await Promise.all(Object.entries(list).map(async([k,v])=>{ IMG[k]=await loadImg(v); }));
+  if(S.uploads.sky) IMG.upSky = await loadImg(S.uploads.sky);
+  if(S.uploads.screen) IMG.upScreen = await loadImg(S.uploads.screen);
+  if(S.uploads.logo) IMG.upLogo = await loadImg(S.uploads.logo);
+  if(S.uploads.font && S.uploads.fontName) await addFontFromData(S.uploads.fontName, S.uploads.font, false);
+}
+const skyImg = () => S.sky.src==="upload" && IMG.upSky ? IMG.upSky : (IMG[S.sky.src] || IMG.wisp);
+const screenImg = () => IMG.upScreen || IMG.screen;
+const logoImg = () => IMG.upLogo || IMG.logo;
+
+/* noise tile for film grain */
+const noise = document.createElement("canvas"); noise.width = noise.height = 160;
+{ const c=noise.getContext("2d"), d=c.createImageData(160,160);
+  for(let i=0;i<d.data.length;i+=4){ const v=128+(Math.random()-.5)*255; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; } c.putImageData(d,0,0); }
+
+/* QR cache */
+const qrCache = {};
+function qrMatrix(url){
+  if(qrCache[url]) return qrCache[url];
+  try{ const q=qrcode(0,"M"); q.addData(url||" "); q.make(); const n=q.getModuleCount(), m=[];
+    for(let r=0;r<n;r++){ m.push([]); for(let c=0;c<n;c++) m[r].push(q.isDark(r,c)); } return qrCache[url]=m; }
+  catch(e){ return null; }
+}
+
+/* ================= drawing (all units mm) ================= */
+const font = (w,size,fam) => `${w} ${size}px "${fam}", "Barlow", sans-serif`;
+let boxes = [];   // hit boxes from the last preview draw
+
+function lines(t, upper){ return String(t||"").split("\n").map(s=>upper?s.toUpperCase():s); }
+function setLS(ctx, em){ if("letterSpacing" in ctx) ctx.letterSpacing = em ? `${em}px` : "0px"; }
+
+function drawSky(ctx){
+  const img = skyImg(); if(!img) { ctx.fillStyle="#2b6097"; ctx.fillRect(0,0,W,H); return; }
+  const w=S.sky.w, h=w*img.naturalHeight/img.naturalWidth;
+  ctx.fillStyle="#2b6097"; ctx.fillRect(0,0,W,H);
+  ctx.drawImage(img, S.sky.x, S.sky.y, w, h);
+}
+function drawClouds(ctx){
+  const img=IMG.cloud; if(!img) return;
+  S.clouds.forEach((c,i)=>{ if(!c.show) return;
+    const w=c.w, h=w*img.naturalHeight/img.naturalWidth;
+    ctx.save(); ctx.globalAlpha=c.op; ctx.translate(c.x+w/2, c.y+h/2);
+    if(c.flip) ctx.scale(-1,1); ctx.rotate((c.flip?-1:1)*c.rot*Math.PI/180);
+    ctx.drawImage(img,-w/2,-h/2,w,h); ctx.restore();
+    boxes.push({id:"cloud"+i, x:c.x, y:c.y, w, h});
+  });
+}
+function drawFades(ctx){
+  let g=ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,`rgba(8,40,90,${S.sky.top})`); g.addColorStop(.38,"rgba(8,40,90,0)");
+  g.addColorStop(.66,"rgba(6,30,70,0)"); g.addColorStop(1,`rgba(6,30,70,${S.sky.bottom})`);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+}
+function crane(){
+  const c=S.crane, s=c.w/HOOK.w, x=c.x-HOOK.rc*s, top=c.y;
+  return { s, x, top, ropes:HOOK.ropes.map(r=>x+r*s), seat:[x+HOOK.seat[0]*s, top+HOOK.seat[1]*s] };
+}
+function drawRopes(ctx,K){
+  const k=crane(), rw=5*k.s, end=k.top+HOOK.ropeEnd*k.s, step=3*k.s;
+  k.ropes.forEach(rx=>{
+    ctx.save(); ctx.beginPath(); ctx.rect(rx-rw/2,-2,rw,end+2); ctx.clip();
+    ctx.fillStyle="#30353a"; ctx.fillRect(rx-rw/2,-2,rw,end+2);
+    ctx.strokeStyle="#8e979f"; ctx.lineWidth=step*.42;
+    const slope=rw*Math.tan(28*Math.PI/180);
+    ctx.beginPath(); for(let y=-4; y<end+slope; y+=step){ ctx.moveTo(rx-rw/2,y); ctx.lineTo(rx+rw/2,y-slope); } ctx.stroke();
+    ctx.strokeStyle="rgba(210,216,221,.8)"; ctx.lineWidth=step*.12;
+    ctx.beginPath(); for(let y=-4; y<end+slope; y+=step){ ctx.moveTo(rx-rw/2,y-step*.1); ctx.lineTo(rx+rw/2,y-slope-step*.1); } ctx.stroke();
+    const g=ctx.createLinearGradient(rx-rw/2,0,rx+rw/2,0);
+    g.addColorStop(0,"rgba(0,0,0,.45)"); g.addColorStop(.35,"rgba(255,255,255,.12)"); g.addColorStop(.7,"rgba(0,0,0,.1)"); g.addColorStop(1,"rgba(0,0,0,.55)");
+    ctx.fillStyle=g; ctx.fillRect(rx-rw/2,-2,rw,end+2); ctx.restore();
+  });
+}
+function drawHook(ctx){ const k=crane(); if(IMG.hook) ctx.drawImage(IMG.hook, k.x, k.top, HOOK.w*k.s, HOOK.h*k.s); }
+
+function phoneGeom(){
+  const k=crane(), w=S.crane.phoneW, h=w*PHONE_RATIO, y=k.seat[1]+S.crane.drop, x=k.seat[0]-w/2;
+  return {x,y,w,h,rot:S.crane.tilt, cx:k.seat[0]};
+}
+function rr(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function drawPhone(ctx,K){
+  const p=phoneGeom(), img=screenImg();
+  ctx.save(); ctx.translate(p.cx,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.translate(-p.w/2,0);
+  // shadow + body thickness
+  ctx.save(); ctx.shadowColor="rgba(8,30,60,.28)"; ctx.shadowBlur=9*K; ctx.shadowOffsetY=9*K*Math.cos(p.rot*Math.PI/180); ctx.shadowOffsetX=-9*K*Math.sin(p.rot*Math.PI/180);
+  rr(ctx,-1.3,0,p.w,p.h,11); ctx.fillStyle="#4c5258"; ctx.fill(); ctx.restore();
+  // titanium frame
+  const g=ctx.createLinearGradient(0,0,p.w,p.h*.55);
+  [[0,"#6e747b"],[.14,"#eef0f2"],[.32,"#9aa0a6"],[.5,"#5d636a"],[.72,"#c9cdd1"],[1,"#7b8188"]].forEach(([o,c])=>g.addColorStop(o,c));
+  rr(ctx,0,0,p.w,p.h,11); ctx.fillStyle=g; ctx.fill();
+  ctx.strokeStyle="rgba(255,255,255,.35)"; ctx.lineWidth=.3; rr(ctx,.35,.35,p.w-.7,p.h-.7,10.6); ctx.stroke();
+  // buttons
+  ctx.fillStyle="#7d838a"; [[.19,.06],[.27,.09],[.38,.09]].forEach(([t,hh])=>{ rr(ctx,-.8,p.h*t,1.1,p.h*hh,.5); ctx.fill(); }); rr(ctx,p.w-.3,p.h*.27,1.1,p.h*.13,.5); ctx.fill();
+  // glass + screen
+  rr(ctx,1.6,1.6,p.w-3.2,p.h-3.2,9.6); ctx.fillStyle="#050505"; ctx.fill();
+  const sx=3.1, sy=3.1, sw=p.w-6.2, sh=p.h-6.2;
+  ctx.save(); rr(ctx,sx,sy,sw,sh,8.2); ctx.clip();
+  if(img){ const sc=Math.max(sw/img.naturalWidth, sh/img.naturalHeight); ctx.drawImage(img, sx+(sw-img.naturalWidth*sc)/2, sy, img.naturalWidth*sc, img.naturalHeight*sc); }
+  ctx.restore();
+  rr(ctx,p.w*.36,1.6+3.4,p.w*.28,4.4,2.2); ctx.fillStyle="#000"; ctx.fill();
+  ctx.save(); rr(ctx,1.6,1.6,p.w-3.2,p.h-3.2,9.6); ctx.clip();
+  const gl=ctx.createLinearGradient(0,0,p.w*.55,p.h*.5); gl.addColorStop(0,"rgba(255,255,255,.26)"); gl.addColorStop(.52,"rgba(255,255,255,.06)"); gl.addColorStop(.8,"rgba(255,255,255,0)");
+  ctx.fillStyle=gl; ctx.fillRect(0,0,p.w,p.h); ctx.restore();
+  // lifting lugs
+  [.22,.78].forEach(t=>{ const lx=p.w*t-2.5, ly=-3.4;
+    const lg=ctx.createLinearGradient(lx,0,lx+5,0); lg.addColorStop(0,"#c99a00"); lg.addColorStop(.45,"#ffe066"); lg.addColorStop(1,"#d6a300");
+    rr(ctx,lx,ly,5,4.2,1); ctx.fillStyle=lg; ctx.fill(); ctx.beginPath(); ctx.arc(lx+2.5,ly+1.7,.9,0,7); ctx.fillStyle="#5b4500"; ctx.fill(); });
+  ctx.restore();
+  boxes.push({id:"crane", x:Math.min(p.x, crane().x)-2, y:crane().top, w:Math.max(p.w, HOOK.w*crane().s)+4, h:p.y+p.h-crane().top});
+}
+function lugPoints(){
+  const p=phoneGeom(), a=p.rot*Math.PI/180;
+  return [.22,.78].map(t=>{ const dx=p.w*t-p.w/2, dy=-3.4+1.7; return [p.cx+dx*Math.cos(a)-dy*Math.sin(a), p.y+dx*Math.sin(a)+dy*Math.cos(a)]; });
+}
+function wire(ctx,x1,y1,x2,y2,w){
+  ctx.lineCap="round"; ctx.strokeStyle="#1d2125"; ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.setLineDash([w*.22,w*.3]); ctx.strokeStyle="rgba(93,102,110,.55)"; ctx.lineWidth=w*.55; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.setLineDash([]); ctx.strokeStyle="rgba(201,208,214,.55)"; ctx.lineWidth=w*.13; ctx.beginPath(); ctx.moveTo(x1-w*.2,y1); ctx.lineTo(x2-w*.2,y2); ctx.stroke();
+}
+function drawRig(ctx){
+  const k=crane(), [hx,hy]=k.seat, s=k.s;
+  ctx.save();
+  ctx.lineWidth=3.4*s; ctx.strokeStyle="#2d3238"; ctx.beginPath(); ctx.ellipse(hx,hy+9*s,8*s,13*s,0,0,7); ctx.stroke();
+  ctx.lineWidth=.9*s; ctx.strokeStyle="#9aa2aa"; ctx.beginPath(); ctx.ellipse(hx-.6*s,hy+9*s,8*s,13*s,0,0,7); ctx.stroke();
+  const ml=[hx,hy+21*s], lugs=lugPoints();
+  lugs.forEach(([lx,ly])=>{
+    wire(ctx,ml[0],ml[1],lx,ly-3,1.1);
+    ctx.strokeStyle="#c0392b"; ctx.lineWidth=.9; ctx.beginPath(); ctx.moveTo(lx-1.9,ly-.4); ctx.lineTo(lx-1.9,ly-2); ctx.arc(lx,ly-2,1.9,Math.PI,0); ctx.lineTo(lx+1.9,ly-.4); ctx.stroke();
+    ctx.strokeStyle="#40464c"; ctx.lineWidth=.8; ctx.beginPath(); ctx.moveTo(lx-2.5,ly-.3); ctx.lineTo(lx+2.5,ly-.3); ctx.stroke();
+  });
+  if(S.text.tag1||S.text.tag2){
+    const t=.42, tx=ml[0]+(lugs[0][0]-ml[0])*t, ty=ml[1]+(lugs[0][1]-ml[1])*t;
+    ctx.translate(tx,ty); ctx.rotate(10*Math.PI/180);
+    ctx.strokeStyle="#333"; ctx.lineWidth=.35; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-3,3.5); ctx.stroke();
+    rr(ctx,-17,3,15,8.4,1); ctx.fillStyle="#f3e72a"; ctx.fill(); ctx.strokeStyle="#14263f"; ctx.stroke();
+    ctx.fillStyle="#14263f"; ctx.textAlign="center"; setLS(ctx,0);
+    ctx.font=font(800,2.7,"Barlow Condensed"); ctx.fillText(S.text.tag1,-9.5,6.6);
+    ctx.font=font(800,3.1,"Barlow Condensed"); ctx.fillText(S.text.tag2,-9.5,10);
+  }
+  ctx.restore();
+}
+function drawLogo(ctx){
+  const img=logoImg(); if(!S.logo.show||!img) return;
+  const h=S.logo.h, w=h*img.naturalWidth/img.naturalHeight;
+  ctx.drawImage(img,S.logo.x,S.logo.y,w,h); boxes.push({id:"logo",x:S.logo.x,y:S.logo.y,w,h});
+}
+function drawHeadline(ctx){
+  const h=S.head, ls=lines(S.text.headline,h.upper), size=h.size;
+  ctx.save(); ctx.fillStyle=S.color.head; ctx.textAlign="left"; ctx.textBaseline="alphabetic";
+  ctx.font=font(S.font.headW,size,S.font.head); setLS(ctx,h.ls*size);
+  let wmax=0; ls.forEach((t,i)=>{ const y=h.y+(h.lh/2+.4)*size+i*h.lh*size; ctx.fillText(t,h.x,y); wmax=Math.max(wmax,ctx.measureText(t).width); });
+  ctx.restore(); boxes.push({id:"headline",x:h.x,y:h.y,w:wmax,h:Math.max(1,ls.length)*h.lh*size, kind:"text"});
+}
+function drawPayoff(ctx){
+  const p=S.pay, size=p.size; ctx.save(); ctx.fillStyle=S.color.text; setLS(ctx,0);
+  const b1=p.y+(p.lh/2+.4)*size, b2=b1+p.lh*size;
+  ctx.font=font(400,size,S.font.body); ctx.fillText(S.text.pay1,p.x,b1); let w=ctx.measureText(S.text.pay1).width;
+  ctx.font=font(700,size,S.font.body); ctx.fillText(S.text.pay2,p.x,b2); w=Math.max(w,ctx.measureText(S.text.pay2).width);
+  ctx.restore(); boxes.push({id:"payoff",x:p.x,y:p.y,w,h:2*p.lh*size, kind:"text"});
+}
+function drawInfo(ctx){
+  const I=S.info; ctx.save(); setLS(ctx,0);
+  ctx.fillStyle=S.color.accent; ctx.fillRect(I.x,I.y,16,1.2);
+  ctx.fillStyle=S.color.text; ctx.font=font(700,I.app,S.font.body);
+  const appBase=I.y+5.4+.9*I.app; ctx.fillText(S.text.app,I.x,appBase);
+  let wmax=ctx.measureText(S.text.app).width;
+  const top=I.y+36.5, icon=12.5, pts=[S.text.p1,S.text.p2,S.text.p3];
+  pts.forEach((t,i)=>{
+    const cx=I.x+i*I.col+(i?5:0);
+    if(i){ ctx.fillStyle="rgba(255,255,255,.4)"; ctx.fillRect(I.x+i*I.col,top,.35,icon+3+2*1.2*I.pt+1); }
+    ctx.save(); ctx.translate(cx,top); ctx.scale(icon/24,icon/24);
+    ctx.strokeStyle=S.color.accent; ctx.lineWidth=1.6; ctx.lineCap="round"; ctx.lineJoin="round";
+    ctx.stroke(new Path2D((ICONS[S.icons[i]]||ICONS.language).d)); ctx.restore();
+    ctx.fillStyle=S.color.text; ctx.font=font(600,I.pt,S.font.body);
+    lines(t,false).forEach((ln,j)=>{ ctx.fillText(ln,cx,top+icon+3+I.pt+j*1.2*I.pt); wmax=Math.max(wmax,cx-I.x+ctx.measureText(ln).width); });
+  });
+  ctx.restore(); boxes.push({id:"info",x:I.x,y:I.y,w:wmax,h:top-I.y+icon+3+2*1.2*I.pt+1, kind:"text"});
+}
+function drawQR(ctx){
+  const Q=S.qr; ctx.save(); setLS(ctx,0);
+  [[Q.urlA,S.text.qrA],[Q.urlB,S.text.qrB]].forEach(([url,cap],i)=>{
+    const x=Q.x+i*(Q.size+Q.gap), y=Q.y, m=qrMatrix(url);
+    rr(ctx,x,y,Q.size,Q.size,1.6); ctx.fillStyle="#fff"; ctx.fill();
+    if(m){ const n=m.length, cell=Q.size/(n+8); ctx.fillStyle="#000";
+      for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(m[r][c]) ctx.fillRect(x+(c+4)*cell, y+(r+4)*cell, cell+.01, cell+.01); }
+    ctx.fillStyle=S.color.text; ctx.font=font(600,Q.cap,S.font.body); ctx.textAlign="center";
+    ctx.fillText(cap,x+Q.size/2,y+Q.size+1.6+.95*Q.cap);
+  });
+  ctx.restore(); boxes.push({id:"qr",x:Q.x,y:Q.y,w:2*Q.size+Q.gap,h:Q.size+1.6+1.2*Q.cap, kind:"text"});
+}
+function drawGrain(ctx,K){
+  if(!S.grain) return; const pat=ctx.createPattern(noise,"repeat");
+  const cell=.12; pat.setTransform(new DOMMatrix([cell,0,0,cell,0,0]));
+  ctx.save(); ctx.globalCompositeOperation="overlay"; ctx.globalAlpha=S.grain*.22; ctx.fillStyle=pat; ctx.fillRect(0,0,W,H); ctx.restore();
+}
+function drawPoster(ctx,K){
+  boxes=[];
+  ctx.save(); ctx.scale(K,K);
+  drawSky(ctx); drawClouds(ctx); drawFades(ctx);
+  drawRopes(ctx,K); drawHook(ctx);
+  drawHeadline(ctx); drawPayoff(ctx);
+  drawPhone(ctx,K); drawRig(ctx);
+  drawLogo(ctx); drawInfo(ctx); drawQR(ctx);
+  drawGrain(ctx,K);
+  ctx.restore();
+}
+
+/* ================= preview ================= */
+const view=document.getElementById("view"), wrap=document.getElementById("wrap");
+let K=2, sel=null;
+function sizeView(){
+  const r=wrap.getBoundingClientRect();
+  const availW=Math.max(260,r.width), availH=window.innerWidth<=900 ? availW*H/W : Math.max(380, window.innerHeight - r.top - 20);
+  K=Math.min(availW/W, availH/H);
+  const dpr=window.devicePixelRatio||1;
+  view.style.width=(W*K)+"px"; view.style.height=(H*K)+"px";
+  view.width=Math.round(W*K*dpr); view.height=Math.round(H*K*dpr);
+  document.getElementById("zoomChip").textContent=`Preview ${Math.round(K/(96/25.4)*100)}%`;
+}
+function render(){
+  const dpr=window.devicePixelRatio||1, ctx=view.getContext("2d");
+  ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,view.width,view.height);
+  drawPoster(ctx,K*dpr);
+  ctx.save(); ctx.scale(K*dpr,K*dpr);
+  if(S.ui.guides){
+    ctx.setLineDash([2,1.5]); ctx.lineWidth=.35;
+    ctx.strokeStyle="#ff2bd6"; ctx.strokeRect(BLEED,BLEED,W-2*BLEED,H-2*BLEED);
+    ctx.strokeStyle="#00e5ff"; ctx.strokeRect(SAFE,SAFE,W-2*SAFE,H-2*SAFE);
+  }
+  if(sel){ const b=boxes.find(x=>x.id===sel); if(b){ ctx.setLineDash([1.6,1.2]); ctx.lineWidth=.5; ctx.strokeStyle="#ffffff"; ctx.strokeRect(b.x-1,b.y-1,b.w+2,b.h+2); ctx.strokeStyle="#14263f"; ctx.lineDashOffset=1.4; ctx.strokeRect(b.x-1,b.y-1,b.w+2,b.h+2); } }
+  ctx.restore();
+  runChecks();
+}
+let raf=null; const schedule=()=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=null; render(); }); };
+
+/* ================= selection, drag, nudge ================= */
+const NAMES={headline:"Headline",payoff:"Payoff line",logo:"Logo",info:"App name & points",qr:"QR codes",crane:"Hook & phone",cloud0:"Top cloud",cloud1:"Middle cloud"};
+const POS={headline:["head.x","head.y"],payoff:["pay.x","pay.y"],logo:["logo.x","logo.y"],info:["info.x","info.y"],qr:["qr.x","qr.y"],crane:["crane.x","crane.y"],cloud0:["clouds.0.x","clouds.0.y"],cloud1:["clouds.1.x","clouds.1.y"]};
+const FIELDS={
+  headline:[["X mm","head.x",.5],["Y mm","head.y",.5],["Size mm","head.size",1],["Line spacing","head.lh",.01],["Letter spacing","head.ls",.005]],
+  payoff:[["X mm","pay.x",.5],["Y mm","pay.y",.5],["Size mm","pay.size",.1],["Line spacing","pay.lh",.01]],
+  logo:[["X mm","logo.x",.5],["Y mm","logo.y",.5],["Height mm","logo.h",.5]],
+  info:[["X mm","info.x",.5],["Y mm","info.y",.5],["App name size mm","info.app",.1],["Points size mm","info.pt",.1],["Column width mm","info.col",1]],
+  qr:[["X mm","qr.x",.5],["Y mm","qr.y",.5],["Tile size mm (min 35)","qr.size",.5],["Gap mm","qr.gap",.5],["Caption size mm","qr.cap",.1]],
+  crane:[["Rope X mm","crane.x",.5],["Hook top Y mm","crane.y",.5],["Hook width mm","crane.w",.5],["Phone width mm","crane.phoneW",.5],["Phone tilt °","crane.tilt",.5],["Sling length mm","crane.drop",.5]],
+  cloud0:[["X mm","clouds.0.x",1],["Y mm","clouds.0.y",1],["Width mm","clouds.0.w",1],["Rotation °","clouds.0.rot",1],["Opacity","clouds.0.op",.01],["Mirror","clouds.0.flip","bool"]],
+  cloud1:[["X mm","clouds.1.x",1],["Y mm","clouds.1.y",1],["Width mm","clouds.1.w",1],["Rotation °","clouds.1.rot",1],["Opacity","clouds.1.op",.01],["Mirror","clouds.1.flip","bool"]]
+};
+function select(id){
+  sel=id; document.getElementById("selName").textContent=id?NAMES[id]:"nothing";
+  const body=document.getElementById("inspectorBody");
+  if(!id){ body.innerHTML='<p class="hint wide">Click an element on the poster to select it, then drag it or fine-tune it here. Arrow keys nudge 0.5 mm, with Shift 5 mm.</p>'; schedule(); return; }
+  body.innerHTML = FIELDS[id].map(([lab,k,step],i)=> step==="bool"
+    ? `<label class="check wide"><input type="checkbox" id="ins_${i}" data-k="${k}"> ${lab}</label>`
+    : `<label class="f"><span>${lab}</span><input type="number" id="ins_${i}" data-k="${k}" step="${step}" data-num="1"></label>`).join("");
+  bindAll(body); schedule();
+}
+function toMM(e){ const r=view.getBoundingClientRect(); return [(e.clientX-r.left)/r.width*W, (e.clientY-r.top)/r.height*H]; }
+let drag=null;
+view.addEventListener("pointerdown",e=>{
+  const [mx,my]=toMM(e);
+  const order=["qr","info","logo","crane","payoff","headline","cloud1","cloud0"];
+  const hit=order.map(id=>boxes.find(b=>b.id===id)).find(b=>b&&mx>=b.x-1&&mx<=b.x+b.w+1&&my>=b.y-1&&my<=b.y+b.h+1);
+  if(!hit){ select(null); return; }
+  if(sel!==hit.id) select(hit.id);
+  const [px,py]=POS[hit.id]; drag={id:hit.id,mx,my,x0:get(px),y0:get(py),px,py};
+  view.setPointerCapture(e.pointerId); view.style.cursor="grabbing"; view.focus({preventScroll:true});
+});
+view.addEventListener("pointermove",e=>{
+  if(!drag){ const [mx,my]=toMM(e); view.style.cursor=boxes.some(b=>mx>=b.x&&mx<=b.x+b.w&&my>=b.y&&my<=b.y+b.h)?"grab":"default"; return; }
+  const [mx,my]=toMM(e); const snap=v=>Math.round(v*2)/2;
+  set(drag.px,snap(drag.x0+mx-drag.mx)); set(drag.py,snap(drag.y0+my-drag.my)); syncInputs(); schedule();
+});
+const endDrag=()=>{ if(drag){ drag=null; view.style.cursor="default"; persist(); } };
+view.addEventListener("pointerup",endDrag); view.addEventListener("pointercancel",endDrag);
+view.addEventListener("keydown",e=>{
+  if(!sel) return; const d=e.shiftKey?5:.5, [px,py]=POS[sel]; let used=true;
+  if(e.key==="ArrowLeft") set(px,get(px)-d); else if(e.key==="ArrowRight") set(px,get(px)+d);
+  else if(e.key==="ArrowUp") set(py,get(py)-d); else if(e.key==="ArrowDown") set(py,get(py)+d);
+  else if(e.key==="Escape") { select(null); } else used=false;
+  if(used){ e.preventDefault(); syncInputs(); schedule(); persist(); }
+});
+
+/* ================= form binding ================= */
+function fillSelects(){
+  const opts = (S.uploads.fontName?[S.uploads.fontName]:[]).concat(FONTS).map(f=>`<option value="${f}">${f}</option>`).join("");
+  document.getElementById("f_head").innerHTML=opts; document.getElementById("f_body").innerHTML=opts;
+  const io=Object.entries(ICONS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join("");
+  ["i_p1","i_p2","i_p3"].forEach(id=>document.getElementById(id).innerHTML=io);
+}
+function syncInputs(root=document){
+  root.querySelectorAll("[data-k]").forEach(el=>{
+    const v=get(el.dataset.k);
+    if(el.type==="checkbox") el.checked=!!v; else if(el.type==="file") return;
+    else if(document.activeElement!==el) el.value = (el.dataset.num&&typeof v==="number") ? +(+v).toFixed(3) : (v??"");
+  });
+  [["v_top","sky.top"],["v_bottom","sky.bottom"],["v_grain","grain"]].forEach(([id,k])=>document.getElementById(id).textContent=Math.round(get(k)*100)+"%");
+}
+function bindAll(root=document){
+  root.querySelectorAll("[data-k]").forEach(el=>{
+    if(el.dataset.bound) return; el.dataset.bound="1";
+    const evt=(el.type==="checkbox"||el.tagName==="SELECT")?"change":"input";
+    el.addEventListener(evt, async()=>{
+      let v = el.type==="checkbox" ? el.checked : el.value;
+      if(el.dataset.num){ v=parseFloat(v); if(!isFinite(v)) return; }
+      if(el.dataset.k==="qr.size") v=Math.max(35,v);
+      set(el.dataset.k,v);
+      if(el.dataset.k.startsWith("font.")) await ensureFonts();
+      syncInputs(); schedule(); persist();
+    });
+  });
+  syncInputs(root);
+}
+async function ensureFonts(){
+  const need=[[S.font.headW,S.font.head],[400,S.font.body],[600,S.font.body],[700,S.font.body],[800,"Barlow Condensed"]];
+  try{ await Promise.all(need.map(([w,f])=>document.fonts.load(`${w} 40px "${f}"`, "LIGHTWORKégy"))); }catch(e){}
+}
+async function addFontFromData(name,dataUrl,announce=true){
+  try{ const buf=await (await fetch(dataUrl)).arrayBuffer(); const ff=new FontFace(name,buf); await ff.load(); document.fonts.add(ff);
+    if(announce) setStatus(`Font "${name}" added. Pick it in the font lists.`); return true; }
+  catch(e){ setStatus("That font file could not be read. Try a .ttf, .otf or .woff2 file."); return false; }
+}
+const readAsDataURL = f => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(f); });
+
+document.getElementById("fontFile").addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f) return; const name=f.name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9 _-]/g,"").slice(0,40)||"Custom font";
+  const data=await readAsDataURL(f); if(await addFontFromData(name,data)){ S.uploads.font=data; S.uploads.fontName=name; fillSelects(); syncInputs(); persist(); schedule(); }
+  e.target.value="";
+});
+async function uploadImage(input,key,imgKey,after){
+  input.addEventListener("change",async e=>{ const f=e.target.files[0]; if(!f) return;
+    const data=await readAsDataURL(f); const img=await loadImg(data);
+    if(!img){ setStatus("That image could not be opened. Use a JPG, PNG or WebP file."); return; }
+    S.uploads[key]=data; IMG[imgKey]=img; if(after) after(img); syncInputs(); schedule(); persist(); setStatus("Image updated."); e.target.value=""; });
+}
+uploadImage(document.getElementById("skyFile"),"sky","upSky",img=>{ S.sky.src="upload"; S.sky.w=W; S.sky.x=0; S.sky.y=0; if(W*img.naturalHeight/img.naturalWidth<H){ S.sky.w=H*img.naturalWidth/img.naturalHeight; S.sky.x=(W-S.sky.w)/2; } });
+uploadImage(document.getElementById("screenFile"),"screen","upScreen");
+uploadImage(document.getElementById("logoFile"),"logo","upLogo");
+document.getElementById("clearUploads").addEventListener("click",()=>{
+  ["upSky","upScreen","upLogo"].forEach(k=>delete IMG[k]); S.uploads.sky=S.uploads.screen=S.uploads.logo=null; if(S.sky.src==="upload") S.sky.src="wisp";
+  syncInputs(); schedule(); persist(); setStatus("Uploaded images removed; the originals are back.");
+});
+
+/* ================= print checks ================= */
+function runChecks(){
+  const out=[];
+  const c=document.createElement("canvas").getContext("2d"); c.font=font(S.font.headW,S.head.size,S.font.head);
+  const cap=c.measureText("H").actualBoundingBoxAscent;
+  out.push(cap>=40?["ok",`Headline cap height ${cap.toFixed(1)} mm (40 mm minimum for 3–4 m)`]:["warn",`Headline cap height ${cap.toFixed(1)} mm: below 40 mm, it will be hard to read at 3–4 m`]);
+  const outside=boxes.filter(b=>["headline","payoff","logo","info","qr"].includes(b.id)).filter(b=>b.x<SAFE-.3||b.y<SAFE-.3||b.x+b.w>W-SAFE+.3||b.y+b.h>H-SAFE+.3).map(b=>NAMES[b.id]);
+  out.push(outside.length?["warn",`Outside the 12 mm safe line: ${outside.join(", ")}`]:["ok","All text, logo and QR codes inside the safe line"]);
+  out.push(S.qr.size>=35?["ok",`QR tiles ${S.qr.size} mm`]:["warn","QR tiles under 35 mm"]);
+  const sk=skyImg(); if(sk){ const dpi=sk.naturalWidth/(S.sky.w/25.4); out.push(dpi>=150?["ok",`Sky prints at about ${Math.round(dpi)} dpi`]:["warn",`Sky prints at about ${Math.round(dpi)} dpi: fine from a distance, soft up close. Upload a larger original for print.`]); }
+  out.push(IMG.upScreen?["ok","Your own app screenshot is on the phone"]:["warn","Phone shows the original screenshot (with “Overdue 2”). Upload a clean one before printing."]);
+  document.getElementById("checks").innerHTML=out.map(([k,t])=>`<li class="${k==="warn"?"warn":""}">${t}</li>`).join("");
+}
+
+/* ================= export ================= */
+let downloads=null;
+const setStatus=t=>{ document.getElementById("status").textContent=t; };
+function exportCanvas(){
+  const cv=document.createElement("canvas"); cv.width=Math.round(W*PX); cv.height=Math.round(H*PX);
+  const ctx=cv.getContext("2d"); drawPoster(ctx, cv.width/W); boxes=[]; schedule(); return cv;
+}
+const toBlob=(cv,type,q)=>new Promise(r=>cv.toBlob(r,type,q));
+async function save(filename,data){
+  if(!downloads){ setStatus("Downloads are not available in this view. Open the poster in claude.ai to download."); return; }
+  try{ await downloads.save({filename,data}); setStatus(`Saved ${filename}`); }
+  catch(e){ const c=e&&e.code; setStatus(c==="declined"?"Download cancelled.":c==="rate_limited"?"A download is already waiting for your confirmation.":"The download did not go through. Try again in a moment."); }
+}
+async function busy(btn,label,fn){ const t=btn.textContent; btn.disabled=true; btn.textContent=label; setStatus("Rendering at 300 dpi…"); await new Promise(r=>setTimeout(r,30)); try{ await fn(); } finally{ btn.disabled=false; btn.textContent=t; } }
+const slug=()=> (S.text.headline||"poster").replace(/\s+/g," ").trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"poster";
+document.getElementById("pngBtn").addEventListener("click",e=>busy(e.currentTarget,"Rendering…",async()=>{ await ensureFonts(); const cv=exportCanvas(); await save(`${slug()}-A3-bleed-300dpi.png`, await toBlob(cv,"image/png")); }));
+async function pdf(marks){
+  await ensureFonts(); const cv=exportCanvas(); const jpg=cv.toDataURL("image/jpeg",0.95);
+  const M=marks?10:0, PW=W+2*M, PH=H+2*M;
+  const doc=new jspdf.jsPDF({unit:"mm",format:[PW,PH],orientation:"portrait",compress:true});
+  doc.addImage(jpg,"JPEG",M,M,W,H,undefined,"FAST");
+  if(marks){
+    const t=M+BLEED, r=M+W-BLEED, b=M+H-BLEED, len=6, off=M;  // trim box corners, marks sit outside the bleed
+    doc.setDrawColor(0); doc.setLineWidth(0.25);
+    [[t,t],[r,t],[t,b],[r,b]].forEach(([x,y])=>{
+      const sx=x===t?-1:1, sy=y===t?-1:1;
+      doc.line(x, y+sy*(BLEED+1), x, y+sy*(BLEED+1+len));    // vertical mark
+      doc.line(x+sx*(BLEED+1), y, x+sx*(BLEED+1+len), y);    // horizontal mark
+    });
+    doc.setFontSize(6); doc.setTextColor(60); doc.text(`${S.text.headline.replace(/\n/g," ")} · A3 297 × 420 mm trim · 3 mm bleed · 300 dpi`, M, PH-3.5);
+  }
+  return doc.output("blob");
+}
+document.getElementById("pdfBtn").addEventListener("click",e=>busy(e.currentTarget,"Rendering…",async()=>save(`${slug()}-A3-bleed.pdf`, await pdf(false))));
+document.getElementById("pdfMarksBtn").addEventListener("click",e=>busy(e.currentTarget,"Rendering…",async()=>save(`${slug()}-A3-print-cropmarks.pdf`, await pdf(true))));
+document.getElementById("saveJson").addEventListener("click",()=>save(`${slug()}-poster-settings.json`, JSON.stringify(S,null,1)));
+document.getElementById("loadJson").addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{ const data=JSON.parse(await f.text()); history.push(JSON.stringify(S)); S=merge(clone(DEFAULT),data); await loadAssets(); fillSelects(); await ensureFonts(); syncInputs(); select(null); persist(); schedule(); setStatus("Settings loaded."); }
+  catch(_){ setStatus("That file is not a poster settings file."); }
+  e.target.value="";
+});
+
+/* ================= undo / reset ================= */
+async function undo(){ const prev=history.pop(); if(!prev){ setStatus("Nothing to undo."); return; } S=JSON.parse(prev); lastSnap=prev; try{ localStorage.setItem(KEY,prev); }catch(e){} await ensureFonts(); syncInputs(); select(sel); schedule(); }
+document.getElementById("undoBtn").addEventListener("click",undo);
+document.addEventListener("keydown",e=>{ const tag=(e.target.tagName||"").toLowerCase(); if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"&&!["input","textarea","select"].includes(tag)){ e.preventDefault(); undo(); } });
+let resetArmed=false;
+document.getElementById("resetBtn").addEventListener("click",async e=>{
+  if(!resetArmed){ resetArmed=true; e.currentTarget.textContent="Click again to reset"; setStatus("This puts every setting back to the original poster. Uploaded images and your font are kept."); setTimeout(()=>{ resetArmed=false; document.getElementById("resetBtn").textContent="Reset to original"; },4000); return; }
+  resetArmed=false; e.currentTarget.textContent="Reset to original";
+  history.push(JSON.stringify(S)); const keep=S.uploads; S=clone(DEFAULT); S.uploads=keep; if(keep.sky) S.sky.src="wisp";
+  await ensureFonts(); syncInputs(); select(null); persist(); schedule(); setStatus("Back to the original poster. Use Undo to return.");
+});
+
+/* ================= boot ================= */
+(async()=>{
+  fillSelects(); bindAll(); sizeView();
+  await Promise.all([loadAssets(), ensureFonts(), document.fonts.ready]);
+  syncInputs(); render();
+  new ResizeObserver(()=>{ sizeView(); render(); }).observe(wrap);
+  try{ downloads = window.claude && window.claude.use ? await window.claude.use("downloads") : null; }catch(e){ downloads=null; }
+  if(!downloads){ ["pngBtn","pdfBtn","pdfMarksBtn","saveJson"].forEach(id=>document.getElementById(id).disabled=true);
+    setStatus("Downloads are not available in this view. Open the poster in claude.ai to download."); }
+})();
+})();
+</script>
