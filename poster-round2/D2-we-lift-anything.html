@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>D2 · We lift anything</title>
+<link rel="stylesheet" href="base.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break, <b> = bold half of the payoff. ===== */
+const COPY = {
+  headTop:  "We lift",
+  headBot:  "anything.",
+  payoff:   "Even your training.<br><b>On your phone,<br>in your language.</b>",
+  specs: [
+    ["language", "Every course<br>in your language"],
+    ["helmet",   "Site inductions<br>before you arrive"],
+    ["record",   "Your full record,<br>ready to show"]
+  ],
+  scan:     "Scan to<br>get the app",
+  stores:   ["Android", "iPhone"],
+  tag:      ["LOAD", "0.2 KG"],
+  logo:     "Sarens logo"
+};
+</script>
+<style>
+.h-top{left:var(--safe);right:var(--safe);top:36mm;font-size:88mm;color:#fff}
+.h-bot{left:var(--safe);right:var(--safe);top:300mm;font-size:70mm;color:var(--yellow)}
+.glow{position:absolute;left:60mm;top:150mm;width:200mm;height:200mm;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,226,170,.42) 0%,rgba(255,200,140,.16) 35%,rgba(255,190,120,0) 68%)}
+.payoff{position:absolute;right:var(--safe);top:214mm;width:112mm;text-align:right;color:#fff;font:400 9.6mm/1.14 "Barlow"}
+.payoff b{font-weight:700}
+.logo{color:#fff}
+.specs{color:var(--navy)}
+.scan{bottom:var(--safe);right:116mm;color:var(--navy);font-size:5mm;line-height:1.2}
+.qrs{color:var(--navy)}
+.phone{box-shadow:0 0 18mm rgba(255,214,150,.35)}
+</style></head>
+<body><div class="poster">
+  <div class="layer" id="sky"></div>
+  <div class="glow"></div>
+  <svg class="layer" id="ropes" viewBox="0 0 303 426"></svg>
+  <div class="logo" data-copy="logo"></div>
+  <h1 class="headline h-top" data-copy="headTop"></h1>
+  <div class="payoff" data-copy="payoff"></div>
+  <img id="hook" src="img/hook.svg" alt="">
+  <div class="phone" id="phone"></div>
+  <svg class="layer" id="rig" viewBox="0 0 303 426"></svg>
+  <h1 class="headline h-bot" data-copy="headBot"></h1>
+  <div class="specs" id="specs"></div>
+  <div class="scan" data-copy="scan"></div>
+  <div class="qrs" id="qrs"></div>
+</div>
+<script src="sky.js"></script><script src="parts.js"></script>
+<script>
+  sky(document.getElementById('sky'),{stops:[[0,'#08121f'],[.5,'#1a365d'],[.78,'#4f6d93'],[.93,'#e7ab7c'],[1,'#f6c89a']],
+      cloud:['#5a6c88','#7d7f92','#e6a77d'],cloudOpacity:.9,
+      clouds:[[40,282,96,21],[300,300,60,22],[250,372,120,23],[40,404,110,24]]});
+  specs(document.getElementById('specs'),COPY.specs);
+  qrs(document.getElementById('qrs'),COPY.stores);
+  // Drop the hoist rope through the word space of the top line, wherever translation puts it.
+  window.afterFonts=()=>{
+    const ln=document.querySelector('.h-top .ln'), t=ln.firstChild, i=t.textContent.indexOf(' ');
+    const r=document.createRange(); r.setStart(t,i); r.setEnd(t,i+1);
+    const gap=r.getBoundingClientRect(), o=document.querySelector('.poster').getBoundingClientRect();
+    const gx=(gap.left+gap.width/2-o.left)/MMPX, w=34;
+    H=placeHook(document.getElementById('hook'),gx-60*w/120,104,w);
+    const P={w:54,h:110,y:190,rot:-4}; P.x=H.throat[0]-P.w/2;
+    buildPhone(document.getElementById('phone'),P,'img/app-home.jpg');
+    rig(document.getElementById('rig'),H,document.getElementById('phone'),
+      {tag:COPY.tag,tagRot:-6,ropeLayer:document.getElementById('ropes'),slingW:1});
+  };
+  let H;
+</script>
+<script src="fit.js"></script>
+</body></html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>D1 · Lift off</title>
+<link rel="stylesheet" href="base.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break, <b> = bold half of the payoff. ===== */
+const COPY = {
+  headline: "Lift\noff.",
+  payoff:   "Your training, on your phone.<br><b>Learn anywhere.</b>",
+  specs: [
+    ["language", "Every course<br>in your language"],
+    ["helmet",   "Site inductions<br>before you arrive"],
+    ["record",   "Your full record,<br>ready to show"]
+  ],
+  scan:     "Scan to get the app",
+  stores:   ["Android", "iPhone"],
+  tag:      ["LOAD", "0.2 KG"],
+  logo:     "Sarens logo"
+};
+</script>
+<style>
+.headline{left:var(--safe);top:46mm;width:200mm;font-size:118mm;color:var(--yellow);letter-spacing:-.01em}
+.payoff{position:absolute;left:var(--safe);top:270mm;color:#fff;font:400 10.5mm/1.12 "Barlow"}
+.payoff b{font-weight:700}
+.logo{color:#fff}
+.specs{color:var(--navy)}
+.scan{bottom:63mm;color:var(--navy)}
+.qrs{color:var(--navy)}
+</style></head>
+<body><div class="poster">
+  <div class="layer" id="sky"></div>
+  <svg class="layer" id="ropes" viewBox="0 0 303 426"></svg>
+  <div class="logo" data-copy="logo"></div>
+  <h1 class="headline" data-copy="headline"></h1>
+  <div class="payoff" data-copy="payoff"></div>
+  <img id="hook" src="img/hook.svg" alt="">
+  <div class="phone" id="phone"></div>
+  <svg class="layer" id="rig" viewBox="0 0 303 426"></svg>
+  <div class="specs" id="specs"></div>
+  <div class="scan" data-copy="scan"></div>
+  <div class="qrs" id="qrs"></div>
+</div>
+<script src="sky.js"></script><script src="parts.js"></script>
+<script>
+  sky(document.getElementById('sky'),{top:'#1d5b9a',mid:'#4f8bc2',bottom:'#b8d3e9',
+      clouds:[[62,372,130,11],[286,318,96,12],[300,158,46,13],[150,430,120,14]]});
+  specs(document.getElementById('specs'),COPY.specs);
+  qrs(document.getElementById('qrs'),COPY.stores);
+  const H=placeHook(document.getElementById('hook'),216,98,44);
+  const P={x:194.7-1.5,y:212,w:70,h:140,rot:7};
+  P.x=H.throat[0]-P.w/2;
+  buildPhone(document.getElementById('phone'),P,'img/app-home.jpg');
+  window.afterFonts=()=>rig(document.getElementById('rig'),H,document.getElementById('phone'),
+      {tag:COPY.tag,ropeLayer:document.getElementById('ropes')});
+</script>
+<script src="fit.js"></script>
+</body></html>

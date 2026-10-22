@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>D3 · Ready when you are</title>
+<link rel="stylesheet" href="base.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  headline: "Ready\nwhen you\nare.",
+  payoff:   "Every course<br>on your phone.<br>In your language.",
+  specs: [
+    ["language", "Every course<br>in your language"],
+    ["helmet",   "Site inductions<br>before you arrive"],
+    ["record",   "Your full record,<br>ready to show"]
+  ],
+  scan:     "Scan to<br>get the app",
+  stores:   ["Android", "iPhone"],
+  tag:      ["LOAD", "0.2 KG"],
+  logo:     "Sarens logo"
+};
+</script>
+<style>
+.headline{left:var(--safe);right:var(--safe);top:30mm;font-family:"Barlow";font-weight:500;text-transform:none;font-size:60mm;line-height:.9;letter-spacing:-.025em;color:var(--navy)}
+.payoff{position:absolute;left:116mm;top:158mm;width:90mm;color:var(--navy);font:500 7.4mm/1.2 "Barlow"}
+.payoff::before{content:"";display:block;width:12mm;height:.5mm;background:var(--navy);margin-bottom:4mm}
+.logo{color:var(--navy)}
+/* concrete deck */
+.ground{position:absolute;left:0;right:0;top:232mm;bottom:0;background:linear-gradient(#ddd8cf,#cbc5bb)}
+.ground svg{position:absolute;inset:0;width:100%;height:100%}
+.ledge-top{position:absolute;left:-2mm;top:222mm;width:118mm;height:14mm;background:#e6e2db;clip-path:polygon(0 0,92% 0,100% 100%,0 100%)}
+.ledge-face{position:absolute;left:-2mm;top:236mm;width:122mm;height:9mm;background:#c2bcb2}
+.wallshadow{position:absolute;inset:0;background:rgba(40,45,55,.13);clip-path:polygon(78% 54.5%,100% 50%,100% 100%,42% 100%)}
+.wall{position:absolute;right:-3mm;top:0;width:44mm;height:236mm;background:linear-gradient(90deg,#e9e6e1,#d8d4ce)}
+.wall::after{content:"";position:absolute;left:0;top:0;bottom:0;width:6mm;background:linear-gradient(90deg,#cfcac3,#e9e6e1)}
+/* phone lying on the deck */
+.stage{position:absolute;inset:0;perspective:1300mm;perspective-origin:150mm 40mm}
+.obj{position:absolute;left:118mm;top:222mm;width:72mm;height:148mm;transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(-62deg)}
+.obj .sh{position:absolute;inset:0;border-radius:11mm;background:rgba(25,30,38,.45);filter:blur(1.2mm);transform:translate(4mm,9mm)}
+.obj .slab{position:absolute;inset:0;border-radius:11mm;background:linear-gradient(90deg,#6c7279,#c9cdd1 40%,#80868d)}
+.obj .phone{transform:translateZ(4.2mm)!important}
+.specs{color:var(--navy)}
+.scan{bottom:var(--safe);right:116mm;color:var(--navy);font-size:5mm;line-height:1.2}
+.qrs{color:var(--navy)}
+</style></head>
+<body><div class="poster">
+  <div class="layer" id="sky"></div>
+  <div class="wall"></div>
+  <div class="ground"><svg viewBox="0 0 303 194" preserveAspectRatio="none"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .33  0 0 0 0 .3  0 0 0 .55 0"/></filter><rect width="303" height="194" filter="url(#grain)" opacity=".5"/>
+    <path d="M0 70 L303 52 M0 150 L303 128" stroke="#b7b0a5" stroke-width=".5" opacity=".7"/></svg></div>
+  <div class="ledge-top"></div><div class="ledge-face"></div>
+  <div class="wallshadow"></div>
+  <svg class="layer" id="ropes" viewBox="0 0 303 426"></svg>
+  <div class="logo" data-copy="logo"></div>
+  <h1 class="headline" data-copy="headline"></h1>
+  <div class="payoff" data-copy="payoff"></div>
+  <div class="stage"><div class="obj" id="obj"></div></div>
+  <img id="hook" src="img/hook.svg" alt="">
+  <svg class="layer" id="rig" viewBox="0 0 303 426"></svg>
+  <div class="specs" id="specs"></div>
+  <div class="scan" data-copy="scan"></div>
+  <div class="qrs" id="qrs"></div>
+</div>
+<script src="sky.js"></script><script src="parts.js"></script>
+<script>
+  sky(document.getElementById('sky'),{top:'#6fa6d6',mid:'#a9cbe8',bottom:'#e3eef7',
+      clouds:[[40,224,120,31],[175,226,90,32],[120,214,40,33]]});
+  specs(document.getElementById('specs'),COPY.specs);
+  qrs(document.getElementById('qrs'),COPY.stores);
+  const obj=document.getElementById('obj');
+  obj.innerHTML='<div class="sh"></div>'+Array.from({length:10},(_,i)=>`<div class="slab" style="transform:translateZ(${i*.42}mm)"></div>`).join('')+'<div class="phone" id="phone"></div>';
+  buildPhone(document.getElementById('phone'),{x:0,y:0,w:72,h:148,rot:0},'img/app-home.jpg');
+  const H=placeHook(document.getElementById('hook'),214,142,34);
+  window.afterFonts=()=>rig(document.getElementById('rig'),H,document.getElementById('phone'),
+      {tag:COPY.tag,tagRot:-4,ropeLayer:document.getElementById('ropes'),slingW:1});
+</script>
+<script src="fit.js"></script>
+</body></html>

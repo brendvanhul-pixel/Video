@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 300">
+  <!-- Drawn crane hook block. Rope entry points: x=44 and x=76 at y=0. Hook throat (sling seat): x=40, y=241. -->
+  <defs>
+    <linearGradient id="body" x1="0" x2="1">
+      <stop offset="0" stop-color="#b87d00"/><stop offset=".12" stop-color="#e9a800"/>
+      <stop offset=".38" stop-color="#ffd34d"/><stop offset=".55" stop-color="#f5bb12"/>
+      <stop offset=".88" stop-color="#d89600"/><stop offset="1" stop-color="#9e6a00"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" x2="1">
+      <stop offset="0" stop-color="#e5a300"/><stop offset=".4" stop-color="#ffd85c"/><stop offset="1" stop-color="#e3a100"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" x2="1">
+      <stop offset="0" stop-color="#5a6067"/><stop offset=".35" stop-color="#d5d9dd"/><stop offset=".6" stop-color="#8b9299"/><stop offset="1" stop-color="#3f444a"/>
+    </linearGradient>
+    <linearGradient id="hookg" x1="0" x2="1">
+      <stop offset="0" stop-color="#c88a00"/><stop offset=".3" stop-color="#ffd447"/><stop offset=".65" stop-color="#eaa900"/><stop offset="1" stop-color="#a87200"/>
+    </linearGradient>
+    <radialGradient id="pin" cx=".38" cy=".35" r=".7">
+      <stop offset="0" stop-color="#fff0b0"/><stop offset=".45" stop-color="#f2b400"/><stop offset="1" stop-color="#9b6a00"/>
+    </radialGradient>
+    <clipPath id="bodyclip"><path d="M14,38 L34,14 H86 L106,38 V148 L94,166 H26 L14,148 Z"/></clipPath>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.2"/></filter>
+  </defs>
+  <!-- ropes into the block -->
+  <g stroke-linecap="round">
+    <line x1="44" y1="0" x2="44" y2="22" stroke="#24282c" stroke-width="3.4"/><line x1="43.2" y1="0" x2="43.2" y2="22" stroke="#7d868e" stroke-width=".9"/>
+    <line x1="76" y1="0" x2="76" y2="22" stroke="#24282c" stroke-width="3.4"/><line x1="75.2" y1="0" x2="75.2" y2="22" stroke="#7d868e" stroke-width=".9"/>
+  </g>
+  <!-- body -->
+  <path d="M14,38 L34,14 H86 L106,38 V148 L94,166 H26 L14,148 Z" fill="url(#body)"/>
+  <g clip-path="url(#bodyclip)">
+    <!-- hazard band -->
+    <g transform="translate(0,84)">
+      <rect x="0" y="0" width="120" height="22" fill="#ffcf2e"/>
+      <g fill="#16181b">
+        <path d="M-10,22 L4,0 H16 L2,22Z"/><path d="M14,22 L28,0 H40 L26,22Z"/><path d="M38,22 L52,0 H64 L50,22Z"/>
+        <path d="M62,22 L76,0 H88 L74,22Z"/><path d="M86,22 L100,0 H112 L98,22Z"/><path d="M110,22 L124,0 H136 L122,22Z"/>
+      </g>
+      <rect x="0" y="0" width="120" height="22" fill="url(#body)" opacity=".28" style="mix-blend-mode:multiply"/>
+    </g>
+    <!-- edge shading and top bevel light -->
+    <path d="M14,38 L34,14 H86 L106,38 Z" fill="#fff3c4" opacity=".35"/>
+    <rect x="98" y="0" width="12" height="170" fill="#7a5200" opacity=".25"/>
+  </g>
+  <!-- front cheek plate with sheave pin -->
+  <path d="M34,26 H86 L96,40 V74 H24 V40 Z" fill="url(#face)" stroke="#a56f00" stroke-width=".8"/>
+  <circle cx="60" cy="52" r="13" fill="url(#pin)" stroke="#8a5d00" stroke-width=".8"/>
+  <circle cx="60" cy="52" r="5" fill="#c58b00" stroke="#7a5200" stroke-width=".6"/>
+  <!-- lower plate with pin -->
+  <rect x="34" y="114" width="52" height="40" rx="3" fill="url(#face)" stroke="#a56f00" stroke-width=".8"/>
+  <circle cx="60" cy="134" r="10" fill="url(#pin)" stroke="#8a5d00" stroke-width=".8"/>
+  <!-- bolts -->
+  <g fill="#8a5d00"><circle cx="30" cy="44" r="1.8"/><circle cx="90" cy="44" r="1.8"/><circle cx="30" cy="70" r="1.8"/><circle cx="90" cy="70" r="1.8"/>
+    <circle cx="40" cy="120" r="1.6"/><circle cx="80" cy="120" r="1.6"/><circle cx="40" cy="148" r="1.6"/><circle cx="80" cy="148" r="1.6"/></g>
+  <g fill="#ffe9a0" opacity=".8"><circle cx="29.5" cy="43.5" r=".7"/><circle cx="89.5" cy="43.5" r=".7"/><circle cx="29.5" cy="69.5" r=".7"/><circle cx="89.5" cy="69.5" r=".7"/></g>
+  <!-- capacity plate -->
+  <rect x="50" y="77" width="20" height="5" rx="1" fill="#e9ecef" stroke="#8a5d00" stroke-width=".4"/>
+  <!-- swivel / nut -->
+  <rect x="44" y="166" width="32" height="10" rx="2" fill="url(#steel)"/>
+  <rect x="48" y="176" width="24" height="14" rx="2" fill="url(#hookg)"/>
+  <!-- hook: shank, bowl and tip (bowl centre 40,230; outer R29, inner r11) -->
+  <path d="M51,188 H69 V230 A29,29 0 1 1 14.9,215.5 L17,196 L30.5,224.5 A11,11 0 1 0 51,230 Z" fill="url(#hookg)" stroke="#8f6100" stroke-width=".9" stroke-linejoin="round"/>
+  <path d="M64,194 V230 A24,24 0 0 1 46,253" fill="none" stroke="#fff1b8" stroke-width="2" opacity=".5" stroke-linecap="round"/>
+  <path d="M20,236 A23,23 0 0 0 40,256" fill="none" stroke="#7a5200" stroke-width="2.5" opacity=".35" stroke-linecap="round"/>
+  <!-- safety latch across the throat -->
+  <path d="M18.5,199 L50.5,197" stroke="#c9cdd1" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M18.5,199 L50.5,197" stroke="#6b7177" stroke-width=".7" stroke-linecap="round"/>
+</svg>

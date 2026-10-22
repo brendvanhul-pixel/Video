@@ -1,0 +1,48 @@
+/* Round 2 base: A3 + 3 mm bleed, Barlow family (SIL OFL) */
+@font-face{font-family:"Barlow Condensed";font-weight:900;src:url(fonts/BarlowCondensed-Black.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:800;src:url(fonts/BarlowCondensed-ExtraBold.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:700;src:url(fonts/BarlowCondensed-Bold.ttf)}
+@font-face{font-family:"Barlow Condensed";font-weight:600;src:url(fonts/BarlowCondensed-SemiBold.ttf)}
+@font-face{font-family:"Barlow";font-weight:300;src:url(fonts/Barlow-Light.ttf)}
+@font-face{font-family:"Barlow";font-weight:400;src:url(fonts/Barlow-Regular.ttf)}
+@font-face{font-family:"Barlow";font-weight:500;src:url(fonts/Barlow-Medium.ttf)}
+@font-face{font-family:"Barlow";font-weight:600;src:url(fonts/Barlow-SemiBold.ttf)}
+@font-face{font-family:"Barlow";font-weight:700;src:url(fonts/Barlow-Bold.ttf)}
+:root{--blue:#2B6097;--navy:#14263F;--yellow:#F3E72A;--safe:15mm}
+@page{size:303mm 426mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:303mm;height:426mm;background:#777}
+.poster{position:relative;width:303mm;height:426mm;overflow:hidden;font-family:"Barlow",sans-serif;-webkit-font-smoothing:antialiased}
+.layer{position:absolute;inset:0}
+.headline{position:absolute;font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;line-height:.82;white-space:pre-line}
+.headline .ln{display:block;white-space:nowrap}
+.fit-warn{outline:1mm solid red!important}
+
+/* logo slot: replace with the official Sarens logo file */
+.logo{position:absolute;right:var(--safe);top:var(--safe);width:46mm;height:13mm;border:.4mm solid currentColor;opacity:.85;
+  display:flex;align-items:center;justify-content:center;font:600 3.2mm "Barlow";letter-spacing:.14em;text-transform:uppercase}
+
+/* phone */
+.phone{position:absolute;border-radius:11mm;padding:1.6mm;transform-origin:50% 0;
+  background:linear-gradient(140deg,#6e747b 0%,#eef0f2 14%,#9aa0a6 32%,#5d636a 50%,#c9cdd1 72%,#7b8188 100%)}
+.phone::after{content:"";position:absolute;inset:.35mm;border-radius:10.6mm;box-shadow:inset 0 0 0 .3mm rgba(255,255,255,.35);pointer-events:none}
+.phone .glass{position:relative;width:100%;height:100%;border-radius:9.6mm;overflow:hidden;background:#050505;padding:1.5mm}
+.phone .glass img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:8.2mm}
+.phone .island{position:absolute;top:3.4mm;left:50%;transform:translateX(-50%);width:28%;height:4.4mm;border-radius:3mm;background:#000;z-index:2}
+.phone .glare{position:absolute;inset:0;border-radius:9.6mm;background:linear-gradient(118deg,rgba(255,255,255,.16) 0 30%,rgba(255,255,255,0) 30.2%);z-index:3}
+.phone .btn{position:absolute;width:1.1mm;border-radius:.5mm;background:linear-gradient(90deg,#4d5258,#a5abb1)}
+.phone .lug{position:absolute;top:-3.4mm;width:5mm;height:4.2mm;margin-left:-2.5mm;border-radius:1.2mm 1.2mm .4mm .4mm;
+  background:linear-gradient(90deg,#c99a00,#ffe066 45%,#d6a300);box-shadow:inset 0 0 0 .25mm #8a6a00}
+.phone .lug::after{content:"";position:absolute;left:50%;top:.8mm;width:1.8mm;height:1.8mm;margin-left:-.9mm;border-radius:50%;background:#5b4500}
+
+/* spec row: what the app gives you (Dive-in style) */
+.specs{position:absolute;left:var(--safe);bottom:var(--safe);display:flex;align-items:flex-start}
+.spec{width:47mm;padding:0 4mm;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2.6mm}
+.spec+.spec{border-left:.35mm solid currentColor}
+.spec svg{width:11mm;height:11mm;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.spec span{font:500 4.9mm/1.18 "Barlow"}
+.qrs{position:absolute;right:var(--safe);bottom:var(--safe);display:flex;gap:4mm;align-items:flex-end}
+.qrs figure{display:flex;flex-direction:column;align-items:center;gap:1.6mm}
+.qrs img{width:41mm;height:41mm;display:block;border-radius:1.6mm}
+.qrs figcaption{font:600 3.6mm "Barlow";letter-spacing:.12em;text-transform:uppercase}
+.scan{position:absolute;right:var(--safe);font:600 4.6mm "Barlow";text-align:right}
