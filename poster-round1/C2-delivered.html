@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>C2 · Delivered to every site</title>
+<link rel="stylesheet" href="shared.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  headline: "Delivered\nto every\nsite.",
+  support: ["All your training on your phone.", "In your language.", "Do your induction before you arrive."],
+  tag:      ["LOAD", "0.2 KG"],
+  cta:      "Scan. Get the app.",
+  android:  "Android",
+  ios:      "iPhone",
+  app:      "App: Cornerstone Learning"
+};
+</script>
+<style>
+/* photo 3 is 2000x1333; crop x 600-1548 fills the canvas, so 1 px = 0.3196 mm */
+.photo{position:absolute;inset:0;background:url(img/containers-crane.jpg) no-repeat;background-size:auto 426mm;background-position:-191.8mm 0}
+.logo-slot{left:var(--safe);top:var(--safe);width:58mm;height:17mm;color:var(--navy)}
+.headline{position:absolute;left:var(--safe);right:var(--safe);top:38mm;font-size:58mm;color:var(--navy);z-index:2}
+.support{position:absolute;left:126mm;right:var(--safe);bottom:var(--safe);list-style:none;color:#fff;font:700 8.6mm/1.12 "Barlow Condensed";z-index:2}
+.support li{padding-left:6mm;position:relative;margin-top:1.4mm}
+.support li::before{content:"";position:absolute;left:0;top:2.4mm;width:3.2mm;height:3.2mm;background:var(--yellow)}
+.phone{z-index:3}.rig{z-index:4}
+.qr-block{left:var(--safe);bottom:var(--safe);z-index:5}
+</style></head>
+<body><div class="poster">
+  <div class="photo"></div>
+  <div class="logo-slot">Sarens logo</div>
+  <h1 class="headline" data-copy="headline"></h1>
+  <div class="phone" id="phone"></div>
+  <svg class="rig" viewBox="0 0 303 426"></svg>
+  <ul class="support" data-copy-list="support"></ul>
+  <div class="qr-block">
+    <div class="cta" data-copy="cta"></div>
+    <div class="codes">
+      <figure><img src="qr/android.svg" alt=""><figcaption data-copy="android"></figcaption></figure>
+      <figure><img src="qr/ios.svg" alt=""><figcaption data-copy="ios"></figcaption></figure>
+    </div>
+    <div class="app" data-copy="app"></div>
+  </div>
+</div>
+<script src="rig.js"></script>
+<script>
+  const P={x:143,y:196,w:80,h:163,rot:-2};
+  buildPhone(document.getElementById('phone'),P,'img/app-home.jpg');
+  rigPhone({svg:document.querySelector('.rig'),hook:[183.2,175.5],phone:P,tag:COPY.tag,slingW:.9});
+</script>
+<script src="fit.js"></script>
+</body></html>

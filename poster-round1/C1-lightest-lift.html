@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>C1 · Lightest lift</title>
+<link rel="stylesheet" href="shared.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break. ===== */
+const COPY = {
+  headline: "Lightest\nlift yet.",
+  support: ["All your training.", "On your phone.", "In your language."],
+  tag:      ["LOAD", "0.2 KG"],
+  cta:      "Scan. Get the app.",
+  android:  "Android",
+  ios:      "iPhone",
+  app:      "App: Cornerstone Learning"
+};
+</script>
+<style>
+.poster{background:var(--blue)}
+.logo-slot{left:var(--safe);top:var(--safe);width:58mm;height:17mm;color:#fff}
+.headline{position:absolute;left:var(--safe);right:var(--safe);top:40mm;font-size:60mm;color:var(--yellow);z-index:2}
+.support{position:absolute;left:var(--safe);top:168mm;width:180mm;list-style:none;color:#fff;font:800 15mm/1.02 "Barlow Condensed";text-transform:uppercase;z-index:2}
+.hook{left:212mm;top:118mm;width:40mm;z-index:3}
+.phone{z-index:3}
+.rig{z-index:1}.rig.front{z-index:4}
+.qr-block{left:var(--safe);bottom:var(--safe);z-index:5}
+</style></head>
+<body><div class="poster">
+  <svg class="rig back" viewBox="0 0 303 426"></svg>
+  <div class="logo-slot">Sarens logo</div>
+  <h1 class="headline" data-copy="headline"></h1>
+  <ul class="support" data-copy-list="support"></ul>
+  <img class="hook" src="img/hook-block.png" alt="">
+  <div class="phone" id="phone"></div>
+  <svg class="rig front" viewBox="0 0 303 426"></svg>
+  <div class="qr-block">
+    <div class="cta" data-copy="cta"></div>
+    <div class="codes">
+      <figure><img src="qr/android.svg" alt=""><figcaption data-copy="android"></figcaption></figure>
+      <figure><img src="qr/ios.svg" alt=""><figcaption data-copy="ios"></figcaption></figure>
+    </div>
+    <div class="app" data-copy="app"></div>
+  </div>
+</div>
+<script src="rig.js"></script>
+<script>
+  const P={x:187.6,y:214,w:96,h:196,rot:3};
+  buildPhone(document.getElementById('phone'),P,'img/app-home.jpg');
+  // hoist ropes sit behind the headline; sling gear sits in front of everything
+  rigPhone({svg:document.querySelector('.rig.back'),hook:[0,0],phone:{x:-999,y:-999,w:0,h:0},
+            ropes:[[228,-5,228,127],[247.2,-5,247.2,127]]});
+  document.querySelector('.rig.back').innerHTML=document.querySelector('.rig.back').innerHTML.replace(/<ellipse.*$/s,'');
+  rigPhone({svg:document.querySelector('.rig.front'),hook:[235.6,191],phone:P,tag:COPY.tag,
+            tagline:(x,y)=>`M${x},${y} c-3,6 4,10 1,22`});
+</script>
+<script src="fit.js"></script>
+</body></html>
