@@ -15,13 +15,13 @@ function build(){
   P.insertAdjacentHTML('afterbegin',`
     <div class="layer" id="sky"></div>
     <svg class="layer" id="ropes" viewBox="0 0 303 426" style="z-index:3"></svg>
-    <div class="logo" data-copy="logo" style="z-index:7"></div>
+    ${L.logoImg?`<img class="logo-img" src="${L.logoImg}" alt="Sarens">`:`<div class="logo" data-copy="logo" style="z-index:7"></div>`}
     <h1 class="headline" data-copy="headline" style="z-index:5"></h1>
     <div class="payoff" data-copy="payoff"></div>
     <img id="hook" src="${HOOK2.src}" alt="">
     <div class="phone" id="phone" style="z-index:${L.phoneZ||6}"></div>
     <svg class="layer" id="rig" viewBox="0 0 303 426" style="z-index:${(L.phoneZ||6)+1}"></svg>
-    <div class="band ${L.band||''}"><div class="appname" data-copy="appname"></div><div class="scan" data-copy="scan"></div>
+    <div class="band ${L.band||''}"><div class="appname" data-copy="appname"></div>${COPY.scan?'<div class="scan" data-copy="scan"></div>':''}
       <div class="specs" id="specs"></div><div class="qrs" id="qrs"></div></div>
     <div class="grain" id="grain"></div>`);
   // real sky photo wins if img/sky.jpg exists; otherwise the drawn sky
@@ -33,7 +33,7 @@ function build(){
   } else sky(document.getElementById('sky'),L.sky);
   Object.assign(document.querySelector('.headline').style,L.headStyle);
   Object.assign(document.querySelector('.payoff').style,L.payoffStyle);
-  Object.assign(document.querySelector('.logo').style,L.logoStyle||{});
+  if(!L.logoImg) Object.assign(document.querySelector('.logo').style,L.logoStyle||{});
   specs(document.getElementById('specs'),COPY.specs);
   qrs(document.getElementById('qrs'),COPY.stores);
   grain(document.getElementById('grain'));

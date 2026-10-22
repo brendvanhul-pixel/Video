@@ -66,3 +66,8 @@ html,body{width:303mm;height:426mm;background:#777}
 .band .appname{position:absolute;left:var(--safe);top:6.5mm;font:600 4.4mm "Barlow";color:var(--navy);letter-spacing:.02em}
 .payoff{position:absolute;font:400 10.5mm/1.14 "Barlow";z-index:6}
 .payoff b{font-weight:700}
+
+/* round 2c: real logo, QR captions in the poster's text face, no scan prompt */
+.logo-img{position:absolute;left:var(--safe);top:var(--safe);height:13mm;z-index:7}
+.band .qrs figcaption{font:600 4.6mm "Barlow";letter-spacing:0;text-transform:none}
+.band.noscan .spec{width:52mm}
