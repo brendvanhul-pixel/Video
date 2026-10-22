@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>E1a · Light work · cumulus sky</title>
+<link rel="stylesheet" href="base.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break, <b> = bold half of the payoff. ===== */
+const COPY = {
+  headline: "Light\nwork.",
+  payoff:   "Your training, on your phone.<br><b>Learn anywhere.</b>",
+  specs: [
+    ["language", "Every course<br>in your language"],
+    ["helmet",   "Site inductions<br>before you arrive"],
+    ["record",   "Your full record,<br>ready to show"]
+  ],
+  appname:  "Cornerstone Learning app",
+  scan:     "Scan to<br>download",
+  stores:   ["Android", "iPhone"],
+  tag:      ["LOAD", "0.2 KG"],
+  logo:     "Sarens logo"
+};
+/* ===== LAYOUT (mm). Change positions here, not in the code. ===== */
+const L = {"sky": {"top": "#1a5796", "mid": "#4886bf", "bottom": "#a7c9e5", "clouds": [[55, 352, 150, 11], [268, 336, 110, 12], [296, 170, 52, 13], [160, 372, 96, 14]]}, "headStyle": {"left": "15mm", "top": "42mm", "width": "225mm", "fontSize": "88mm", "color": "#F3E72A"}, "payoffStyle": {"left": "15mm", "top": "232mm", "width": "175mm", "color": "#fff"}, "logoStyle": {"left": "15mm", "right": "auto", "color": "#fff"}, "rope": {"x": 256}, "hook": {"top": 94, "w": 40}, "phone": {"w": 68, "h": 138, "rot": 6, "drop": 22}, "skyImg": {"src": "img/sky-cumulus.jpg", "size": "150% auto", "pos": "0% 22%", "filter": "saturate(1.12) contrast(1.04)", "fade": "linear-gradient(180deg,rgba(8,40,90,.30) 0%,rgba(8,40,90,0) 38%,rgba(255,255,255,0) 72%,rgba(225,236,248,.30) 100%)"}};
+</script>
+</head>
+<body><div class="poster"></div>
+<script src="sky.js"></script><script src="parts.js"></script><script src="poster.js"></script>
+<script>build();</script>
+<script src="fit.js"></script>
+</body></html>
