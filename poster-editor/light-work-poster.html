@@ -123,12 +123,13 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
           <label class="check" style="align-self:end"><input type="checkbox" id="f_upper" data-k="head.upper"> Capitals</label>
         </div>
         <label class="f"><span>Text font (payoff, app name, points, captions)</span><select id="f_body" data-k="font.body"></select></label>
-        <label class="f"><span>Use your own font file (.ttf .otf .woff .woff2)</span><input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2"></label>
-        <p class="hint">An uploaded font appears at the top of both font lists. It stays in this browser only.</p>
+        <label class="f"><span>Add your own fonts (.ttf .otf .woff .woff2, several at once)</span><input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2" multiple></label>
+        <p class="hint">Your fonts appear at the top of both font lists and stay in this browser, so the font files never leave your computer. Each file is one style: Gotham Bold is always bold, Caslon Regular always regular.</p>
+        <button class="btn" type="button" id="clearFonts">Remove my fonts</button>
         <div class="row3">
           <label class="f"><span>Headline</span><input type="color" id="c_head" data-k="color.head"></label>
           <label class="f"><span>Text</span><input type="color" id="c_text" data-k="color.text"></label>
-          <label class="f"><span>Accent</span><input type="color" id="c_accent" data-k="color.accent"></label>
+          <label class="f"><span>Icons</span><input type="color" id="c_accent" data-k="color.accent"></label>
         </div>
       </div>
     </details>
@@ -224,7 +225,7 @@ const DEFAULT = {
   head:{ x:15, y:42, size:88, lh:0.82, ls:-0.01, upper:true },
   pay:{ x:15, y:232, size:10.5, lh:1.14 },
   logo:{ x:15, y:15, h:13, show:true },
-  info:{ x:15, y:346, app:10, pt:5.4, col:50 },
+  info:{ x:15, y:351.4, app:10, pt:5.4, col:50 },
   qr:{ x:204, y:364, size:40, gap:4, cap:4.6,
        urlA:"https://play.google.com/store/apps/details?id=com.csod.learning",
        urlB:"https://apps.apple.com/be/app/cornerstone-ondemand/id970204620" },
@@ -234,7 +235,8 @@ const DEFAULT = {
            { x:-14, y:258, w:150, flip:false, rot:3, op:0.95, show:true } ],
   grain:0.55,
   ui:{ guides:false },
-  uploads:{ sky:null, screen:null, logo:null, font:null, fontName:null }
+  uploads:{ sky:null, screen:null, logo:null, fonts:[] },
+  v:2
 };
 
 /* ================= state ================= */
@@ -243,7 +245,13 @@ const clone = o => JSON.parse(JSON.stringify(o));
 function merge(base, over){ if(!over||typeof over!=="object") return base;
   for(const k in over){ if(over[k]&&typeof over[k]==="object"&&!Array.isArray(over[k])&&base[k]&&typeof base[k]==="object") merge(base[k],over[k]); else base[k]=over[k]; } return base; }
 let S = clone(DEFAULT);
-try{ const saved = localStorage.getItem(KEY); if(saved) S = merge(clone(DEFAULT), JSON.parse(saved)); }catch(e){}
+function migrate(o){
+  if(!o.v){ if(o.info&&typeof o.info.y==="number") o.info.y+=5.4;
+    if(o.uploads){ o.uploads.fonts = o.uploads.font&&o.uploads.fontName ? [{name:o.uploads.fontName,data:o.uploads.font}] : []; delete o.uploads.font; delete o.uploads.fontName; }
+    o.v=2; }
+  return o;
+}
+try{ const saved = localStorage.getItem(KEY); if(saved) S = merge(clone(DEFAULT), migrate(JSON.parse(saved))); }catch(e){}
 const get = (path,o=S) => path.split(".").reduce((a,k)=>a==null?a:a[k], o);
 const set = (path,v) => { const ks=path.split("."); let o=S; ks.slice(0,-1).forEach(k=>o=o[k]); o[ks.at(-1)]=v; };
 
@@ -254,7 +262,7 @@ function persist(){
     const now=JSON.stringify(S);
     if(now!==lastSnap){ history.push(lastSnap); if(history.length>60) history.shift(); lastSnap=now; }
     try{ localStorage.setItem(KEY, now); }
-    catch(e){ try{ const lite=clone(S); lite.uploads={sky:null,screen:null,logo:null,font:null,fontName:null}; localStorage.setItem(KEY, JSON.stringify(lite)); setStatus("Uploaded images are too large to keep in this browser; save a settings file to keep them."); }catch(_){} }
+    catch(e){ try{ const lite=clone(S); lite.uploads={sky:null,screen:null,logo:null,fonts:S.uploads.fonts}; localStorage.setItem(KEY, JSON.stringify(lite)); setStatus("Uploaded images are too large to keep in this browser; save a settings file to keep them."); }catch(_){} }
   },350);
 }
 
@@ -267,7 +275,7 @@ async function loadAssets(){
   if(S.uploads.sky) IMG.upSky = await loadImg(S.uploads.sky);
   if(S.uploads.screen) IMG.upScreen = await loadImg(S.uploads.screen);
   if(S.uploads.logo) IMG.upLogo = await loadImg(S.uploads.logo);
-  if(S.uploads.font && S.uploads.fontName) await addFontFromData(S.uploads.fontName, S.uploads.font, false);
+  for(const f of (S.uploads.fonts||[])) await addFontFromData(f.name, f.data, false);
 }
 const skyImg = () => S.sky.src==="upload" && IMG.upSky ? IMG.upSky : (IMG[S.sky.src] || IMG.wisp);
 const screenImg = () => IMG.upScreen || IMG.screen;
@@ -424,11 +432,10 @@ function drawPayoff(ctx){
 }
 function drawInfo(ctx){
   const I=S.info; ctx.save(); setLS(ctx,0);
-  ctx.fillStyle=S.color.accent; ctx.fillRect(I.x,I.y,16,1.2);
   ctx.fillStyle=S.color.text; ctx.font=font(700,I.app,S.font.body);
-  const appBase=I.y+5.4+.9*I.app; ctx.fillText(S.text.app,I.x,appBase);
+  const appBase=I.y+.9*I.app; ctx.fillText(S.text.app,I.x,appBase);
   let wmax=ctx.measureText(S.text.app).width;
-  const top=I.y+36.5, icon=12.5, pts=[S.text.p1,S.text.p2,S.text.p3];
+  const top=I.y+31.1, icon=12.5, pts=[S.text.p1,S.text.p2,S.text.p3];
   pts.forEach((t,i)=>{
     const cx=I.x+i*I.col+(i?5:0);
     if(i){ ctx.fillStyle="rgba(255,255,255,.4)"; ctx.fillRect(I.x+i*I.col,top,.35,icon+3+2*1.2*I.pt+1); }
@@ -547,7 +554,7 @@ view.addEventListener("keydown",e=>{
 
 /* ================= form binding ================= */
 function fillSelects(){
-  const opts = (S.uploads.fontName?[S.uploads.fontName]:[]).concat(FONTS).map(f=>`<option value="${f}">${f}</option>`).join("");
+  const opts = (S.uploads.fonts||[]).map(f=>f.name).concat(FONTS).map(f=>`<option value="${f}">${f}</option>`).join("");
   document.getElementById("f_head").innerHTML=opts; document.getElementById("f_body").innerHTML=opts;
   const io=Object.entries(ICONS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join("");
   ["i_p1","i_p2","i_p3"].forEach(id=>document.getElementById(id).innerHTML=io);
@@ -580,16 +587,27 @@ async function ensureFonts(){
   try{ await Promise.all(need.map(([w,f])=>document.fonts.load(`${w} 40px "${f}"`, "LIGHTWORKégy"))); }catch(e){}
 }
 async function addFontFromData(name,dataUrl,announce=true){
-  try{ const buf=await (await fetch(dataUrl)).arrayBuffer(); const ff=new FontFace(name,buf); await ff.load(); document.fonts.add(ff);
+  try{ const buf=await (await fetch(dataUrl)).arrayBuffer(); const ff=new FontFace(name,buf,{weight:"100 900"}); await ff.load(); document.fonts.add(ff);
     if(announce) setStatus(`Font "${name}" added. Pick it in the font lists.`); return true; }
   catch(e){ setStatus("That font file could not be read. Try a .ttf, .otf or .woff2 file."); return false; }
 }
 const readAsDataURL = f => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(f); });
 
+const fontName = file => file.name.replace(/\.[^.]+$/,"").replace(/^[0-9a-f]{8}-/i,"").replace(/[_-]+/g," ").replace(/[^A-Za-z0-9 ]/g,"").replace(/\s+/g," ").trim().slice(0,40)||"Custom font";
 document.getElementById("fontFile").addEventListener("change",async e=>{
-  const f=e.target.files[0]; if(!f) return; const name=f.name.replace(/\.[^.]+$/,"").replace(/[^A-Za-z0-9 _-]/g,"").slice(0,40)||"Custom font";
-  const data=await readAsDataURL(f); if(await addFontFromData(name,data)){ S.uploads.font=data; S.uploads.fontName=name; fillSelects(); syncInputs(); persist(); schedule(); }
+  const files=[...e.target.files]; if(!files.length) return; const added=[];
+  for(const f of files){
+    const name=fontName(f), data=await readAsDataURL(f);
+    if(await addFontFromData(name,data,false)){ S.uploads.fonts=(S.uploads.fonts||[]).filter(x=>x.name!==name).concat([{name,data}]); added.push(name); }
+  }
+  fillSelects(); syncInputs(); persist(); schedule();
+  setStatus(added.length?`Added ${added.join(", ")}. Pick ${added.length>1?"them":"it"} in the font lists.`:"Those font files could not be read. Try .ttf, .otf or .woff2 files.");
   e.target.value="";
+});
+document.getElementById("clearFonts").addEventListener("click",()=>{
+  const used=new Set((S.uploads.fonts||[]).map(f=>f.name)); S.uploads.fonts=[];
+  if(used.has(S.font.head)) S.font.head="Barlow Condensed"; if(used.has(S.font.body)) S.font.body="Barlow";
+  fillSelects(); syncInputs(); persist(); schedule(); setStatus("Your fonts are removed from this browser.");
 });
 async function uploadImage(input,key,imgKey,after){
   input.addEventListener("change",async e=>{ const f=e.target.files[0]; if(!f) return;
@@ -657,7 +675,7 @@ document.getElementById("pdfMarksBtn").addEventListener("click",e=>busy(e.curren
 document.getElementById("saveJson").addEventListener("click",()=>save(`${slug()}-poster-settings.json`, JSON.stringify(S,null,1)));
 document.getElementById("loadJson").addEventListener("change",async e=>{
   const f=e.target.files[0]; if(!f) return;
-  try{ const data=JSON.parse(await f.text()); history.push(JSON.stringify(S)); S=merge(clone(DEFAULT),data); await loadAssets(); fillSelects(); await ensureFonts(); syncInputs(); select(null); persist(); schedule(); setStatus("Settings loaded."); }
+  try{ const data=JSON.parse(await f.text()); history.push(JSON.stringify(S)); S=merge(clone(DEFAULT),migrate(data)); await loadAssets(); fillSelects(); await ensureFonts(); syncInputs(); select(null); persist(); schedule(); setStatus("Settings loaded."); }
   catch(_){ setStatus("That file is not a poster settings file."); }
   e.target.value="";
 });
