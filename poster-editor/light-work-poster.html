@@ -167,6 +167,7 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
           <label class="check"><input type="checkbox" id="c0_show" data-k="clouds.0.show"> Top cloud</label>
         </div>
         <label class="check"><input type="checkbox" id="c1_show" data-k="clouds.1.show"> Middle cloud</label>
+        <label class="check"><input type="checkbox" id="three" data-k="ui.three"> 3D hook and phone (turn them under “Hook &amp; phone”)</label>
         <button class="btn" type="button" id="clearUploads">Remove uploaded images</button>
       </div>
     </details>
@@ -211,6 +212,7 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (() => {
 /* ================= constants (mm) ================= */
@@ -241,12 +243,12 @@ const DEFAULT = {
   qr:{ x:204, y:364, size:40, gap:4, cap:4.6,
        urlA:"https://play.google.com/store/apps/details?id=com.csod.learning",
        urlB:"https://apps.apple.com/be/app/cornerstone-ondemand/id970204620" },
-  crane:{ x:256, y:94, w:40, phoneW:68, tilt:6, drop:22 },
+  crane:{ x:256, y:94, w:40, phoneW:68, tilt:6, drop:22, hookYaw:28, phoneYaw:-38, phonePitch:10, persp:650 },
   sky:{ src:"wisp", w:820, x:-258.5, y:0, top:0.30, bottom:0.42 },
   clouds:[ { x:212, y:-10, w:150, flip:true, rot:-6, op:0.82, show:true },
            { x:-14, y:258, w:150, flip:false, rot:3, op:0.95, show:true } ],
   grain:0.55,
-  ui:{ guides:false },
+  ui:{ guides:false, three:true },
   highlight:"#f3e72a",
   style:{ headLines:["#f3e72a","#f3e72a","#f3e72a","#f3e72a"],
           pay1:{c:"#ffffff",w:400}, pay2:{c:"#ffffff",w:700}, app:{c:"#ffffff",w:700},
@@ -496,12 +498,221 @@ function drawPoster(ctx,K){
   boxes=[];
   ctx.save(); ctx.scale(K,K);
   drawSky(ctx); drawClouds(ctx); drawFades(ctx);
-  drawRopes(ctx,K); drawHook(ctx);
+  const use3D=S.ui.three&&R3;
+  if(use3D) draw3D(ctx,K,"back"); else { drawRopes(ctx,K); drawHook(ctx); }
   drawHeadline(ctx); drawPayoff(ctx);
-  drawPhone(ctx,K); drawRig(ctx);
+  if(use3D){ draw3D(ctx,K,"front"); const p=phoneGeom(), k=crane(); boxes.push({id:"crane", x:Math.min(p.x-6, k.x), y:k.top, w:Math.max(p.w+12, HOOK.w*k.s), h:p.y+p.h-k.top}); }
+  else { drawPhone(ctx,K); drawRig(ctx); }
   drawLogo(ctx); drawInfo(ctx); drawQR(ctx);
   drawGrain(ctx,K);
   ctx.restore();
+}
+
+/* ================= 3D hook and phone (three.js) =================
+   World units are mm. x right, y up (poster y is down, so y = -posterY), z toward the viewer.
+   A perspective camera is placed so that the plane z = 0 maps exactly onto the poster. */
+let R3 = null;
+const T3 = window.THREE;
+const lin = hex => new T3.Color(hex).convertSRGBToLinear();
+function canvasTex(w,h,draw,srgb=true){ const c=document.createElement("canvas"); c.width=w; c.height=h; draw(c.getContext("2d"),w,h);
+  const t=new T3.CanvasTexture(c); if(srgb) t.encoding=T3.sRGBEncoding; t.anisotropy=8; return t; }
+function rrShape(w,h,r,cx=0,cy=0){ const s=new T3.Shape(), x=cx-w/2, y=cy-h/2;
+  s.moveTo(x+r,y); s.lineTo(x+w-r,y); s.absarc(x+w-r,y+r,r,-Math.PI/2,0,false); s.lineTo(x+w,y+h-r); s.absarc(x+w-r,y+h-r,r,0,Math.PI/2,false);
+  s.lineTo(x+r,y+h); s.absarc(x+r,y+h-r,r,Math.PI/2,Math.PI,false); s.lineTo(x,y+r); s.absarc(x+r,y+r,r,Math.PI,Math.PI*1.5,false); return s; }
+function tubeVar(pts,rFn,segs=180,rad=28){
+  const curve=new T3.CatmullRomCurve3(pts.map(p=>new T3.Vector3(p[0],p[1],0)),false,"centripetal");
+  const fr=curve.computeFrenetFrames(segs,false), pos=[], nor=[], idx=[];
+  for(let i=0;i<=segs;i++){ const t=i/segs, P=curve.getPointAt(t), N=fr.normals[i], B=fr.binormals[i], r=rFn(t);
+    for(let j=0;j<=rad;j++){ const a=j/rad*Math.PI*2, cx=-Math.cos(a), cy=Math.sin(a);
+      const n=new T3.Vector3(cx*N.x+cy*B.x, cx*N.y+cy*B.y, cx*N.z+cy*B.z).normalize();
+      pos.push(P.x+r*n.x,P.y+r*n.y,P.z+r*n.z); nor.push(n.x,n.y,n.z); } }
+  for(let i=0;i<segs;i++) for(let j=0;j<rad;j++){ const a=i*(rad+1)+j, b=(i+1)*(rad+1)+j; idx.push(a,b,a+1,b,b+1,a+1); }
+  const g=new T3.BufferGeometry(); g.setAttribute("position",new T3.Float32BufferAttribute(pos,3)); g.setAttribute("normal",new T3.Float32BufferAttribute(nor,3)); g.setIndex(idx);
+  return {geo:g, end:curve.getPointAt(1)};
+}
+function shadowAll(o,cast=true,recv=true){ o.traverse(m=>{ if(m.isMesh){ m.castShadow=cast; m.receiveShadow=recv; } }); }
+
+function init3D(){
+  if(!T3) return null;
+  try{
+    const renderer=new T3.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});
+    renderer.setPixelRatio(1); renderer.setClearColor(0x000000,0);
+    renderer.outputEncoding=T3.sRGBEncoding; renderer.toneMapping=T3.ACESFilmicToneMapping; renderer.toneMappingExposure=1.0;
+    renderer.physicallyCorrectLights=true; renderer.shadowMap.enabled=true; renderer.shadowMap.type=T3.PCFSoftShadowMap;
+    const scene=new T3.Scene();
+
+    // sky environment for reflections: deep blue above, pale horizon, warm ground, a bright sun upper-left
+    const env=new T3.Scene(), sg=new T3.SphereGeometry(100,64,32), p=sg.attributes.position, col=[];
+    const top=lin("#1c5a99"), hor=lin("#dbe8f4"), gnd=lin("#857e72");
+    for(let i=0;i<p.count;i++){ const y=p.getY(i)/100; const c=y>0?hor.clone().lerp(top,Math.pow(y,.55)):hor.clone().lerp(gnd,Math.min(1,-y*3)); col.push(c.r,c.g,c.b); }
+    sg.setAttribute("color",new T3.Float32BufferAttribute(col,3));
+    env.add(new T3.Mesh(sg,new T3.MeshBasicMaterial({vertexColors:true,side:T3.BackSide})));
+    const sunBall=new T3.Mesh(new T3.SphereGeometry(7,16,8),new T3.MeshBasicMaterial({color:new T3.Color(40,37,32)})); sunBall.position.set(-55,60,45); env.add(sunBall);
+    const pm=new T3.PMREMGenerator(renderer); scene.environment=pm.fromScene(env,0.015).texture;
+
+    const hemi=new T3.HemisphereLight(lin("#b8d4f0"),lin("#6e675d"),1.2); scene.add(hemi);
+    const sun=new T3.DirectionalLight(lin("#fff1d8"),3.4); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
+    sun.shadow.bias=-0.0005; sun.shadow.normalBias=0.35; sun.shadow.radius=3; scene.add(sun); scene.add(sun.target);
+
+    // textures
+    const noise=canvasTex(256,256,(c,w,h)=>{ const d=c.createImageData(w,h); for(let i=0;i<d.data.length;i+=4){ const v=150+Math.random()*90; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; } c.putImageData(d,0,0); },false);
+    noise.wrapS=noise.wrapT=T3.RepeatWrapping; noise.repeat.set(3,3);
+    const stripes=(w,h)=>canvasTex(w,h,(c,W_,H_)=>{ c.fillStyle="#f6c40c"; c.fillRect(0,0,W_,H_); c.fillStyle="#17181a"; const p=H_*1.2;
+      for(let x=-H_;x<W_+H_;x+=p){ c.beginPath(); c.moveTo(x,H_); c.lineTo(x+H_*.62,0); c.lineTo(x+H_*.62+p*.5,0); c.lineTo(x+p*.5,H_); c.fill(); }
+      const d=c.getImageData(0,0,W_,H_); for(let i=0;i<d.data.length;i+=4){ if(Math.random()<.035){ d.data[i]=Math.min(255,d.data[i]+60); d.data[i+1]=Math.min(255,d.data[i+1]+55); } } c.putImageData(d,0,0); });
+    const plateTex=canvasTex(280,60,(c,w,h)=>{ c.fillStyle="#e2e6ea"; c.fillRect(0,0,w,h); c.fillStyle="#2a2f35"; c.font='800 40px "Barlow Condensed", sans-serif'; c.textAlign="center"; c.textBaseline="middle"; c.fillText("SWL 50 t",w/2,h/2+2); });
+
+    // materials
+    const M={
+      paint:new T3.MeshStandardMaterial({color:lin("#f0b00a"),roughness:.55,metalness:.04,roughnessMap:noise,bumpMap:noise,bumpScale:.12}),
+      plate:new T3.MeshStandardMaterial({color:lin("#f5bd18"),roughness:.5,metalness:.05,roughnessMap:noise}),
+      steel:new T3.MeshStandardMaterial({color:lin("#bfc6cc"),roughness:.32,metalness:.95}),
+      dark:new T3.MeshStandardMaterial({color:lin("#2c3036"),roughness:.5,metalness:.7}),
+      bolt:new T3.MeshStandardMaterial({color:lin("#8a6510"),roughness:.6,metalness:.2}),
+      sling:new T3.MeshStandardMaterial({color:lin("#3a3f45"),roughness:.55,metalness:.75}),
+      red:new T3.MeshStandardMaterial({color:lin("#c0392b"),roughness:.45,metalness:.2}),
+      titanium:new T3.MeshStandardMaterial({color:lin("#a9afb5"),roughness:.3,metalness:1}),
+      black:new T3.MeshStandardMaterial({color:lin("#050506"),roughness:.18,metalness:0}),
+      glass:new T3.MeshStandardMaterial({color:0x000000,roughness:.05,metalness:0,transparent:true,blending:T3.AdditiveBlending,envMapIntensity:1.4,depthWrite:false}),
+      lug:new T3.MeshStandardMaterial({color:lin("#f2c21c"),roughness:.45,metalness:.1})
+    };
+    const add=(parent,geo,mat,x=0,y=0,z=0)=>{ const m=new T3.Mesh(geo,mat); m.position.set(x,y,z); parent.add(m); return m; };
+
+    /* ---------- hook block (units: hook units; front width 100, body top y = 0) ---------- */
+    const hook=new T3.Group();
+    const body=new T3.Shape(); body.moveTo(-50,-24); body.quadraticCurveTo(-50,-16,-44,-11); body.lineTo(-30,-2); body.quadraticCurveTo(-26,0,-21,0); body.lineTo(21,0);
+    body.quadraticCurveTo(26,0,30,-2); body.lineTo(44,-11); body.quadraticCurveTo(50,-16,50,-24); body.lineTo(50,-140); body.quadraticCurveTo(50,-150,42,-154);
+    body.lineTo(32,-158); body.lineTo(-32,-158); body.lineTo(-42,-154); body.quadraticCurveTo(-50,-150,-50,-140); body.lineTo(-50,-24);
+    const bg=new T3.ExtrudeGeometry(body,{depth:44,bevelEnabled:true,bevelThickness:3,bevelSize:3,bevelSegments:4,curveSegments:10}); bg.translate(0,0,-22);
+    add(hook,bg,M.paint);
+    const FZ=25;   // front face z
+    // hazard band wraps front and sides
+    const sF=stripes(640,120), sS=stripes(300,120);
+    const band=add(hook,new T3.BoxGeometry(106.4,20,50.6),[ new T3.MeshStandardMaterial({map:sS,roughness:.55}), new T3.MeshStandardMaterial({map:sS,roughness:.55}),
+      M.paint, M.paint, new T3.MeshStandardMaterial({map:sF,roughness:.55}), new T3.MeshStandardMaterial({map:sF,roughness:.55}) ],0,-85,0);
+    // cheek plates
+    const plate=(w,h,cx,cy)=>{ const g=new T3.ExtrudeGeometry(rrShape(w,h,4,cx,cy),{depth:1.6,bevelEnabled:true,bevelThickness:.8,bevelSize:.8,bevelSegments:2,curveSegments:6}); return add(hook,g,M.plate,0,0,FZ); };
+    plate(68,44,-2,-44); plate(56,44,-2,-122);
+    // domed axle caps
+    const cap=(r,cx,cy)=>{ const k=r/15.5; const prof=[[0,0],[15.5,0],[15.5,2.2],[14.2,3.9],[11,5],[6,5.5],[4.6,5.6],[4.6,7.6],[0,7.6]].map(([a,b])=>new T3.Vector2(a*k,b*k));
+      const g=new T3.LatheGeometry(prof,56); g.rotateX(Math.PI/2); add(hook,g,M.paint,cx,cy,FZ+2.4);
+      const pin=new T3.CylinderGeometry(4.2*k,4.2*k,2.2,32); pin.rotateX(Math.PI/2); add(hook,pin,M.steel,cx,cy,FZ+2.4+7.6*k); };
+    cap(15.5,-1.5,-43.5); cap(11.5,-1.5,-122);
+    const boltG=new T3.CylinderGeometry(1.9,1.9,1.6,16); boltG.rotateX(Math.PI/2);
+    [[-31,-27],[27,-27],[-31,-61],[27,-61],[-25,-105],[21,-105],[-25,-139],[21,-139]].forEach(([x,y])=>add(hook,boltG,M.bolt,x,y,FZ+2.4+.8));
+    for(let i=0;i<6;i++){ const a=i/6*Math.PI*2+Math.PI/2; add(hook,boltG,M.bolt,-1.5+Math.cos(a)*12.6,-43.5+Math.sin(a)*12.6,FZ+2.4+2.6); }
+    add(hook,new T3.BoxGeometry(28,6,.8),new T3.MeshStandardMaterial({map:plateTex,roughness:.35,metalness:.6}),0,-70.5,FZ+.4);
+    // rope entries on the top face
+    const holeG=new T3.CylinderGeometry(3.6,3.6,1,24); [-20,20].forEach(x=>add(hook,holeG,M.dark,x,3.1,0));
+    // thrust bearing housing, nut, forged hook
+    add(hook,new T3.CylinderGeometry(22,22,14,48),M.steel,0,-168,0);
+    add(hook,new T3.CylinderGeometry(14,15,13,40),M.paint,0,-181.5,0);
+    const hk=tubeVar([[0,-184],[0,-200],[0,-212],[4,-226],[12,-238],[15,-252],[11,-265],[0,-272],[-12,-268],[-20,-256],[-22,-242],[-19,-228],[-16,-216],[-15,-206]],
+      t=> t<.22?9 : t<.78 ? 9+2.6*Math.sin((t-.22)/.56*Math.PI) : 9-(t-.78)/.22*5.6 );
+    add(hook,hk.geo,M.paint); add(hook,new T3.SphereGeometry(3.4,20,12),M.paint,hk.end.x,hk.end.y,0);
+    const latch=add(hook,new T3.BoxGeometry(11.5,1.4,4),M.steel,-9.5,-201,0); latch.rotation.z=-.42;
+    // master link through the saddle, in the plane across the hook
+    const link=add(hook,new T3.TorusGeometry(8,1.8,14,40),M.dark,0,-270.5,0); link.scale.set(1,1.6,1); link.rotation.y=Math.PI/2;
+    shadowAll(hook);
+
+    /* ---------- phone (mm, built at 68 × 138 × 7.8, origin = top centre) ---------- */
+    const phone=new T3.Group(), PW=68, PH=138, PD=7.8;
+    const pb=new T3.ExtrudeGeometry(rrShape(PW-1.8,PH-1.8,10.1,0,-PH/2),{depth:PD-1.8,bevelEnabled:true,bevelThickness:.9,bevelSize:.9,bevelSegments:5,curveSegments:24});
+    pb.translate(0,0,-(PD-1.8)/2); add(phone,pb,M.titanium);
+    const front=PD/2+.02;
+    add(phone,new T3.ShapeGeometry(rrShape(PW-1.2,PH-1.2,10.4,0,-PH/2),24),M.black,0,0,front);
+    const SW=PW-6.2, SH=PH-6.2, screenMat=new T3.MeshBasicMaterial({color:0xffffff,toneMapped:false});
+    add(phone,new T3.ShapeGeometry(rrShape(SW,SH,8.2,0,0),24),screenMat,0,-PH/2,front+.02);
+    add(phone,new T3.ShapeGeometry(rrShape(19,4.4,2.2,0,-(1.6+3.4+2.2)),12),M.black,0,0,front+.04);
+    add(phone,new T3.ShapeGeometry(rrShape(PW-3.2,PH-3.2,9.6,0,-PH/2),24),M.glass,0,0,front+.06);
+    const btn=(x,y,h)=>add(phone,new T3.BoxGeometry(1.2,h,2.4),M.titanium,x,y,0);
+    btn(-PW/2-.35,-PH*.22,PH*.06); btn(-PW/2-.35,-PH*.315,PH*.09); btn(-PW/2-.35,-PH*.425,PH*.09); btn(PW/2+.35,-PH*.335,PH*.13);
+    const lugG=new T3.BoxGeometry(5,4.4,3.2); [-.28,.28].forEach(f=>add(phone,lugG,M.lug,PW*f,2.0,0));
+    shadowAll(phone);
+
+    /* ---------- rigging (world space, rebuilt each update) ---------- */
+    const front3=new T3.Group(); front3.add(phone);
+    const rig=new T3.Group(); front3.add(rig);
+    const back3=new T3.Group(); back3.add(hook);
+    const ropes=new T3.Group(); back3.add(ropes);
+    scene.add(back3); scene.add(front3);
+    const ropeTex=canvasTex(64,256,(c,w,h)=>{ c.fillStyle="#2c3136"; c.fillRect(0,0,w,h); c.strokeStyle="#9aa3ab"; c.lineWidth=9;
+      for(let y=-w;y<h+w;y+=22){ c.beginPath(); c.moveTo(0,y); c.lineTo(w,y-w*.9); c.stroke(); } c.strokeStyle="rgba(220,226,231,.7)"; c.lineWidth=2.5;
+      for(let y=-w;y<h+w;y+=22){ c.beginPath(); c.moveTo(0,y-3); c.lineTo(w,y-3-w*.9); c.stroke(); } });
+    ropeTex.wrapS=ropeTex.wrapT=T3.RepeatWrapping;
+    const ropeMat=new T3.MeshStandardMaterial({map:ropeTex,roughness:.5,metalness:.7});
+
+    const cam=new T3.PerspectiveCamera(30,W/H,10,10000);
+    return {renderer,scene,cam,sun,M,hook,phone,back3,front3,rig,ropes,ropeMat,screenMat,SW,SH,PW,PH,tagKey:null,tagTex:null,screenSrc:null};
+  }catch(e){ console.warn("3D unavailable",e); return null; }
+}
+
+function cylBetween(a,b,r,mat){ const d=new T3.Vector3().subVectors(b,a), L=d.length(); const g=new T3.CylinderGeometry(r,r,L,12,1);
+  const m=new T3.Mesh(g,mat); m.position.copy(a).addScaledVector(d,.5); m.quaternion.setFromUnitVectors(new T3.Vector3(0,1,0),d.normalize()); m.castShadow=true; m.receiveShadow=true; return m; }
+function disposeChildren(g){ while(g.children.length){ const c=g.children.pop(); c.geometry&&c.geometry.dispose(); } }
+
+function update3D(){
+  const R=R3, c=S.crane, s=c.w/145, D=Math.max(300,c.persp||650);
+  // screenshot texture
+  const img=screenImg();
+  if(img && R.screenSrc!==img.src){ const t=new T3.Texture(img); t.encoding=T3.sRGBEncoding; t.generateMipmaps=false; t.minFilter=T3.LinearFilter; t.needsUpdate=true;
+    const a=img.naturalWidth/img.naturalHeight, sa=R.SW/R.SH;
+    if(a<sa){ const vis=R.SH/(R.SW/a); t.repeat.set(1/R.SW, vis/R.SH); t.offset.set(.5, 1-vis/2); }      // fit width, keep the top
+    else { const vis=R.SW/(R.SH*a); t.repeat.set(vis/R.SW, 1/R.SH); t.offset.set(.5,.5); }
+    if(R.screenMat.map) R.screenMat.map.dispose(); R.screenMat.map=t; R.screenMat.needsUpdate=true; R.screenSrc=img.src; }
+  // hook block
+  const bodyTopY=-(c.y+20*s);
+  R.hook.scale.setScalar(s); R.hook.position.set(c.x,bodyTopY,0); R.hook.rotation.set(0,(c.hookYaw||0)*Math.PI/180,0);
+  R.hook.updateMatrixWorld(true);
+  // ropes from above the top edge into the block
+  disposeChildren(R.ropes);
+  [-20,20].forEach(x=>{ const e=new T3.Vector3(x,3,0).applyMatrix4(R.hook.matrixWorld); const top=new T3.Vector3(e.x,6,e.z);
+    const m=cylBetween(top,e,2.5*s,R.ropeMat); m.material=R.ropeMat; R.ropes.add(m);
+    R.ropeMat.map.repeat.set(1,(top.y-e.y)/(2.5*s*4)); });
+  // phone hangs below the hook saddle
+  const linkBottom=new T3.Vector3(0,-270.5-1.6*9.8,0).applyMatrix4(R.hook.matrixWorld);
+  const ps=c.phoneW/68; R.phone.scale.setScalar(ps);
+  R.phone.position.set(linkBottom.x, linkBottom.y-(c.drop-21*s+2), 0);
+  R.phone.rotation.set((c.phonePitch||0)*Math.PI/180,(c.phoneYaw||0)*Math.PI/180,-(c.tilt||0)*Math.PI/180,"YXZ");
+  R.phone.updateMatrixWorld(true);
+  disposeChildren(R.rig);
+  const lugs=[-.28,.28].map(f=>new T3.Vector3(R.PW*f,4.2,0).applyMatrix4(R.phone.matrixWorld));
+  lugs.forEach(l=>{ R.rig.add(cylBetween(linkBottom,l,.55,R.M.sling));
+    const sh=new T3.Mesh(new T3.TorusGeometry(1.9,.45,8,20,Math.PI),R.M.red); sh.position.copy(l); sh.rotation.y=(c.phoneYaw||0)*Math.PI/180+Math.PI/2; R.rig.add(sh); });
+  // load tag on the left leg
+  const key=S.text.tag1+"|"+S.text.tag2;
+  if(R.tagKey!==key){ if(R.tagTex) R.tagTex.dispose();
+    R.tagTex=canvasTex(300,168,(x,w,h)=>{ x.fillStyle="#f3e72a"; x.fillRect(0,0,w,h); x.strokeStyle="#14263f"; x.lineWidth=8; x.strokeRect(4,4,w-8,h-8);
+      x.fillStyle="#14263f"; x.textAlign="center"; x.font='800 54px "Barlow Condensed", sans-serif'; x.fillText(S.text.tag1,w/2,70); x.font='800 62px "Barlow Condensed", sans-serif'; x.fillText(S.text.tag2,w/2,138); });
+    R.tagKey=key; }
+  if(S.text.tag1||S.text.tag2){
+    const p=new T3.Vector3().lerpVectors(linkBottom,lugs[0],.42);
+    const tag=new T3.Mesh(new T3.PlaneGeometry(15,8.4),new T3.MeshStandardMaterial({map:R.tagTex,roughness:.6,side:T3.DoubleSide}));
+    tag.position.set(p.x-7.5,p.y-6.5,p.z+1.5); tag.rotation.set(0,(c.phoneYaw||0)*Math.PI/360,.17); tag.castShadow=true; R.rig.add(tag);
+    R.rig.add(cylBetween(p,new T3.Vector3(p.x-3.2,p.y-2.6,p.z+1.2),.18,R.M.dark)); }
+  // sun from the upper left, shadow box around the rig
+  const centre=new T3.Vector3(c.x,bodyTopY-60,0);
+  R.sun.target.position.copy(centre); R.sun.position.copy(centre).add(new T3.Vector3(-260,330,320));
+  const sc=R.sun.shadow.camera, ext=Math.max(120,c.drop+c.phoneW*2.2+c.w*2); sc.left=-ext; sc.right=ext; sc.top=ext; sc.bottom=-ext; sc.near=50; sc.far=1400; sc.updateProjectionMatrix();
+  // camera: plane z = 0 maps exactly onto the poster
+  const cam=R.cam; cam.fov=2*Math.atan((H/2)/D)*180/Math.PI; cam.aspect=W/H; cam.near=D*.2; cam.far=D*4;
+  cam.position.set(W/2,-H/2,D); cam.lookAt(W/2,-H/2,0); cam.updateMatrixWorld(true);
+  return {linkBottom};
+}
+function draw3D(ctx,K,pass){
+  const R=R3; if(pass==="back") update3D();
+  R.back3.visible=pass==="back"; R.front3.visible=pass==="front";
+  const fw=Math.round(W*K), fh=Math.round(H*K), T_=2048, cam=R.cam;
+  // only render the band of the poster the rig can reach
+  const c=S.crane, y0=0, y1=Math.min(H, c.y + (c.w/145)*300 + c.drop + c.phoneW*2.4 + 40);
+  const py0=Math.floor(y0*K), py1=Math.ceil(y1*K);
+  for(let oy=py0; oy<py1; oy+=T_) for(let ox=0; ox<fw; ox+=T_){
+    const tw=Math.min(T_,fw-ox), th=Math.min(T_,py1-oy);
+    cam.setViewOffset(fw,fh,ox,oy,tw,th); cam.updateProjectionMatrix();
+    R.renderer.setSize(tw,th,false); R.renderer.render(R.scene,cam);
+    ctx.drawImage(R.renderer.domElement,0,0,tw,th,ox/K,oy/K,tw/K,th/K);
+  }
+  cam.clearViewOffset();
 }
 
 /* ================= preview ================= */
@@ -541,7 +752,8 @@ const FIELDS={
   logo:[["X mm","logo.x",.5],["Y mm","logo.y",.5],["Height mm","logo.h",.5]],
   info:[["X mm","info.x",.5],["Y mm","info.y",.5],["App name size mm","info.app",.1],["Points size mm","info.pt",.1],["Column width mm","info.col",1]],
   qr:[["X mm","qr.x",.5],["Y mm","qr.y",.5],["Tile size mm (min 35)","qr.size",.5],["Gap mm","qr.gap",.5],["Caption size mm","qr.cap",.1]],
-  crane:[["Rope X mm","crane.x",.5],["Hook top Y mm","crane.y",.5],["Hook width mm","crane.w",.5],["Phone width mm","crane.phoneW",.5],["Phone tilt °","crane.tilt",.5],["Sling length mm","crane.drop",.5]],
+  crane:[["Rope X mm","crane.x",.5],["Hook top Y mm","crane.y",.5],["Hook width mm","crane.w",.5],["Phone width mm","crane.phoneW",.5],["Phone tilt °","crane.tilt",.5],["Sling length mm","crane.drop",.5],
+         ["Hook turn ° (3D)","crane.hookYaw",1],["Phone turn ° (3D)","crane.phoneYaw",1],["Phone lean back ° (3D)","crane.phonePitch",1],["Perspective mm (lower = stronger)","crane.persp",50]],
   cloud0:[["X mm","clouds.0.x",1],["Y mm","clouds.0.y",1],["Width mm","clouds.0.w",1],["Rotation °","clouds.0.rot",1],["Opacity","clouds.0.op",.01],["Mirror","clouds.0.flip","bool"]],
   cloud1:[["X mm","clouds.1.x",1],["Y mm","clouds.1.y",1],["Width mm","clouds.1.w",1],["Rotation °","clouds.1.rot",1],["Opacity","clouds.1.op",.01],["Mirror","clouds.1.flip","bool"]]
 };
@@ -732,7 +944,7 @@ document.getElementById("resetBtn").addEventListener("click",async e=>{
 
 /* ================= boot ================= */
 (async()=>{
-  fillSelects(); bindAll(); sizeView();
+  fillSelects(); bindAll(); sizeView(); R3=init3D(); if(!R3) setStatus("3D is not available on this computer; the flat hook and phone are shown.");
   await Promise.all([loadAssets(), ensureFonts(), document.fonts.ready]);
   syncInputs(); render();
   new ResizeObserver(()=>{ sizeView(); render(); }).observe(wrap);
