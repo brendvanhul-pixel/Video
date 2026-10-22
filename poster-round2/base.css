@@ -46,3 +46,23 @@ html,body{width:303mm;height:426mm;background:#777}
 .qrs img{width:41mm;height:41mm;display:block;border-radius:1.6mm}
 .qrs figcaption{font:600 3.6mm "Barlow";letter-spacing:.12em;text-transform:uppercase}
 .scan{position:absolute;right:var(--safe);font:600 4.6mm "Barlow";text-align:right}
+
+/* ---------- Round 2b ---------- */
+.grain{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.55;z-index:50}
+.phone{filter:drop-shadow(0 9mm 9mm rgba(8,30,60,.28))}
+.phone::before{content:"";position:absolute;inset:0;border-radius:11mm;transform:translateX(-1.3mm);background:#4c5258;z-index:-1}
+.phone .glare{background:linear-gradient(158deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.06) 26%,rgba(255,255,255,0) 40%)}
+.band{position:absolute;left:0;right:0;bottom:0;height:72mm;z-index:20;
+  background:rgba(250,252,255,.74);backdrop-filter:blur(5mm) saturate(1.25);-webkit-backdrop-filter:blur(5mm) saturate(1.25);
+  border-top:.3mm solid rgba(255,255,255,.95)}
+.band.solid{background:#fff;backdrop-filter:none}
+.band .specs{bottom:18mm;color:var(--navy)}
+.band .spec{width:46mm;padding:0 2.5mm}
+.band .spec span{font-size:4.6mm}
+.band .qrs{bottom:var(--safe);color:var(--navy)}
+.band .qrs img{width:40mm;height:40mm;box-shadow:0 0 0 .3mm rgba(20,38,63,.12)}
+.band .scan{bottom:calc(var(--safe) + 6mm);right:108mm;width:40mm;text-align:right;color:var(--navy);font:600 5mm/1.2 "Barlow"}
+.band .scan::after{content:" \2192";}
+.band .appname{position:absolute;left:var(--safe);top:6.5mm;font:600 4.4mm "Barlow";color:var(--navy);letter-spacing:.02em}
+.payoff{position:absolute;font:400 10.5mm/1.14 "Barlow";z-index:6}
+.payoff b{font-weight:700}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>E3 · Every lift starts here</title>
+<link rel="stylesheet" href="base.css">
+<script>
+/* ===== ALL COPY FOR THIS POSTER. Translate here only. "\n" = line break, <b> = bold half of the payoff. ===== */
+const COPY = {
+  headline: "Every\nlift\nstarts\nhere.",
+  payoff:   "Your training, on your phone.<br><b>Learn anywhere.</b>",
+  specs: [
+    ["language", "Every course<br>in your language"],
+    ["helmet",   "Site inductions<br>before you arrive"],
+    ["record",   "Your full record,<br>ready to show"]
+  ],
+  appname:  "Cornerstone Learning app",
+  scan:     "Scan to<br>download",
+  stores:   ["Android", "iPhone"],
+  tag:      ["LOAD", "0.2 KG"],
+  logo:     "Sarens logo"
+};
+/* ===== LAYOUT (mm). Change positions here, not in the code. ===== */
+const L = {"sky": {"top": "#1a5796", "mid": "#4886bf", "bottom": "#a9cae6", "clouds": [[70, 350, 150, 31], [262, 340, 100, 32]]}, "headStyle": {"left": "15mm", "top": "40mm", "width": "170mm", "fontSize": "60mm", "color": "#F3E72A"}, "payoffStyle": {"left": "15mm", "top": "250mm", "width": "170mm", "color": "#fff", "fontSize": "9.6mm"}, "logoStyle": {"left": "15mm", "right": "auto", "top": "15mm", "color": "#fff"}, "rope": {"x": 240}, "hook": {"top": -150, "w": 150}, "phone": {"w": 58, "h": 118, "rot": 4, "drop": 26}, "hookZ": 4};
+</script>
+</head>
+<body><div class="poster"></div>
+<script src="sky.js"></script><script src="parts.js"></script><script src="poster.js"></script>
+<script>build();</script>
+<script src="fit.js"></script>
+</body></html>

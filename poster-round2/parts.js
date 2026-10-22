@@ -26,7 +26,8 @@ function rig(svg,hook,phoneEl,o={}){
   const NS='http://www.w3.org/2000/svg';
   const el=(n,a,p=svg)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;};
   const wire=(x1,y1,x2,y2,w,p)=>{el('line',{x1,y1,x2,y2,stroke:'#1d2125','stroke-width':w,'stroke-linecap':'round'},p);
-    el('line',{x1:x1-w*.2,y1,x2:x2-w*.2,y2,stroke:'#8a939b','stroke-width':w*.22,'stroke-linecap':'round',opacity:.9},p);};
+    el('line',{x1,y1,x2,y2,stroke:'#5d666e','stroke-width':w*.55,'stroke-dasharray':`${w*.22} ${w*.3}`,opacity:.55},p);
+    el('line',{x1:x1-w*.2,y1,x2:x2-w*.2,y2,stroke:'#c9d0d6','stroke-width':w*.13,opacity:.55},p);};
   const s=hook.s, top=o.ropeFrom??-5;
   hook.ropes.forEach(x=>wire(x,top,x,hook.ropeTop+20*s,o.ropeW||1.5,o.ropeLayer||svg));
   const [hx,hy]=hook.throat;
