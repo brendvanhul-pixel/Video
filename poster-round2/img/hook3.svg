@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145 300">
+<!-- Hook block v3, lit to sit in a daylight sky photo: warm key light upper-left, cool sky fill on shadow sides.
+     Rope falls x=54 and x=94 at y=0 (centre 74). Hook saddle (sling seat) x=70, y=263. -->
+<defs>
+  <!-- paint -->
+  <linearGradient id="pH" x1="0" x2="1">
+    <stop offset="0" stop-color="#f3b800"/><stop offset=".18" stop-color="#ffd640"/><stop offset=".42" stop-color="#f8c21a"/>
+    <stop offset=".78" stop-color="#d9a00a"/><stop offset="1" stop-color="#a98a3a"/>
+  </linearGradient>
+  <linearGradient id="pV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff6d6" stop-opacity=".35"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/>
+    <stop offset=".75" stop-color="#3e5a7a" stop-opacity="0"/><stop offset="1" stop-color="#3e5a7a" stop-opacity=".32"/>
+  </linearGradient>
+  <linearGradient id="bevel" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff3c0"/><stop offset=".45" stop-color="#ffe07a" stop-opacity=".4"/>
+    <stop offset=".55" stop-color="#7a5600" stop-opacity=".3"/><stop offset="1" stop-color="#5b4a2a"/>
+  </linearGradient>
+  <linearGradient id="side" x1="0" x2="1"><stop offset="0" stop-color="#a27a14"/><stop offset=".55" stop-color="#7e6a3c"/><stop offset="1" stop-color="#5d6670"/></linearGradient>
+  <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe489"/><stop offset=".45" stop-color="#f6bf18"/><stop offset="1" stop-color="#c79a26"/></linearGradient>
+  <radialGradient id="cap" cx=".32" cy=".28" r=".8"><stop offset="0" stop-color="#ffe9a0"/><stop offset=".25" stop-color="#ffd440"/><stop offset=".62" stop-color="#d9a209"/><stop offset="1" stop-color="#8d7440"/></radialGradient>
+  <linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#454b52"/><stop offset=".18" stop-color="#9aa2aa"/><stop offset=".32" stop-color="#eef1f3"/><stop offset=".5" stop-color="#8e969e"/><stop offset=".85" stop-color="#5b6874"/><stop offset="1" stop-color="#7f93a8"/></linearGradient>
+  <linearGradient id="cylY" x1="0" x2="1"><stop offset="0" stop-color="#c58f00"/><stop offset=".25" stop-color="#ffe17a"/><stop offset=".5" stop-color="#f2b90f"/><stop offset=".85" stop-color="#b9922e"/><stop offset="1" stop-color="#8f8a78"/></linearGradient>
+  <linearGradient id="hookH" x1="0" x2="1"><stop offset="0" stop-color="#e2a600"/><stop offset=".3" stop-color="#ffd545"/><stop offset=".6" stop-color="#f1b70e"/><stop offset="1" stop-color="#9f8a52"/></linearGradient>
+  <!-- wire rope: right-hand lay strands -->
+  <pattern id="lay" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-62)">
+    <rect width="3" height="3" fill="#30353a"/><rect width="1.3" height="3" fill="#8e979f"/><rect x=".2" width=".45" height="3" fill="#d2d8dd"/>
+  </pattern>
+  <linearGradient id="ropeShade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".35" stop-color="#fff" stop-opacity=".12"/><stop offset=".7" stop-color="#000" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+  <!-- filters -->
+  <filter id="ao" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.4"/></filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation=".6"/></filter>
+  <filter id="grime" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".9 .035" numOctaves="3" seed="21"/>
+    <feColorMatrix values="0 0 0 0 .25  0 0 0 0 .2  0 0 0 0 .12  0 0 0 1.6 -.95"/>
+  </filter>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="5"/>
+    <feColorMatrix values="0 0 0 0 .45  0 0 0 0 .35  0 0 0 0 .15  0 0 0 .7 -.2"/>
+  </filter>
+  <filter id="chips" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="8"/>
+    <feColorMatrix values="0 0 0 0 .22  0 0 0 0 .2  0 0 0 0 .18  0 0 0 9 -6.4"/>
+  </filter>
+  <mask id="wear"><rect width="145" height="300" fill="#fff"/><rect width="145" height="300" filter="url(#chips)" style="filter:url(#chips) invert(1)"/></mask>
+  <clipPath id="bodyC"><path id="body" d="M24,44 Q24,36 30,31 L44,22 Q48,20 53,20 H95 Q100,20 104,22 L118,31 Q124,36 124,44 V160 Q124,170 116,174 L106,178 H42 L32,174 Q24,170 24,160 Z"/></clipPath>
+  <clipPath id="edgeC"><path d="M24,44 Q24,36 30,31 L44,22 Q48,20 53,20 H95 Q100,20 104,22 L118,31 Q124,36 124,44 V160 Q124,170 116,174 L106,178 H42 L32,174 Q24,170 24,160 Z" transform="translate(0,0)"/></clipPath>
+  <clipPath id="hookC"><path id="hk" transform="translate(12,13)" d="M53,189 H71 V209 C77,213 88,226 88,247 C88,267 75,280 58,280 C41,280 28,268 28,249 C28,233 32,219 38,206 L41,198 C42,195.5 46,195.5 46.5,198.5 L47,212 C43.5,222 44.5,235 49,243 C53,251 62,253 66.5,245 C70,237 69.5,226 66.5,219 C63,215 58,214 53,214 Z"/></clipPath>
+</defs>
+
+<!-- ===== wire rope falls into the sheave slot ===== -->
+<g>
+  <rect x="51.5" y="0" width="5" height="34" fill="url(#lay)"/><rect x="51.5" y="0" width="5" height="34" fill="url(#ropeShade)"/>
+  <rect x="91.5" y="0" width="5" height="34" fill="url(#lay)"/><rect x="91.5" y="0" width="5" height="34" fill="url(#ropeShade)"/>
+</g>
+
+<!-- ===== side face (turned away from the sun: cool sky fill) ===== -->
+<path d="M118,31 L127,36 Q133,40 133,48 V156 Q133,163 127,167 L116,174 Q124,170 124,160 V44 Q124,36 118,31 Z" fill="url(#side)"/>
+<path d="M118,31 L127,36" stroke="#ffe9a0" stroke-width=".7" opacity=".6"/>
+<rect x="124" y="38" width="10" height="140" filter="url(#grain)" opacity=".35" clip-path="url(#bodyC)"/>
+
+<!-- ===== front body ===== -->
+<use href="#body" fill="url(#pH)"/>
+<g clip-path="url(#bodyC)">
+  <rect width="145" height="190" fill="url(#pV)"/>
+  <!-- sheave slot at the top where the ropes reeve in -->
+  <path d="M46,20 H102 V30 Q74,40 46,30 Z" fill="#1d2023"/>
+  <path d="M50,30 Q74,38 98,30" fill="none" stroke="#3a4046" stroke-width="3"/>
+  <path d="M50,29.5 Q74,37.5 98,29.5" fill="none" stroke="url(#lay)" stroke-width="2.2"/>
+  <path d="M46,30 Q74,40 102,30" fill="none" stroke="#ffe07a" stroke-width=".7" opacity=".55"/>
+  <!-- hazard band (worn) -->
+  <g transform="translate(0,95)" mask="url(#wear)">
+    <rect width="145" height="20" fill="#f6c60e"/>
+    <g fill="#16171a"><path d="M2,20 L14,0 H25 L13,20Z"/><path d="M24,20 L36,0 H47 L35,20Z"/><path d="M46,20 L58,0 H69 L57,20Z"/><path d="M68,20 L80,0 H91 L79,20Z"/><path d="M90,20 L102,0 H113 L101,20Z"/><path d="M112,20 L124,0 H135 L123,20Z"/></g>
+  </g>
+  <rect y="95" width="145" height="1.2" fill="#000" opacity=".22"/><rect y="113.8" width="145" height="1.2" fill="#fff" opacity=".25"/>
+  <rect width="145" height="190" fill="url(#pV)" opacity=".6"/>
+  <!-- grime streaks running down from the bolts and edges -->
+  <rect width="145" height="190" filter="url(#grime)" opacity=".45"/>
+  <!-- paint grain -->
+  <rect width="145" height="190" filter="url(#grain)" opacity=".5"/>
+</g>
+<!-- bevel: bright on edges facing the sun, dark on the others -->
+<use href="#body" fill="none" stroke="url(#bevel)" stroke-width="3.2" clip-path="url(#bodyC)"/>
+<use href="#body" fill="none" stroke="#5a4a28" stroke-width=".5" opacity=".7"/>
+<!-- paint chips on the edges -->
+<g clip-path="url(#bodyC)" opacity=".85">
+  <rect x="22" y="40" width="5" height="130" filter="url(#chips)"/>
+  <rect x="118" y="35" width="7" height="135" filter="url(#chips)"/>
+  <rect x="30" y="172" width="90" height="7" filter="url(#chips)"/>
+</g>
+
+<!-- ===== upper cheek plate with sheave axle ===== -->
+<rect x="40" y="44" width="68" height="44" rx="4" fill="#000" opacity=".28" filter="url(#ao)"/>
+<rect x="38" y="42" width="68" height="44" rx="4" fill="url(#plate)"/>
+<rect x="38" y="42" width="68" height="44" rx="4" fill="none" stroke="url(#bevel)" stroke-width="1.4"/>
+<circle cx="74" cy="65" r="17" fill="#000" opacity=".32" filter="url(#ao)"/>
+<circle cx="72.5" cy="63.5" r="15.5" fill="url(#cap)"/>
+<circle cx="72.5" cy="63.5" r="15.5" fill="none" stroke="#7a5d1a" stroke-width=".6"/>
+<circle cx="72.5" cy="63.5" r="10" fill="none" stroke="#a37a10" stroke-width=".8" opacity=".7"/>
+<circle cx="72.5" cy="63.5" r="4.6" fill="#5f5b52"/><circle cx="72.5" cy="63.5" r="4.6" fill="url(#cyl)" opacity=".75"/>
+<path d="M62,55 A13,13 0 0 1 70,51" stroke="#fffbe6" stroke-width="2" fill="none" stroke-linecap="round" opacity=".45"/>
+<g fill="#6b5320"><circle cx="72.5" cy="50.5" r="1.4"/><circle cx="83.8" cy="57" r="1.4"/><circle cx="83.8" cy="70" r="1.4"/><circle cx="72.5" cy="76.5" r="1.4"/><circle cx="61.2" cy="70" r="1.4"/><circle cx="61.2" cy="57" r="1.4"/></g>
+<g fill="#fff3c4" opacity=".8"><circle cx="72" cy="50" r=".5"/><circle cx="83.3" cy="56.5" r=".5"/><circle cx="60.7" cy="56.5" r=".5"/></g>
+<!-- corner bolts -->
+<g><g fill="#6b5320"><circle cx="43" cy="47" r="1.9"/><circle cx="101" cy="47" r="1.9"/><circle cx="43" cy="81" r="1.9"/><circle cx="101" cy="81" r="1.9"/></g>
+<g fill="#fff0b0"><circle cx="42.4" cy="46.4" r=".7"/><circle cx="100.4" cy="46.4" r=".7"/><circle cx="42.4" cy="80.4" r=".7"/><circle cx="100.4" cy="80.4" r=".7"/></g></g>
+
+<!-- ===== data plate ===== -->
+<rect x="60" y="88" width="28" height="6" rx="1" fill="#cfd5da"/>
+<rect x="60" y="88" width="28" height="6" rx="1" fill="url(#cyl)" opacity=".35"/>
+<text x="74" y="92.4" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="800" font-size="3.6" fill="#2a2f35">SWL 50 t</text>
+
+<!-- ===== lower cheek plate with axle ===== -->
+<rect x="46" y="122" width="56" height="44" rx="4" fill="#000" opacity=".28" filter="url(#ao)"/>
+<rect x="44" y="120" width="56" height="44" rx="4" fill="url(#plate)"/>
+<rect x="44" y="120" width="56" height="44" rx="4" fill="none" stroke="url(#bevel)" stroke-width="1.4"/>
+<circle cx="74" cy="143.5" r="12.5" fill="#000" opacity=".3" filter="url(#ao)"/>
+<circle cx="72.5" cy="142" r="11.5" fill="url(#cap)"/>
+<circle cx="72.5" cy="142" r="11.5" fill="none" stroke="#7a5d1a" stroke-width=".6"/>
+<circle cx="72.5" cy="142" r="3.6" fill="url(#cyl)"/>
+<path d="M65,135.5 A9.5,9.5 0 0 1 70,133" stroke="#fffbe6" stroke-width="1.7" fill="none" stroke-linecap="round" opacity=".45"/>
+<g fill="#6b5320"><circle cx="49" cy="125" r="1.7"/><circle cx="95" cy="125" r="1.7"/><circle cx="49" cy="159" r="1.7"/><circle cx="95" cy="159" r="1.7"/></g>
+
+<!-- ===== thrust-bearing housing + nut ===== -->
+<ellipse cx="74" cy="180" rx="24" ry="4" fill="#000" opacity=".35" filter="url(#ao)"/>
+<rect x="52" y="176" width="44" height="14" rx="3" fill="url(#cyl)"/>
+<rect x="52" y="176" width="44" height="1.6" rx=".8" fill="#fff" opacity=".45"/>
+<rect x="52" y="188.4" width="44" height="1.6" fill="#000" opacity=".25"/>
+<rect x="60" y="190" width="28" height="13" rx="2" fill="url(#cylY)"/>
+<rect x="60" y="190" width="28" height="13" rx="2" fill="none" stroke="#7a5d1a" stroke-width=".4"/>
+<g stroke="#8a6a1a" stroke-width=".5" opacity=".7"><path d="M66,190 V203"/><path d="M74,190 V203"/><path d="M82,190 V203"/></g>
+
+<!-- ===== forged hook ===== -->
+<use href="#hk" fill="url(#hookH)"/>
+<g clip-path="url(#hookC)">
+  <g transform="translate(12,13)">
+    <!-- form shading: light from upper-left, sky fill on the right/underside -->
+    <path d="M86,228 C90,246 86,266 70,276" fill="none" stroke="#5d7290" stroke-width="9" opacity=".35" filter="url(#soft)"/>
+    <path d="M30,250 C30,236 33,222 40,208" fill="none" stroke="#fff3c0" stroke-width="4" opacity=".7" filter="url(#soft)"/>
+    <path d="M80,224 C84,234 84,258 70,270" fill="none" stroke="#fff1b8" stroke-width="3.4" opacity=".38" stroke-linecap="round" filter="url(#soft)"/>
+    <path d="M66,192 V208" stroke="#fffbe6" stroke-width="3" opacity=".42" stroke-linecap="round" filter="url(#soft)"/>
+    <path d="M28,262 C40,284 74,286 86,258" fill="none" stroke="#3f4b5c" stroke-width="8" opacity=".35" filter="url(#soft)"/>
+    <path d="M53,214 C58,214 63,215 66.5,219" fill="none" stroke="#5a4a28" stroke-width="3.4" opacity=".5"/>
+    <!-- saddle worn to bare steel by slings -->
+    <path d="M48,242 C53,252 63,254 67.5,245" fill="none" stroke="#8e969d" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M48,242 C53,252 63,254 67.5,245" fill="none" stroke="#d7dce0" stroke-width="1.4" stroke-linecap="round" opacity=".8" transform="translate(-.6,-.8)"/>
+  </g>
+  <rect y="190" width="145" height="110" filter="url(#grime)" opacity=".35"/>
+  <rect y="190" width="145" height="110" filter="url(#grain)" opacity=".5"/>
+</g>
+<use href="#hk" fill="none" stroke="#5a4a28" stroke-width=".7"/>
+<!-- safety latch with spring -->
+<g transform="translate(12,13)">
+  <path d="M44,198 L54.5,213" stroke="#2c3136" stroke-width="3" stroke-linecap="round"/>
+  <path d="M43.4,197.6 L53.9,212.6" stroke="#cfd5da" stroke-width="1.1" stroke-linecap="round"/>
+  <path d="M53,210 q2,-1 2.4,1 q.4,2 2.4,1 q2,-1 2.4,1" fill="none" stroke="#9aa2aa" stroke-width=".7"/>
+</g>
+</svg>

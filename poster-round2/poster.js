@@ -1,7 +1,7 @@
 // Builds a round-2b poster from COPY (text) and L (layout). All sizes in mm.
-const HOOK2={w:130,h:300,ropes:[46,78],seat:[58,250]};
+const HOOK2={src:'img/hook3.svg',w:145,h:300,rc:74,ropes:[54,94],seat:[70,263],ropeEnd:30};
 function placeHook2(el,ropeCx,top,w){
-  const s=w/HOOK2.w, x=ropeCx-62*s;
+  const s=w/HOOK2.w, x=ropeCx-HOOK2.rc*s;
   el.style.cssText+=`position:absolute;left:${x}mm;top:${top}mm;width:${w}mm;z-index:${L.hookZ||4}`;
   return {ropes:HOOK2.ropes.map(r=>x+r*s), ropeTop:top, throat:[x+HOOK2.seat[0]*s, top+HOOK2.seat[1]*s], s};
 }
@@ -18,7 +18,7 @@ function build(){
     <div class="logo" data-copy="logo" style="z-index:7"></div>
     <h1 class="headline" data-copy="headline" style="z-index:5"></h1>
     <div class="payoff" data-copy="payoff"></div>
-    <img id="hook" src="img/hook2.svg" alt="">
+    <img id="hook" src="${HOOK2.src}" alt="">
     <div class="phone" id="phone" style="z-index:${L.phoneZ||6}"></div>
     <svg class="layer" id="rig" viewBox="0 0 303 426" style="z-index:${(L.phoneZ||6)+1}"></svg>
     <div class="band ${L.band||''}"><div class="appname" data-copy="appname"></div><div class="scan" data-copy="scan"></div>
@@ -42,7 +42,13 @@ function build(){
     const ph={w:L.phone.w,h:L.phone.h,rot:L.phone.rot,y:H.throat[1]+(L.phone.drop||24)};
     ph.x=H.throat[0]-ph.w/2;
     buildPhone(document.getElementById('phone'),ph,'img/app-home.jpg');
-    rig(document.getElementById('rig'),H,document.getElementById('phone'),
-        Object.assign({tag:COPY.tag,ropeLayer:document.getElementById('ropes'),ropeW:L.ropeW||1.7,slingW:L.slingW||1.1},L.rigOpts||{}));
+    // hoist rope from the top edge into the block, drawn with the same strand lay as the hook drawing
+    const R=document.getElementById('ropes'), rw=5*H.s;
+    R.innerHTML=`<defs><pattern id="lay" width="${3*H.s}" height="${3*H.s}" patternUnits="userSpaceOnUse" patternTransform="rotate(-62)">
+      <rect width="${3*H.s}" height="${3*H.s}" fill="#30353a"/><rect width="${1.3*H.s}" height="${3*H.s}" fill="#8e979f"/><rect x="${.2*H.s}" width="${.45*H.s}" height="${3*H.s}" fill="#d2d8dd"/></pattern>
+      <linearGradient id="rsh" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".35" stop-color="#fff" stop-opacity=".12"/><stop offset=".7" stop-color="#000" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient></defs>`+
+      H.ropes.map(x=>`<rect x="${x-rw/2}" y="-5" width="${rw}" height="${H.ropeTop+HOOK2.ropeEnd*H.s+5}" fill="url(#lay)"/><rect x="${x-rw/2}" y="-5" width="${rw}" height="${H.ropeTop+HOOK2.ropeEnd*H.s+5}" fill="url(#rsh)"/>`).join('');
+    rig(document.getElementById('rig'),Object.assign({},H,{ropes:[]}),document.getElementById('phone'),
+        Object.assign({tag:COPY.tag,slingW:L.slingW||1.1},L.rigOpts||{}));
   };
 }
