@@ -77,3 +77,16 @@ html,body{width:303mm;height:426mm;background:#777}
 .band.open .appname,.band.open .specs,.band.open .qrs{color:#fff}
 .band.open .spec+.spec{border-left-color:rgba(255,255,255,.55)}
 .band.open .qrs img{box-shadow:none}
+
+/* open + strong: info stands out by type and colour, no panel */
+.band.strong{height:84mm}
+.band.strong .appname{top:4mm;font:700 10mm/1 "Barlow";letter-spacing:-.005em;color:#fff}
+.band.strong .appname::before{content:"";display:block;width:16mm;height:1.2mm;background:var(--yellow);margin-bottom:4.2mm}
+.band.strong .specs{bottom:var(--safe);left:calc(var(--safe) - 3mm)}
+.band.strong .spec{width:50mm;align-items:flex-start;text-align:left;gap:3mm;padding:0 3mm}
+.band.strong .spec+.spec{border-left:.35mm solid rgba(255,255,255,.4);padding-left:5mm}
+.band.strong .spec svg{width:12.5mm;height:12.5mm;stroke:var(--yellow);stroke-width:1.6}
+.band.strong .spec span{font:600 5.4mm/1.2 "Barlow";color:#fff}
+.band.strong .qrs figcaption{color:#fff;font-weight:600}
+.band.strong .specs{left:var(--safe)}
+.band.strong .spec:first-child{padding-left:0}
