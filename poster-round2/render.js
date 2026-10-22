@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
 const names = process.argv.slice(2).length ? process.argv.slice(2)
-  : fs.readdirSync('.').filter(f=>/^[DE]\d[ab]?.*\.html$/.test(f)).map(f=>f.replace('.html',''));
+  : fs.readdirSync('.').filter(f=>/^[DE]\d[abc]?.*\.html$/.test(f)).map(f=>f.replace('.html',''));
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport:{ width:1146, height:1611 }, deviceScaleFactor:2.5 });
 page.on('console', m => console.log('  console:', m.text()));

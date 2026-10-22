@@ -71,3 +71,9 @@ html,body{width:303mm;height:426mm;background:#777}
 .logo-img{position:absolute;left:var(--safe);top:var(--safe);height:13mm;z-index:7}
 .band .qrs figcaption{font:600 4.6mm "Barlow";letter-spacing:0;text-transform:none}
 .band.noscan .spec{width:52mm}
+
+/* open variant: no band, info sits on the sky like the pool poster */
+.band.open{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-top:0}
+.band.open .appname,.band.open .specs,.band.open .qrs{color:#fff}
+.band.open .spec+.spec{border-left-color:rgba(255,255,255,.55)}
+.band.open .qrs img{box-shadow:none}
