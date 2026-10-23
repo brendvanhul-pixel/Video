@@ -167,6 +167,8 @@ canvas#view{display:block;box-shadow:0 2px 14px rgba(0,0,0,.18);touch-action:non
           <label class="check"><input type="checkbox" id="c0_show" data-k="clouds.0.show"> Top cloud</label>
         </div>
         <label class="check"><input type="checkbox" id="c1_show" data-k="clouds.1.show"> Middle cloud</label>
+        <label class="check"><input type="checkbox" id="hk_match" data-k="hookColor.match"> Hook in the same colour as the headline</label>
+        <label class="f"><span>Hook colour (when not matching)</span><input type="color" id="hk_c" data-k="hookColor.c"></label>
         <label class="check"><input type="checkbox" id="three" data-k="ui.three"> 3D hook and phone (turn them under “Hook &amp; phone”)</label>
         <button class="btn" type="button" id="clearUploads">Remove uploaded images</button>
       </div>
@@ -250,6 +252,7 @@ const DEFAULT = {
   grain:0.55,
   ui:{ guides:false, three:true },
   highlight:"#f3e72a",
+  hookColor:{ match:true, c:"#f3e72a" },
   style:{ headLines:["#f3e72a","#f3e72a","#f3e72a","#f3e72a"],
           pay1:{c:"#ffffff",w:400}, pay2:{c:"#ffffff",w:700}, app:{c:"#ffffff",w:700},
           p1:{c:"#ffffff",w:600}, p2:{c:"#ffffff",w:600}, p3:{c:"#ffffff",w:600},
@@ -537,7 +540,7 @@ function init3D(){
   try{
     const renderer=new T3.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true});
     renderer.setPixelRatio(1); renderer.setClearColor(0x000000,0);
-    renderer.outputEncoding=T3.sRGBEncoding; renderer.toneMapping=T3.ACESFilmicToneMapping; renderer.toneMappingExposure=1.0;
+    renderer.outputEncoding=T3.sRGBEncoding; renderer.toneMapping=T3.NoToneMapping;
     renderer.physicallyCorrectLights=true; renderer.shadowMap.enabled=true; renderer.shadowMap.type=T3.PCFSoftShadowMap;
     const scene=new T3.Scene();
 
@@ -550,14 +553,14 @@ function init3D(){
     const sunBall=new T3.Mesh(new T3.SphereGeometry(7,16,8),new T3.MeshBasicMaterial({color:new T3.Color(40,37,32)})); sunBall.position.set(-55,60,45); env.add(sunBall);
     const pm=new T3.PMREMGenerator(renderer); scene.environment=pm.fromScene(env,0.015).texture;
 
-    const hemi=new T3.HemisphereLight(lin("#b8d4f0"),lin("#6e675d"),1.2); scene.add(hemi);
-    const sun=new T3.DirectionalLight(lin("#fff1d8"),3.4); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
+    const hemi=new T3.HemisphereLight(lin("#b8d4f0"),lin("#6e675d"),1.0); scene.add(hemi);
+    const sun=new T3.DirectionalLight(lin("#fff1d8"),2.5); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048);
     sun.shadow.bias=-0.0005; sun.shadow.normalBias=0.35; sun.shadow.radius=3; scene.add(sun); scene.add(sun.target);
 
     // textures
     const noise=canvasTex(256,256,(c,w,h)=>{ const d=c.createImageData(w,h); for(let i=0;i<d.data.length;i+=4){ const v=150+Math.random()*90; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; } c.putImageData(d,0,0); },false);
     noise.wrapS=noise.wrapT=T3.RepeatWrapping; noise.repeat.set(3,3);
-    const stripes=(w,h)=>canvasTex(w,h,(c,W_,H_)=>{ c.fillStyle="#f6c40c"; c.fillRect(0,0,W_,H_); c.fillStyle="#17181a"; const p=H_*1.2;
+    const stripes=(w,h,yel)=>canvasTex(w,h,(c,W_,H_)=>{ c.fillStyle=yel; c.fillRect(0,0,W_,H_); c.fillStyle="#17181a"; const p=H_*1.2;
       for(let x=-H_;x<W_+H_;x+=p){ c.beginPath(); c.moveTo(x,H_); c.lineTo(x+H_*.62,0); c.lineTo(x+H_*.62+p*.5,0); c.lineTo(x+p*.5,H_); c.fill(); }
       const d=c.getImageData(0,0,W_,H_); for(let i=0;i<d.data.length;i+=4){ if(Math.random()<.035){ d.data[i]=Math.min(255,d.data[i]+60); d.data[i+1]=Math.min(255,d.data[i+1]+55); } } c.putImageData(d,0,0); });
     const plateTex=canvasTex(280,60,(c,w,h)=>{ c.fillStyle="#e2e6ea"; c.fillRect(0,0,w,h); c.fillStyle="#2a2f35"; c.font='800 40px "Barlow Condensed", sans-serif'; c.textAlign="center"; c.textBaseline="middle"; c.fillText("SWL 50 t",w/2,h/2+2); });
@@ -587,9 +590,8 @@ function init3D(){
     add(hook,bg,M.paint);
     const FZ=25;   // front face z
     // hazard band wraps front and sides
-    const sF=stripes(640,120), sS=stripes(300,120);
-    const band=add(hook,new T3.BoxGeometry(106.4,20,50.6),[ new T3.MeshStandardMaterial({map:sS,roughness:.55}), new T3.MeshStandardMaterial({map:sS,roughness:.55}),
-      M.paint, M.paint, new T3.MeshStandardMaterial({map:sF,roughness:.55}), new T3.MeshStandardMaterial({map:sF,roughness:.55}) ],0,-85,0);
+    const bandF=new T3.MeshStandardMaterial({roughness:.55}), bandS=new T3.MeshStandardMaterial({roughness:.55});
+    add(hook,new T3.BoxGeometry(106.4,20,50.6),[bandS,bandS,M.paint,M.paint,bandF,bandF],0,-85,0);
     // cheek plates
     const plate=(w,h,cx,cy)=>{ const g=new T3.ExtrudeGeometry(rrShape(w,h,4,cx,cy),{depth:1.6,bevelEnabled:true,bevelThickness:.8,bevelSize:.8,bevelSegments:2,curveSegments:6}); return add(hook,g,M.plate,0,0,FZ); };
     plate(68,44,-2,-44); plate(56,44,-2,-122);
@@ -643,7 +645,7 @@ function init3D(){
     const ropeMat=new T3.MeshStandardMaterial({map:ropeTex,roughness:.5,metalness:.7});
 
     const cam=new T3.PerspectiveCamera(30,W/H,10,10000);
-    return {renderer,scene,cam,sun,M,hook,phone,back3,front3,rig,ropes,ropeMat,screenMat,SW,SH,PW,PH,tagKey:null,tagTex:null,screenSrc:null};
+    return {renderer,scene,cam,sun,M,bandF,bandS,stripes,hookColor:null,hook,phone,back3,front3,rig,ropes,ropeMat,screenMat,SW,SH,PW,PH,tagKey:null,tagTex:null,screenSrc:null};
   }catch(e){ console.warn("3D unavailable",e); return null; }
 }
 
@@ -660,6 +662,12 @@ function update3D(){
     if(a<sa){ const vis=R.SH/(R.SW/a); t.repeat.set(1/R.SW, vis/R.SH); t.offset.set(.5, 1-vis/2); }      // fit width, keep the top
     else { const vis=R.SW/(R.SH*a); t.repeat.set(vis/R.SW, 1/R.SH); t.offset.set(.5,.5); }
     if(R.screenMat.map) R.screenMat.map.dispose(); R.screenMat.map=t; R.screenMat.needsUpdate=true; R.screenSrc=img.src; }
+  // hook paint follows the headline colour unless overridden
+  const hc = S.hookColor.match ? (S.style.headLines[Math.min(1,S.style.headLines.length-1)]||S.color.head) : S.hookColor.c;
+  if(R.hookColor!==hc){
+    [R.M.paint,R.M.plate,R.M.lug].forEach(m=>m.color.copy(lin(hc)));
+    [[R.bandF,640],[R.bandS,300]].forEach(([m,w])=>{ if(m.map) m.map.dispose(); m.map=R.stripes(w,120,hc); m.needsUpdate=true; });
+    R.hookColor=hc; }
   // hook block
   const bodyTopY=-(c.y+20*s);
   R.hook.scale.setScalar(s); R.hook.position.set(c.x,bodyTopY,0); R.hook.rotation.set(0,(c.hookYaw||0)*Math.PI/180,0);
