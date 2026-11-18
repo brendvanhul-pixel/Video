@@ -6,68 +6,425 @@
  "fps": 30,
  "bpm": 120,
  "music": {
-  "sections": [[0, "intro"], [10, "groove"], [76, "build"], [80, "drop"], [88, "groove"], [104, "break"]],
-  "end": 116.5
+  "sections": [
+   [
+    0,
+    "intro"
+   ],
+   [
+    10,
+    "groove"
+   ],
+   [
+    76,
+    "build"
+   ],
+   [
+    80,
+    "drop"
+   ],
+   [
+    88,
+    "groove"
+   ],
+   [
+    104,
+    "break"
+   ]
+  ],
+  "end": 117.31
  },
- "vo": {},
+ "vo": {
+  "file": "vo_placed.wav",
+  "offset": 0.0,
+  "source": "vo.wav",
+  "placement": [
+   [
+    0.23,
+    0.23,
+    4.39
+   ],
+   [
+    5.06,
+    5.06,
+    7.36
+   ],
+   [
+    8.01,
+    8.01,
+    12.38
+   ],
+   [
+    13.47,
+    13.47,
+    17.21
+   ],
+   [
+    17.97,
+    17.97,
+    23.06
+   ],
+   [
+    24.0,
+    23.99,
+    26.38
+   ],
+   [
+    26.704,
+    27.0,
+    29.56
+   ],
+   [
+    31.4,
+    30.56,
+    34.34
+   ],
+   [
+    35.48,
+    35.02,
+    36.62
+   ],
+   [
+    37.6,
+    37.06,
+    40.26
+   ],
+   [
+    42.8,
+    41.17,
+    44.07
+   ],
+   [
+    46.0,
+    44.86,
+    47.37
+   ],
+   [
+    52.2,
+    48.67,
+    52.71
+   ],
+   [
+    56.8,
+    53.48,
+    57.21
+   ],
+   [
+    61.6,
+    57.93,
+    61.09
+   ],
+   [
+    65.06,
+    61.63,
+    65.71
+   ],
+   [
+    69.44,
+    66.48,
+    70.08
+   ],
+   [
+    75.2,
+    71.42,
+    73.19
+   ],
+   [
+    78.2,
+    73.82,
+    77.16
+   ],
+   [
+    82.4,
+    77.74,
+    79.51
+   ],
+   [
+    86.2,
+    80.43,
+    82.94
+   ],
+   [
+    89.8,
+    83.66,
+    85.29
+   ],
+   [
+    92.4,
+    85.94,
+    89.16
+   ],
+   [
+    96.4,
+    89.56,
+    90.98
+   ],
+   [
+    99.6,
+    91.77,
+    93.0
+   ],
+   [
+    104.2,
+    94.2,
+    95.6
+   ],
+   [
+    107.0,
+    96.27,
+    101.03
+   ],
+   [
+    114.2,
+    102.05,
+    104.91
+   ]
+  ]
+ },
  "captions": [
-  [0.6, 3.8, "Monday, 08:52. Tom wants his rigging plan."],
-  [3.8, 6.6, "Marta wants a lift study by Wednesday."],
-  [6.6, 10.6, "And the HQ report is due Friday. Nobody’s asked about that one."],
-  [11.2, 15.6, "Start on whoever calls loudest, and the week lives in your head."],
-  [15.6, 22.4, "Every call reshuffles it, and the quiet jobs slide later until they’re urgent."],
-  [23.2, 26.2, "Tom and Marta push for one reason."],
-  [26.2, 30.6, "They can’t see when their work will come."],
-  [31.4, 35.4, "So give it ten minutes before you answer. One page."],
-  [35.4, 37.6, "Every job gets its own date,"],
-  [37.6, 42.4, "and one gets marked as the thing that must happen this week."],
-  [42.8, 45.8, "Then call Tom back: Tuesday, by noon."],
-  [45.8, 51.2, "He can plan his crew, and the calls stop."],
-  [52.2, 56.8, "Dates move. On Tuesday the client’s drawing slips to Thursday."],
-  [56.8, 61.4, "Before anything goes back in, ask how the last few like it went."],
-  [61.6, 64.9, "New cost codes, no record yet: extra days."],
-  [64.9, 69.2, "A permit office that’s been on time six times: trust its date."],
-  [69.2, 73.6, "A client who only “might” want more: ask first."],
-  [75.2, 78.2, "Wednesday morning, you open the plan."],
-  [78.2, 82.4, "The study and the report both need Thursday and Friday."],
-  [82.4, 85.6, "You see it now, two days early."],
-  [86.2, 89.8, "Saying so feels like admitting the week went wrong."],
-  [89.8, 92.4, "Say it anyway, with a proposal."],
-  [92.4, 96.4, "“Both need Thursday and Friday. I’d do the study first."],
-  [96.4, 99.2, "Can the report move to Monday?”"],
-  [99.6, 103.4, "Paul answers in one line."],
-  [104.2, 107.0, "Most weeks get done either way."],
-  [107.0, 113.2, "What the plan buys you is a calmer one, and Friday’s problem on a Wednesday."]
+  [
+   0.13,
+   4.79,
+   "Monday, 08:52. Tom wants his rigging plan."
+  ],
+  [
+   4.96,
+   7.86,
+   "Marta wants a lift study by Wednesday."
+  ],
+  [
+   7.91,
+   13.32,
+   "And the HQ report is due Friday. Nobody’s asked about that one."
+  ],
+  [
+   13.37,
+   17.82,
+   "Start on whoever calls loudest, and the week lives in your head."
+  ],
+  [
+   17.87,
+   23.85,
+   "Every call reshuffles it, and the quiet jobs slide later until they’re urgent."
+  ],
+  [
+   23.9,
+   26.55,
+   "Tom and Marta push for one reason."
+  ],
+  [
+   26.6,
+   30.8,
+   "They can’t see when their work will come."
+  ],
+  [
+   31.3,
+   35.33,
+   "So give it ten minutes before you answer. One page."
+  ],
+  [
+   35.38,
+   37.45,
+   "Every job gets its own date,"
+  ],
+  [
+   37.5,
+   42.65,
+   "and one gets marked as the thing that must happen this week."
+  ],
+  [
+   42.7,
+   45.85,
+   "Then call Tom back: Tuesday, by noon."
+  ],
+  [
+   45.9,
+   50.5,
+   "He can plan his crew, and the calls stop."
+  ],
+  [
+   52.1,
+   56.65,
+   "Dates move. On Tuesday the client’s drawing slips to Thursday."
+  ],
+  [
+   56.7,
+   61.45,
+   "Before anything goes back in, ask how the last few like it went."
+  ],
+  [
+   61.5,
+   64.91,
+   "New cost codes, no record yet: extra days."
+  ],
+  [
+   64.96,
+   69.29,
+   "A permit office that’s been on time six times: trust its date."
+  ],
+  [
+   69.34,
+   73.94,
+   "A client who only “might” want more: ask first."
+  ],
+  [
+   75.1,
+   78.05,
+   "Wednesday morning, you open the plan."
+  ],
+  [
+   78.1,
+   82.25,
+   "The study and the report both need Thursday and Friday."
+  ],
+  [
+   82.3,
+   86.05,
+   "You see it now, two days early."
+  ],
+  [
+   86.1,
+   89.65,
+   "Saying so feels like admitting the week went wrong."
+  ],
+  [
+   89.7,
+   92.25,
+   "Say it anyway, with a proposal."
+  ],
+  [
+   92.3,
+   96.25,
+   "“Both need Thursday and Friday. I’d do the study first."
+  ],
+  [
+   96.3,
+   99.45,
+   "Can the report move to Monday?”"
+  ],
+  [
+   99.5,
+   102.5,
+   "Paul answers in one line."
+  ],
+  [
+   104.1,
+   106.85,
+   "Most weeks get done either way."
+  ],
+  [
+   106.9,
+   113.9,
+   "What the plan buys you is a calmer one, and Friday’s problem on a Wednesday."
+  ]
  ],
  "t": {
-  "drop": 0.3, "phone": 0.62, "ring1": 1.2, "clock": 1.4, "ring2": 1.8,
-  "cardTom": 2.2, "cardMarta": 4.4, "cardHQ": 7.0, "hqQuiet": 9.0, "tray": 10.0, "s2": 10.9,
-
-  "stack": 11.0, "dotOn": 11.4, "kw2": 11.6,
-  "bub1": 12.4, "shuf1": 13.0, "bub2": 14.8, "shuf2": 15.4, "bub3": 17.2, "shuf3": 17.8,
-  "hqBack": 20.4, "bigBub": 21.3, "wipe3": 22.25, "s3": 22.75,
-
-  "tomOn": 23.0, "martaOn": 23.25, "kw3": 23.5, "tomCard": 24.0, "tomPhone": 24.5,
-  "martaCard": 26.6, "martaType": 26.9, "cc": 27.8, "dotBack": 29.8, "roll3": 30.7, "iris": 31.3,
-
-  "timer": 31.8, "kw4": 32.0, "row1": 34.4, "row2": 35.0, "row3": 35.6, "row4": 36.2,
-  "dotMark": 39.4, "split": 42.8, "tomOn4": 43.1, "phoneOn": 43.3, "phoneLit": 44.4,
-  "nod": 46.3, "pocket": 47.4, "crew1": 48.0, "crew2": 48.3, "exit4": 50.8, "roll": 51.4,
-
-  "strip": 51.75, "labels": 52.15, "blocks": 52.6, "kw5a": 53.0, "slip": 55.0, "drag": 55.25,
-  "kw5out": 61.2, "report": 61.8, "kw5b": 62.0, "stretch": 63.2,
-  "permit": 65.2, "kw5c": 65.3, "ticks": 65.8, "permitLand": 67.0,
-  "might": 69.4, "kw5d": 69.6, "avatar": 70.2, "ask": 70.6, "collapse5": 74.0, "disc": 74.5,
-
-  "dotDown": 75.2, "roll6": 75.8, "kw6a": 78.4, "enter": 79.3, "hit": 80.0, "flag": 81.0,
-  "kw6b": 82.6, "dim": 82.8, "wipe7": 85.6,
-
-  "door": 86.6, "paulOut": 86.9, "clock7": 87.3, "mini": 88.2, "bubble7": 92.3,
-  "chip1": 92.6, "chip2": 94.6, "chip3": 96.6, "send": 99.2, "reply": 99.8,
-  "reportHop": 100.8, "studyGrow": 101.4, "snap": 101.9, "wipe8": 103.2, "s8": 103.7,
-
-  "kw8": 104.4, "tick1": 105.0, "lean": 105.6, "tick2": 106.2, "tick3": 107.4, "collapse8": 113.0,
-
-  "s9": 113.6, "title1": 114.2, "title2": 114.9, "finalHop": 116.0, "finalLand": 116.5
+  "drop": 0.382,
+  "phone": 0.789,
+  "ring1": 1.527,
+  "clock": 1.782,
+  "ring2": 2.291,
+  "cardTom": 2.8,
+  "cardMarta": 5.1,
+  "cardHQ": 8.0,
+  "hqQuiet": 9.6,
+  "tray": 11.5,
+  "s2": 12.978,
+  "stack": 13.142,
+  "dotOn": 13.675,
+  "kw2": 13.879,
+  "bub1": 14.697,
+  "shuf1": 15.311,
+  "bub2": 17.152,
+  "shuf2": 17.765,
+  "bub3": 19.24,
+  "shuf3": 19.717,
+  "hqBack": 21.781,
+  "bigBub": 22.496,
+  "wipe3": 23.25,
+  "s3": 23.645,
+  "tomOn": 23.842,
+  "martaOn": 24.045,
+  "kw3": 24.27,
+  "tomCard": 24.721,
+  "tomPhone": 25.172,
+  "martaCard": 27.064,
+  "martaType": 27.335,
+  "cc": 28.146,
+  "dotBack": 29.948,
+  "roll3": 30.759,
+  "iris": 31.3,
+  "timer": 31.8,
+  "kw4": 32.0,
+  "row1": 34.4,
+  "row2": 35.0,
+  "row3": 35.6,
+  "row4": 36.2,
+  "dotMark": 39.4,
+  "split": 42.8,
+  "tomOn4": 43.1,
+  "phoneOn": 43.3,
+  "phoneLit": 44.4,
+  "nod": 46.3,
+  "pocket": 47.4,
+  "crew1": 48.0,
+  "crew2": 48.3,
+  "exit4": 50.8,
+  "roll": 51.4,
+  "strip": 51.75,
+  "labels": 52.15,
+  "blocks": 52.6,
+  "kw5a": 53.0,
+  "slip": 55.0,
+  "drag": 55.25,
+  "kw5out": 61.2,
+  "report": 61.8,
+  "kw5b": 62.0,
+  "stretch": 63.2,
+  "permit": 65.2,
+  "kw5c": 65.3,
+  "ticks": 65.8,
+  "permitLand": 67.0,
+  "might": 69.4,
+  "kw5d": 69.6,
+  "avatar": 70.2,
+  "ask": 70.6,
+  "collapse5": 74.0,
+  "disc": 74.5,
+  "dotDown": 75.2,
+  "roll6": 75.8,
+  "kw6a": 78.4,
+  "enter": 79.3,
+  "hit": 80.0,
+  "flag": 81.0,
+  "kw6b": 82.6,
+  "dim": 82.8,
+  "wipe7": 85.6,
+  "door": 86.6,
+  "paulOut": 86.9,
+  "clock7": 87.3,
+  "mini": 88.2,
+  "bubble7": 92.3,
+  "chip1": 92.6,
+  "chip2": 94.6,
+  "chip3": 96.6,
+  "send": 99.2,
+  "reply": 99.8,
+  "reportHop": 100.8,
+  "studyGrow": 101.4,
+  "snap": 101.9,
+  "wipe8": 103.2,
+  "s8": 103.7,
+  "kw8": 104.4,
+  "tick1": 105.0,
+  "lean": 105.6,
+  "tick2": 106.2,
+  "tick3": 107.4,
+  "collapse8": 113.0,
+  "s9": 113.6,
+  "title1": 114.15,
+  "title2": 115.71,
+  "finalHop": 116.81,
+  "finalLand": 117.31
  }
 }
