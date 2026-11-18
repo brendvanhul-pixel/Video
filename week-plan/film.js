@@ -332,6 +332,13 @@ window.FILM = async function (SR, tl, root, T, cues) {
   tl.to(stu.a, { x: 2 * STEP, duration: 0.6, ease: 'back.out(1.3)' }, T.drag);
   tl.to(stu.a, { keyframes: [{ scaleX: 1.22, scaleY: 0.9, duration: 0.25 }, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1,0.35)' }], transformOrigin: '100% 50%' }, T.drag);
   SR.sfx(T.drag, 'whoosh', { dur: 0.5, rise: false, lo: 300, hi: 2500, gain: 0.35 });
+  // living hold while the VO asks about the record: the dot pulses, the blocks breathe
+  SR.onTick(t => {
+    const w = SR.win(t, T.drag + 0.9, T.report - 0.1, 0.4), s = t - T.drag;
+    hero.body.setAttribute('r', 40 * (1 + 0.07 * w * Math.max(0, Math.sin(s * 2 * Math.PI * 0.8))));
+    if (w > 0 || (t > T.drag && t < T.report + 1)) { stu.r.setAttribute('transform', `translate(0,${w * Math.sin(s * 2 * Math.PI * 0.5) * 4})`); drw.r.setAttribute('transform', `translate(0,${w * Math.sin(s * 2 * Math.PI * 0.5 + 1.2) * 4})`); }
+  });
+  for (let i = 0; i < 4; i++) SR.sfx(T.drag + 1.6 + i * 1.25, 'pluck', { note: [67, 72, 69, 74][i], gain: 0.08 });
   // report: no record, so its block grows extra days (ghost stack is empty)
   const repG = anim(place(s5, xCol(4), L2));
   const ghosts = [24, 12].map(o => el('rect', { x: o, y: -38 - o, width: CW, height: 76, rx: 12, fill: 'none', stroke: C.white, 'stroke-width': 4, 'stroke-dasharray': '14 10' }, repG));
