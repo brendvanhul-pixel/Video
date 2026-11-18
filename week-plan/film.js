@@ -91,95 +91,139 @@ window.FILM = async function (SR, tl, root, T, cues) {
 
   const X0 = 260, STEP = 220, CW = 210, xCol = i => X0 + i * STEP, spanW = n => n * CW + (n - 1) * (STEP - CW), xCol0 = X0;
 
-  /* ========== SCENE 1 · Monday 08:52 (blue-deep) ========== */
+  /* ========== SCENE 1 · Monday 08:52: you at your desk, the messages come in (blue-deep) ========== */
   const s1 = scene(C.deep); k.show(s1, 0);
-  const clock = SR.words(s1, '08:52', 150, 262, stDisp, C.white); gsap.set(clock.groups, { scale: 0 });
-  // phone: the dot lands on its corner and becomes the badge
-  const phone = anim(place(s1, 470, 800));
-  rect(phone, -115, -420, 230, 420, C.deepBand, 36);
-  rect(phone, -95, -380, 190, 320, C.blue, 16);
-  circle(phone, 0, -280, 46, C.white);
-  path(phone, 'M-22,-300 C-22,-318 22,-318 22,-300 L14,-262 C10,-250 -10,-250 -14,-262 Z', C.blue);
-  SR.textEl(phone, 'Tom', 0, -170, stLabel, C.white, 'middle');
-  rect(phone, -40, -40, 80, 12, C.deep, 6);
-  gsap.set(phone, { scale: 0, transformOrigin: '50% 100%' });
-  k.pop(phone, T.phone, { origin: '50% 100%', dur: 0.45, ease: 'popBig', pitch: 260 });
-  k.drop(hero, T.drop, { x: 585, groundY: 420, rebound: 90 });
-  [T.ring1, T.ring2, T.ring3].forEach((at, i) => {
-    tl.to(phone, { keyframes: [{ rotation: 6, duration: 2 * FR }, { rotation: -6, duration: 2 * FR }, { rotation: 6, duration: 2 * FR }, { rotation: 0, duration: 2 * FR }], transformOrigin: '50% 100%' }, at);
-    k.squash(hero, at + 0.04, 0.14);
-    SR.sfx(at, 'tick', { pitch: 2600, gain: 0.3 }); SR.sfx(at + 0.09, 'tick', { pitch: 2300, gain: 0.25 });
+  // the wall: a clock at 08:52 with a ticking second hand, and a Monday calendar
+  const clk1 = place(s1, 300, 300);
+  circle(clk1, 0, 0, 112, C.deepBand); circle(clk1, 0, 0, 96, C.white);
+  for (let i = 0; i < 12; i++) { const m = place(clk1, 0, 0, `rotate(${i * 30})`); rect(m, -4, -88, 8, i % 3 ? 12 : 22, C.deep, 4); }
+  rect(place(clk1, 0, 0, `rotate(${(8 + 52 / 60) * 30})`), -7, -52, 14, 60, C.deep, 7);
+  rect(place(clk1, 0, 0, `rotate(${52 * 6})`), -5, -80, 10, 88, C.deep, 5);
+  const sec = el('g', {}, clk1); rect(sec, -2, -84, 4, 98, C.blue, 2); circle(clk1, 0, 0, 10, C.deep);
+  SR.onTick(t => sec.setAttribute('transform', `rotate(${(20 + Math.floor(t)) * 6 + 6 * SR.smooth((t % 1) / 0.1)})`));
+  const cal = place(s1, 560, 196);
+  rect(cal, 0, 0, 190, 210, C.white, 14); rect(cal, 0, 0, 190, 60, C.blue, 14); rect(cal, 0, 40, 190, 20, C.blue);
+  SR.textEl(cal, 'Monday', 95, 42, stLabel, C.white, 'middle');
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) rect(cal, 22 + c * 40, 80 + r * 40, 28, 28, r + c === 0 ? C.blue : C.grey, 6);
+  // the HQ report: a grey note pinned to the wall that nobody touches
+  const hqP = place(s1, 1000, 222), hq = anim(hqP);
+  rect(hq, -110, 0, 220, 156, C.grey, 10); circle(hq, 0, 16, 12, C.tint);
+  SR.textEl(hq, 'HQ report', 0, 76, stLabel, C.deep, 'middle'); SR.textEl(hq, 'Fri', 0, 126, stBody, C.deep, 'middle');
+  // you, at the desk, with a coffee
+  const eng1 = SR.character(s1, 760, 822, { shirt: C.blue, sleeve: C.deepBand, skin: SR.SKIN[3], hair: 'short', hairColor: SR.HAIR[1] });
+  rect(eng1.armL.fore, -26, 62, 52, 58, C.white, 10); stroke(eng1.armL.fore, 'M26,72 a16,16 0 0 1 0,30', C.white, 9);
+  SR.props.table(s1, 340, 1260, 822, C.deepBand);
+  SR.props.laptop(s1, 980, 822, C.blue);
+  const phP = place(s1, 1160, 822), ph1 = anim(phP);
+  rect(ph1, -38, -134, 76, 134, C.white, 14); rect(ph1, -30, -122, 60, 104, C.blue, 8);
+  gsap.set(ph1, { scale: 0, transformOrigin: '50% 100%' });
+  k.pop(ph1, T.phone, { origin: '50% 100%', dur: 0.45, ease: 'popBig', pitch: 260 });
+  // the dot drops onto the phone and becomes its badge
+  tl.set(hero.size, { scale: 0.5 }, 0);
+  k.drop(hero, T.drop, { x: 1196, groundY: 694 + 40, rebound: 60 });
+  [T.ring1, T.ring2, T.ring3].forEach(at => {
+    tl.to(ph1, { keyframes: [{ rotation: 6, duration: 2 * FR }, { rotation: -6, duration: 2 * FR }, { rotation: 6, duration: 2 * FR }, { rotation: 0, duration: 2 * FR }], transformOrigin: '50% 100%' }, at);
+    k.squash(hero, at + 0.04, 0.16);
+    SR.sfx(at, 'tick', { pitch: 2600, gain: 0.3, pan: 0.3 }); SR.sfx(at + 0.09, 'tick', { pitch: 2300, gain: 0.25, pan: 0.3 });
   });
-  k.popWords(clock.groups, T.clock, { stagger: 3 * FR, dur: 0.5 });
-  const cTom = card(s1, 1270, 395, 900, 130, 'crane', 'Tom: rigging plan');
-  const cMar = card(s1, 1270, 555, 900, 130, 'document', 'Marta: lift study, Wed');
-  const cHQ = card(s1, 1330, 712, 640, 100, 'bars', 'HQ report, Fri', { fill: C.grey });
-  dropIn(cTom.a, T.cards, { pitch: 380, pan: 0.3 });
-  dropIn(cMar.a, T.cards + 3 * FR, { pitch: 460, pan: 0.3 });
-  dropIn(cHQ.a, T.cards + 6 * FR, { pitch: 300, gain: 0.3, pan: 0.4 });
-  // the voice walks across the cards: each one pulses as it is named
-  [[cTom, T.nameTom], [cMar, T.nameMarta], [cHQ, T.nameHQ]].forEach(([c, at], i) => {
-    tl.to(c.sh, { keyframes: [{ scale: 1.045, duration: 0.1, ease: 'power2.out' }, { scale: 1, duration: 0.55, ease: 'elastic.out(1,0.35)' }], transformOrigin: '50% 50%' }, at);
-    SR.sfx(at, 'pluck', { note: [76, 79, 67][i], gain: 0.18, pan: 0.3 });
+  // first ring: you flinch and the mug goes down
+  tl.to(eng1.rise, { keyframes: [{ y: -18, duration: 0.08, ease: 'power2.out' }, { y: 0, duration: 0.45, ease: 'elastic.out(1,0.35)' }] }, T.ring1);
+  SR.sfx(T.ring1 + 0.02, 'boing', { pitch: 420, gain: 0.25 });
+  SR.charLife(eng1, { seed: 0.4, side: 1, from: 0, to: T.s2 + 0.1, listen: [[T.nameTom, T.nameMarta - 0.4], [T.nameMarta + 0.2, T.nameHQ - 0.3]] });
+  SR.onTick(t => {
+    if (t > T.s2 + 0.1) return;
+    const mug = 0.95 * (1 - SR.smooth((t - T.ring1 - 0.15) / 0.45));
+    const typ = SR.win(t, T.nameTom + 0.6, T.tray, 0.3) * (0.18 + 0.07 * Math.max(0, Math.sin(t * 2 * Math.PI * 5)));
+    SR.setArms(eng1, Math.max(mug, typ), typ * (0.9 + 0.1 * Math.sin(t * 9)));
   });
-  [[cTom, 1270, 395], [cMar, 1270, 555], [cHQ, 1330, 712]].forEach(([c, x, y], i) => SR.onTick(t => c.p.setAttribute('transform', `translate(${x},${y}) scale(${1 + 0.005 * Math.sin((t + i * 0.7) * 2 * Math.PI * 0.4)})`)));
-  tl.to(cHQ.sh, { y: 6, rotation: -2, duration: 1.2, ease: 'sine.inOut', transformOrigin: '50% 50%' }, T.hqQuiet);
-  // transition: a blue tray rises from the bottom edge and swallows the week
+  for (let i = 0; i < 12; i++) SR.sfx(T.nameTom + 0.8 + i * 0.6 + (i % 2) * 0.13, 'tick', { pitch: 3300 + (i % 3) * 250, gain: 0.08, pan: 0.2 });
+  // messages fly out of the phone into a feed: Tom, Tom again, Marta
+  const notif = (slotY, who, text, at) => {
+    const p = place(s1, 1545, slotY), a = anim(p);
+    rect(a, -255, -52, 510, 104, C.white, 22);
+    const av = place(a, -200, 0); circle(av, 0, 0, 38, C.blue);
+    if (who === 'tom') { circle(av, 0, 8, 22, SR.SKIN[1]); path(av, 'M-25,2 C-25,-30 25,-30 25,2 Z', C.white); rect(av, -31, -3, 62, 9, C.white, 4); }
+    else { path(av, 'M-24,4 C-28,-28 28,-28 24,4 L26,30 L-26,30 Z', SR.HAIR[1]); circle(av, 0, 6, 21, SR.SKIN[2]); path(av, 'M-22,4 C-24,-21 24,-21 22,4 C15,-6 8,-11 0,-11 C-8,-11 -15,-6 -22,4 Z', SR.HAIR[1]); }
+    SR.textEl(a, text, -142, 15, stBody, C.deep);
+    gsap.set(a, { autoAlpha: 0 }); k.show(a, at);
+    tl.fromTo(a, { x: 1160 - 1545, y: 740 - slotY, scale: 0.12, rotation: -18 }, { x: 0, y: 0, scale: 1, rotation: 0, duration: 0.55, ease: 'back.out(1.5)', immediateRender: false }, at);
+    tl.to(ph1, { keyframes: [{ scaleY: 0.9, scaleX: 1.08, duration: 0.05 }, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1,0.35)' }], transformOrigin: '50% 100%' }, at - 0.05);
+    SR.sfx(at, 'whoosh', { dur: 0.4, rise: false, lo: 900, hi: 4000, gain: 0.25, pan: 0.5 }); SR.sfx(at + 0.5, 'pop', { pitch: who === 'tom' ? 520 : 700, gain: 0.45, pan: 0.5 });
+    return a;
+  };
+  const n1 = notif(300, 'tom', 'Rigging plan?', T.nameTom), n2 = notif(424, 'tom', 'Today?', T.nameTom + 0.85), n3 = notif(548, 'marta', 'Lift study by Wed!', T.nameMarta);
+  tl.to(n2, { keyframes: [{ x: -10, duration: 0.04 }, { x: 10, duration: 0.06 }, { x: -6, duration: 0.06 }, { x: 0, duration: 0.06 }] }, T.nameTom + 1.45);
+  tl.to(n3, { keyframes: [{ scale: 1.06, duration: 0.1 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1,0.35)' }] }, T.nameMarta + 1.3);
+  SR.sfx(T.nameMarta + 1.3, 'pop', { pitch: 820, gain: 0.35, pan: 0.5 });
+  [[n1, 300], [n2, 424], [n3, 548]].forEach(([n, y], i) => SR.onTick(t => n.parentNode.setAttribute('transform', `translate(1545,${y + Math.sin((t + i) * 2 * Math.PI * 0.45) * 3})`)));
+  // HQ: named, then it quietly sags on its pin
+  tl.to(hq, { keyframes: [{ scale: 1.05, duration: 0.12 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1,0.35)' }], transformOrigin: '50% 10%' }, T.nameHQ);
+  SR.sfx(T.nameHQ, 'pluck', { note: 60, gain: 0.2, pan: 0.1 });
+  tl.to(hq, { rotation: 11, y: 6, duration: 1.2, ease: 'elastic.out(1,0.5)', transformOrigin: '50% 10%' }, T.hqQuiet);
+  SR.sfx(T.hqQuiet, 'pluck', { note: 55, gain: 0.18 });
+  // transition: a blue tray rises from the bottom edge and swallows the morning
   const trayP = place(s1, 0, 0), tray = anim(trayP);
   rect(tray, 0, 0, W, H + 60, C.blue);
   const mouth = anim(place(tray, 960, 70)); rect(mouth, -470, -28, 940, 56, C.deepBand, 28);
   gsap.set(tray, { y: H + 10 });
   tl.to(tray, { y: 0, duration: 0.9, ease: 'power2.inOut' }, T.tray);
   tl.to(mouth, { scaleX: 0, duration: 0.25, ease: 'back.in(2)', transformOrigin: '50% 50%' }, T.tray + 0.62);
-  sink([[cTom.a, 1270, 395], [cMar.a, 1270, 555], [cHQ.a, 1330, 712], [phone, 470, 590]], T.tray + 0.05, 960, 640);
-  k.outWords(clock.groups, T.tray);
+  sink([[n1, 1545, 300], [n2, 1545, 424], [n3, 1545, 548], [hq, 1000, 300], [ph1, 1160, 755]], T.tray + 0.05, 960, 640);
   hopTo(T.tray + 0.05, 960, 640, { scale: 0, dur: 0.4, land: false });
 
-  /* ========== SCENE 2 · The inbox decides (blue-301) ========== */
+  /* ========== SCENE 2 · Loudest first: Tom and Marta out-shout each other (blue-301) ========== */
   const s2 = scene(C.blue);
   k.show(s2, T.s2); k.hide(s1, T.s2 + 0.05);
-  const kw2 = kw(s2, 'Loudest first', T.kw2, T.bigBub - 0.2);
+  const tomS = SR.character(s2, 250, 850, { shirt: C.deepBand, sleeve: C.deepBand, skin: SR.SKIN[1], helmet: C.white, hair: 'none' }); vest(tomS);
+  const marS = SR.character(s2, 1670, 850, { shirt: C.tint, sleeve: C.deepBand, skin: SR.SKIN[2], hair: 'long', hairColor: SR.HAIR[1] });
+  const mg = anim(place(tomS.head, 46, 34)); rect(mg, -18, -20, 26, 46, C.tint, 6); path(mg, 'M0,-16 L96,-50 L96,66 L0,24 Z', C.white);
+  gsap.set(mg, { scale: 0, transformOrigin: '0% 50%' });
+  rect(s2, 0, 846, W, 240, C.deepBand);
+  tl.fromTo(tomS.rise, { y: 440 }, { y: 0, duration: 0.5, ease: 'popBig' }, T.s2 + 0.1); SR.sfx(T.s2 + 0.1, 'boing', { pitch: 260, gain: 0.45, pan: -0.7 });
+  tl.fromTo(marS.rise, { y: 440 }, { y: 0, duration: 0.5, ease: 'popBig' }, T.s2 + 0.3); SR.sfx(T.s2 + 0.3, 'boing', { pitch: 320, gain: 0.45, pan: 0.7 });
+  // your task stack, in the middle
   const cl = el('g', {}, s2);
   const slot = [360, 510, 660, 768];
-  const tom2 = card(cl, 960, 0, 760, 120, 'crane', 'Tom: rigging plan');
-  const mar2 = card(cl, 960, 0, 760, 120, 'document', 'Marta: lift study');
-  const hq2 = card(cl, 960, 0, 620, 100, 'bars', 'HQ report', { fill: C.grey });
+  const tom2 = card(cl, 960, 0, 620, 120, 'crane', 'Tom: rigging plan');
+  const mar2 = card(cl, 960, 0, 620, 120, 'document', 'Marta: lift study');
+  const hq2 = card(cl, 960, 0, 520, 100, 'bars', 'HQ report', { fill: C.grey });
   gsap.set(tom2.a, { y: slot[0] }); gsap.set(mar2.a, { y: slot[1] }); gsap.set(hq2.a, { y: slot[2] });
   [tom2, mar2, hq2].forEach((c, i) => k.pop(c.sh, T.stack + i * 3 * FR, { origin: '50% 100%', ease: 'popBig', pitch: 400 + 120 * i, gain: 0.35 }));
-  const topY = slot[0] - 60 - 44;
-  tl.set(hero.pos, { x: 1280, y: topY }, T.dotOn - 0.05);
+  const dotX = 960 + 310 - 60, topY = slot[0] - 60 - 44;
+  tl.set(hero.pos, { x: dotX, y: topY }, T.dotOn - 0.05);
   heroPop(T.dotOn, 1);
-  // the loudest card is drawn on top: deterministic reorder from the schedule
   const loud = [[0, tom2], [T.shuf1, mar2], [T.shuf2, tom2], [T.shuf3, mar2], [T.hqBack, hq2]];
   SR.onTick(t => { let c = loud[0][1]; loud.forEach(([a, cc]) => { if (t >= a) c = cc; }); if (cl.lastChild !== c.p) cl.appendChild(c.p); });
   const jump = (c, at, y, side) => {
-    tl.to(c.a, { keyframes: [{ x: side * 560, duration: 0.24, ease: 'power2.out' }, { x: 0, duration: 0.3, ease: 'power2.in' }] }, at);
+    tl.to(c.a, { keyframes: [{ x: side * 420, duration: 0.24, ease: 'power2.out' }, { x: 0, duration: 0.3, ease: 'power2.in' }] }, at);
     tl.to(c.a, { y, duration: 0.54, ease: 'power2.inOut' }, at);
     tl.to(c.sh, { keyframes: [{ scale: 1.08, duration: 0.24 }, { scale: 1, duration: 0.45, ease: 'elastic.out(1,0.4)' }], transformOrigin: '50% 50%' }, at);
     SR.sfx(at, 'zip', { dur: 0.3, gain: 0.35, pan: side * 0.4 });
   };
   const slide = (c, at, y) => tl.to(c.a, { y, duration: 0.4, ease: 'power3.inOut' }, at);
   const bumpDot = (at) => { tl.to(hero.pos, { keyframes: [{ y: topY - 130, duration: 0.24, ease: 'power2.out' }, { y: topY, duration: 0.3, ease: 'power2.in' }] }, at); tl.to(hero.spin, { rotation: '+=180', duration: 0.54 }, at); k.squash(hero, at + 0.54, 0.22); SR.sfx(at + 0.54, 'pop', { pitch: 800, gain: 0.4 }); };
-  const bubbles = [
-    [T.bub1, 1620, 470, 330, 170, 'left', 0], [T.bub1 + 0.15, 290, 610, 200, 110, 'right', 0],
-    [T.bub2, 300, 470, 340, 180, 'right', 0], [T.bub2 + 0.15, 1630, 700, 200, 110, 'left', 0],
-    [T.bub3, 1620, 520, 360, 190, 'left', 0], [T.bub3 + 0.12, 300, 380, 190, 100, 'right', 0], [T.bub3 + 0.24, 1660, 290, 160, 90, 'left', 0]
-  ];
-  const outAt = { [T.bub1]: T.shuf1 + 0.6, [T.bub2]: T.shuf2 + 0.6, [T.bub3]: T.shuf3 + 0.6 };
-  bubbles.forEach(([at, x, y, w, h, tail], i) => {
-    const b = SR.bubble(s2, x, y, { w, h, fill: C.white, tail, content: bang });
+  // the shouting match: each round is louder, and the shouter's card jumps to the top
+  const bangs = n => (g, ink) => { for (let i = 0; i < n; i++) { const b = place(g, (i - (n - 1) / 2) * 40, 0); rect(b, -9, -40, 18, 50, ink, 9); circle(b, 0, 30, 10, ink); } };
+  const shouts = [ // [who, start, end, w, h, n, fill]
+    [marS, T.bub1, T.shuf1 + 0.6, 260, 140, 1, C.white],
+    [tomS, T.bub2, T.shuf2 + 0.6, 340, 180, 2, C.white],
+    [marS, T.bub3, T.shuf3 + 0.6, 400, 210, 3, C.white]];
+  shouts.forEach(([c, a, z, w, h, n, f], i) => {
+    const left = c === tomS, b = SR.bubble(s2, left ? 480 : 1460, 370, { w, h, fill: f, tail: left ? 'left' : 'right', content: bangs(n) });
+    const o = left ? '22% 100%' : '78% 100%';
     gsap.set(b, { scale: 0 });
-    const o = b.dir > 0 ? '78% 100%' : '22% 100%';
-    k.pop(b, at, { origin: o, dur: 0.4, ease: 'popBig', rot: -10 * b.dir, pitch: 500 + (w > 300 ? -150 : 250), pan: x < 960 ? -0.6 : 0.6, gain: w > 300 ? 0.55 : 0.35 });
-    const base = Object.keys(outAt).map(Number).filter(v => v <= at + 0.001).pop();
-    k.unpop(b, outAt[base] + (i % 3) * 2 * FR, { origin: o });
+    k.pop(b, a, { origin: o, dur: 0.45, ease: 'popBig', rot: left ? 10 : -10, pitch: 520 - i * 110, pan: left ? -0.6 : 0.6, gain: 0.45 + i * 0.1 });
+    tl.to(b, { keyframes: [{ scale: 1.08, duration: 0.08 }, { scale: 1, duration: 0.3, ease: 'elastic.out(1,0.35)' }], transformOrigin: o }, a + 0.9);
+    k.unpop(b, z, { origin: o });
+    SR.sfx(a, 'whoosh', { dur: 0.35, rise: true, lo: 300, hi: 2500 + i * 1500, gain: 0.25 + i * 0.1, pan: left ? -0.6 : 0.6 });
   });
+  k.pop(mg, T.bub2 - 0.35, { origin: '0% 50%', ease: 'popBig', pitch: 300, pan: -0.6 });
   jump(mar2, T.shuf1, slot[0], 1); slide(tom2, T.shuf1 + 0.08, slot[1]); slide(hq2, T.shuf1 + 0.16, slot[3]); bumpDot(T.shuf1 + 0.02);
   jump(tom2, T.shuf2, slot[0], -1); slide(mar2, T.shuf2 + 0.08, slot[1]);
   tl.to(hq2.a, { y: 1260, rotation: 12, duration: 0.55, ease: 'power3.in' }, T.shuf2 + 0.16); SR.sfx(T.shuf2 + 0.2, 'whoosh', { dur: 0.4, rise: false, lo: 2000, hi: 300, gain: 0.3 });
   bumpDot(T.shuf2 + 0.02);
   jump(mar2, T.shuf3, slot[0], 1); slide(tom2, T.shuf3 + 0.08, slot[1]); bumpDot(T.shuf3 + 0.02);
-  // the quiet job comes back, urgent and shaking
+  // the quiet job comes back, urgent and shaking; both of them stop and stare
   tl.set(hq2.a, { rotation: 0, y: -300 }, T.hqBack - 0.05);
   tl.to(hq2.a, { y: slot[0], duration: 0.34, ease: 'power2.in' }, T.hqBack);
   tl.to(hq2.sh, { keyframes: [{ scaleY: 0.8, scaleX: 1.12, duration: 0.05 }, { scaleY: 1.06, scaleX: 1.06, duration: 0.5, ease: 'elastic.out(1.1,0.35)' }], transformOrigin: '50% 50%' }, T.hqBack + 0.34);
@@ -188,12 +232,26 @@ window.FILM = async function (SR, tl, root, T, cues) {
   tl.to(hero.pos, { keyframes: [{ y: topY - 260, duration: 0.2, ease: 'power2.out' }, { y: topY, duration: 0.34, ease: 'power2.in' }] }, T.hqBack + 0.2);
   k.squash(hero, T.hqBack + 0.74, 0.25);
   SR.onTick(t => { const s = t - (T.hqBack + 0.8); const sh = s > 0 && t < T.wipe3 ? Math.sin(s * 2 * Math.PI * 7) * 2.2 * (0.6 + 0.4 * Math.sin(s * 3)) : 0; hq2.p.setAttribute('transform', `translate(${960 + sh * 2},0) rotate(${sh})`); });
-  // the biggest bubble grows into scene 3's ground
-  const big = SR.bubble(s2, 1560, 560, { w: 420, h: 220, fill: C.deep, tail: 'left', content: bang });
+  // acting: shouters lean in, mouth wide, arm up, a shake; Marta grows on her last round; both freeze when HQ lands
+  const shoutWins = { tom: [[T.bub2, T.shuf2 + 0.6], [T.bigBub, T.wipe3 + 0.5]], mar: [[T.bub1, T.shuf1 + 0.6], [T.bub3, T.shuf3 + 0.6]] };
+  const stare = [T.hqBack + 0.3, T.bigBub - 0.05];
+  SR.charLife(tomS, { seed: 0.3, side: 1, from: T.s2, to: T.s3 + 0.3, listen: [shoutWins.mar[0], shoutWins.mar[1], stare] });
+  SR.charLife(marS, { seed: 1.2, side: -1, from: T.s2, to: T.s3 + 0.3, listen: [shoutWins.tom[0], stare] });
+  [[tomS, 250, shoutWins.tom, 1], [marS, 1670, shoutWins.mar, -1]].forEach(([c, x, wins, side]) => SR.onTick(t => {
+    if (t < T.s2 || t > T.s3 + 0.3) return;
+    const w = SR.inWins(t, wins, 0.12), jit = w * Math.sin(t * 2 * Math.PI * 9) * 1.6;
+    const grow = side < 0 ? 1 + 0.1 * SR.win(t, T.bub3, T.shuf3 + 0.6, 0.25) : 1;
+    c.p.setAttribute('transform', `translate(${x},110) translate(0,760) scale(${grow}) rotate(${side * 7 * w + jit}) translate(0,-760)`);
+    c.mouth.setAttribute('transform', `scale(${1 + 0.5 * w},${1 + w * (1.6 + 0.5 * Math.sin(t * 2 * Math.PI * 6))})`);
+    const arm = w * (0.75 + 0.25 * Math.sin(t * 2 * Math.PI * 3));
+    if (side > 0) SR.setArms(c, 0, arm); else SR.setArms(c, arm, 0);
+  }));
+  // Tom's last shout is the biggest: it grows into scene 3's ground
+  const big = SR.bubble(s2, 480, 370, { w: 440, h: 230, fill: C.deep, tail: 'left', content: bangs(3) });
   gsap.set(big, { scale: 0 });
-  k.pop(big, T.bigBub, { origin: '22% 100%', dur: 0.5, ease: 'popBig', rot: 10, pitch: 220, gain: 0.6, pan: 0.5 });
+  k.pop(big, T.bigBub, { origin: '22% 100%', dur: 0.5, ease: 'popBig', rot: 10, pitch: 220, gain: 0.6, pan: -0.5 });
   heroOut(T.wipe3 - 0.15);
-  k.shapeWipe(big, T.wipe3, { scale: 15, dx: -600, dy: -20, dur: 0.5, anticipate: 0.25 });
+  k.shapeWipe(big, T.wipe3, { scale: 15, dx: 480, dy: 170, dur: 0.5, anticipate: 0.25 });
 
   /* ========== SCENE 3 · Why they push (blue-deep; Marta's office on deep-raised) ========== */
   const s3 = scene(C.deep);
@@ -624,10 +682,10 @@ window.FILM = async function (SR, tl, root, T, cues) {
   });
 
   /* ---------- captions: every spoken line, one system on every ground ---------- */
-  // white Caslon on a square block; blue-deep block on blue-301 ground, blue-deep-band block on blue-deep ground
+  // white Caslon on a square block; blue-deep block on blue-301 ground, blue-301 block on blue-deep ground
   const sw = [T.tray + 0.9, T.s3, T.iris + 0.55, T.disc + 0.3, T.wipe7 + 0.3, T.s8];
   const deepAt = t => t < sw[0] || (t >= sw[1] && t < sw[2]) || (t >= sw[3] && t < sw[4]) || t >= sw[5];
-  const boxOn = t => deepAt(t) ? C.deepBand : C.deep;
+  const boxOn = t => deepAt(t) ? C.blue : C.deep;
   const stC = SR.style('caption');
   cues.captions.forEach(([t0, t1, text]) => {
     const g = el('g', {}, capL); gsap.set(g, { autoAlpha: 0 });
