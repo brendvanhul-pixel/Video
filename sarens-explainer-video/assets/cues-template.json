@@ -1,0 +1,19 @@
+{
+ "title": "Working title",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece",
+ "duration": 12.0,
+ "fps": 30,
+ "bpm": 120,
+ "music": { "sections": [[0, "intro"], [4, "groove"]], "end": 10.0 },
+ "vo": {},
+ "t": {
+  "drop": 0.0,
+  "title": 1.0,
+  "toStatement": 4.0,
+  "statement": 4.5,
+  "collapse": 8.5,
+  "endTitle": 9.0,
+  "finalLand": 10.0
+ }
+}

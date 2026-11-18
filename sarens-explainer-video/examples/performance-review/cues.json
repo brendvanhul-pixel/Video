@@ -1,0 +1,81 @@
+{
+ "title": "What is a performance review?",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece",
+ "duration": 24.0,
+ "fps": 30,
+ "bpm": 120,
+ "music": {
+  "sections": [
+   [
+    0,
+    "intro"
+   ],
+   [
+    4,
+    "groove"
+   ],
+   [
+    12,
+    "build"
+   ],
+   [
+    14,
+    "drop"
+   ],
+   [
+    20,
+    "break"
+   ]
+  ],
+  "end": 22.0
+ },
+ "t": {
+  "drop": 0.0,
+  "land1": 0.5,
+  "land2": 0.86,
+  "leap": 1.1,
+  "words1": 1.15,
+  "hook": 1.25,
+  "dotLand": 1.5,
+  "s1exit": 3.0,
+  "lineLand": 3.5,
+  "months": 3.5,
+  "cap2a": 4.25,
+  "cap2b": 4.75,
+  "rollStart": 5.0,
+  "flagJun": 5.75,
+  "flagDec": 6.5,
+  "irisAnt": 6.8,
+  "iris": 7.0,
+  "charA": 7.6,
+  "charB": 7.75,
+  "cap3": 8.0,
+  "bubA1": 9.0,
+  "bubB1": 10.0,
+  "bubA2": 11.0,
+  "bubB2": 12.0,
+  "wipeAnt": 12.75,
+  "wipe": 13.0,
+  "badge1": 14.0,
+  "bars": 14.25,
+  "label1": 14.5,
+  "badge2": 15.0,
+  "check": 15.25,
+  "label2": 15.5,
+  "badge3": 16.0,
+  "label3": 16.33,
+  "arrow": 16.5,
+  "hit": 17.0,
+  "heart": 18.0,
+  "coin": 18.5,
+  "collapse": 20.0,
+  "heroPop": 20.5,
+  "blueWipe": 20.6,
+  "hop": 21.0,
+  "kicker": 21.25,
+  "title": 21.33,
+  "tagline": 21.75,
+  "finalLand": 22.0
+ }
+}

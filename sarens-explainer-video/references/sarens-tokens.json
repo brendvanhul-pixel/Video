@@ -1,0 +1,1106 @@
+{
+ "name": "Sarens",
+ "version": 7,
+ "color": {
+  "themes": [
+   {
+    "id": "light",
+    "name": "Light"
+   },
+   {
+    "id": "dark",
+    "name": "Dark"
+   }
+  ],
+  "tokens": [
+   {
+    "name": "blue-301",
+    "value": "#2A5E97",
+    "usage": "[Manual p.46–47] Pantone 301C. Main brand colour: logo, document covers, cranes. On screen: primary buttons, links, chart bars, progress fills, brand hero cards, the primary icon stroke. White text on it 6.67:1."
+   },
+   {
+    "name": "grey-431",
+    "value": "#606566",
+    "usage": "[Manual p.46–47] Pantone 431C. Secondary colour for typography and graphic block elements. On screen: body text on light grounds (5.18:1 on ground, 5.91:1 on surface, 4.74:1 on blue-wash), control borders. Fails as body text on grey-sarens (4.36:1)."
+   },
+   {
+    "name": "yellow-108",
+    "value": "#FFE300",
+    "usage": "[Manual p.46–47] Pantone 108C. Highlighting colour, used infrequently. On screen: an accent fill carrying blue-deep text (11.89:1), or a mark on surface-contrast and brand-fill. Never text, never a status, never a mark on a light ground (1.29:1 on white)."
+   },
+   {
+    "name": "grey-sarens",
+    "value": "#D9DEE2",
+    "usage": "[Manual p.46–47] Grey Sarens. Alternative background. On screen: table header rows and hairlines on light; body text on dark (11.34:1)."
+   },
+   {
+    "name": "white-sarens",
+    "value": "#FFFFFF",
+    "usage": "[Manual p.46–47] White Sarens. Background colour. On screen: cards on the light ground, text on blue-301 and blue-deep."
+   },
+   {
+    "name": "marine-281",
+    "value": "#001F5B",
+    "usage": "[Manual p.46–47] Pantone 281C. Reserved exclusively for work clothes and certain vehicles. Never in any screen, poster, newsletter or e-learning. Listed only so no one reintroduces it."
+   },
+   {
+    "name": "blue-tint",
+    "value": "#94AECB",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] 50% tint of blue-301 with white. Secondary icon tone, unselected chart bars with a value label, muted text on surface-contrast in light (6.72:1); links, control borders and focus ring on dark. Never text on light (2.0:1 on ground)."
+   },
+   {
+    "name": "blue-wash",
+    "value": "#DFE7EF",
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] 15% tint of blue-301 with white. The tinted card surface on light. grey-431 on it 4.74:1, blue-301 5.34:1, blue-deep 12.31:1."
+   },
+   {
+    "name": "blue-deep",
+    "value": "#11263C",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] blue-301 darkened to 40%. Dark page ground. Since 12 Nov 2026 also the contrast card and strong text colour on light (15.37:1 on white, 13.45:1 on ground), and the text colour on yellow."
+   },
+   {
+    "name": "blue-deep-raised",
+    "value": "#152F4C",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] blue-301 at 50%. Cards on the dark ground."
+   },
+   {
+    "name": "blue-deep-band",
+    "value": "#1D426A",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] blue-301 at 70%. Tracks, hairlines and the tinted card on dark."
+   },
+   {
+    "name": "grey-tint",
+    "value": "#EEF0F2",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] grey-sarens 45% with white. Light page ground, and wells inside white cards."
+   },
+   {
+    "name": "ground",
+    "value": {
+     "light": "{grey-tint}",
+     "dark": "{blue-deep}"
+    },
+    "usage": "Page ground. Cards float on it; nothing else sits directly on it except the page headline and the nav."
+   },
+   {
+    "name": "surface",
+    "value": {
+     "light": "{white-sarens}",
+     "dark": "{blue-deep-raised}"
+    },
+    "usage": "Default card, field and menu surface. Flat at rest: depth is the colour step from ground. Shadow only on hover and on floating layers."
+   },
+   {
+    "name": "surface-sunken",
+    "value": {
+     "light": "{grey-tint}",
+     "dark": "{blue-deep}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] Wells inside a surface card: list rows, nested tiles, segmented-control tracks, unselected chips. ink on it 5.18:1 light, 11.34:1 dark."
+   },
+   {
+    "name": "surface-contrast",
+    "value": {
+     "light": "{blue-deep}",
+     "dark": "{blue-301}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] The one dark card that anchors a view, selected chips, the segmented-control thumb, contrast buttons. Text on it is on-contrast. At most two contrast cards in a view."
+   },
+   {
+    "name": "on-contrast",
+    "value": {
+     "light": "{white-sarens}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "Headings, figures and body text on surface-contrast. 15.37:1 light, 6.67:1 dark."
+   },
+   {
+    "name": "on-contrast-muted",
+    "value": {
+     "light": "{blue-tint}",
+     "dark": "{grey-sarens}"
+    },
+    "usage": "Secondary text and inactive marks on surface-contrast. 6.72:1 light, 4.93:1 dark."
+   },
+   {
+    "name": "surface-wash",
+    "value": {
+     "light": "{blue-wash}",
+     "dark": "{blue-deep-band}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] The tinted card: a quieter second colour block beside white and contrast cards. Body text on it is ink (4.74:1 light, 7.60:1 dark); headings ink-strong."
+   },
+   {
+    "name": "surface-glass",
+    "value": {
+     "light": "rgba(255,255,255,0.72)",
+     "dark": "rgba(21,47,76,0.72)"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] A layer floating over a photo or a contrast card, always with backdrop-filter blur-glass. Text on glass is ink-strong only (8.56:1 worst case light, 5.63:1 dark); never ink."
+   },
+   {
+    "name": "scrim",
+    "value": "rgba(17,38,60,0.72)",
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] blue-deep at 72%. The block laid over a photo so text can sit on it, in print and video only. Text on it is white-sarens: 6.16:1 over the whitest photo, 17.39:1 over the darkest. Never a gradient, never under 72%. Email cannot draw it: there, text sits on a solid block beside the photo."
+   },
+   {
+    "name": "band",
+    "value": {
+     "light": "{grey-sarens}",
+     "dark": "{blue-deep-band}"
+    },
+    "usage": "Table header rows and selected rows. Text on band: ink-strong or ink-heading only at body size. Progress tracks do not use it: a track is the surface's strong ink at 14% opacity, so it shows on every card."
+   },
+   {
+    "name": "hairline",
+    "value": {
+     "light": "{grey-sarens}",
+     "dark": "{blue-deep-band}"
+    },
+    "usage": "1px dividers and chart gridlines. Decorative only: never the sole edge of a control."
+   },
+   {
+    "name": "ink",
+    "value": {
+     "light": "{grey-431}",
+     "dark": "{grey-sarens}"
+    },
+    "usage": "Body text, captions, table cells on ground, surface, surface-sunken and surface-wash. Light 5.18 / 5.91 / 5.18 / 4.74:1; dark 11.34 / 10.04 / 11.34 / 7.60:1. Never on band in light (4.36:1), never on glass."
+   },
+   {
+    "name": "ink-strong",
+    "value": {
+     "light": "{blue-deep}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] Headlines, titles, card headings and figures on ground, surface, surface-sunken, surface-wash, band and glass. Light 13.45:1 on ground, 15.37:1 on surface; dark 15.37:1 on ground."
+   },
+   {
+    "name": "ink-heading",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "Brand-coloured text: eyebrow labels, the emphasised phrase in a headline, selected labels. On ground, surface, wash and band. Light 5.84 / 6.67 / 5.34 / 4.93:1."
+   },
+   {
+    "name": "ink-link",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{blue-tint}"
+    },
+    "usage": "Links and text buttons on ground and surface. Dark 6.72 / 5.95:1; on dark band 4.50:1, so avoid links in dark wash cards."
+   },
+   {
+    "name": "brand-fill",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{blue-301}"
+    },
+    "usage": "Primary buttons, brand hero cards, progress fills, the selected chart bar. Same blue in both themes."
+   },
+   {
+    "name": "on-brand",
+    "value": {
+     "light": "{white-sarens}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "Text and icons on brand-fill (6.67:1)."
+   },
+   {
+    "name": "highlight",
+    "value": {
+     "light": "{yellow-108}",
+     "dark": "{yellow-108}"
+    },
+    "usage": "The accent fill: one yellow card, button or chip per view carrying on-highlight text, plus small marks (dots, done-days, one chart bar) inside surface-contrast or brand-fill. Never text, status, or a mark on ground, surface, wash or sunken."
+   },
+   {
+    "name": "on-highlight",
+    "value": {
+     "light": "{blue-deep}",
+     "dark": "{blue-deep}"
+    },
+    "usage": "Text and icons on a highlight fill (11.89:1). Changed from blue-301 on 12 Nov 2026. Never white on yellow (1.29:1)."
+   },
+   {
+    "name": "data-strong",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] The datum that matters: progress fills, ring values, the selected chart bar. Light 6.67:1 on surface; dark 13.61:1. On surface-contrast and brand-fill the strong datum is highlight instead."
+   },
+   {
+    "name": "data-quiet",
+    "value": {
+     "light": "{blue-tint}",
+     "dark": "{blue-301}"
+    },
+    "usage": "[Added 12 Nov 2026, not yet reviewed by MarCom] The other data: unselected chart bars. About 2:1 on surface in both themes, so every quiet bar carries a value label."
+   },
+   {
+    "name": "control-border",
+    "value": {
+     "light": "{grey-431}",
+     "dark": "{blue-tint}"
+    },
+    "usage": "1px edge of text fields, outline buttons, outline chips and checkboxes. Light 5.18:1 on ground; dark 6.72:1 on ground."
+   },
+   {
+    "name": "focus-ring",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{blue-tint}"
+    },
+    "usage": "2px solid outline, 2px offset, on every focusable element. Light 5.84:1 on ground; dark 6.72:1. On surface-contrast and brand-fill use on-contrast; on highlight use on-highlight."
+   },
+   {
+    "name": "icon-primary",
+    "value": {
+     "light": "{blue-301}",
+     "dark": "{white-sarens}"
+    },
+    "usage": "Primary icon stroke: the part that names the thing. Light 5.84:1 on ground; dark 15.37:1."
+   },
+   {
+    "name": "icon-secondary",
+    "value": {
+     "light": "{blue-tint}",
+     "dark": "{blue-tint}"
+    },
+    "usage": "Secondary icon stroke: frame or context. 2.0:1 on light ground, so two-tone icons always sit beside a text label."
+   },
+   {
+    "name": "status-good",
+    "value": "#1B8A6B",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] Good / on track. Marks only (icon, dot, bar), always with a word. 3.76:1 on light ground, 3.58:1 on dark ground. Never on surface-contrast or brand-fill: put the status chip's own surface under it."
+   },
+   {
+    "name": "status-warning",
+    "value": "#CC5E0E",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] Warning / due soon. Burnt orange, deliberately far from yellow-108. Marks only, always with a word. 3.55:1 light, 3.79:1 dark."
+   },
+   {
+    "name": "status-bad",
+    "value": "#DB3B45",
+    "usage": "[Added, MarCom-approved 06 Nov 2026] Bad / overdue / failed. Marks only, always with a word. 3.89:1 light, 3.46:1 dark."
+   }
+  ]
+ },
+ "type": {
+  "fonts": [
+   {
+    "family": "Adobe Caslon Pro",
+    "file": "fonts/ACaslonPro-Regular.otf",
+    "weight": "100 900",
+    "style": "normal"
+   },
+   {
+    "family": "Gotham",
+    "file": "fonts/Gotham-Light.otf",
+    "weight": "300",
+    "style": "normal"
+   },
+   {
+    "family": "Gotham",
+    "file": "fonts/Gotham-Book.otf",
+    "weight": "400",
+    "style": "normal"
+   },
+   {
+    "family": "Gotham",
+    "file": "fonts/Gotham-Medium.otf",
+    "weight": "500",
+    "style": "normal"
+   },
+   {
+    "family": "Gotham",
+    "file": "fonts/Gotham-Bold.otf",
+    "weight": "700",
+    "style": "normal"
+   }
+  ],
+  "families": {
+   "text": "\"Adobe Caslon Pro\", Georgia, \"Times New Roman\", serif",
+   "caslon": "\"Adobe Caslon Pro\", Georgia, \"Times New Roman\", serif",
+   "gotham": "Gotham, Arial, sans-serif",
+   "sans": "Gotham, Arial, sans-serif",
+   "editorial": "\"Adobe Caslon Pro\", Georgia, \"Times New Roman\", serif",
+   "email": "Georgia, \"Times New Roman\", serif",
+   "email-gotham": "Arial, Helvetica, sans-serif"
+  },
+  "groups": [
+   {
+    "name": "Screen, Caslon voice",
+    "family": "text",
+    "styles": [
+     {
+      "name": "caption",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 400,
+      "sample": "Source: D365 HR, refreshed 12 Nov 2026",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Sources, axis labels, timestamps. Colour ink."
+     },
+     {
+      "name": "label",
+      "fontSize": "15px",
+      "lineHeight": "20px",
+      "fontWeight": 400,
+      "sample": "Sessions completed",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, sentence case. Buttons, chips, table headers, measure names. Table headers and eyebrows are set in small capitals."
+     },
+     {
+      "name": "body",
+      "fontSize": "17px",
+      "lineHeight": "26px",
+      "fontWeight": 400,
+      "sample": "312 of 340 operators completed the lifting plan module.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Dashboard and UI text. Colour ink."
+     },
+     {
+      "name": "body-lg",
+      "fontSize": "20px",
+      "lineHeight": "30px",
+      "fontWeight": 400,
+      "sample": "Before the lift, confirm the ground bearing pressure with the site engineer.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. E-learning screens and welcome pages. Max 72 characters a line."
+     },
+     {
+      "name": "heading",
+      "fontSize": "23px",
+      "lineHeight": "28px",
+      "fontWeight": 400,
+      "sample": "Required vs reality",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, sentence case. Card headings. Colour ink-strong."
+     },
+     {
+      "name": "title",
+      "fontSize": "36px",
+      "lineHeight": "40px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.005em",
+      "sample": "Training compliance",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, sentence case. One per view when there is no headline. Colour ink-strong. Uppercase titles ended on 12 Nov 2026."
+     },
+     {
+      "name": "headline",
+      "fontSize": "50px",
+      "lineHeight": "58px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em",
+      "sample": "Good morning, Ana. 312 of 340 operators are certified.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, sentence case. The greeting or the one finding that opens a view; its key phrase sits over a dimension bracket. Colour ink-strong, or on-contrast in a hero card."
+     },
+     {
+      "name": "display",
+      "fontSize": "84px",
+      "lineHeight": "84px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.015em",
+      "sample": "Welcome to Sarens",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, sentence case. Welcome hero and e-learning title screen only. Never on dashboards."
+     },
+     {
+      "name": "figure",
+      "fontSize": "92px",
+      "lineHeight": "88px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.02em",
+      "sample": "92%",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. The lead figure of a card. Colour ink-strong, on-contrast or on-highlight. Always with a caption naming the measure and its date."
+     },
+     {
+      "name": "figure-md",
+      "fontSize": "42px",
+      "lineHeight": "44px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em",
+      "sample": "5,500",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Secondary figures in small cards and inside rings."
+     },
+     {
+      "name": "figure-sm",
+      "fontSize": "17px",
+      "lineHeight": "24px",
+      "fontWeight": 400,
+      "sample": "1,284",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, right-aligned. Numbers in tables and chart labels."
+     }
+    ]
+   },
+   {
+    "name": "Long-form, Caslon voice",
+    "family": "text",
+    "styles": [
+     {
+      "name": "legend",
+      "fontSize": "15px",
+      "lineHeight": "22px",
+      "fontWeight": 400,
+      "sample": "Lifting the 1,200 t reactor vessel, Antwerp, 2026.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Photo legends and footnotes. Upright: the font has no italic."
+     },
+     {
+      "name": "article",
+      "fontSize": "20px",
+      "lineHeight": "32px",
+      "fontWeight": 400,
+      "sample": "Every heavy lift starts weeks before the crane arrives on site.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Long-form newsletter articles. Max 70 characters a line."
+     }
+    ]
+   },
+   {
+    "name": "Screen, Gotham voice",
+    "family": "gotham",
+    "styles": [
+     {
+      "name": "gotham-caption",
+      "fontSize": "12px",
+      "lineHeight": "16px",
+      "fontWeight": 400,
+      "sample": "Source: D365 HR, refreshed 12 Nov 2026",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book. Sources, axis labels, timestamps. What `caption` becomes under data-voice=\"gotham\"."
+     },
+     {
+      "name": "gotham-label",
+      "fontSize": "13px",
+      "lineHeight": "16px",
+      "fontWeight": 500,
+      "sample": "Sessions completed",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. Chips, eyebrows, table headers. What `label` and `eyebrow` become."
+     },
+     {
+      "name": "gotham-body",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 400,
+      "sample": "312 of 340 operators completed the lifting plan module.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book. Dashboard and UI text; buttons at 500. What `body` becomes."
+     },
+     {
+      "name": "gotham-body-lg",
+      "fontSize": "16px",
+      "lineHeight": "24px",
+      "fontWeight": 400,
+      "sample": "Before the lift, confirm the ground bearing pressure.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book. What `body-lg` becomes."
+     },
+     {
+      "name": "gotham-heading",
+      "fontSize": "18px",
+      "lineHeight": "24px",
+      "fontWeight": 500,
+      "sample": "Required vs reality",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. Card headings. What `heading` becomes.",
+      "letterSpacing": "-0.01em"
+     },
+     {
+      "name": "gotham-title",
+      "fontSize": "28px",
+      "lineHeight": "32px",
+      "fontWeight": 500,
+      "sample": "Training compliance",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. What `title` becomes.",
+      "letterSpacing": "-0.015em"
+     },
+     {
+      "name": "gotham-headline",
+      "fontSize": "40px",
+      "lineHeight": "48px",
+      "fontWeight": 400,
+      "sample": "Good morning, Ana. 312 of 340 operators are certified.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book; key phrase in Medium 500 over the bracket. What `headline` becomes.",
+      "letterSpacing": "-0.02em"
+     },
+     {
+      "name": "gotham-display",
+      "fontSize": "64px",
+      "lineHeight": "64px",
+      "fontWeight": 300,
+      "sample": "Welcome to Sarens",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Light, 24px and up only. What `display` becomes.",
+      "letterSpacing": "-0.03em"
+     },
+     {
+      "name": "gotham-figure",
+      "fontSize": "72px",
+      "lineHeight": "72px",
+      "fontWeight": 300,
+      "sample": "92%",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Light. Gotham has no tabular figures, so digits in a column do not line up exactly. What `figure` becomes.",
+      "letterSpacing": "-0.04em"
+     },
+     {
+      "name": "gotham-figure-md",
+      "fontSize": "32px",
+      "lineHeight": "36px",
+      "fontWeight": 400,
+      "sample": "5,500",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book. What `figure-md` becomes.",
+      "letterSpacing": "-0.02em"
+     },
+     {
+      "name": "gotham-figure-sm",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 500,
+      "sample": "1,284",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium, right-aligned. What `figure-sm` becomes."
+     }
+    ]
+   },
+   {
+    "name": "Poster, Caslon voice",
+    "family": "text",
+    "styles": [
+     {
+      "name": "poster-display",
+      "fontSize": "172px",
+      "lineHeight": "156px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.02em",
+      "sample": "Learn what the job never taught you.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, 129pt on A3, flush left so the headline reads as one block. The one line read from 5 m. Eight words at most."
+     },
+     {
+      "name": "poster-figure",
+      "fontSize": "264px",
+      "lineHeight": "236px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.02em",
+      "sample": "92%",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, tabular figures, 198pt on A3. A poster built on one number uses this in place of poster-display, never beside it."
+     },
+     {
+      "name": "poster-title",
+      "fontSize": "76px",
+      "lineHeight": "80px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em",
+      "sample": "23 to 27 Nov 2026",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, 57pt on A3. The second read, from 2 m: the date, the place, the one action."
+     },
+     {
+      "name": "poster-lead",
+      "fontSize": "38px",
+      "lineHeight": "46px",
+      "fontWeight": 400,
+      "sample": "Five days of short sessions, on site and online.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, 28.5pt on A3. One or two sentences of support under the headline."
+     },
+     {
+      "name": "poster-body",
+      "fontSize": "26px",
+      "lineHeight": "36px",
+      "fontWeight": 400,
+      "sample": "Book a session in Sarens Academy.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, 19.5pt on A3. Details read at arm's length. 60 words at most on the whole poster."
+     },
+     {
+      "name": "poster-caption",
+      "fontSize": "19px",
+      "lineHeight": "26px",
+      "fontWeight": 400,
+      "sample": "When",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, 14.2pt on A3. Labels above details, sources, legal lines. Nothing on a poster is smaller."
+     }
+    ]
+   },
+   {
+    "name": "Poster, Gotham voice",
+    "family": "gotham",
+    "styles": [
+     {
+      "name": "gotham-poster-display",
+      "fontSize": "156px",
+      "lineHeight": "142px",
+      "fontWeight": 500,
+      "sample": "Learn what the job never taught you.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium, 117pt on A3, tight. What `poster-display` becomes.",
+      "letterSpacing": "-0.05em"
+     },
+     {
+      "name": "gotham-poster-title",
+      "fontSize": "64px",
+      "lineHeight": "68px",
+      "fontWeight": 500,
+      "sample": "23 to 27 Nov 2026",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium, 48pt. What `poster-title` becomes.",
+      "letterSpacing": "-0.02em"
+     },
+     {
+      "name": "gotham-poster-lead",
+      "fontSize": "32px",
+      "lineHeight": "40px",
+      "fontWeight": 400,
+      "sample": "Short sessions led by colleagues.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book, 24pt. What `poster-lead` becomes.",
+      "letterSpacing": "-0.01em"
+     },
+     {
+      "name": "gotham-poster-body",
+      "fontSize": "22px",
+      "lineHeight": "30px",
+      "fontWeight": 400,
+      "sample": "Book a session in Sarens Academy.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book, 16.5pt. What `poster-body` becomes."
+     },
+     {
+      "name": "gotham-poster-caption",
+      "fontSize": "16px",
+      "lineHeight": "22px",
+      "fontWeight": 500,
+      "sample": "When",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium, 12pt. The floor. What `poster-caption` becomes."
+     }
+    ]
+   },
+   {
+    "name": "Video, Caslon voice",
+    "family": "text",
+    "styles": [
+     {
+      "name": "video-display",
+      "fontSize": "170px",
+      "lineHeight": "160px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.02em",
+      "sample": "Learning week.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Title card and end card. Six words at most."
+     },
+     {
+      "name": "video-figure",
+      "fontSize": "320px",
+      "lineHeight": "290px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.02em",
+      "sample": "312",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon, tabular figures. The one number of a figure scene. Counts up once."
+     },
+     {
+      "name": "video-title",
+      "fontSize": "84px",
+      "lineHeight": "92px",
+      "fontWeight": 400,
+      "letterSpacing": "-0.01em",
+      "sample": "Book it in Sarens Academy.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Statement scenes and step lines. Twelve words at most a scene."
+     },
+     {
+      "name": "video-body",
+      "fontSize": "46px",
+      "lineHeight": "60px",
+      "fontWeight": 400,
+      "sample": "of 340 operators are certified.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Support under a title or a figure. Two lines at most."
+     },
+     {
+      "name": "video-caption",
+      "fontSize": "42px",
+      "lineHeight": "56px",
+      "fontWeight": 400,
+      "sample": "Check the ground bearing pressure first.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Subtitles: white on a blue-deep block, two lines of 42 characters at most."
+     },
+     {
+      "name": "video-label",
+      "fontSize": "32px",
+      "lineHeight": "40px",
+      "fontWeight": 400,
+      "sample": "Benelux, 12 Nov 2026",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Caslon. Eyebrows, sources, lower thirds. Nothing in a 1080p frame is smaller."
+     }
+    ]
+   },
+   {
+    "name": "Video, Gotham voice",
+    "family": "gotham",
+    "styles": [
+     {
+      "name": "gotham-video-display",
+      "fontSize": "150px",
+      "lineHeight": "140px",
+      "fontWeight": 500,
+      "sample": "Learning week.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. What `video-display` becomes.",
+      "letterSpacing": "-0.05em"
+     },
+     {
+      "name": "gotham-video-figure",
+      "fontSize": "280px",
+      "lineHeight": "260px",
+      "fontWeight": 300,
+      "sample": "312",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Light. What `video-figure` becomes.",
+      "letterSpacing": "-0.04em"
+     },
+     {
+      "name": "gotham-video-title",
+      "fontSize": "72px",
+      "lineHeight": "80px",
+      "fontWeight": 500,
+      "sample": "Book it in Sarens Academy.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. What `video-title` becomes.",
+      "letterSpacing": "-0.02em"
+     },
+     {
+      "name": "gotham-video-body",
+      "fontSize": "40px",
+      "lineHeight": "52px",
+      "fontWeight": 400,
+      "sample": "operators finished this year's refresher.",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Book. What `video-body` becomes."
+     },
+     {
+      "name": "gotham-video-label",
+      "fontSize": "28px",
+      "lineHeight": "36px",
+      "fontWeight": 500,
+      "sample": "Benelux, 12 Nov 2026",
+      "usage": "[Added 13 Nov 2026, not yet reviewed by MarCom] Gotham Medium. The floor. What `video-label` becomes."
+     }
+    ]
+   },
+   {
+    "name": "Email, Caslon voice (Georgia)",
+    "family": "email",
+    "styles": [
+     {
+      "name": "email-h1",
+      "fontSize": "32px",
+      "lineHeight": "38px",
+      "fontWeight": 400,
+      "sample": "Learning week opens for booking.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Georgia. The lead story's headline, once an issue. Caslon-voice issues use Georgia, the serif every mail client has; Gotham-voice issues use Arial, as the manual sets email."
+     },
+     {
+      "name": "email-h2",
+      "fontSize": "22px",
+      "lineHeight": "28px",
+      "fontWeight": 400,
+      "sample": "New: the lifting plan module",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Georgia. Secondary story headlines and section names."
+     },
+     {
+      "name": "email-body",
+      "fontSize": "17px",
+      "lineHeight": "26px",
+      "fontWeight": 400,
+      "sample": "Sessions run from 23 to 27 Nov 2026 on every site.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Georgia. All running text. Never below 16px: most issues are opened on a phone."
+     },
+     {
+      "name": "email-small",
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "fontWeight": 400,
+      "sample": "You receive this because you work at Sarens.",
+      "usage": "[Changed 13 Nov 2026, not yet reviewed by MarCom] Georgia. Eyebrows, dates, the footer."
+     }
+    ]
+   }
+  ]
+ },
+ "spacing": {
+  "tokens": [
+   {
+    "name": "space-1",
+    "value": "4px",
+    "usage": "Icon-to-label gap; gap between progress segments."
+   },
+   {
+    "name": "space-2",
+    "value": "8px",
+    "usage": "Inside chips; gap between a figure and its caption; gap between stacked cards on mobile; nav rail padding."
+   },
+   {
+    "name": "space-3",
+    "value": "12px",
+    "usage": "Gap between list rows; table cell padding (vertical 8, horizontal 12)."
+   },
+   {
+    "name": "space-4",
+    "value": "16px",
+    "usage": "Card padding in compact density; gap between stacked controls; gap between cards under 900px."
+   },
+   {
+    "name": "space-6",
+    "value": "24px",
+    "usage": "Card padding; grid gutter between cards on desktop."
+   },
+   {
+    "name": "space-8",
+    "value": "32px",
+    "usage": "Page margin on desktop; hero card padding."
+   },
+   {
+    "name": "space-12",
+    "value": "48px",
+    "usage": "Gap between page sections; poster margins at A-series scale start here."
+   },
+   {
+    "name": "space-16",
+    "value": "64px",
+    "usage": "Hero and title-screen spacing."
+   }
+  ]
+ },
+ "radius": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] Screens are rounded; print stays square. Nested corners are concentric: inner radius = outer radius minus the padding between them, never below radius-xs.",
+  "tokens": [
+   {
+    "name": "radius-xs",
+    "value": "8px",
+    "usage": "Tooltips, table row hover, chart bars under 16px wide, the smallest nested tile."
+   },
+   {
+    "name": "radius-sm",
+    "value": "12px",
+    "usage": "Text fields inside cards, square icon tiles, cards in compact density's nested level."
+   },
+   {
+    "name": "radius-md",
+    "value": "16px",
+    "usage": "List rows and tiles nested in a card; images inside a card; cards in compact density."
+   },
+   {
+    "name": "radius-lg",
+    "value": "24px",
+    "usage": "Cards."
+   },
+   {
+    "name": "radius-xl",
+    "value": "32px",
+    "usage": "Hero cards, the welcome hero, sheets and modals, cards on mobile."
+   },
+   {
+    "name": "radius-pill",
+    "value": "999px",
+    "usage": "Buttons, chips, segmented controls, search fields, nav rails, progress tracks."
+   },
+   {
+    "name": "radius-dot",
+    "value": "50%",
+    "usage": "Icon buttons, avatars, status dots, calendar days."
+   },
+   {
+    "name": "radius-none",
+    "value": "0",
+    "usage": "Print only: posters and newsletters keep the manual's square blocks. Never on a screen component."
+   }
+  ]
+ },
+ "shadow": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] Cards are flat at rest. Shadow is feedback (hover) or separation (a layer floating over content), never decoration.",
+  "tokens": [
+   {
+    "name": "shadow-rest",
+    "value": "none",
+    "usage": "Retired 12 Nov 2026: cards are flat at rest again. Kept for one version; do not use."
+   },
+   {
+    "name": "shadow-hover",
+    "value": {
+     "light": "0 2px 4px rgba(17,38,60,0.04), 0 16px 40px rgba(17,38,60,0.12)",
+     "dark": "0 2px 4px rgba(0,0,0,0.3), 0 16px 40px rgba(0,0,0,0.45)"
+    },
+    "usage": "An interactive card or button under the pointer, with a 2px lift."
+   },
+   {
+    "name": "shadow-float",
+    "value": {
+     "light": "0 4px 12px rgba(17,38,60,0.08), 0 24px 56px rgba(17,38,60,0.16)",
+     "dark": "0 4px 12px rgba(0,0,0,0.35), 0 24px 56px rgba(0,0,0,0.5)"
+    },
+    "usage": "Floating nav bars, menus, popovers, tooltips, modals."
+   }
+  ]
+ },
+ "grid": {
+  "note": "[Manual p.53–55] A grid is always mandatory; the exact Müller-Brockmann reticle is not. Screen values below are [Added].",
+  "tokens": [
+   {
+    "name": "grid-columns",
+    "value": "12",
+    "usage": "Desktop columns. 8 on tablet, 4 on mobile. Cards span whole columns."
+   },
+   {
+    "name": "grid-gutter",
+    "value": "24px",
+    "usage": "Gap between cards on desktop, equal to space-6. space-4 under 900px, space-2 for a stacked mobile column."
+   },
+   {
+    "name": "grid-margin",
+    "value": "32px",
+    "usage": "Outer page margin on desktop (16px under 600px)."
+   },
+   {
+    "name": "grid-max-width",
+    "value": "1440px",
+    "usage": "Content width cap for dashboards and welcome pages."
+   }
+  ]
+ },
+ "stroke": {
+  "note": "[Added] Line weights for icons, hairlines and focus.",
+  "tokens": [
+   {
+    "name": "stroke-hairline",
+    "value": "1px",
+    "usage": "Dividers, chart gridlines, grid motif lines, control borders."
+   },
+   {
+    "name": "stroke-icon",
+    "value": "1.5px",
+    "usage": "Icon stroke on the 24px icon grid."
+   },
+   {
+    "name": "stroke-focus",
+    "value": "2px",
+    "usage": "Focus ring width, with a 2px offset."
+   }
+  ]
+ },
+ "size": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] Control heights. Nothing a finger or pointer has to hit is smaller than size-control-md, except inside compact tables.",
+  "tokens": [
+   {
+    "name": "size-control-sm",
+    "value": "32px",
+    "usage": "Chips, compact-density buttons, row actions inside tables."
+   },
+   {
+    "name": "size-control-md",
+    "value": "44px",
+    "usage": "Buttons, icon buttons, fields, segmented controls, nav items."
+   },
+   {
+    "name": "size-control-lg",
+    "value": "56px",
+    "usage": "The one main action on a welcome page or e-learning title screen; floating nav bar height."
+   }
+  ]
+ },
+ "blur": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] Backdrop blur for surface-glass.",
+  "tokens": [
+   {
+    "name": "blur-glass",
+    "value": "20px",
+    "usage": "backdrop-filter: blur() on every surface-glass layer. Glass without blur is not allowed: the text contrast depends on it."
+   }
+  ]
+ },
+ "print": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] The poster canvas. Build every poster at A3 in CSS px; A4, A2 and A1 are the same file scaled, because the A series keeps one proportion.",
+  "tokens": [
+   {
+    "name": "print-canvas-w",
+    "value": "1123px",
+    "usage": "A3 portrait width: 297mm at 96px to the inch. 1mm is 3.78px; 1px prints as 0.75pt."
+   },
+   {
+    "name": "print-canvas-h",
+    "value": "1587px",
+    "usage": "A3 portrait height: 420mm. Swap the two for landscape."
+   },
+   {
+    "name": "print-columns",
+    "value": "6",
+    "usage": "Columns across the whole sheet. Blocks snap to them and may bleed off the edge."
+   },
+   {
+    "name": "print-rows",
+    "value": "8",
+    "usage": "Rows down the whole sheet."
+   },
+   {
+    "name": "print-margin",
+    "value": "48px",
+    "usage": "12.7mm on A3 (space-12). No text, logo or QR code sits closer to the trim than this."
+   },
+   {
+    "name": "print-bleed",
+    "value": "3mm",
+    "usage": "Added by MarCom or the print shop on every side for trimmed work. Office printing needs none."
+   }
+  ]
+ },
+ "video": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] The video frame, its clear margin and its timing. Timings are in ms; at 30 frames a second one frame is 33ms.",
+  "tokens": [
+   {
+    "name": "video-canvas-w",
+    "value": "1920px",
+    "usage": "Frame width for 16:9. 9:16 is 1080 by 1920 and 1:1 is 1080 by 1080, rebuilt, never cropped."
+   },
+   {
+    "name": "video-canvas-h",
+    "value": "1080px",
+    "usage": "Frame height for 16:9."
+   },
+   {
+    "name": "video-fps",
+    "value": "30",
+    "usage": "Frames a second. Export H.264 MP4."
+   },
+   {
+    "name": "video-margin",
+    "value": "96px",
+    "usage": "5% of the width. All text and logos stay inside it. In 9:16 keep the top 250px and the bottom 340px clear as well."
+   },
+   {
+    "name": "video-move",
+    "value": "600ms",
+    "usage": "The longest any single movement runs: an entrance, a wipe, a count-up. 18 frames."
+   },
+   {
+    "name": "video-beat",
+    "value": "500ms",
+    "usage": "The rest between two movements, and the length of a block wipe. 15 frames."
+   },
+   {
+    "name": "video-stagger",
+    "value": "80ms",
+    "usage": "Delay between items entering as a group. Five items at most."
+   },
+   {
+    "name": "video-hold-min",
+    "value": "2000ms",
+    "usage": "The shortest time any text stays still on screen. Longer lines hold 400ms a word plus 1000ms."
+   },
+   {
+    "name": "video-ease-out",
+    "value": "cubic-bezier(.2,.8,.2,1)",
+    "usage": "Everything that enters or settles. The same curve as --ease-out on screens."
+   },
+   {
+    "name": "video-ease-in",
+    "value": "cubic-bezier(.6,0,.8,.2)",
+    "usage": "Everything that leaves."
+   }
+  ]
+ },
+ "email": {
+  "note": "[Added 12 Nov 2026, not yet reviewed by MarCom] Email newsletter measures. Email clients cannot read custom properties: copy these values, and the brand hex values, into inline styles.",
+  "tokens": [
+   {
+    "name": "email-width",
+    "value": "600px",
+    "usage": "Width of the one content column. On a phone it shrinks to the screen."
+   },
+   {
+    "name": "email-padding",
+    "value": "24px",
+    "usage": "Left and right padding inside the column, and the space between stories (space-6)."
+   },
+   {
+    "name": "email-button-height",
+    "value": "48px",
+    "usage": "Height of a button cell. Square corners: Outlook draws no radius."
+   }
+  ]
+ }
+}
