@@ -313,7 +313,7 @@
       return { upper, fore };
     }
     const armL = arm(-1), armR = arm(1);
-    const rest = { L: [18, -70], R: [-18, 70] };
+    const rest = { L: [10, -34], R: [-10, 34] };
     const c = { p, rise, body, head: headB, eyes, mouth, armL, armR, rest };
     setArms(c, 0, 0);
     return c;
