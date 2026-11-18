@@ -1,2 +1,4 @@
 .env*
 node_modules/
+week-plan/build/
+week-plan/cues.js
