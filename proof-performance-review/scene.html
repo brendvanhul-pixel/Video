@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Performance review explainer</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #151433; overflow: hidden; }
+  svg { display: block; }
+  text { font-family: 'Outfit'; font-kerning: normal; }
+</style>
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script src="node_modules/gsap/dist/CustomEase.min.js"></script>
+<script src="node_modules/gsap/dist/CustomBounce.min.js"></script>
+<script src="cues.js"></script>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="irisClip"><circle id="irisCircle" cx="0" cy="0" r="0"/></clipPath>
+    <clipPath id="frameClip"><rect x="0" y="0" width="1920" height="1080"/></clipPath>
+  </defs>
+  <g id="root" clip-path="url(#frameClip)"></g>
+</svg>
+<script>
+/* ---------- palette & helpers ---------- */
+const P = { blue:'#2B2BFF', blueDk:'#2121D9', coral:'#FF5A4E', sun:'#FFC62B', mint:'#2EE6A8',
+            cream:'#FFF6E9', ink:'#151433', skinA:'#F2B38C', skinB:'#9A6244', mintDk:'#22C891' };
+const NS = 'http://www.w3.org/2000/svg';
+const T = window.CUES.t;
+const FR = 1/30;
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+// static placement wrapper + animated child (GSAP owns the child's transform)
+function place(parent, x, y) { const g = el('g', { transform: `translate(${x},${y})` }, parent); return g; }
+function anim(parent) { return el('g', {}, parent); }
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const smooth = x => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); };
+const easeOutBack = (x, s = 1.70158) => { x = clamp(x, 0, 1); return 1 + (s + 1) * Math.pow(x - 1, 3) + s * Math.pow(x - 1, 2); };
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* text measurement */
+function measure(str, size, weight, ls = 0) {
+  const t = el('text', { 'font-size': size, 'font-weight': weight, 'letter-spacing': ls, x: -9999, y: -9999 }, document.getElementById('stage'));
+  t.textContent = str;
+  const w = t.getComputedTextLength();
+  t.remove();
+  return w;
+}
+// a line of words; each word is its own animated group with origin at its baseline-centre
+function wordLine(parent, str, x, y, size, weight, fill, opts = {}) {
+  const ls = opts.ls || 0;
+  const words = str.split(' ');
+  const space = measure('a b', size, weight, ls) - measure('ab', size, weight, ls);
+  let cx = x;
+  const groups = [];
+  words.forEach(w => {
+    const ww = measure(w, size, weight, ls);
+    const p = place(parent, cx + ww / 2, y);
+    const a = anim(p);
+    const t = el('text', { x: 0, y: 0, 'font-size': size, 'font-weight': weight, fill, 'text-anchor': 'middle', 'letter-spacing': ls }, a);
+    if (opts.opacity) t.setAttribute('fill-opacity', opts.opacity);
+    t.textContent = w;
+    groups.push(a);
+    cx += ww + space;
+  });
+  return { groups, width: cx - space - x, endX: cx - space };
+}
+function rrect(parent, x, y, w, h, r, fill) { return el('rect', { x, y, width: w, height: h, rx: r, ry: r, fill }, parent); }
+
+/* ---------- build ---------- */
+async function build() {
+  const ff = [500, 600, 700, 800].map(w => new FontFace('Outfit', `url(node_modules/@fontsource/outfit/files/outfit-latin-${w}-normal.woff2)`, { weight: String(w) }));
+  for (const f of ff) { await f.load(); document.fonts.add(f); }
+  await document.fonts.ready;
+
+  CustomEase.create('pop', 'M0,0 C0.34,1.56 0.64,1 1,1');           // signature overshoot
+  CustomEase.create('popBig', 'M0,0 C0.3,1.9 0.6,1 1,1');
+  CustomEase.create('antic', 'M0,0 C0.4,-0.6 0.7,0.2 1,1');          // dips back, then goes
+  CustomEase.create('fall', 'M0,0 C0.55,0 0.9,0.6 1,1');
+
+  const root = document.getElementById('root');
+  gsap.defaults({ smoothOrigin: false });
+  const tl = gsap.timeline({ paused: true, defaults: { ease: 'pop', duration: 0.4, smoothOrigin: false } });
+  const pop = (tg, at, o = {}) => tl.fromTo(tg, { scale: 0, transformOrigin: o.origin || '50% 50%', rotation: o.rot || 0 },
+                                         { scale: 1, rotation: 0, transformOrigin: o.origin || '50% 50%', duration: o.dur || 0.4, ease: o.ease || 'pop' }, at);
+  const unpop = (tg, at, o = {}) => tl.to(tg, { scale: 0, transformOrigin: o.origin || '50% 50%', duration: o.dur || 0.22, ease: 'back.in(2)' }, at);
+  const show = (tg, at) => tl.set(tg, { autoAlpha: 1 }, at);
+  const hide = (tg, at) => tl.set(tg, { autoAlpha: 0 }, at);
+  const micro = {}; // closed-form micro-motion hooks for tick(t)
+
+  /* ===== SCENE 1 + 2 : blue field, title, year line ===== */
+  const s12 = el('g', { id: 's12' }, root);
+  rrect(s12, 0, 0, 1920, 1080, 0, P.blue);
+
+  // title layout
+  const L1 = 'What is a', L2 = 'performance review';
+  const s1 = 96, s2 = 148;
+  const w1 = measure(L1, s1, 500, -1), w2 = measure(L2, s2, 800, -4);
+  const qW = 104;
+  const blockW = Math.max(w1, w2 + 18 + qW);
+  const bx = Math.round((1920 - blockW) / 2), by1 = 470, by2 = 628;
+  const title = el('g', {}, s12);
+  const tl1 = wordLine(title, L1, bx, by1, s1, 500, P.cream, { ls: -1 });
+  const tl2 = wordLine(title, L2, bx, by2, s2, 800, P.cream, { ls: -4 });
+  const qx = tl2.endX + 18;
+  const hook = el('path', { d: 'M10,-88 C10,-114 30,-128 52,-128 C78,-128 96,-112 96,-89 C96,-66 80,-59 66,-52 C56,-47 52,-42 52,-34',
+    fill: 'none', stroke: P.sun, 'stroke-width': 27, 'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+    transform: `translate(${qx},${by2})` }, title);
+  const hookLen = hook.getTotalLength();
+  hook.setAttribute('stroke-dasharray', hookLen);
+  const dotR = 17, dotX = qx + 52, dotY = by2 - dotR;
+
+  // year line
+  const lineY = 724, mx0 = 250, mx1 = 1670;
+  const yearLine = el('g', {}, s12);
+  const line = rrect(yearLine, mx0 - 50, lineY - 4, (mx1 - mx0) + 100, 8, 4, P.cream);
+  const monthsX = [...Array(12)].map((_, i) => mx0 + i * (mx1 - mx0) / 11);
+  const monthG = [];
+  'JFMAMJJASOND'.split('').forEach((m, i) => {
+    const p = place(yearLine, monthsX[i], lineY);
+    const a = anim(p);
+    el('circle', { cx: 0, cy: 0, r: 10, fill: P.cream }, a);
+    el('text', { x: 0, y: 62, 'font-size': 34, 'font-weight': 600, fill: P.cream, 'fill-opacity': 0.85, 'text-anchor': 'middle' }, a).textContent = m;
+    const bump = anim(a); // reserved
+    monthG.push(a);
+  });
+  // flags
+  function flag(i, label, color) {
+    const p = place(yearLine, monthsX[i], lineY);
+    const a = anim(p);
+    rrect(a, -5, -230, 10, 230, 5, P.cream);
+    const fw = measure(label, 32, 700) + 52;
+    const fl = anim(a);
+    el('path', { d: `M5,-230 H${fw} l-22,32 l22,32 H5 Z`, fill: color }, fl);
+    el('text', { x: 22, y: -187, 'font-size': 32, 'font-weight': 700, fill: color === P.sun ? P.ink : P.cream }, fl).textContent = label;
+    return { a, fl };
+  }
+  const fJun = flag(5, 'Mid-year', P.coral);
+  const fDec = flag(11, 'Year-end', P.sun);
+
+  // caption 2
+  const cap2 = el('g', {}, s12);
+  const c2a = wordLine(cap2, 'Once or twice a year,', 120, 230, 60, 500, P.cream, { opacity: 0.8 });
+  const c2b = wordLine(cap2, 'you and your manager sit down.', 120, 330, 92, 800, P.cream, { ls: -2 });
+
+  // hero circle (scene 1-2)
+  const R = 70;
+  const shadow = el('ellipse', { cx: 960, cy: 702, rx: 0, ry: 0, fill: P.blueDk }, s12);
+  const heroPos = el('g', {}, s12);
+  const heroSize = anim(heroPos);
+  const heroSq = anim(heroSize);
+  el('circle', { cx: 0, cy: 0, r: R, fill: P.sun }, heroSq);
+  const heroSpin = anim(heroSq);
+  el('path', { d: `M${-R*0.62},${-R*0.12} A${R*0.64},${R*0.64} 0 0 1 ${-R*0.12},${-R*0.62}`, fill: 'none', stroke: P.cream, 'stroke-width': R*0.16, 'stroke-linecap': 'round' }, heroSpin);
+
+  /* ===== SCENE 3 : room (revealed by iris) ===== */
+  const s3 = el('g', { id: 's3', 'clip-path': 'url(#irisClip)' }, root);
+  const roomCam = el('g', {}, s3);
+  rrect(roomCam, -200, -200, 2320, 1480, 0, P.cream);
+  rrect(roomCam, -200, 892, 2320, 400, 0, P.blue);
+  // window with crane
+  const win = place(roomCam, 1430, 150);
+  rrect(win, -16, -16, 352, 392, 22, P.ink);
+  rrect(win, 0, 0, 320, 360, 10, P.blue);
+  el('circle', { cx: 240, cy: 86, r: 34, fill: P.sun }, win);
+  const crane = el('g', {}, win);
+  rrect(crane, 70, 120, 22, 240, 3, P.cream);          // mast
+  rrect(crane, 30, 112, 270, 18, 4, P.cream);          // jib
+  rrect(crane, 20, 104, 50, 34, 4, P.coral);           // counterweight
+  el('path', { d: 'M81,112 L81,72 L100,112 Z', fill: P.cream }, crane);
+  const craneLoad = place(crane, 250, 130);
+  const craneLoadSw = anim(craneLoad);
+  rrect(craneLoadSw, -2, 0, 4, 110, 2, P.cream);
+  rrect(craneLoadSw, -26, 110, 52, 34, 5, P.sun);
+  rrect(win, 0, 172, 320, 10, 0, P.ink);               // mullion
+  rrect(win, 155, 0, 10, 360, 0, P.ink);
+  // plant
+  const plant = place(roomCam, 230, 892);
+  const plantSw = anim(plant);
+  el('path', { d: 'M0,-170 C-60,-210 -90,-290 -40,-330 C-10,-280 0,-230 0,-170 Z', fill: P.mint }, plantSw);
+  el('path', { d: 'M0,-170 C50,-220 110,-250 140,-210 C100,-180 50,-170 0,-170 Z', fill: P.mintDk }, plantSw);
+  el('path', { d: 'M0,-160 C-40,-170 -110,-160 -130,-110 C-80,-110 -40,-130 0,-160 Z', fill: P.mintDk }, plantSw);
+  el('path', { d: 'M-60,-170 H60 L44,0 H-44 Z', fill: P.coral }, plant);
+  // lamp
+
+  // characters
+  function character(x, shirt, skin, hairFn, accFn, sleeve) {
+    const p = place(roomCam, x, 0);
+    const rise = anim(p);
+    const body = anim(rise);
+    // torso
+    el('path', { d: 'M-118,740 L-108,600 C-104,566 -80,550 -50,550 H50 C80,550 104,566 108,600 L118,740 Z', fill: shirt }, body);
+    rrect(body, -20, 520, 40, 44, 12, skin);                 // neck
+    const head = place(body, 0, 470);
+    const headB = anim(head);
+    el('circle', { cx: 0, cy: 0, r: 66, fill: skin }, headB);
+    hairFn(headB);
+    const eyes = anim(headB);
+    el('ellipse', { cx: -24, cy: 4, rx: 7.5, ry: 9.5, fill: P.ink }, eyes);
+    el('ellipse', { cx: 24, cy: 4, rx: 7.5, ry: 9.5, fill: P.ink }, eyes);
+    const mouthP = place(headB, 0, 34);
+    const mouth = anim(mouthP);
+    el('path', { d: 'M-15,-4 Q0,10 15,-4 Q0,18 -15,-4 Z', fill: P.ink }, mouth);
+    if (accFn) accFn(headB, body);
+    // arms (rig): shoulder -> upper arm -> elbow -> forearm -> hand
+    function arm(side) {
+      const sh = place(body, side * 92, 590);
+      const upper = anim(sh);
+      rrect(upper, -17, -6, 34, 112, 17, sleeve);
+      const elb = place(upper, 0, 100);
+      const fore = anim(elb);
+      rrect(fore, -15, -14, 30, 100, 15, sleeve);
+      el('circle', { cx: 0, cy: 92, r: 19, fill: skin }, fore);
+      return { upper, fore };
+    }
+    const armL = arm(-1), armR = arm(1);
+    return { p, rise, body, head: headB, eyes, mouth, armL, armR };
+  }
+  const emp = character(740, P.coral, P.skinA, h => {
+    el('path', { d: 'M-66,-6 C-70,-60 -30,-82 4,-80 C40,-80 70,-56 66,-6 C50,-30 20,-42 -10,-40 C-34,-38 -54,-24 -66,-6 Z', fill: P.ink }, h);
+  }, (h, b) => {
+    rrect(b, -112, 640, 224, 16, 4, P.cream);            // hi-vis stripes
+    rrect(b, -114, 684, 228, 16, 4, P.cream);
+  }, '#E2463B');
+  const mgr = character(1180, P.mint, P.skinB, h => {
+    el('path', { d: 'M-68,-2 C-74,-74 74,-74 68,-2 C60,-34 40,-50 0,-50 C-40,-50 -60,-34 -68,-2 Z', fill: P.ink }, h);
+    el('circle', { cx: 0, cy: -70, r: 26, fill: P.ink }, h);
+  }, (h, b) => {
+    el('circle', { cx: -24, cy: 4, r: 19, fill: 'none', stroke: P.ink, 'stroke-width': 6 }, h);
+    el('circle', { cx: 24, cy: 4, r: 19, fill: 'none', stroke: P.ink, 'stroke-width': 6 }, h);
+    rrect(h, -6, 1, 12, 6, 3, P.ink);
+    el('path', { d: 'M-12,552 H12 L8,590 L0,610 L-8,590 Z', fill: P.cream }, b);
+  }, P.mintDk);
+  // arms resting on table (forearms pointing inward)
+  [emp, mgr].forEach(c => {
+    gsap.set(c.armL.upper, { rotation: 18, svgOrigin: '0 0' });
+    gsap.set(c.armR.upper, { rotation: -18, svgOrigin: '0 0' });
+    gsap.set(c.armL.fore, { rotation: -70, svgOrigin: '0 0' });
+    gsap.set(c.armR.fore, { rotation: 70, svgOrigin: '0 0' });
+  });
+  // table + props
+  const table = el('g', {}, roomCam);
+  rrect(table, 420, 700, 1080, 30, 15, P.ink);
+  rrect(table, 450, 724, 1020, 168, 0, P.ink);
+  const hat = place(table, 560, 700);
+  el('path', { d: 'M-70,0 C-70,-70 70,-70 70,0 Z', fill: P.sun }, hat);
+  rrect(hat, -88, -12, 176, 14, 7, P.sun);
+  rrect(hat, -10, -66, 20, 56, 8, '#FFD866');
+  const laptop = place(table, 1030, 700);
+  el('path', { d: 'M-80,0 L-70,-120 H70 L80,0 Z', fill: P.blue }, laptop);
+  el('circle', { cx: 0, cy: -62, r: 11, fill: P.cream }, laptop);
+  const mug = place(table, 1350, 700);
+  rrect(mug, -30, -70, 60, 70, 10, P.coral);
+  el('path', { d: 'M30,-54 a20,20 0 0 1 0,36', fill: 'none', stroke: P.coral, 'stroke-width': 10 }, mug);
+  const steam = [0, 1].map(i => el('path', { d: 'M0,0 C-10,-14 10,-26 0,-40', fill: 'none', stroke: P.ink, 'stroke-width': 6, 'stroke-linecap': 'round', 'stroke-opacity': 0.35 }, place(mug, -10 + i * 20, -84)));
+
+  // caption 3
+  const cap3 = el('g', {}, roomCam);
+  const c3a = wordLine(cap3, 'A planned,', 120, 190, 84, 800, P.ink, { ls: -2 });
+  const c3b = wordLine(cap3, 'two-way conversation.', 120, 284, 84, 800, P.ink, { ls: -2 });
+
+  // speech bubbles
+  function bubble(x, y, w, h, color, tailDir, content) {
+    const p = place(roomCam, x, y);
+    const a = anim(p);
+    const tx = tailDir > 0 ? w * 0.28 : -w * 0.28;
+    el('path', { d: `M${tx - 22},${h/2 - 6} L${tx + tailDir * 46},${h/2 + 48} L${tx + 26},${h/2 - 6} Z`, fill: color }, a);
+    rrect(a, -w/2, -h/2, w, h, h/2, color);
+    content(a);
+    return a;
+  }
+  const dots = (c) => (a) => { const d = []; for (let i = 0; i < 3; i++) d.push(el('circle', { cx: -44 + i * 44, cy: 0, r: 14, fill: c }, a)); a._dots = d; };
+  const bubA1 = bubble(510, 440, 230, 130, P.blue, 1, dots(P.cream));
+  const bubB1 = bubble(1430, 640, 0.001, 0.001, P.mint, -1, () => {}); // placeholder (unused)
+  bubB1.parentNode.remove();
+  const bubB = bubble(1290, 300, 230, 130, P.mint, -1, a => {
+    el('path', { d: 'M-40,2 L-10,30 L44,-26', fill: 'none', stroke: P.ink, 'stroke-width': 16, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, a);
+  });
+  const bubA2 = bubble(510, 440, 230, 130, P.blue, 1, a => {
+    el('path', { d: 'M0,34 C-60,-6 -40,-52 0,-24 C40,-52 60,-6 0,34 Z', fill: P.coral }, a);
+  });
+  const bubB2 = bubble(1290, 300, 230, 130, P.mint, -1, dots(P.ink));
+
+  /* ===== SCENE 4 : three parts (mint) ===== */
+  const s4 = el('g', { id: 's4' }, root);
+  rrect(s4, 0, 0, 1920, 1080, 0, P.mint);
+  const kick4 = wordLine(s4, 'WHAT HAPPENS IN IT', 120, 150, 30, 700, P.ink, { ls: 6 });
+  const colX = [400, 960, 1520], badgeY = 440;
+  const cols = colX.map(x => { const p = place(s4, x, badgeY); const fly = anim(p); return { p, fly }; });
+  // col 1 : look back - bar chart
+  const b1 = anim(cols[0].fly);
+  el('circle', { cx: 0, cy: 0, r: 170, fill: P.blue }, b1);
+  rrect(b1, -100, 78, 200, 12, 6, P.cream);
+  const bars = [[-72, 70, P.cream], [-6, 112, P.cream], [60, 160, P.sun]].map(([bx_, h, c]) => {
+    const g = place(b1, bx_ + 6, 78); const a = anim(g); rrect(a, -26, -h, 52, h, 10, c); return a; });
+  const coinP = place(cols[0].fly, 120, -150); const coin = anim(coinP); const coinFlip = anim(coin);
+  el('circle', { cx: 0, cy: 0, r: 40, fill: P.sun }, coinFlip);
+  el('circle', { cx: 0, cy: 0, r: 26, fill: 'none', stroke: P.ink, 'stroke-width': 6, 'stroke-opacity': 0.25 }, coinFlip);
+  // col 2 : feedback - check
+  const b2 = anim(cols[1].fly);
+  el('circle', { cx: 0, cy: 0, r: 170, fill: P.coral }, b2);
+  const check = el('path', { d: 'M-74,4 L-22,56 L80,-58', fill: 'none', stroke: P.cream, 'stroke-width': 34, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, b2);
+  const checkLen = check.getTotalLength(); check.setAttribute('stroke-dasharray', checkLen);
+  const heartP = place(cols[1].fly, 130, -140); const heart = anim(heartP);
+  el('path', { d: 'M0,40 C-70,-6 -48,-62 0,-28 C48,-62 70,-6 0,40 Z', fill: P.blue }, heart);
+  // col 3 : plan ahead - target + arrow
+  const b3 = anim(cols[2].fly);
+  el('circle', { cx: 0, cy: 0, r: 170, fill: P.cream }, b3);
+  const rings = [[124, P.coral], [90, P.cream], [56, P.coral], [24, P.blue]].map(([r, c]) => { const a = anim(b3); el('circle', { cx: 0, cy: 0, r, fill: c }, a); return a; });
+  const arrowG = el('g', {}, cols[2].fly);
+  const arrow = el('g', {}, arrowG);
+  rrect(arrow, -300, -7, 270, 14, 7, P.ink);
+  el('path', { d: 'M0,0 L-52,-26 L-40,0 L-52,26 Z', fill: P.ink }, arrow);
+  el('path', { d: 'M-300,0 L-250,0 L-280,-34 L-320,-34 Z', fill: P.sun }, arrow);
+  el('path', { d: 'M-300,0 L-250,0 L-280,34 L-320,34 Z', fill: P.sun }, arrow);
+  const confG = el('g', {}, cols[2].fly);
+  const r1 = rng(7);
+  const confetti = [...Array(26)].map(() => {
+    const c = [P.blue, P.coral, P.sun, P.cream, P.ink][Math.floor(r1() * 5)];
+    const shape = r1() < 0.5 ? el('rect', { x: -9, y: -5, width: 18, height: 10, rx: 3, fill: c }, confG) : el('circle', { cx: 0, cy: 0, r: 7, fill: c }, confG);
+    const ang = -Math.PI * (0.15 + 0.7 * r1());
+    return { shape, vx: Math.cos(ang) * (420 + 700 * r1()) * (r1() < 0.5 ? -1 : 1) * 0.9, vy: Math.sin(ang) * (500 + 650 * r1()), spin: (r1() - 0.5) * 1400, life: 0.9 + 0.5 * r1() };
+  });
+  // labels
+  const labels = [['Look back', "What went well, what didn't"], ['Share feedback', 'Honest, and in both directions'], ['Plan ahead', 'Goals and growth for next year']]
+    .map(([a, b], i) => {
+      const p = place(s4, colX[i], 0);
+      const la = anim(place(p, 0, 712)); el('text', { x: 0, y: 0, 'font-size': 64, 'font-weight': 800, fill: P.ink, 'text-anchor': 'middle', 'letter-spacing': -1.5 }, la).textContent = a;
+      const lb = anim(place(p, 0, 776)); el('text', { x: 0, y: 0, 'font-size': 34, 'font-weight': 500, fill: P.ink, 'fill-opacity': 0.78, 'text-anchor': 'middle' }, lb).textContent = b;
+      const num = anim(place(p, 0, 640)); el('text', { x: 0, y: 0, 'font-size': 28, 'font-weight': 700, fill: P.ink, 'fill-opacity': 0.55, 'text-anchor': 'middle', 'letter-spacing': 4 }, num).textContent = '0' + (i + 1);
+      return { la, lb, num };
+    });
+  // bubble wipe overlay (manager bubble growing) lives above the room; we reuse bubB2 scaling.
+
+  /* ===== SCENE 5 : lockup ===== */
+  const s5 = el('g', { id: 's5' }, root);
+  const blueWipeP = place(s5, 960, 540); const blueWipe = anim(blueWipeP);
+  el('circle', { cx: 0, cy: 0, r: 1110, fill: P.blue }, blueWipe);
+  const LT = 'Performance review', tSize = 168;
+  const wT = measure(LT, tSize, 800, -5);
+  const lockW = wT + 14 + 2 * 22;
+  const lx = Math.round((1920 - lockW) / 2), lyT = 600;
+  const kick5 = wordLine(s5, 'SARENS ACADEMY', lx + 4, lyT - 178, 30, 700, P.mint, { ls: 9 });
+  const tWords = wordLine(s5, LT, lx, lyT, tSize, 800, P.cream, { ls: -5 });
+  const tag = wordLine(s5, 'Look back. Plan ahead.', lx + 4, lyT + 106, 60, 500, P.cream, { opacity: 0.92 });
+  const finR = 22, finX = tWords.endX + 14 + finR, finY = lyT - finR;
+  const sparks = [-60, 0, 60].map(a => el('rect', { x: -4, y: -60, width: 8, height: 0, rx: 4, fill: P.sun, transform: `translate(${finX},${finY}) rotate(${a - 30})` }, s5));
+  const endPos = el('g', {}, s5); const endSize = anim(endPos); const endSq = anim(endSize);
+  el('circle', { cx: 0, cy: 0, r: R, fill: P.sun }, endSq);
+  el('path', { d: `M${-R*0.62},${-R*0.12} A${R*0.64},${R*0.64} 0 0 1 ${-R*0.12},${-R*0.62}`, fill: 'none', stroke: P.cream, 'stroke-width': R*0.16, 'stroke-linecap': 'round' }, endSq);
+
+  /* =================== TIMELINE =================== */
+  // initial visibility
+  gsap.set([s3, s4, s5], { autoAlpha: 0 });
+  gsap.set([...tl1.groups, ...tl2.groups, ...c2a.groups, ...c2b.groups, ...monthG, fJun.a, fDec.a], { scale: 0 });
+
+  // --- S1: drop + squash + bounce
+  const g0 = 702; // ground (bottom of circle)
+  tl.set(heroPos, { x: 960, y: -R - 10 }, 0);
+  tl.set(heroSq, { transformOrigin: '50% 100%' }, 0);
+  tl.fromTo(heroPos, { y: -R - 10 }, { y: g0 - R, duration: T.land1, ease: 'power2.in' }, 0);
+  tl.fromTo(heroSq, { scaleX: 0.9, scaleY: 1.12 }, { scaleX: 0.86, scaleY: 1.16, duration: T.land1 - 0.07, ease: 'power1.in' }, 0);
+  tl.to(heroSq, { scaleX: 1.22, scaleY: 0.78, duration: 0.07, ease: 'power2.out' }, T.land1 - 0.035);        // squash on impact
+  tl.to(heroPos, { y: g0 - R - 120, duration: 0.18, ease: 'power2.out' }, T.land1);                         // rebound
+  tl.to(heroSq, { scaleX: 0.94, scaleY: 1.08, duration: 0.1, ease: 'power1.out' }, T.land1 + 0.04);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.08 }, T.land1 + 0.14);
+  tl.to(heroPos, { y: g0 - R, duration: 0.18, ease: 'power2.in' }, T.land1 + 0.18);
+  tl.to(heroSq, { scaleX: 1.12, scaleY: 0.88, duration: 0.06, ease: 'power2.out' }, T.land2 - 0.03);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1,0.35)' }, T.land2 + 0.03);
+  // anticipation then leap to become the question-mark dot
+  tl.to(heroSq, { scaleX: 1.14, scaleY: 0.84, duration: 0.1, ease: 'power2.out' }, T.leap - 0.12);
+  tl.to(heroSq, { scaleX: 0.9, scaleY: 1.12, duration: 0.12, ease: 'power2.out' }, T.leap - 0.02);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.2 }, T.leap + 0.12);
+  const leapDur = T.dotLand - T.leap;
+  tl.to(heroPos, { x: dotX, duration: leapDur, ease: 'power1.inOut' }, T.leap);
+  tl.to(heroPos, { keyframes: [{ y: 250, duration: leapDur * 0.45, ease: 'power2.out' }, { y: dotY, duration: leapDur * 0.55, ease: 'power2.in' }] }, T.leap);
+  tl.to(heroSize, { scale: dotR / R, duration: leapDur, ease: 'power2.inOut', transformOrigin: '50% 50%' }, T.leap);
+  tl.to(heroSpin, { rotation: 300, duration: leapDur, ease: 'power1.inOut', transformOrigin: '50% 50%' }, T.leap);
+  tl.to(heroSq, { scaleX: 1.25, scaleY: 0.75, duration: 0.05, ease: 'power2.out' }, T.dotLand - 0.03);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1.1,0.3)' }, T.dotLand + 0.02);
+  // words
+  [...tl1.groups, ...tl2.groups].forEach((g, i) => pop(g, T.words1 + i * 2 * FR, { origin: '50% 100%', dur: 0.45 }));
+  tl.fromTo(hook, { attr: { 'stroke-dashoffset': hookLen } }, { attr: { 'stroke-dashoffset': 0 }, duration: 0.3, ease: 'power2.out' }, T.hook);
+  // title idle: slow drift up (camera breathing)
+  tl.to(title, { y: -10, duration: T.s1exit - T.dotLand, ease: 'sine.inOut' }, T.dotLand);
+
+  // --- S1 -> S2: dot pops out, title collapses, year line draws
+  [...tl2.groups].reverse().concat([...tl1.groups].reverse()).forEach((g, i) => unpop(g, T.s1exit + 0.05 + i * FR, { origin: '50% 100%' }));
+  tl.to(hook, { attr: { 'stroke-dashoffset': -hookLen }, duration: 0.2, ease: 'power2.in' }, T.s1exit);
+  const r2 = 34;
+  const lineCY = lineY - 4 - r2;
+  tl.to(heroSize, { scale: r2 / R, duration: 0.35, ease: 'pop' }, T.s1exit);
+  tl.to(heroPos, { x: monthsX[0], duration: T.lineLand - T.s1exit, ease: 'power1.inOut' }, T.s1exit);
+  tl.to(heroPos, { keyframes: [{ y: dotY - 200, duration: 0.2, ease: 'power2.out' }, { y: lineCY, duration: 0.3, ease: 'power2.in' }] }, T.s1exit);
+  tl.to(heroSpin, { rotation: -60, duration: 0.5, ease: 'power1.inOut' }, T.s1exit);
+  tl.to(heroSq, { scaleX: 1.2, scaleY: 0.8, duration: 0.05, ease: 'power2.out' }, T.lineLand - 0.03);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'elastic.out(1,0.35)' }, T.lineLand + 0.02);
+  tl.fromTo(line, { attr: { width: 0 } }, { attr: { width: (mx1 - mx0) + 100 }, duration: 0.55, ease: 'power3.out' }, T.s1exit + 0.1);
+  monthG.forEach((g, i) => pop(g, T.months + i * 2 * FR, { origin: '50% 0%', dur: 0.4 }));
+  c2a.groups.forEach((g, i) => pop(g, T.cap2a + i * 2 * FR, { origin: '50% 100%' }));
+  c2b.groups.forEach((g, i) => pop(g, T.cap2b + i * 2 * FR, { origin: '50% 100%' }));
+  // roll across the year
+  const rollTo = (x0, x1, at, dur, ease) => {
+    tl.to(heroPos, { x: x1, duration: dur, ease }, at);
+    tl.to(heroSpin, { rotation: `+=${(x1 - x0) / r2 * 180 / Math.PI}`, duration: dur, ease }, at);
+  };
+  rollTo(monthsX[0], monthsX[5], T.rollStart, T.flagJun - T.rollStart, 'power1.in');
+  rollTo(monthsX[5], monthsX[11], T.flagJun, T.flagDec - T.flagJun, 'power1.out');
+  // month dots bump as the circle passes (secondary action)
+  monthsX.forEach((x, i) => {
+    if (i === 0 || i === 11) return;
+    const frac = i <= 5 ? Math.sqrt((x - monthsX[0]) / (monthsX[5] - monthsX[0])) : 1 - Math.sqrt(1 - (x - monthsX[5]) / (monthsX[11] - monthsX[5]));
+    const at = i <= 5 ? T.rollStart + frac * (T.flagJun - T.rollStart) : T.flagJun + frac * (T.flagDec - T.flagJun);
+    tl.to(monthG[i], { keyframes: [{ y: 8, duration: 0.06, ease: 'power1.out' }, { y: 0, duration: 0.35, ease: 'elastic.out(1,0.3)' }] }, at - 0.03);
+  });
+  pop(fJun.a, T.flagJun, { origin: '50% 100%', dur: 0.5, ease: 'popBig' });
+  tl.fromTo(fJun.fl, { rotation: -14, transformOrigin: '0% 50%' }, { rotation: 0, duration: 0.9, ease: 'elastic.out(1,0.3)' }, T.flagJun + 0.08);
+  pop(fDec.a, T.flagDec, { origin: '50% 100%', dur: 0.5, ease: 'popBig' });
+  tl.fromTo(fDec.fl, { rotation: -14, transformOrigin: '0% 50%' }, { rotation: 0, duration: 0.9, ease: 'elastic.out(1,0.3)' }, T.flagDec + 0.08);
+  tl.to(heroSq, { scaleX: 0.86, scaleY: 1.1, duration: 0.06 }, T.flagDec - 0.06);   // brake
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.4, ease: 'elastic.out(1,0.35)' }, T.flagDec);
+
+  // --- S2 -> S3: iris (the circle becomes the window into the room)
+  const irisX = monthsX[11] - 200, irisY = 520;
+  tl.to(heroSq, { scaleX: 1.18, scaleY: 0.8, duration: T.iris - T.irisAnt, ease: 'power2.out' }, T.irisAnt);
+  tl.to(heroSq, { scaleX: 1, scaleY: 1, duration: 0.15 }, T.iris);
+  tl.to(heroPos, { x: irisX, y: irisY, duration: 0.25, ease: 'power2.out' }, T.iris);
+  tl.to(heroSize, { scale: 2300 / R, duration: 0.5, ease: 'power3.in' }, T.iris + 0.05);
+  tl.to(heroSpin, { scale: 0, duration: 0.15, ease: 'power2.in', transformOrigin: '50% 50%' }, T.iris);
+  show(s3, T.iris);
+  tl.set('#irisCircle', { attr: { cx: irisX, cy: irisY } }, T.iris);
+  tl.fromTo('#irisCircle', { attr: { r: 0 } }, { attr: { r: 2300 }, duration: 0.5, ease: 'power3.in' }, T.iris + 0.05 + 3 * FR);
+  hide(s12, T.iris + 0.6);
+  tl.set(s3, { attr: { 'clip-path': 'none' } }, T.iris + 0.6);
+  // room push (continuous camera)
+  tl.fromTo(roomCam, { scale: 1.12, svgOrigin: '960 560' }, { scale: 1, svgOrigin: '960 560', duration: 1.0, ease: 'power3.out' }, T.iris + 0.05);
+  tl.to(roomCam, { scale: 1.07, svgOrigin: '960 560', duration: T.wipeAnt - (T.iris + 1.05), ease: 'sine.inOut' }, T.iris + 1.05);
+  tl.fromTo(emp.rise, { y: 320 }, { y: 0, duration: 0.5, ease: 'popBig' }, T.charA);
+  tl.fromTo(mgr.rise, { y: 320 }, { y: 0, duration: 0.5, ease: 'popBig' }, T.charB);
+  [...c3a.groups, ...c3b.groups].forEach((g, i) => pop(g, T.cap3 + i * 2 * FR, { origin: '50% 100%' }));
+  gsap.set([...c3a.groups, ...c3b.groups], { scale: 0 });
+  // bubbles (one speaker at a time)
+  [bubA1, bubB, bubA2, bubB2].forEach(b => gsap.set(b, { scale: 0 }));
+  const bubOrigin = (dir) => dir > 0 ? '78% 100%' : '22% 100%';
+  pop(bubA1, T.bubA1, { origin: bubOrigin(1), dur: 0.45, rot: -8 });
+  unpop(bubA1, T.bubB1 - 0.15, { origin: bubOrigin(1) });
+  pop(bubB, T.bubB1, { origin: bubOrigin(-1), dur: 0.45, rot: 8 });
+  unpop(bubB, T.bubA2 - 0.15, { origin: bubOrigin(-1) });
+  pop(bubA2, T.bubA2, { origin: bubOrigin(1), dur: 0.45, rot: -8 });
+  tl.fromTo(bubA2.children[2], { scale: 0.6, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.5, ease: 'elastic.out(1.2,0.3)' }, T.bubA2 + 0.12);
+  unpop(bubA2, T.bubB2 - 0.15, { origin: bubOrigin(1) });
+  pop(bubB2, T.bubB2, { origin: bubOrigin(-1), dur: 0.45, rot: 8 });
+  // the manager's bubble becomes the wipe
+  tl.to(bubB2, { scale: 0.86, duration: T.wipe - T.wipeAnt, ease: 'power2.out', transformOrigin: '50% 50%' }, T.wipeAnt);
+  tl.to(bubB2, { scale: 22, x: -330, y: 240, duration: T.badge1 - 0.5 - T.wipe, ease: 'power3.in', transformOrigin: '50% 50%' }, T.wipe);
+  show(s4, T.wipe + 0.5);
+  hide(s3, T.wipe + 0.5);
+
+  // --- S4: three parts
+  gsap.set([b1, b2, b3, ...bars, coin, heart, ...rings, ...kick4.groups, ...labels.flatMap(l => [l.la, l.lb, l.num])], { scale: 0 });
+  kick4.groups.forEach((g, i) => pop(g, T.wipe + 0.55 + i * 2 * FR, { origin: '50% 100%' }));
+  pop(b1, T.badge1, { dur: 0.5, ease: 'popBig', rot: -20 });
+  bars.forEach((b, i) => tl.fromTo(b, { scaleY: 0, scaleX: 1.2, transformOrigin: '50% 100%' }, { scaleY: 1, scaleX: 1, duration: 0.45, ease: 'popBig' }, T.bars + i * 3 * FR));
+  [labels[0].num, labels[0].la, labels[0].lb].forEach((g, i) => pop(g, T.label1 + i * 2 * FR, { origin: '50% 100%' }));
+  pop(b2, T.badge2, { dur: 0.5, ease: 'popBig', rot: 20 });
+  tl.fromTo(check, { attr: { 'stroke-dashoffset': checkLen } }, { attr: { 'stroke-dashoffset': 0 }, duration: 0.25, ease: 'power2.inOut' }, T.check);
+  tl.fromTo(b2, { scale: 1 }, { keyframes: [{ scale: 1.08, duration: 0.06 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1,0.3)' }] }, T.check + 0.25);
+  [labels[1].num, labels[1].la, labels[1].lb].forEach((g, i) => pop(g, T.label2 + i * 2 * FR, { origin: '50% 100%' }));
+  pop(b3, T.badge3, { dur: 0.5, ease: 'popBig', rot: -20 });
+  rings.forEach((r, i) => pop(r, T.badge3 + 0.06 + i * 2 * FR, { dur: 0.4 }));
+  [labels[2].num, labels[2].la, labels[2].lb].forEach((g, i) => pop(g, T.label3 + i * 2 * FR, { origin: '50% 100%' }));
+  // impact: badge recoils
+  tl.fromTo(b3, { x: 0 }, { keyframes: [{ x: 22, scaleX: 0.92, scaleY: 1.05, duration: 0.05, ease: 'power2.out' }, { x: 0, scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1.2,0.3)' }] }, T.hit);
+  pop(heart, T.heart, { dur: 0.5, ease: 'popBig', rot: 25 });
+  tl.fromTo(coin, { y: 120, scale: 0 }, { y: 0, scale: 1, duration: 0.55, ease: 'popBig' }, T.coin);
+  // gentle idle push on the whole scene (keeps the hold alive)
+  tl.fromTo(s4, { scale: 1, svgOrigin: '960 540' }, { scale: 1.03, svgOrigin: '960 540', duration: T.collapse - T.badge1, ease: 'sine.inOut' }, T.badge1);
+
+  // --- S4 -> S5: everything collapses into the circle
+  const outs = [...kick4.groups, ...labels.flatMap(l => [l.num, l.la, l.lb]), heart, coin];
+  outs.forEach((g, i) => unpop(g, T.collapse + (i % 6) * FR, { origin: '50% 50%', dur: 0.2 }));
+  cols.forEach((c, i) => {
+    const dx = 960 - colX[i], dy = 540 - badgeY;
+    tl.to(c.fly, { x: dx, y: dy, scale: 0.12, rotation: (i - 1) * 90, duration: 0.42, ease: 'power3.in', transformOrigin: '50% 50%' }, T.collapse + 0.06 + i * 3 * FR);
+  });
+  show(s5, T.heroPop - 0.02);
+  gsap.set(blueWipe, { scale: 0 });
+  gsap.set(endPos, { x: 960, y: 540 });
+  gsap.set(endSize, { scale: 0 });
+  tl.fromTo(endSize, { scale: 0 }, { scale: 1, duration: 0.45, ease: 'popBig', transformOrigin: '50% 50%' }, T.heroPop);
+  tl.fromTo(blueWipe, { scale: 0 }, { scale: 1, duration: 0.42, ease: 'power3.in', transformOrigin: '50% 50%' }, T.blueWipe);
+  hide(s4, T.blueWipe + 0.45);
+  // hop away, lockup builds, drop in as the full stop
+  tl.set(endSq, { transformOrigin: '50% 100%' }, T.hop - 0.2);
+  tl.to(endSq, { scaleX: 1.16, scaleY: 0.82, duration: 0.1, ease: 'power2.out' }, T.hop - 0.1);
+  tl.to(endSq, { scaleX: 0.86, scaleY: 1.16, duration: 0.1 }, T.hop);
+  tl.to(endPos, { y: -200, duration: 0.32, ease: 'power2.in' }, T.hop);
+  gsap.set([...kick5.groups, ...tWords.groups, ...tag.groups], { scale: 0 });
+  kick5.groups.forEach((g, i) => pop(g, T.kicker + i * 2 * FR, { origin: '50% 100%' }));
+  tWords.groups.forEach((g, i) => pop(g, T.title + i * 3 * FR, { origin: '50% 100%', dur: 0.5 }));
+  tag.groups.forEach((g, i) => pop(g, T.tagline + i * 2 * FR, { origin: '50% 100%' }));
+  tl.set(endPos, { x: finX }, T.hop + 0.4);
+  tl.set(endSize, { scale: finR / R }, T.hop + 0.4);
+  tl.fromTo(endPos, { y: -120 }, { y: finY, duration: T.finalLand - (T.hop + 0.62), ease: 'power2.in', immediateRender: false }, T.hop + 0.62);
+  tl.to(endSq, { scaleX: 0.85, scaleY: 1.2, duration: 0.2 }, T.hop + 0.62);
+  tl.to(endSq, { scaleX: 1.3, scaleY: 0.72, duration: 0.05, ease: 'power2.out' }, T.finalLand - 0.03);
+  tl.to(endSq, { scaleX: 1, scaleY: 1, duration: 0.8, ease: 'elastic.out(1.1,0.28)' }, T.finalLand + 0.02);
+  // title reacts to the impact (follow-through)
+  tl.to(tWords.groups[1], { keyframes: [{ y: 6, duration: 0.05 }, { y: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }] }, T.finalLand - 0.02);
+  tl.set({}, {}, CUES.duration);
+
+  /* ---------- closed-form micro motion ---------- */
+  const talkWins = { emp: [[T.bubA1, T.bubB1 - 0.2], [T.bubA2, T.bubB2 - 0.2]], mgr: [[T.bubB1, T.bubA2 - 0.2], [T.bubB2, T.wipe]] };
+  const inWin = (t, wins) => wins.reduce((m, [a, b]) => Math.max(m, smooth((t - a) / 0.15) * (1 - smooth((t - b) / 0.15))), 0);
+  function blink(t, offs) { const period = 2.7; const ph = ((t + offs) % period + period) % period; return ph < 0.12 ? 1 - Math.sin(ph / 0.12 * Math.PI) * 0.9 : 1; }
+  function charTick(c, t, wins, offs, side) {
+    const talk = inWin(t, wins), listen = inWin(t, wins === talkWins.emp ? talkWins.mgr : talkWins.emp);
+    const bob = Math.sin((t + offs) * 2 * Math.PI * 0.5) * 3 + talk * Math.sin(t * 2 * Math.PI * 2) * 4;
+    const tilt = talk * Math.sin(t * 2 * Math.PI * 1) * 4 + listen * (side * 6 + Math.sin(t * 2 * Math.PI * 1.0) * 2.5);
+    c.head.setAttribute('transform', `translate(0,${bob}) rotate(${tilt})`);
+    c.eyes.setAttribute('transform', `translate(0,${4 * (1 - blink(t, offs))}) scale(1,${blink(t, offs)})`);
+    const m = 1 + talk * (0.5 + 0.5 * Math.sin(t * 2 * Math.PI * 4.2)) * 1.2;
+    c.mouth.setAttribute('transform', `scale(1,${m})`);
+    c.body.setAttribute('transform', `translate(0,${Math.sin((t + offs) * Math.PI) * 2})`);
+    // gesture: talking arm lifts at the elbow with follow-through
+    const g = talk * (0.6 + 0.4 * Math.sin(t * 2 * Math.PI * 1.1));
+    const armSide = side > 0 ? c.armL : c.armR;
+    const dir = side > 0 ? -1 : 1;
+    armSide.upper.setAttribute('transform', `rotate(${(side > 0 ? 18 : -18) + dir * g * 55})`);
+    armSide.fore.setAttribute('transform', `rotate(${(side > 0 ? -70 : 70) + dir * g * 60})`);
+  }
+  window.tick = (t) => {
+    // shadow under the first drop
+    if (t < T.leap + 0.3) {
+      const y = gsap.getProperty(heroPos, 'y');
+      const h = clamp((g0 - R - y) / 500, 0, 1);
+      const s = t < T.leap ? 1 : 1 - smooth((t - T.leap) / 0.25);
+      shadow.setAttribute('rx', (R * 1.1) * (1 - 0.6 * h) * s);
+      shadow.setAttribute('ry', 14 * (1 - 0.6 * h) * s);
+      shadow.setAttribute('opacity', (y < -R + 5 ? 0 : 1));
+    } else { shadow.setAttribute('rx', 0); shadow.setAttribute('ry', 0); }
+    // dot idle on the question mark
+    // room life
+    if (t > T.iris - 0.1 && t < T.badge1) {
+      charTick(emp, t, talkWins.emp, 0.3, 1);
+      charTick(mgr, t, talkWins.mgr, 1.4, -1);
+      craneLoadSw.setAttribute('transform', `rotate(${Math.sin(t * 2 * Math.PI * 0.4) * 6})`);
+      plantSw.setAttribute('transform', `rotate(${Math.sin(t * 2 * Math.PI * 0.25) * 1.5})`);
+      steam.forEach((s, i) => { const ph = ((t * 0.7 + i * 0.5) % 1); s.setAttribute('transform', `translate(${Math.sin(ph * 6 + i) * 4},${-ph * 30}) scale(${1 - ph * 0.3})`); s.setAttribute('stroke-opacity', 0.35 * Math.sin(ph * Math.PI)); });
+      [bubA1, bubB2].forEach(b => { if (b._dots) b._dots.forEach((d, i) => d.setAttribute('cy', -Math.max(0, Math.sin((t * 2.2 - i * 0.18) * 2 * Math.PI)) * 12)); });
+    }
+    // arrow flight (closed form quadratic bezier, local coords of column 3)
+    {
+      const P0 = [-1900, 40], C = [-950, -400], P2 = [0, 0];
+      let ax, ay, ang, vis = 1;
+      if (t < T.arrow) { vis = 0; ax = P0[0]; ay = P0[1]; ang = 0; }
+      else if (t < T.hit) {
+        const u0 = (t - T.arrow) / (T.hit - T.arrow);
+        const u = 0.35 * u0 + 0.65 * u0 * u0;
+        const mt = 1 - u;
+        ax = mt * mt * P0[0] + 2 * mt * u * C[0] + u * u * P2[0];
+        ay = mt * mt * P0[1] + 2 * mt * u * C[1] + u * u * P2[1];
+        const dx = 2 * mt * (C[0] - P0[0]) + 2 * u * (P2[0] - C[0]);
+        const dy = 2 * mt * (C[1] - P0[1]) + 2 * u * (P2[1] - C[1]);
+        ang = Math.atan2(dy, dx) * 180 / Math.PI;
+      } else {
+        const dx = 2 * (P2[0] - C[0]), dy = 2 * (P2[1] - C[1]);
+        const base = Math.atan2(dy, dx) * 180 / Math.PI;
+        const s = t - T.hit;
+        ax = 0; ay = 0; ang = base + 9 * Math.exp(-s * 5) * Math.sin(s * 2 * Math.PI * 4.5);
+      }
+      arrowG.setAttribute('visibility', vis ? 'visible' : 'hidden');
+      arrow.setAttribute('transform', `translate(${ax},${ay}) rotate(${ang})`);
+      // confetti
+      confetti.forEach(c => {
+        const s = t - T.hit;
+        if (s < 0 || s > c.life) { c.shape.setAttribute('visibility', 'hidden'); return; }
+        const x = c.vx * s * 0.7, y = c.vy * s + 0.5 * 1900 * s * s;
+        const k = s > c.life - 0.25 ? (c.life - s) / 0.25 : Math.min(1, s / 0.05);
+        c.shape.setAttribute('visibility', 'visible');
+        c.shape.setAttribute('transform', `translate(${x},${y}) rotate(${c.spin * s}) scale(${k})`);
+      });
+    }
+    // coin flip
+    if (t >= T.coin) { const s = clamp((t - T.coin) / 0.7, 0, 1); const turns = 3 * (1 - Math.pow(1 - s, 3)); coinFlip.setAttribute('transform', `scale(${Math.cos(turns * 2 * Math.PI)},1)`); }
+    // idle in S4: bars breathe
+    if (t > T.label1 && t < T.collapse) bars.forEach((b, i) => b.parentNode.setAttribute('transform', `translate(${[-72, -6, 60][i] + 6},78) scale(1,${1 + 0.03 * Math.sin((t - i * 0.2) * 2 * Math.PI * 0.8)})`));
+    // end: sparks + breathing dot
+    if (t >= T.finalLand) {
+      const s = t - T.finalLand;
+      sparks.forEach((sp, i) => { const e = smooth(s / 0.18), r = smooth((s - 0.18) / 0.22);
+        sp.setAttribute('height', Math.max(0, 34 * e - 34 * r)); sp.setAttribute('y', -70 - 30 * r); });
+      if (s > 0.9) { const b = Math.sin((s - 0.9) * 2 * Math.PI * 0.9) * 0.035; endSq.setAttribute('data-b', b); }
+    }
+  };
+
+  window.renderAt = (t) => { tl.seek(t, false); window.tick(t); };
+  window.DURATION = CUES.duration;
+  window.ready = true;
+  renderAt(0);
+}
+build();
+</script>
+</body>
+</html>
