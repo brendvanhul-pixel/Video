@@ -1,0 +1,59 @@
+{
+ "title": "The leftover",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece (LMS refresher)",
+ "duration": 75.0,
+ "fps": 30,
+ "bpm": 120,
+ "music": {
+  "sections": [[0, "intro"], [6, "groove"], [24, "intro"], [48, "drop"], [62, "break"]],
+  "end": 69.0,
+  "mute": [[0, 6.6], [36.5, 48.9], [62.0, 64.5]]
+ },
+ "vo": {
+  "file": "vo.mp3",
+  "clips": [
+   {"from": 0.00, "to": 2.80, "at": 7.5},
+   {"from": 3.38, "to": 4.50, "at": 10.6},
+   {"from": 4.90, "to": 5.58, "at": 12.0},
+   {"from": 5.84, "to": 6.62, "at": 13.0},
+   {"from": 6.80, "to": 7.50, "at": 14.0},
+   {"from": 7.98, "to": 10.42, "at": 17.6},
+   {"from": 10.74, "to": 12.12, "at": 21.4},
+   {"from": 12.46, "to": 16.12, "at": 25.8},
+   {"from": 16.58, "to": 19.06, "at": 30.0},
+   {"from": 19.38, "to": 22.62, "at": 40.7},
+   {"from": 22.92, "to": 24.16, "at": 49.3},
+   {"from": 24.50, "to": 27.36, "at": 51.0},
+   {"from": 27.64, "to": 30.33, "at": 69.3}
+  ]
+ },
+ "captions": [
+  [7.5, 10.5, "Sam is building this year's offer from last year's."],
+  [10.6, 11.9, "Three things are different."],
+  [12.0, 14.9, "The client, the crane, the dates."],
+  [17.6, 20.2, "Sam changes all three on page one."],
+  [21.4, 23.0, "The offer has twelve."],
+  [25.8, 29.6, "A leftover from last year is a real name in a real sentence."],
+  [30.0, 32.7, "It reads as correct, so you read past it."],
+  [40.7, 44.2, "The new name only finds the places you already fixed."],
+  [49.3, 50.8, "Search for the old one."],
+  [51.0, 54.2, "Every hit is a place your change never reached."],
+  [69.3, 72.4, "Before you send, search for what it used to be."]
+ ],
+ "t": {
+  "fan": 0.15, "glow": 1.7, "pulse": 2.3, "cool": 3.1, "title": 3.7, "titleOut": 6.0,
+  "toMonitor": 6.5, "desk": 6.6, "monitor": 6.75, "samRise": 7.0, "samLabel": 7.35,
+  "sticky": 10.3, "line1": 12.0, "line2": 13.0, "line3": 14.0,
+  "samOut": 16.6, "zoom1": 16.8, "close1": 17.35,
+  "flip1": 18.2, "flip2": 18.8, "flip3": 19.4, "done": 20.0,
+  "pull": 20.7, "grid": 21.0, "label12": 21.6, "glide": 24.4, "close9": 25.2,
+  "sweep9": 26.6, "p11": 31.4, "sweep11": 31.9, "calc": 33.3, "sweepCalc": 33.8, "wipe": 35.3,
+  "box": 35.9, "freeze": 36.5, "question": 36.7, "unfreeze": 40.0,
+  "type1": 40.15, "hits1": 41.0, "res1": 41.5, "beat": 44.6, "rewind1": 46.6,
+  "type2": 47.7, "hit2": 49.0, "rewind2": 51.6, "type3": 52.2, "hit3": 53.0,
+  "rewind3": 55.2, "type4": 55.5, "hit4": 56.5, "boxOut": 59.4, "toFan": 60.0,
+  "callback": 62.0, "fold": 66.0, "send": 66.8, "toEnd": 68.2,
+  "head": 68.9, "item1": 69.5, "item2": 70.2, "chip": 71.0
+ }
+}

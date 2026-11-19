@@ -258,7 +258,11 @@ if cues.get('vo', {}).get('file'):
         cur = env[i] if env[i] > cur else env[i] + (cur - env[i]) * rel; sm[i] = cur
     duck = 1 - 0.65 * sm                                       # about -9 dB under speech
 
-mix = mus * music_gain * duck[:, None] + sfx * 0.75 * (1 - 0.3 * (1 - duck))[:, None] + vo * 1.0
+# room tone: a quiet low-passed noise floor so the track never drops to digital silence (about -55 LUFS after mastering)
+rt = lp(lp(rng.standard_normal(N), 500), 500)
+rt = rt / (np.sqrt(np.mean(rt ** 2)) + 1e-9) * 0.0025
+room = np.stack([rt, np.roll(rt, int(0.013 * SR))], 1)
+mix = room + mus * music_gain * duck[:, None] + sfx * 0.75 * (1 - 0.3 * (1 - duck))[:, None] + vo * 1.0
 # look-ahead peak limiter so loudnorm can run in linear mode
 from numpy.lib.stride_tricks import sliding_window_view
 peak = np.max(np.abs(mix), 1); w = int(0.003 * SR)
