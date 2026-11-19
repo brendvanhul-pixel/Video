@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sarens explainer stage</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #11263C; overflow: hidden; }
+  svg { display: block; }
+  text { font-kerning: normal; font-synthesis: none; }
+</style>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/CustomEase.min.js"></script>
+<script src="sarens.js"></script>
+<script src="cues.js"></script>
+<script src="film.js"></script>
+</head>
+<body>
+<svg id="stage" xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs><clipPath id="frameClip"><rect x="0" y="0" width="1920" height="1080"/></clipPath></defs>
+  <g id="root" clip-path="url(#frameClip)"></g>
+</svg>
+<script>SR.boot(window.FILM);</script>
+</body>
+</html>
