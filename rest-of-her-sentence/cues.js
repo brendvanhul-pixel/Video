@@ -1,0 +1,42 @@
+window.CUES={
+ "title": "The rest of her sentence",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece (Sarens Academy refresher)",
+ "duration": 80.0,
+ "fps": 30,
+ "bpm": 120,
+ "music": { "file": "music.wav" },
+ "vo": { "file": "vo.wav", "offset": 0.0 },
+ "t": {
+  "bub0": 0.2, "type0": 0.6, "snip0": 4.0, "fall0": 4.85, "stub0": 5.9, "dotHop": 6.1, "dotLand": 6.55,
+  "line": 6.8, "charB": 7.0, "charC": 7.2, "heading": 7.3, "labMira": 8.0, "flag": 9.0, "labEng": 9.2, "screen": 9.8, "labPM": 10.4,
+  "tick1": 12.4, "tick2": 12.9, "labelsOut": 15.0,
+  "dotUp": 15.35, "miraBub": 15.6, "type1": 15.85, "engBub": 18.0, "shoot": 18.7, "snip": 19.0, "halfLand": 19.6, "trucks": 19.72,
+  "replyOut": 23.6, "fine": 24.0, "next": 25.0, "bubOut": 26.2, "miraOut": 26.35, "cal": 26.45, "calFlip": 26.95,
+  "craneIn": 27.4, "craneStop": 29.0, "crew": 29.4,
+  "freeze": 32.0, "rewStart": 32.3, "rewEnd": 34.9, "rewTo": 17.9, "B": 35.0,
+  "q": 35.2, "tickA": 36.0, "tickB": 37.0, "tickC": 38.0, "qOut": 38.6, "emptyOut": 38.8,
+  "type2": 40.3, "truckIcon": 42.5, "halfGo": 43.2, "halfLand2": 44.4,
+  "say": 46.8, "sayGo": 47.4, "sayArrive": 48.0, "sayLabel": 48.5, "check": 49.0, "sayOut": 55.6,
+  "askLabel": 57.0, "ask": 57.2, "askGo": 57.8, "askArrive": 58.3, "stubOut": 59.05, "answer": 59.3,
+  "morph": 61.8, "arc": 62.0, "askOut": 62.6, "askLabelOut": 63.1,
+  "hold": 63.4, "pause": 64.0, "timeSlide": 65.0, "stamp": 65.8, "callEnd": 65.9, "thu": 66.0, "trucks2": 66.2, "trucksGo": 66.9,
+  "calTime": 67.6, "crane2": 67.7, "crane2Stop": 68.9, "holdOut": 68.3, "out1": 69.0, "out2": 69.5, "out3": 70.0, "out4": 70.5,
+  "wipe": 71.5, "endBub": 72.0, "rule": 73.4, "collapse": 76.6, "heroPop": 77.0, "blueWipe": 77.1, "hop": 77.45, "title": 77.5, "finalLand": 78.2
+ },
+ "captions": [
+  [7.0, 8.6, "Tuesday, nine o’clock."],
+  [8.85, 11.9, "Last week you issued the lift sequence for the port job."],
+  [12.0, 13.9, "You checked it twice."],
+  [25.45, 28.4, "Nobody said what site does about position two."],
+  [28.5, 31.0, "So site decides, on the day."],
+  [39.15, 40.7, "Let her finish."],
+  [42.35, 45.6, "The rest of her sentence is the part only she can see."],
+  [48.25, 50.3, "Say it back before you answer."],
+  [50.38, 51.7, "That isn’t agreeing."],
+  [51.78, 54.2, "It checks you heard the right problem."],
+  [56.35, 59.7, "Then ask the one thing only she knows."],
+  [64.45, 66.45, "Her times make the fix small."],
+  [66.52, 69.6, "A later start, and position two stays."]
+ ]
+};
