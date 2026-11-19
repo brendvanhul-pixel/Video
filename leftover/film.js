@@ -98,6 +98,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   SPEC[0].toks = PAGES[0].toks; // page 1 tokens: client, crane, start
   TOK.hero = PAGES[8].toks[0]; TOK.calc = PAGES[11].toks[0]; TOK.p11 = PAGES[10].toks[0];
   const pages = PAGES.map(p => p.pg);
+  pageLayer.appendChild(pages[8]);                   // page 9 on top: the opening close-up sits inside the fan
 
   const fanPos = i => ({ x: 960 + (i - 5.5) * 112, y: 600 + Math.pow(i - 5.5, 2) * 1.5, rotation: (i - 8) * 1.4, scale: 0.55 });
   const gridPos = i => ({ x: 440 + (i % 6) * 208, y: 420 + Math.floor(i / 6) * 280, rotation: 0, scale: 0.28 });
@@ -119,7 +120,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   const expoIO = u => { u = SR.clamp(u, 0, 1); return u === 0 ? 0 : u === 1 ? 1 : u < 0.5 ? Math.pow(2, 20 * u - 10) / 2 : (2 - Math.pow(2, -20 * u + 10)) / 2; };
   const CAM = [];
   const camWin = (a, b, F, s0, P0, s1, P1, ease, reset) => CAM.push({ a, b, F, s0, P0, s1, P1, ease, reset });
-  const zoomIn = (i, pos, a, b, ease = easeIO) => { camWin(a, b, pos, 1, pos, CS / pos.scale, CC, ease, true); setPage(i, closePos, b); only(i, b); };
+  const zoomIn = (i, pos, a, b, ease = easeIO, keep = false) => { camWin(a, b, pos, 1, pos, CS / pos.scale, CC, ease, true); setPage(i, closePos, b); if (!keep) only(i, b); };
   const zoomOut = (i, pos, a, b, ease = expoOut, s0mul = 1, P0 = CC) => { setPage(i, pos, a); camWin(a, b, pos, CS / pos.scale * s0mul, P0, 1, pos, ease, true); };
   SR.onTick(t => {
     let w = null; for (const c of CAM) if (c.a <= t) w = c;
@@ -162,7 +163,10 @@ window.FILM = async function (SR, tl, root, T, cues) {
   };
 
   /* ================= HOOK 0-5: one word glows in a real sentence, then hides among bars ================= */
-  setPage(8, closePos, 0); only(8, 0);
+  // opening frame: page 9 close, the other eleven already in the fan around it (camera framing does the rest)
+  const f9 = fanPos(8);
+  const z = CS / f9.scale;
+  pages.forEach((p, i) => { const f = fanPos(i); gsap.set(p, i === 8 ? closePos : { x: CC.x + z * (f.x - f9.x), y: CC.y + z * (f.y - f9.y), rotation: f.rotation, scale: f.scale * z, autoAlpha: 1 }); });
   gsap.set(PAGES[8].bars, { autoAlpha: 0 }); gsap.set(PAGES[8].ov, { autoAlpha: 1 });
   highlight(TOK.hero, T.glow, 880, 0.5);
   cool(TOK.hero, T.cool);
@@ -170,16 +174,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   toBars(8, T.resolve0);
   zoomOut(8, fanPos(8), T.pullFan, T.pullFan + 1.0, expoOut);
   SR.sfx(T.pullFan, 'whoosh', { dur: 0.7, rise: false, lo: 5000, hi: 500, gain: 0.35 });
-  // the fan opens left to right out of page 9
-  pages.forEach((p, i) => {
-    if (i === 8) return; const f = fanPos(i), at = T.fanOut + i * 0.06;
-    const s = fanPos(8);
-    tl.set(p, { x: s.x, y: s.y, rotation: 0, scale: 0.55, autoAlpha: 1 }, at - 0.01);
-    tl.to(p, { x: f.x, y: f.y, rotation: f.rotation, duration: 0.5, ease: 'pop' }, at);
-    SR.sfx(at, 'tick', { pitch: 700 + 40 * i, gain: 0.12, pan: -0.7 + 1.4 * i / 11 });
-  });
-  SR.sfx(T.fanOut, 'whoosh', { dur: 0.9, rise: false, lo: 1500, hi: 6000, gain: 0.3 });
-  const f9 = fanPos(8);
+  pages.forEach((p, i) => { if (i !== 8) setPage(i, fanPos(i), T.pullFan); });
   camWin(T.fanOut + 0.7, T.toMonitor, f9, 1, f9, 1.035, f9, SR.smooth, false);           // the camera waits on page 9
   camWin(T.toMonitor, T.toMonitor + 0.45, f9, 1.035, f9, 1, f9, easeIO, true);
 
@@ -432,7 +427,8 @@ window.FILM = async function (SR, tl, root, T, cues) {
   labels(false, T.toFan);
   pages.forEach((p, i) => { const f = fanPos(i); tl.to(p, { x: f.x, y: f.y, rotation: f.rotation, scale: f.scale, duration: 0.8, ease: 'power3.inOut' }, T.toFan + i * 0.03); });
   SR.sfx(T.toFan, 'whoosh', { dur: 1.1, rise: false, lo: 600, hi: 3000, gain: 0.3 });
-  zoomIn(8, f9, T.inCall, T.call, easeIO);
+  zoomIn(8, f9, T.inCall, T.call, easeIO, true);
+  pages.forEach((p, i) => { if (i !== 8) { const f = fanPos(i); tl.set(p, { x: CC.x + z * (f.x - f9.x), y: CC.y + z * (f.y - f9.y), scale: f.scale * z }, T.call); } });
   SR.sfx(T.inCall, 'whoosh', { dur: 0.8, rise: true, lo: 200, hi: 4000, gain: 0.3 });
   toText(8, T.call);
   // hold on the grey word, now correct; slow drift in
@@ -441,13 +437,13 @@ window.FILM = async function (SR, tl, root, T, cues) {
   camWin(T.call + 0.2, T.outCall - 0.2, HC, 1, HC, drift, HC, SR.smooth, false);
   toBars(8, T.outCall - 0.2);
   zoomOut(8, f9, T.outCall, T.outCall + 0.8, expoOut, drift, { x: HC.x + drift * (CC.x - HC.x), y: HC.y + drift * (CC.y - HC.y) });
-  pages.forEach((p, i) => { if (i !== 8) tl.set(p, { autoAlpha: 1 }, T.outCall); });
+  pages.forEach((p, i) => { if (i !== 8) setPage(i, fanPos(i), T.outCall); });
   SR.sfx(T.outCall, 'whoosh', { dur: 0.6, rise: false, lo: 5000, hi: 500, gain: 0.3 });
   // fold shut and send
   pages.forEach((p, i) => tl.to(p, { x: 960, y: 600, rotation: 0, duration: 0.45, ease: 'power3.inOut' }, T.fold + (11 - i) * 0.025));
   SR.sfx(T.fold, 'whoosh', { dur: 0.5, rise: false, lo: 800, hi: 4000, gain: 0.3 });
   SR.sfx(T.fold + 0.5, 'thunk', { gain: 0.25 });
-  pages.forEach((p, i) => tl.to(p, { keyframes: [{ x: 900, rotation: -2, duration: 0.15, ease: 'power2.out' }, { x: 2400, rotation: 6, duration: 0.4, ease: 'power3.in' }] }, T.send + (i === 8 ? 0.04 : 0)));
+  pages.forEach((p, i) => tl.to(p, { keyframes: [{ x: 900, rotation: -2, duration: 0.15, ease: 'power2.out' }, { x: 2400, rotation: 6, duration: 0.4, ease: 'power3.in' }] }, T.send));
   SR.sfx(T.send + 0.1, 'whoosh', { dur: 0.45, rise: true, lo: 300, hi: 7000, gain: 0.5, pan: 0.6 });
 
   /* ================= END CARD 67.8-75 on blue-301: the hero comes back ================= */
@@ -462,7 +458,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   const bx = EX + wa + SPACE + GAP;
   const heroE = anim(place(end, bx + wb / 2, EY[2] - 23)), heroSq = anim(heroE);
   const heroR = rect(heroSq, -wb / 2 - 14, -37, wb + 28, 74, C.yellow, 12);
-  gsap.set(heroE, { autoAlpha: 0 }); gsap.set(heroSq, { transformOrigin: '50% 100%' });
+  gsap.set(heroE, { autoAlpha: 0 }); gsap.set(heroSq, { transformOrigin: '50% 50%' });
   const i2a = SR.words(end, a2, EX, EY[2], stT, C.white);
   const i2b = SR.words(end, b2, bx, EY[2], stT, C.white);
   const i2c = SR.words(end, c2, bx + wb + GAP + SPACE, EY[2], stT, C.white);
@@ -471,19 +467,12 @@ window.FILM = async function (SR, tl, root, T, cues) {
   k.popWords(head.groups, T.head);
   k.popWords(i1.groups, T.item1);
   k.popWords([...i2a.groups, ...i2b.groups, ...i2c.groups], T.item2);
-  // the block flies back in from the right edge, where page 9 left the frame, on an arc
-  const land = { x: bx + wb / 2, y: EY[2] - 23 };
-  tl.set(heroE, { autoAlpha: 1 }, T.heroIn);
-  tl.fromTo(heroE, { x: 2150 - land.x, y: 600 - land.y }, { keyframes: [
-    { x: (1500 - land.x), y: -260, duration: (T.chip - T.heroIn) * 0.5, ease: 'power1.out' },
-    { x: 0, y: 0, duration: (T.chip - T.heroIn) * 0.5, ease: 'power2.in' }], immediateRender: false }, T.heroIn);
-  tl.fromTo(heroE, { rotation: 20 }, { rotation: 0, duration: T.chip - T.heroIn, ease: 'power1.inOut', immediateRender: false }, T.heroIn);
-  tl.fromTo(heroSq, { scaleX: 0.85, scaleY: 1.15 }, { scaleX: 0.9, scaleY: 1.1, duration: T.chip - T.heroIn - 0.02, immediateRender: false }, T.heroIn);
-  tl.to(heroSq, { keyframes: [{ scaleX: 1.15, scaleY: 0.8, duration: 0.06 }, { scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1.1,0.3)' }] }, T.chip);
+  // the block glows in place behind "old value": the same move as the opening frame
+  tl.set(heroE, { autoAlpha: 1 }, T.chip);
+  tl.fromTo(heroSq, { scale: 0.55 }, { scale: 1, duration: 0.4, ease: 'popBig', immediateRender: false }, T.chip);
   i2b.groups.forEach(g => tl.set(g.firstChild, { attr: { fill: C.deep } }, T.chip));
   [...i2a.groups, ...i2b.groups, ...i2c.groups].forEach((g, j) => tl.to(g, { keyframes: [{ y: 5, duration: 0.05 }, { y: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }] }, T.chip + j * FR));
-  SR.sfx(T.heroIn, 'whoosh', { dur: T.chip - T.heroIn, rise: true, lo: 500, hi: 5000, gain: 0.35, pan: 0.5 });
-  SR.sfx(T.chip, 'ding', { pitch: 1046.5, gain: 0.45 }); SR.sfx(T.chip, 'boing', { pitch: 330, gain: 0.4 });
+  SR.sfx(T.chip, 'ding', { pitch: 880, gain: 0.5 });
   SR.onTick(t => { if (t > T.chip + 0.7) heroR.setAttribute('transform', `scale(${1 + 0.02 * Math.sin((t - T.chip - 0.7) * Math.PI)},1)`); else heroR.removeAttribute('transform'); });
 
   /* ---------------- captions: one system, a blue-deep lower-third band, one line each ---------------- */
