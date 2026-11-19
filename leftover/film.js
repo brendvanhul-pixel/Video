@@ -162,23 +162,10 @@ window.FILM = async function (SR, tl, root, T, cues) {
     tl.set(tk.chipW, { autoAlpha: 0 }, at + 0.45);
   };
 
-  /* ================= HOOK 0-5: one word glows in a real sentence, then hides among bars ================= */
-  // opening frame: page 9 close, the other eleven already in the fan around it (camera framing does the rest)
-  const f9 = fanPos(8);
-  const z = CS / f9.scale;
-  pages.forEach((p, i) => { const f = fanPos(i); gsap.set(p, i === 8 ? closePos : { x: CC.x + z * (f.x - f9.x), y: CC.y + z * (f.y - f9.y), rotation: f.rotation, scale: f.scale * z, autoAlpha: 1 }); });
-  gsap.set(PAGES[8].bars, { autoAlpha: 0 }); gsap.set(PAGES[8].ov, { autoAlpha: 1 });
-  highlight(TOK.hero, T.glow, 880, 0.5);
-  cool(TOK.hero, T.cool);
-  SR.sfx(T.cool, 'whoosh', { dur: 0.7, rise: false, lo: 2500, hi: 400, gain: 0.22 });
-  toBars(8, T.resolve0);
-  zoomOut(8, fanPos(8), T.pullFan, T.pullFan + 1.0, expoOut);
-  SR.sfx(T.pullFan, 'whoosh', { dur: 0.7, rise: false, lo: 5000, hi: 500, gain: 0.35 });
-  pages.forEach((p, i) => { if (i !== 8) setPage(i, fanPos(i), T.pullFan); });
-  camWin(T.fanOut + 0.7, T.toMonitor, f9, 1, f9, 1.035, f9, SR.smooth, false);           // the camera waits on page 9
-  camWin(T.toMonitor, T.toMonitor + 0.45, f9, 1.035, f9, 1, f9, easeIO, true);
+  /* opening: straight onto Sam's desk; page 1 is already the file on screen */
+  pages.forEach((p, i) => gsap.set(p, { x: monPos.x, y: monPos.y, rotation: 0, scale: i === 0 ? 0 : monPos.scale, autoAlpha: i === 0 ? 1 : 0 }));
 
-  /* ================= SAM 5-17.4: three things are different ================= */
+  /* ================= SAM 0-12.4: three things are different ================= */
   const SX = 330, BY = 820;
   const samG = el('g', {}, samScene); gsap.set(samG, { autoAlpha: 0 });
   const sam = SR.character(samG, SX, BY, { shirt: C.tint, sleeve: C.deepBand, skin: SR.SKIN[1], hair: 'short', hairColor: SR.HAIR[1], collar: 'v' });
@@ -194,12 +181,8 @@ window.FILM = async function (SR, tl, root, T, cues) {
 
   tl.to(desk, { y: 0, duration: 0.5, ease: 'power3.out' }, T.desk); SR.sfx(T.desk, 'whoosh', { dur: 0.4, gain: 0.25, lo: 200, hi: 1500 });
   k.pop(mon, T.monitor, { origin: '50% 100%', dur: 0.5, ease: 'popBig', pitch: 300 });
-  pages.forEach((p, i) => {
-    const at = T.toMonitor + (11 - i) * 0.04;
-    tl.to(p, { x: monPos.x, y: monPos.y, rotation: 0, scale: monPos.scale, duration: 0.5, ease: 'power3.inOut' }, at);
-    if (i) tl.set(p, { autoAlpha: 0 }, at + 0.5);
-  });
-  SR.sfx(T.toMonitor, 'whoosh', { dur: 0.8, rise: true, lo: 400, hi: 3000, gain: 0.3 });
+  tl.fromTo(pages[0], { scale: 0 }, { scale: monPos.scale, duration: 0.45, ease: 'popBig' }, T.monitor + 0.2);
+  SR.sfx(T.monitor + 0.2, 'pop', { pitch: 700, gain: 0.3 });
   k.show(samG, T.samRise - 0.01);
   tl.fromTo(sam.rise, { y: 380 }, { y: 0, duration: 0.55, ease: 'popBig' }, T.samRise); SR.sfx(T.samRise, 'boing', { pitch: 260, gain: 0.45, pan: -0.4 });
   k.popWords(samLabel.groups, T.samLabel);
@@ -417,28 +400,14 @@ window.FILM = async function (SR, tl, root, T, cues) {
   counter('0 hits', T.enter5, T.pull11 + 0.6);
   SR.sfx(T.enter5 + 0.05, 'sparkle', { gain: 0.25 });
 
-  /* ================= CALLBACK 58.9-67.8: the same frame as the opening, nothing glows ================= */
+  /* ================= OUT: back to the twelve pages, fold, send ================= */
   toBars(10, T.pull11 - 0.2);
   pages.forEach((p, i) => { if (i !== 10) setPage(i, gridPos(i), T.pull11); });
   zoomOut(10, gridPos(10), T.pull11, T.pull11 + 0.8, expoOut);
   SR.sfx(T.pull11, 'whoosh', { dur: 0.7, rise: false, lo: 5000, hi: 400, gain: 0.3 });
   tl.to(box, { scale: 0, duration: 0.25, ease: 'back.in(2)' }, T.pull11 + 0.5);
-  resetOv([8, 11], T.toFan);
-  labels(false, T.toFan);
-  pages.forEach((p, i) => { const f = fanPos(i); tl.to(p, { x: f.x, y: f.y, rotation: f.rotation, scale: f.scale, duration: 0.8, ease: 'power3.inOut' }, T.toFan + i * 0.03); });
-  SR.sfx(T.toFan, 'whoosh', { dur: 1.1, rise: false, lo: 600, hi: 3000, gain: 0.3 });
-  zoomIn(8, f9, T.inCall, T.call, easeIO, true);
-  pages.forEach((p, i) => { if (i !== 8) { const f = fanPos(i); tl.set(p, { x: CC.x + z * (f.x - f9.x), y: CC.y + z * (f.y - f9.y), scale: f.scale * z }, T.call); } });
-  SR.sfx(T.inCall, 'whoosh', { dur: 0.8, rise: true, lo: 200, hi: 4000, gain: 0.3 });
-  toText(8, T.call);
-  // hold on the grey word, now correct; slow drift in
-  const HC = { x: TOK.hero.x + TOK.hero.wN / 2, y: TOK.hero.yc };
-  const drift = 1.035;
-  camWin(T.call + 0.2, T.outCall - 0.2, HC, 1, HC, drift, HC, SR.smooth, false);
-  toBars(8, T.outCall - 0.2);
-  zoomOut(8, f9, T.outCall, T.outCall + 0.8, expoOut, drift, { x: HC.x + drift * (CC.x - HC.x), y: HC.y + drift * (CC.y - HC.y) });
-  pages.forEach((p, i) => { if (i !== 8) setPage(i, fanPos(i), T.outCall); });
-  SR.sfx(T.outCall, 'whoosh', { dur: 0.6, rise: false, lo: 5000, hi: 500, gain: 0.3 });
+  resetOv([8, 11], T.pull11);
+  labels(false, T.fold);
   // fold shut and send
   pages.forEach((p, i) => tl.to(p, { x: 960, y: 600, rotation: 0, duration: 0.45, ease: 'power3.inOut' }, T.fold + (11 - i) * 0.025));
   SR.sfx(T.fold, 'whoosh', { dur: 0.5, rise: false, lo: 800, hi: 4000, gain: 0.3 });

@@ -2,45 +2,33 @@
  "title": "The leftover",
  "voice": "caslon",
  "voice_rule": "4: Group Talent learning piece (LMS refresher)",
- "duration": 75.0,
+ "duration": 63.5,
  "fps": 30,
  "bpm": 120,
  "music": {
   "sections": [
    [
     0,
-    "intro"
-   ],
-   [
-    5,
     "groove"
    ],
    [
-    24,
+    19,
     "intro"
    ],
    [
-    48,
+    43,
     "drop"
    ],
    [
-    62,
+    55,
     "break"
    ]
   ],
-  "end": 70.35,
+  "end": 58.55,
   "mute": [
    [
-    0,
-    5.0
-   ],
-   [
-    36.5,
-    49.4
-   ],
-   [
-    62.0,
-    65.4
+    31.5,
+    44.4
    ]
   ]
  },
@@ -50,226 +38,216 @@
    {
     "from": 0.0,
     "to": 2.8,
-    "at": 7.5
+    "at": 2.5
    },
    {
     "from": 3.38,
     "to": 4.5,
-    "at": 10.6
+    "at": 5.6
    },
    {
     "from": 4.9,
     "to": 5.58,
-    "at": 12.0
+    "at": 7.0
    },
    {
     "from": 5.84,
     "to": 6.62,
-    "at": 13.0
+    "at": 8.0
    },
    {
     "from": 6.8,
     "to": 7.5,
-    "at": 14.0
+    "at": 9.0
    },
    {
     "from": 7.98,
     "to": 10.42,
-    "at": 17.6
+    "at": 12.6
    },
    {
     "from": 10.74,
     "to": 12.12,
-    "at": 21.4
+    "at": 16.4
    },
    {
     "from": 12.46,
     "to": 16.12,
-    "at": 25.8
+    "at": 20.8
    },
    {
     "from": 16.58,
     "to": 19.06,
-    "at": 30.0
+    "at": 25.0
    },
    {
     "from": 19.38,
     "to": 22.62,
-    "at": 40.7
+    "at": 35.7
    },
    {
     "from": 22.92,
     "to": 24.16,
-    "at": 49.3
+    "at": 44.3
    },
    {
     "from": 24.5,
     "to": 27.36,
-    "at": 51.0
+    "at": 46.0
    },
    {
     "from": 27.64,
     "to": 30.33,
-    "at": 69.3
+    "at": 57.5
    }
   ]
  },
  "captions": [
   [
-   7.5,
-   9.25,
+   2.5,
+   4.25,
    "Sam is building this year's offer"
   ],
   [
-   9.25,
-   10.45,
+   4.25,
+   5.45,
    "from last year's."
   ],
   [
-   10.6,
-   11.85,
+   5.6,
+   6.85,
    "Three things are different."
   ],
   [
-   12.0,
-   14.9,
+   7.0,
+   9.9,
    "The client, the crane, the dates."
   ],
   [
-   17.6,
-   20.2,
+   12.6,
+   15.2,
    "Sam changes all three on page one."
   ],
   [
-   21.4,
-   23.0,
+   16.4,
+   18.0,
    "The offer has twelve."
   ],
   [
-   25.8,
-   27.25,
+   20.8,
+   22.25,
    "A leftover from last year"
   ],
   [
-   27.25,
-   29.6,
+   22.25,
+   24.6,
    "is a real name in a real sentence."
   ],
   [
-   30.0,
-   32.6,
+   25.0,
+   27.6,
    "It reads as correct, so you read past it."
   ],
   [
-   40.7,
-   42.75,
+   35.7,
+   37.75,
    "The new name only finds the places"
   ],
   [
-   42.75,
-   44.2,
+   37.75,
+   39.2,
    "you already fixed."
   ],
   [
-   49.3,
-   50.75,
+   44.3,
+   45.75,
    "Search for the old one."
   ],
   [
-   51.0,
-   52.25,
+   46.0,
+   47.25,
    "Every hit is a place"
   ],
   [
-   52.25,
-   54.1,
+   47.25,
+   49.1,
    "your change never reached."
   ],
   [
-   69.3,
-   70.25,
+   57.5,
+   58.45,
    "Before you send,"
   ],
   [
-   70.25,
-   72.4,
+   58.45,
+   60.6,
    "search for what it used to be."
   ]
  ],
  "t": {
-  "glow": 0.2,
-  "cool": 1.0,
-  "resolve0": 2.1,
-  "pullFan": 2.3,
-  "fanOut": 3.3,
-  "toMonitor": 5.0,
-  "desk": 5.05,
-  "monitor": 5.2,
-  "samRise": 5.45,
-  "samLabel": 5.8,
-  "look1": 7.3,
-  "click": 8.3,
-  "three": 10.9,
-  "line1": 12.0,
-  "line2": 13.0,
-  "line3": 14.0,
-  "lean": 15.3,
-  "push1": 16.6,
-  "in1": 17.4,
-  "flip1": 18.2,
-  "flip2": 18.8,
-  "flip3": 19.4,
-  "done": 20.1,
-  "pull": 20.7,
-  "label12": 21.7,
-  "glide": 24.4,
-  "in9": 25.2,
-  "sweep9": 26.3,
-  "wipe11": 28.75,
-  "sweep11": 29.6,
-  "wipe12": 30.95,
-  "sweep12": 31.8,
-  "pull12": 33.2,
-  "box": 34.5,
-  "freeze": 36.5,
-  "unfreeze": 40.0,
-  "type1": 40.15,
-  "enter1": 40.75,
-  "lean1": 40.85,
-  "hits1": 41.35,
-  "shrink1": 44.2,
-  "rewind1": 46.4,
-  "type2": 47.4,
-  "enter2": 48.2,
-  "push9": 48.3,
-  "hit2": 49.5,
-  "flipH2": 50.3,
-  "settle2": 51.0,
-  "rewind2": 51.25,
-  "type3": 51.6,
-  "enter3": 52.1,
-  "hit3": 52.5,
-  "flipH3": 53.2,
-  "settle3": 53.8,
-  "rewind3": 54.2,
-  "type4": 54.5,
-  "enter4": 55.4,
-  "hit4": 55.8,
-  "flipH4": 56.5,
-  "settle4": 57.2,
-  "rewind4": 57.45,
-  "type5": 57.8,
-  "enter5": 58.55,
-  "pull11": 58.9,
-  "toFan": 59.9,
-  "inCall": 61.1,
-  "call": 61.9,
-  "outCall": 65.6,
-  "fold": 66.5,
-  "send": 67.1,
-  "head": 67.5,
-  "item1": 68.0,
-  "item2": 68.5,
-  "chip": 70.35
+  "desk": 0.05,
+  "monitor": 0.2,
+  "samRise": 0.45,
+  "samLabel": 0.8,
+  "look1": 2.3,
+  "click": 3.3,
+  "three": 5.9,
+  "line1": 7.0,
+  "line2": 8.0,
+  "line3": 9.0,
+  "lean": 10.3,
+  "push1": 11.6,
+  "in1": 12.4,
+  "flip1": 13.2,
+  "flip2": 13.8,
+  "flip3": 14.4,
+  "done": 15.1,
+  "pull": 15.7,
+  "label12": 16.7,
+  "glide": 19.4,
+  "in9": 20.2,
+  "sweep9": 21.3,
+  "wipe11": 23.75,
+  "sweep11": 24.6,
+  "wipe12": 25.95,
+  "sweep12": 26.8,
+  "pull12": 28.2,
+  "box": 29.5,
+  "freeze": 31.5,
+  "unfreeze": 35.0,
+  "type1": 35.15,
+  "enter1": 35.75,
+  "lean1": 35.85,
+  "hits1": 36.35,
+  "shrink1": 39.2,
+  "rewind1": 41.4,
+  "type2": 42.4,
+  "enter2": 43.2,
+  "push9": 43.3,
+  "hit2": 44.5,
+  "flipH2": 45.3,
+  "settle2": 46.0,
+  "rewind2": 46.25,
+  "type3": 46.6,
+  "enter3": 47.1,
+  "hit3": 47.5,
+  "flipH3": 48.2,
+  "settle3": 48.8,
+  "rewind3": 49.2,
+  "type4": 49.5,
+  "enter4": 50.4,
+  "hit4": 50.8,
+  "flipH4": 51.5,
+  "settle4": 52.2,
+  "rewind4": 52.45,
+  "type5": 52.8,
+  "enter5": 53.55,
+  "pull11": 53.9,
+  "fold": 55.0,
+  "send": 55.6,
+  "head": 56.0,
+  "item1": 56.5,
+  "item2": 57.0,
+  "chip": 58.55
  }
 }
