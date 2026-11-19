@@ -91,7 +91,7 @@ def bed(t0, t1, prog, pattern, gain=1.0, bright=1.0, melody=None):
 rt = lp(hp(rng.standard_normal(N), 90), 700) * 0.018
 env = np.ones(N); a, b = M['silence']
 env[int(a * SR):int(b * SR)] = 0
-fi = int(0.04 * SR); env[int(a * SR) - fi:int(a * SR)] = np.linspace(1, 0, fi)
+fi = int(0.2 * SR); env[int(a * SR) - fi:int(a * SR)] = np.linspace(1, 0, fi)
 env[int(b * SR):int(b * SR) + int(0.6 * SR)] = np.linspace(0, 1, int(0.6 * SR))
 env *= np.clip(1 - (tt(N) - M['roomOut']) / 2.0, 0.35, 1)  # drops under the score once it starts
 mus += np.stack([rt * env, rt * env], 1)
@@ -108,6 +108,12 @@ bed(M['lift'][0], M['lift'][1], ['F', 'G', 'C', 'Am'], groove, 0.9, 1.0, None)
 bed(M['lift2'][0], M['lift2'][1], ['F', 'G', 'Am', 'C'], groove, 1.05, 1.0, [[(0, 81), (1.5, 79)], [(0, 79), (2, 74)], [(0, 76), (1, 77), (2, 79)], [(0, 84)]])
 for tk in M.get('ticks', []):
     n_ = int(0.05 * SR); tq = tt(n_); put(tk, np.sin(2 * np.pi * 1900 * tq) * np.exp(-tq / 0.01), 0.5, -0.6)
+# the turn: a warm sustained pad from "OK, go." to the end (root plus the fifth above)
+if 'pad' in M:
+    n_ = int((DUR - M['pad']) * SR); tq = tt(n_)
+    padsig = sum(np.sin(2 * np.pi * midi(nn) * tq * (1 + d)) for nn in (48, 55, 60, 64, 67) for d in (-0.002, 0.002)) / 10
+    padsig = lp(padsig, 1800) * np.minimum(1, tq / 0.8) * np.clip((DUR - 0.3 - M['pad'] - tq) / 1.5, 0, 1)
+    put(M['pad'], padsig, 0.55)
 # button: last chord, plucked together + bass
 bt = M['button']
 for i, nte in enumerate([48, 60, 64, 67, 72]): put(bt + i * 0.012, P_(nte, 0.9), 0.4)

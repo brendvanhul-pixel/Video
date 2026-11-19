@@ -1,0 +1,155 @@
+{
+ "title": "Say what moves",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece (recap film for an e-learning)",
+ "duration": 100.0,
+ "fps": 30,
+ "bpm": 100,
+ "music": {
+  "file": "music.wav"
+ },
+ "vo": {
+  "file": "vo.wav",
+  "offset": 0.0
+ },
+ "vo_lines": [
+  [
+   0.2,
+   3.85,
+   10.0
+  ],
+  [
+   4.2,
+   11.95,
+   20.0
+  ],
+  [
+   12.2,
+   18.55,
+   33.4
+  ],
+  [
+   18.7,
+   24.0,
+   44.6
+  ],
+  [
+   24.3,
+   32.0,
+   52.6
+  ],
+  [
+   32.2,
+   36.05,
+   63.6
+  ],
+  [
+   36.1,
+   41.95,
+   71.8
+  ],
+  [
+   42.1,
+   44.9,
+   81.0
+  ],
+  [
+   45.0,
+   48.35,
+   86.4
+  ]
+ ],
+ "score": {
+  "bpm": 100,
+  "silence": [
+   2.0,
+   3.0
+  ],
+  "roomOut": 7.0,
+  "piano": 7.0,
+  "beds": [
+   [
+    7.0,
+    29.0
+   ],
+   [
+    32.0,
+    49.9
+   ]
+  ],
+  "tense": [
+   71.0,
+   75.8
+  ],
+  "lift": [
+   80.0,
+   89.6
+  ],
+  "lift2": [
+   89.6,
+   97.2
+  ],
+  "button": 97.2,
+  "chime1": 81.7,
+  "chime1b": 83.9,
+  "chime2": 87.1,
+  "chime2b": 89.95,
+  "ticks": [
+   29.0,
+   30.0,
+   31.0
+  ]
+ },
+ "t": {
+  "tilesIn": 0.2,
+  "whiteIn": 0.9,
+  "shove": 1.4,
+  "tip": 1.55,
+  "fallOut": 2.0,
+  "thud": 3.0,
+  "tilt": 3.6,
+  "flip": 7.0,
+  "titleIn": 7.15,
+  "toRebuild": 8.8,
+  "rebuildLand": 9.7,
+  "labels": 10.6,
+  "toOffice": 18.3,
+  "clock1": 19.8,
+  "director": 22.0,
+  "pm": 24.4,
+  "freeze1": 29.0,
+  "ask": 29.2,
+  "take1": 32.0,
+  "take2": 38.0,
+  "freeze": 43.5,
+  "rewind": 43.9,
+  "rewound": 45.7,
+  "whoHears": 47.8,
+  "musicOut": 49.9,
+  "toLine": 50.5,
+  "chip1": 55.1,
+  "chip2": 56.5,
+  "chip3": 58.4,
+  "lineDraw": 58.6,
+  "ring": 61.6,
+  "split": 62.4,
+  "tileBack": 64.5,
+  "slice": 65.0,
+  "clash": 70.4,
+  "slam": 84.05,
+  "phone": 75.56,
+  "msg1": 81.7,
+  "reply1": 83.9,
+  "msg2": 87.1,
+  "reply2": 89.95,
+  "rearrange": 90.25,
+  "callback": 91.5,
+  "white2": 92.4,
+  "shove2": 93.0,
+  "hand": 92.65,
+  "place": 94.2,
+  "endLine": 94.7,
+  "endCard": 96.8
+ },
+ "vo_source": "vo_source_v2.mp3"
+}

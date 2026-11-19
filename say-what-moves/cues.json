@@ -65,11 +65,11 @@
    2.0,
    3.0
   ],
-  "roomOut": 7.0,
-  "piano": 7.0,
+  "roomOut": 5.4,
+  "piano": 5.4,
   "beds": [
    [
-    7.0,
+    5.4,
     29.0
    ],
    [
@@ -98,18 +98,19 @@
    29.0,
    30.0,
    31.0
-  ]
+  ],
+  "pad": 89.95
  },
  "t": {
   "tilesIn": 0.2,
-  "whiteIn": 0.9,
-  "shove": 1.4,
-  "tip": 1.55,
-  "fallOut": 2.0,
+  "whiteIn": 0.0,
+  "shove": 0.33,
+  "tip": 0.8,
+  "fallOut": 1.65,
   "thud": 3.0,
-  "tilt": 3.6,
-  "flip": 7.0,
-  "titleIn": 7.15,
+  "tilt": 3.25,
+  "flip": 5.4,
+  "titleIn": 5.55,
   "toRebuild": 8.8,
   "rebuildLand": 9.7,
   "labels": 10.6,
@@ -145,10 +146,10 @@
   "rearrange": 90.25,
   "callback": 91.5,
   "white2": 92.4,
-  "shove2": 93.0,
-  "hand": 92.65,
-  "place": 94.2,
-  "endLine": 94.7,
+  "shove2": 92.75,
+  "hand": 93.0,
+  "place": 94.73,
+  "endLine": 95.1,
   "endCard": 96.8
  },
  "vo_source": "vo_source_v2.mp3"
