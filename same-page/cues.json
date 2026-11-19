@@ -2,7 +2,7 @@
  "title": "Same page",
  "voice": "caslon",
  "voice_rule": "4: Group Talent learning piece (refresher film for Topic 4, Their view first)",
- "duration": 83.0,
+ "duration": 80.0,
  "fps": 30,
  "bpm": 120,
  "music": {
@@ -12,31 +12,49 @@
     "mute"
    ],
    [
-    6,
+    3.4,
     "intro"
    ],
    [
-    27.5,
+    24.0,
     "break"
    ],
    [
-    35,
+    32.4,
     "mute"
    ],
    [
-    47,
+    39.4,
     "intro"
    ],
    [
-    57,
-    "groove"
-   ],
-   [
-    75,
+    70.6,
     "break"
    ]
   ],
-  "end": 79.5
+  "end": 74.6,
+  "dips": [
+   [
+    44.2,
+    44.400000000000006
+   ],
+   [
+    68.0,
+    68.14
+   ],
+   [
+    68.5,
+    68.64
+   ],
+   [
+    69.0,
+    69.14
+   ],
+   [
+    69.5,
+    69.64
+   ]
+  ]
  },
  "vo": {
   "file": "vo_placed.wav",
@@ -44,37 +62,37 @@
   "source": "vo.mp3",
   "placement": [
    [
-    6.6,
+    4.0,
     0.09,
     4.74
    ],
    [
-    11.6,
+    9.0,
     5.18,
     6.36
    ],
    [
-    27.6,
+    26.1,
     6.83,
     10.33
    ],
    [
-    47.7,
+    44.6,
     10.75,
     12.75
    ],
    [
-    50.0,
+    46.9,
     13.05,
     16.53
    ],
    [
-    60.1,
+    55.9,
     16.97,
     19.23
    ],
    [
-    62.7,
+    58.46,
     19.62,
     21.99
    ]
@@ -82,101 +100,104 @@
  },
  "captions": [
   [
-   6.5,
-   11.5,
+   3.9,
+   8.9,
    "Tuesday, nine o’clock. Last week you issued the lift sequence for the port job."
   ],
   [
-   11.5,
-   13.4,
+   8.9,
+   10.8,
    "You checked it twice."
   ],
   [
-   27.5,
-   31.6,
+   26.0,
+   30.1,
    "You were both right about your own page. Nobody put them together."
   ],
   [
-   47.6,
-   49.9,
+   44.5,
+   46.8,
    "Say it back until she says yes."
   ],
   [
-   49.9,
-   53.98,
+   46.8,
+   50.88,
    "That isn’t agreeing. It puts you both on one page."
   ],
   [
-   60.0,
-   62.6,
+   55.8,
+   58.36,
    "Now give your view, with your reason."
   ],
   [
-   62.6,
-   65.57,
+   58.36,
+   61.33,
    "She hears it, because she knows you heard her."
   ]
  ],
  "t": {
-  "peel": 1.6,
-  "drift": 2.4,
-  "truck1": 4.5,
-  "truck2": 4.75,
-  "panels": 6.0,
-  "line": 6.6,
-  "title": 7.0,
-  "labMira": 8.0,
-  "labYou": 9.0,
-  "labPM": 10.2,
-  "issued": 11.8,
-  "labsOut": 16.4,
-  "mira1": 17.0,
-  "herEnd": 22.0,
-  "his1": 22.9,
-  "hisDrop": 25.8,
-  "mira2": 27.0,
-  "pm": 28.0,
-  "cal": 29.3,
-  "calFlip": 29.9,
-  "wipeT": 30.6,
-  "thu": 31.15,
-  "craneIn": 31.6,
-  "craneStop": 33.3,
-  "freeze": 35.0,
-  "rewindEnd": 37.9,
-  "replay": 38.0,
-  "tick1": 38.8,
-  "tick2": 39.8,
-  "tick3": 40.8,
-  "say": 42.0,
-  "carry": 44.8,
-  "drop": 46.6,
-  "yes": 47.1,
-  "check": 47.6,
-  "slideTogether": 48.2,
-  "lock": 49.0,
-  "labSay": 49.3,
-  "ask": 53.6,
-  "six": 54.6,
-  "clockFly": 55.5,
-  "arc": 56.0,
-  "labAsk": 56.4,
-  "view": 58.0,
-  "cross": 62.4,
-  "nod": 63.2,
-  "pause": 63.6,
-  "labView": 63.9,
-  "slideTime": 64.4,
-  "stamp": 66.8,
-  "zoomP2": 67.8,
-  "thu2": 68.3,
-  "trucksOut": 69.0,
-  "label1030": 70.4,
-  "craneRoll": 70.8,
-  "out1": 72.5,
-  "collapse": 75.0,
-  "endSheet": 75.45,
-  "rule": 77.8,
-  "resolve": 79.5
+  "flutter": 0.05,
+  "peel": 0.33,
+  "drift": 0.8,
+  "truck1": 2.3,
+  "panels": 3.4,
+  "line": 3.9,
+  "title": 4.2,
+  "labMira": 5.0,
+  "labYou": 6.0,
+  "labPM": 7.0,
+  "issued": 9.2,
+  "labsOut": 13.6,
+  "mira1": 14.4,
+  "herEnd": 19.4,
+  "his1": 20.3,
+  "hisDrop": 23.2,
+  "mira2": 24.2,
+  "pm": 25.2,
+  "cal": 26.7,
+  "calFlip": 27.3,
+  "wipeT": 28.0,
+  "thu": 28.55,
+  "craneIn": 29.0,
+  "craneStop": 30.7,
+  "freeze": 32.4,
+  "rewindEnd": 35.3,
+  "replay": 35.4,
+  "tick1": 36.2,
+  "tick2": 37.2,
+  "tick3": 38.2,
+  "say": 39.4,
+  "carry": 41.6,
+  "drop": 42.3,
+  "yes": 42.7,
+  "check": 43.25,
+  "push": 43.4,
+  "lock": 44.2,
+  "pullBack": 45.9,
+  "labSay": 46.6,
+  "ask": 50.5,
+  "six": 51.4,
+  "clockFly": 52.2,
+  "arc": 52.6,
+  "labAsk": 52.9,
+  "view": 53.8,
+  "cross": 58.6,
+  "nod": 59.3,
+  "pause": 59.7,
+  "labView": 60.0,
+  "slideTime": 60.5,
+  "stamp": 61.6,
+  "zoomP2": 62.6,
+  "thu2": 63.1,
+  "trucksOut": 63.5,
+  "label1030": 65.0,
+  "craneRoll": 65.2,
+  "boomUp": 66.8,
+  "out1": 68.0,
+  "collapse": 70.6,
+  "endSheet": 71.05,
+  "rule": 73.1,
+  "resolve": 74.6,
+  "endCard": 78.0
  }
 }

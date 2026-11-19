@@ -228,6 +228,11 @@ else:
     mus = synth_music(music_spec); music_gain = 0.55
     mus = np.stack([lp(lp(mus[:, 0], 12000), 12000), lp(lp(mus[:, 1], 12000), 12000)], 1)   # nothing above ~12 kHz in the bed
 
+# music dips: hard cut-outs so key hits (paper click, outrigger clunks) land on silence
+for d0, d1 in music_spec.get('dips', []):
+    i0, i1, r = int(d0 * SR), int(d1 * SR), int(0.01 * SR)
+    env = np.ones(N); env[i0:i1] = 0; env[max(0, i0 - r):i0] = np.linspace(1, 0, min(r, i0)); env[i1:i1 + r] = np.linspace(0, 1, len(env[i1:i1 + r]))
+    mus = mus * env[:, None]
 sfx = np.zeros((N, 2))
 for c in sfxcues:
     sig, g = render_sfx(c)
@@ -244,7 +249,7 @@ if cues.get('vo', {}).get('file'):
     rel = np.exp(-1 / (0.3 * SR)); sm = np.empty_like(env); cur = 0.0
     for i in range(N):
         cur = env[i] if env[i] > cur else env[i] + (cur - env[i]) * rel; sm[i] = cur
-    duck = 1 - 0.65 * sm                                       # about -9 dB under speech
+    duck = 1 - 0.75 * sm                                       # about -12 dB under speech
 
 mix = mus * music_gain * duck[:, None] + sfx * 0.75 * (1 - 0.3 * (1 - duck))[:, None] + vo * 1.0
 # look-ahead peak limiter so loudnorm can run in linear mode
