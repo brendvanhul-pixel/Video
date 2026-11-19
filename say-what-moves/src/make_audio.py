@@ -27,7 +27,7 @@ def lp(x, fc): return sosfilt(butter(2, fc / (SR / 2), 'low', output='sos'), x)
 def hp(x, fc): return sosfilt(butter(2, fc / (SR / 2), 'high', output='sos'), x)
 
 # ---------------- VO: cut and re-place ----------------
-src = decode(os.path.join(P, 'src', 'vo_source.mp3'))
+src = decode(os.path.join(P, 'src', cues.get('vo_source', 'vo_source.mp3')))
 vo = np.zeros(N)
 for a, b, at in cues['vo_lines']:
     seg = src[int(a * SR):int(b * SR)].copy()
@@ -99,13 +99,15 @@ mus += np.stack([rt * env, rt * env], 1)
 put(M['piano'], piano(48, 3.5), 0.9)
 groove = [(0, 'b'), (0.5, 0), (1, 1), (1.5, 2), (2, 'b'), (2.5, 1), (3, 0), (3.5, 2)]
 mel = [[(0, 72), (1.5, 74)], [(0, 76), (2, 72)], [(0, 77), (1, 76), (2, 74)], [(0, 74), (2.5, 67)]]
-bed(M['bed1'][0], M['bed1'][1], ['C', 'Am', 'F', 'G'], groove, 1.0, 1.0, mel)
+for a_, b_ in M['beds']: bed(a_, b_, ['C', 'Am', 'F', 'G'], groove, 1.0, 1.0, mel)
 # tense: two bars, low and staccato
 tense = [(0, 'b'), (0.5, 0), (1, 0), (1.5, 0), (2, 'b'), (2.5, 0), (3, 0), (3.5, 0)]
 bed(M['tense'][0], M['tense'][1], ['Dm', 'E'], tense, 0.9, 0.6)
 # lift: brighter, melody up an octave on the second half
 bed(M['lift'][0], M['lift'][1], ['F', 'G', 'C', 'Am'], groove, 0.9, 1.0, None)
 bed(M['lift2'][0], M['lift2'][1], ['F', 'G', 'Am', 'C'], groove, 1.05, 1.0, [[(0, 81), (1.5, 79)], [(0, 79), (2, 74)], [(0, 76), (1, 77), (2, 79)], [(0, 84)]])
+for tk in M.get('ticks', []):
+    n_ = int(0.05 * SR); tq = tt(n_); put(tk, np.sin(2 * np.pi * 1900 * tq) * np.exp(-tq / 0.01), 0.5, -0.6)
 # button: last chord, plucked together + bass
 bt = M['button']
 for i, nte in enumerate([48, 60, 64, 67, 72]): put(bt + i * 0.012, P_(nte, 0.9), 0.4)
