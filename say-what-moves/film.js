@@ -246,7 +246,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   { const w = Math.max(SR.measure('Transport can wait.', stB), SR.measure('The rest, Friday.', stB)) + 90;
     path(quote, 'M-20,70 L-60,112 L20,70 Z', C.blue); rect(quote, -w / 2, -75, w, 150, C.blue, 40);
     SR.textEl(quote, 'Transport can wait.', 0, -15, stB, C.white, 'middle'); SR.textEl(quote, 'The rest, Friday.', 0, 45, stB, C.white, 'middle'); }
-  gsap.set(quote, { scale: 0 }); gsap.set(split, { x: 980 });
+  gsap.set(quote, { scale: 0 }); gsap.set(split, { x: 1100 });
 
   // ---- 9.95: reveal the office, the tile lands in Friday ----
   k.show(offS, mid1); k.hide(hookS, mid1 + 0.02);
@@ -370,7 +370,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   tl.to(hero.slice, { keyframes: [{ y: -80, duration: 0.25, ease: 'power2.out' }, { y: 0, duration: 0.3, ease: 'power2.in' }] }, T.slice);
   SR.sfx(T.slice, 'sparkle', { gain: 0.3, pan: 0.5 }); SR.sfx(T.slice + 0.55, 'pop', { pitch: 900, gain: 0.3, pan: 0.6 });
   k.unpop(quote, 63.3, { origin: '35% 100%' });
-  tl.to(split, { x: 980, duration: 0.4, ease: 'power3.in' }, 63.5);
+  tl.to(split, { x: 1100, duration: 0.4, ease: 'power3.in' }, 63.5);
   SR.sfx(63.5, 'whoosh', { dur: 0.4, rise: true, lo: 300, hi: 3000, gain: 0.25, pan: 0.5 });
 
   // ---- 64-69.4: the clash, pushed in ----
