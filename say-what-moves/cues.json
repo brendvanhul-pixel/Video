@@ -1,0 +1,141 @@
+{
+ "title": "Say what moves",
+ "voice": "caslon",
+ "voice_rule": "4: Group Talent learning piece (recap film for an e-learning)",
+ "duration": 88.0,
+ "fps": 30,
+ "bpm": 100,
+ "music": {
+  "file": "music.wav"
+ },
+ "vo": {
+  "file": "vo.wav",
+  "offset": 0.0
+ },
+ "vo_lines": [
+  [
+   0.0,
+   8.4,
+   10.6
+  ],
+  [
+   9.0,
+   14.85,
+   22.4
+  ],
+  [
+   15.0,
+   20.9,
+   37.0
+  ],
+  [
+   21.2,
+   28.85,
+   46.0
+  ],
+  [
+   29.05,
+   32.95,
+   57.5
+  ],
+  [
+   33.15,
+   37.25,
+   64.6
+  ],
+  [
+   37.4,
+   40.3,
+   70.0
+  ],
+  [
+   40.45,
+   43.75,
+   75.5
+  ]
+ ],
+ "score": {
+  "bpm": 100,
+  "silence": [
+   2.85,
+   4.0
+  ],
+  "roomOut": 8.0,
+  "piano": 7.0,
+  "bed1": [
+   8.0,
+   42.75
+  ],
+  "tense": [
+   64.6,
+   69.4
+  ],
+  "lift": [
+   70.0,
+   77.2
+  ],
+  "lift2": [
+   77.2,
+   85.95
+  ],
+  "button": 86.0,
+  "chime1": 70.9,
+  "chime1b": 72.95,
+  "chime2": 75.9,
+  "chime2b": 78.75
+ },
+ "t": {
+  "tilesIn": 0.3,
+  "whiteIn": 1.3,
+  "shove": 1.9,
+  "tip": 2.1,
+  "fallOut": 2.85,
+  "thud": 4.0,
+  "tilt": 4.6,
+  "flip": 7.0,
+  "titleIn": 7.15,
+  "toOffice": 9.5,
+  "officeWipe": 9.7,
+  "tileLand": 10.3,
+  "clock1": 10.8,
+  "director": 11.4,
+  "pm": 13.0,
+  "take1": 22.0,
+  "take2": 25.5,
+  "take3": 29.0,
+  "take4": 32.5,
+  "freeze": 35.7,
+  "rewind": 36.1,
+  "rewound": 37.9,
+  "whoHears": 40.2,
+  "musicOut": 42.75,
+  "toLine": 43.8,
+  "lineStart": 46.0,
+  "chip1": 48.45,
+  "chip2": 49.85,
+  "chip3": 51.5,
+  "lineDraw": 51.7,
+  "lineEnd": 53.7,
+  "ring": 55.6,
+  "split": 56.3,
+  "pmNo": 57.7,
+  "tileBack": 58.4,
+  "slice": 58.9,
+  "clash": 64.2,
+  "clashEnd": 69.2,
+  "phone": 69.6,
+  "msg1": 70.9,
+  "reply1": 72.95,
+  "slam": 73.1,
+  "msg2": 75.9,
+  "reply2": 78.75,
+  "rearrange": 79.1,
+  "callback": 80.3,
+  "white2": 81.2,
+  "shove2": 81.8,
+  "hand": 81.45,
+  "place": 83.0,
+  "endLine": 83.5,
+  "endCard": 85.6
+ }
+}
