@@ -13,7 +13,7 @@ window.FILM = async function (SR, tl, root, T, cues) {
   const mapT = t => {
     if (t < T.freeze) return t;
     if (t < T.rewStart) return T.freeze;
-    if (t < T.rewEnd) { const u = (t - T.rewStart) / (T.rewEnd - T.rewStart); const e = u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; return T.freeze - e * (T.freeze - T.rewTo); }
+    if (t < T.rewEnd) { const u = (t - T.rewStart) / (T.rewEnd - T.rewStart); const e = 0.5 - 0.5 * Math.cos(Math.PI * u); return T.freeze - e * (T.freeze - T.rewTo); }
     if (t < T.B) return T.rewTo;
     return t;
   };
